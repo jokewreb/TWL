@@ -7,186 +7,127 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="particles" class="particles-container"></div>
+    <div id="particles-js"></div>
 
     <nav>
         <div class="logo">WAVE LIST</div>
-        <div class="nav-links">
-            <button class="btn-leaderboard" onclick="toggleLeaderboard()">LEADERBOARD</button>
-        </div>
+        <button class="btn-leaderboard" id="lb-btn">LEADERBOARD</button>
     </nav>
 
-    <div class="main-container">
-        <aside class="sidebar" id="sidebar-list">
-            <div style="padding: 20px;">Loading Levels...</div>
-        </aside>
+    <div class="app-container">
+        <aside class="sidebar" id="side-list">
+            </aside>
 
-        <main class="content">
-            <div class="level-card">
-                <div class="video-container">
-                    <div id="no-video" class="no-video-overlay" style="display:none;">No Video Available</div>
-                    <iframe id="main-video" src="" allowfullscreen></iframe>
+        <main class="main-view">
+            <div class="level-hero">
+                <div class="video-box">
+                    <iframe id="hero-video" src="" allowfullscreen></iframe>
                 </div>
                 
-                <div class="level-header">
-                    <h1 id="level-name" style="margin-top: 0; font-weight: 900; letter-spacing: 1px;">Select a Level</h1>
-                    <div id="level-id-badge" style="color: #bbb; font-weight: bold;">ID: -</div>
-                </div>
+                <h1 id="hero-name" style="margin: 0 0 25px 0; font-size: 2.5rem; font-weight: 800;">Loading...</h1>
 
-                <div class="stats-grid">
-                    <div class="stat-box">
-                        <span class="label">CREATOR</span>
-                        <div id="stat-creator" class="value">-</div>
+                <div class="info-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Creator</div>
+                        <div id="hero-creator" class="stat-value">-</div>
                     </div>
-                    <div class="stat-box">
-                        <span class="label">VERIFIER</span>
-                        <div id="stat-verifier" class="value">-</div>
+                    <div class="stat-card">
+                        <div class="stat-label">Verifier</div>
+                        <div id="hero-verifier" class="stat-value">-</div>
                     </div>
-                    <div class="stat-box">
-                        <span class="label">POINTS</span>
-                        <div id="stat-points" class="value" style="color: #00e5ff;">-</div>
+                    <div class="stat-card">
+                        <div class="stat-label">List ID</div>
+                        <div id="hero-id" class="stat-value">-</div>
                     </div>
                 </div>
             </div>
         </main>
     </div>
 
-    <div id="leaderboard-modal" class="modal">
-        <div class="modal-content">
-            <button class="close-btn" onclick="toggleLeaderboard()">✕</button>
-            <h2 style="margin-top: 0; color: #00e5ff; font-weight: 900;">Top Players</h2>
-            <p style="color: #aaa; font-size: 0.9rem; margin-bottom: 20px;">Ranked by points of levels verified.</p>
-            <div id="leaderboard-data"></div>
+    <div class="leaderboard-overlay" id="lb-overlay">
+        <div class="lb-modal">
+            <span class="close-lb" id="lb-close">✕</span>
+            <h2 style="margin: 0 0 30px 0; font-size: 2rem;">Top Players</h2>
+            <div id="lb-content"></div>
         </div>
     </div>
 
     <script>
-        // 1. Particle Generator
-        function spawnParticles() {
-            const container = document.getElementById('particles');
-            const colors = ['rgba(0, 229, 255, 0.2)', 'rgba(183, 0, 255, 0.2)', 'rgba(255, 0, 85, 0.2)'];
-            for(let i = 0; i < 40; i++) {
-                let p = document.createElement('div');
-                p.className = 'particle';
-                p.style.left = Math.random() * 100 + 'vw';
-                p.style.width = Math.random() * 15 + 5 + 'px';
-                p.style.height = p.style.width;
-                p.style.background = colors[Math.floor(Math.random() * colors.length)];
-                p.style.animationDuration = Math.random() * 15 + 10 + 's';
-                p.style.animationDelay = Math.random() * 5 + 's';
-                container.appendChild(p);
-            }
-        }
-        spawnParticles();
+        let levels = [];
 
-        // 2. List & Data Logic
-        let globalLevels = [];
-
-        async function initList() {
+        // 1. Fetch and Populate
+        async function start() {
             try {
-                const response = await fetch('./levels.json');
-                globalLevels = await response.json();
-                
-                // Sort by points highest to lowest
-                globalLevels.sort((a, b) => b.points - a.points);
+                const res = await fetch('./levels.json');
+                levels = await res.json();
+                levels.sort((a, b) => b.points - a.points);
 
-                const sidebar = document.getElementById('sidebar-list');
-                sidebar.innerHTML = ''; 
+                const container = document.getElementById('side-list');
+                container.innerHTML = '';
 
-                globalLevels.forEach((lvl, index) => {
-                    const rank = index + 1;
-                    const item = document.createElement('div');
+                levels.forEach((l, i) => {
+                    const div = document.createElement('div');
+                    div.className = 'list-item';
                     
-                    let rankClass = "rank-standard";
-                    if(rank === 1) rankClass = "rank-gold";
-                    if(rank === 2) rankClass = "rank-silver";
-                    if(rank === 3) rankClass = "rank-bronze";
+                    let thumb = `https://img.youtube.com/vi/${l.video}/mqdefault.jpg`;
+                    if(l.video.includes('medal')) thumb = "https://cdn.medal.tv/assets/img/medal-logo.png";
 
-                    item.className = `list-item ${rankClass}`;
-                    
-                    // Bulletproof Image Logic
-                    let thumb = "https://via.placeholder.com/120x68/1a1d24/ffffff?text=No+Video";
-                    if(lvl.video && lvl.video.includes('medal.tv')) {
-                        thumb = "https://cdn.medal.tv/assets/img/medal-logo.png";
-                    } else if (lvl.video && lvl.video !== "") {
-                        thumb = `https://img.youtube.com/vi/${lvl.video}/mqdefault.jpg`;
-                    }
-
-                    item.innerHTML = `
-                        <div class="rank-number">#${rank}</div>
-                        <img src="${thumb}" class="list-thumb" onerror="this.src='https://via.placeholder.com/120x68/1a1d24/333?text=Error'">
-                        <div style="display: flex; flex-direction: column;">
-                            <div class="list-title">${lvl.name}</div>
-                            <div style="color: #aaa; font-size: 0.8rem; margin-top: 4px;"><b>${lvl.points}</b> PTS</div>
+                    div.innerHTML = `
+                        <div class="item-rank">#${i+1}</div>
+                        <img src="${thumb}" class="item-thumb">
+                        <div>
+                            <div class="item-name">${l.name}</div>
+                            <div class="item-pts">${l.points} POINTS</div>
                         </div>
                     `;
-                    
-                    item.onclick = () => updateDisplay(lvl, rank);
-                    sidebar.appendChild(item);
+                    div.onclick = () => updateHero(l, i+1);
+                    container.appendChild(div);
                 });
 
-                updateDisplay(globalLevels[0], 1);
+                updateHero(levels[0], 1);
                 buildLeaderboard();
-            } catch (error) {
-                document.getElementById('sidebar-list').innerHTML = `<div style="padding: 20px; color: red;">Error loading levels.json</div>`;
-            }
+            } catch (e) { console.error("Error:", e); }
         }
 
-        function updateDisplay(lvl, rank) {
-            document.getElementById('level-name').innerText = `#${rank} ${lvl.name}`;
-            document.getElementById('stat-creator').innerText = lvl.creator;
-            document.getElementById('stat-verifier').innerText = lvl.verifier;
-            document.getElementById('stat-points').innerText = lvl.points;
-            document.getElementById('level-id-badge').innerText = `ID: ${lvl.id}`;
+        function updateHero(l, rank) {
+            document.getElementById('hero-name').innerText = `#${rank} ${l.name}`;
+            document.getElementById('hero-creator').innerText = l.creator;
+            document.getElementById('hero-verifier').innerText = l.verifier;
+            document.getElementById('hero-id').innerText = l.id;
 
-            const videoIframe = document.getElementById('main-video');
-            const noVideo = document.getElementById('no-video');
-
-            if (!lvl.video || lvl.video === "") {
-                videoIframe.src = "";
-                videoIframe.style.display = "none";
-                noVideo.style.display = "flex";
+            const v = document.getElementById('hero-video');
+            if(l.video.includes('medal')) {
+                const id = l.video.split('/clips/')[1]?.split('?')[0];
+                v.src = `https://medal.tv/clip/${id}`;
             } else {
-                videoIframe.style.display = "block";
-                noVideo.style.display = "none";
-                
-                if(lvl.video.includes('medal.tv')) {
-                    const clipId = lvl.video.split('/clips/')[1]?.split('?')[0];
-                    videoIframe.src = `https://medal.tv/clip/${clipId}`;
-                } else {
-                    videoIframe.src = `https://www.youtube.com/embed/${lvl.video}`;
-                }
+                v.src = `https://www.youtube.com/embed/${l.video}`;
             }
         }
 
-        // 3. Leaderboard Generator
+        // 2. Leaderboard Logic
         function buildLeaderboard() {
-            const players = {};
-            globalLevels.forEach(lvl => {
-                if(!players[lvl.verifier]) players[lvl.verifier] = 0;
-                players[lvl.verifier] += lvl.points;
+            const scores = {};
+            levels.forEach(l => {
+                scores[l.verifier] = (scores[l.verifier] || 0) + l.points;
             });
 
-            const sortedPlayers = Object.entries(players).sort((a, b) => b[1] - a[1]);
-            const lbContainer = document.getElementById('leaderboard-data');
-            lbContainer.innerHTML = '';
-            
-            sortedPlayers.forEach(([name, points], index) => {
-                lbContainer.innerHTML += `
-                    <div class="lb-player">
-                        <span><span style="color:#555;">#${index + 1}</span> &nbsp; ${name}</span>
-                        <span>${points} PTS</span>
-                    </div>
-                `;
-            });
+            const sorted = Object.entries(scores).sort((a,b) => b[1] - a[1]);
+            const content = document.getElementById('lb-content');
+            content.innerHTML = sorted.map(([name, pts], i) => `
+                <div class="lb-entry">
+                    <span>#${i+1} ${name}</span>
+                    <b>${pts} Pts</b>
+                </div>
+            `).join('');
         }
 
-        function toggleLeaderboard() {
-            const modal = document.getElementById('leaderboard-modal');
-            modal.classList.toggle('active');
-        }
+        // 3. Robust Modal Controls
+        const overlay = document.getElementById('lb-overlay');
+        document.getElementById('lb-btn').onclick = () => overlay.style.display = 'flex';
+        document.getElementById('lb-close').onclick = () => overlay.style.display = 'none';
+        window.onclick = (e) => { if(e.target == overlay) overlay.style.display = 'none'; }
 
-        initList();
+        start();
     </script>
 </body>
 </html>
