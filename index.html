@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wave List</title>
+    <style>
+        /* COLOR THEME - Edit these to change the look */
+        :root {
+            --bg-darker: #0c0d10;
+            --bg-main: #111217;
+            --bg-card: #181a21;
+            --accent: #eb4d4b;
+            --text-main: #ffffff;
+            --text-dim: #8e9297;
+            --border: #2f3136;
+        }
+
+        body { background: var(--bg-darker); color: var(--text-main); font-family: sans-serif; margin: 0; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
+        nav { background: var(--bg-main); border-bottom: 2px solid var(--accent); padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; }
+        .nav-links span { margin-left: 20px; font-size: 0.8rem; color: var(--text-dim); cursor: pointer; font-weight: bold; text-transform: uppercase; }
+        .nav-links span.active { color: var(--accent); }
+
+        .wrapper { display: flex; flex: 1; overflow: hidden; }
+        .sidebar { width: 400px; background: var(--bg-main); border-right: 1px solid var(--border); overflow-y: auto; }
+        
+        /* LEVEL LIST ITEMS */
+        .list-item { padding: 15px; border-bottom: 1px solid var(--border); display: flex; align-items: center; cursor: pointer; gap: 15px; }
+        .list-item:hover { background: var(--bg-card); }
+        .list-item.active { border-left: 4px solid var(--accent); background: var(--bg-card); }
+        
+        .thumb { width: 120px; height: 68px; background: #000; border-radius: 4px; object-fit: cover; border: 1px solid #333; }
+        .level-info b { display: block; font-size: 1rem; }
+        .level-info i { font-size: 0.8rem; color: var(--text-dim); font-style: normal; }
+
+        /* MAIN CONTENT AREA */
+        .main-content { flex: 1; padding: 40px; overflow-y: auto; }
+        .view { display: none; max-width: 900px; margin: 0 auto; }
+        .view.active { display: block; }
+        .card { background: var(--bg-card); padding: 30px; border-radius: 8px; border: 1px solid var(--border); }
+
+        .video-box { width: 100%; aspect-ratio: 16/9; background: #000; margin-bottom: 20px; border-radius: 4px; overflow: hidden; }
+        iframe { width: 100%; height: 100%; border: none; }
+
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border); }
+        .stat-item { font-size: 0.95rem; }
+        .stat-item b { color: var(--text-dim); }
+
+        /* RECORD LIST */
+        .records { margin-top: 30px; }
+        .record-row { padding: 10px; border-bottom: 1px solid #222; display: flex; justify-content: space-between; font-size: 0.9rem; }
+
+        /* LEADERBOARD TABLE */
+        table { width: 100%; border-collapse: collapse; }
+        th { text-align: left; padding: 10px; color: var(--text-dim); border-bottom: 2px solid var(--border); }
+        td { padding: 15px 10px; border-bottom: 1px solid var(--border); }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div><h1 style="margin:0; font-size: 1.2rem;">THE WAVE LIST</h1></div>
+        <div class="nav-links">
+            <span id="btn-list" class="active">List</span>
+            <span id="btn-lb">Leaderboard</span>
+        </div>
+    </nav>
+
+    <div class="wrapper">
+        <div class="sidebar">
+            <!-- 
+                LEVEL CONFIGURATION SECTION 
+                - Add victor names to data-records="Name1, Name2"
+                - Add image link to src="..." 
+            -->
+            <div class="list-item active" data-rank="1" data-name="Defeated Brajan" data-points="345" data-creator="Symm. and Armi12" data-verifier="Symm" data-id="127760359" data-video="ZmX_l_ALCd4" data-records="">
+                <img src="https://thumbnails.demonlist.org/custom-list-previews/368923.png" class="thumb">
+                <div class="level-info"><b>#1 Defeated Brajan</b><i>345 Points</i></div>
+            </div>
+
+            <div class="list-item" data-rank="2" data-name="TooSquared" data-points="330" data-creator="puffballGD" data-verifier="puffballGD" data-id="126306734" data-video="O9h9_W3G4-U" data-records="">
+                <img src="https://thumbnails.demonlist.org/custom-list-previews/368935.png" class="thumb">
+                <div class="level-info"><b>#2 TooSquared</b><i>330 Points</i></div>
+            </div>
+
+            <div class="list-item" data-rank="3" data-name="Solar Wave" data-points="315" data-creator="newbise" data-verifier="newbise" data-id="114003770" data-video="dQw4w9WgXcQ" data-records="">
+                <img src="https://thumbnails.demonlist.org/custom-list-previews/370812.png" class="thumb">
+                <div class="level-info"><b>#3 Solar Wave</b><i>315 Points</i></div>
+            </div>
+
+            <div class="list-item" data-rank="4" data-name="Vendetas Hair" data-points="300" data-creator="Symm" data-verifier="Symm" data-id="140026254" data-video="" data-records="">
+                <img src="https://thumbnails.demonlist.org/custom-list-previews/368929.png" class="thumb">
+                <div class="level-info"><b>#4 Vendetas Hair</b><i>300 Points</i></div>
+            </div>
+
+            <div class="list-item" data-rank="5" data-name="Unnerfed Wave Corridor" data-points="215" data-creator="ChefLime & itsJellyGD" data-verifier="itsJellyGD" data-id="139994700" data-video="" data-records="">
+                <img src="https://thumbnails.demonlist.org/custom-list-previews/366988.png" class="thumb">
+                <div class="level-info"><b>#5 Unnerfed Wave Corridor</b><i>215 Points</i></div>
+            </div>
+
+            <div class="list-item" data-rank="6" data-name="Purgatori" data-points="175" data-creator="Rallen" data-verifier="itsJellyGD" data-id="140011577" data-video="" data-records="">
+                <img src="https://thumbnails.demonlist.org/custom-list-previews/368453.png" class="thumb">
+                <div class="level-info"><b>#6 Purgatori</b><i>175 Points</i></div>
+            </div>
+
+            <div class="list-item" data-rank="7" data-name="Silent Akbar II" data-points="150" data-creator="ARandomBall" data-verifier="ARandomBall" data-id="140121222" data-video="" data-records="">
+                <img src="https://thumbnails.demonlist.org/custom-list-previews/379445.png" class="thumb">
+                <div class="level-info"><b>#7 Silent Akbar II</b><i>150 Points</i></div>
+            </div>
+
+            <div class="list-item" data-rank="8" data-name="ULTIMATE DIRRUCTION" data-points="125" data-creator="itsJellyGD" data-verifier="itsJellyGD" data-id="139797969" data-video="" data-records="">
+                <img src="https://thumbnails.demonlist.org/custom-list-previews/350977.png" class="thumb">
+                <div class="level-info"><b>#8 ULTIMATE DIRRUCTION</b><i>125 Points</i></div>
+            </div>
+
+            <div class="list-item" data-rank="9" data-name="Moody Sigma" data-points="100" data-creator="HurryingJackM" data-verifier="HurryingJackM" data-id="140163794" data-video="" data-records="">
+                <img src="https://thumbnails.demonlist.org/custom-list-previews/379448.png" class="thumb">
+                <div class="level-info"><b>#9 Moody Sigma</b><i>100 Points</i></div>
+            </div>
+
+            <div class="list-item" data-rank="10" data-name="Happiest Day" data-points="85" data-creator="HurryingJackM" data-verifier="HurryingJackM" data-id="140102237" data-video="" data-records="">
+                <img src="https://thumbnails.demonlist.org/custom-list-previews/379439.png" class="thumb">
+                <div class="level-info"><b>#10 Happiest Day</b><i>85 Points</i></div>
+            </div>
+
+            <div class="list-item" data-rank="11" data-name="Wave Corridor" data-points="75" data-creator="ChefLime" data-verifier="ChefLime" data-id="139972028" data-video="" data-records="">
+                <img src="https://thumbnails.demonlist.org/custom-list-previews/366474.png" class="thumb">
+                <div class="level-info"><b>#11 Wave Corridor</b><i>75 Points</i></div>
+            </div>
+
+            <div class="list-item" data-rank="12" data-name="ChefLime Circles" data-points="65" data-creator="ChefLime" data-verifier="ChefLime" data-id="140080516" data-video="" data-records="">
+                <img src="https://thumbnails.demonlist.org/custom-list-previews/373117.png" class="thumb">
+                <div class="level-info"><b>#12 ChefLime Circles</b><i>65 Points</i></div>
+            </div>
+
+            <div class="list-item" data-rank="13" data-name="Figo Likes Wave" data-points="55" data-creator="ChefLime" data-verifier="ChefLime" data-id="139954071" data-video="" data-records="">
+                <img src="" class="thumb">
+                <div class="level-info"><b>#13 Figo Likes Wave</b><i>55 Points</i></div>
+            </div>
+
+            <div class="list-item" data-rank="14" data-name="Spam Practice" data-points="45" data-creator="ZiroGMD" data-verifier="ZiroGMD" data-id="140117104" data-video="" data-records="">
+                <img src="" class="thumb">
+                <div class="level-info"><b>#14 Spam Practice</b><i>45 Points</i></div>
+            </div>
+
+            <div class="list-item" data-rank="15" data-name="Azure Portal" data-points="30" data-creator="ChefLime" data-verifier="ChefLime" data-id="140113463" data-video="" data-records="">
+                <img src="" class="thumb">
+                <div class="level-info"><b>#15 Azure Portal</b><i>30 Points</i></div>
+            </div>
+
+            <div class="list-item" data-rank="16" data-name="Sakupen PooPoo" data-points="25" data-creator="ChefLime" data-verifier="ChefLime" data-id="140060248" data-video="" data-records="">
+                <img src="" class="thumb">
+                <div class="level-info"><b>#16 Sakupen PooPoo</b><i>25 Points</i></div>
+            </div>
+
+            <div class="list-item" data-rank="17" data-name="Blocked" data-points="20" data-creator="ZiroGMD" data-verifier="ZiroGMD" data-id="140076326" data-video="" data-records="">
+                <img src="" class="thumb">
+                <div class="level-info"><b>#17 Blocked</b><i>20 Points</i></div>
+            </div>
+
+            <div class="list-item" data-rank="18" data-name="arbys dih burger" data-points="15" data-creator="ChefLime" data-verifier="ChefLime" data-id="139799043" data-video="" data-records="">
+                <img src="" class="thumb">
+                <div class="level-info"><b>#18 arbys dih burger</b><i>15 Points</i></div>
+            </div>
+
+            <div class="list-item" data-rank="19" data-name="i miss u szeitik" data-points="10" data-creator="ChefLime" data-verifier="ChefLime" data-id="140005842" data-video="" data-records="">
+                <img src="" class="thumb">
+                <div class="level-info"><b>#19 i miss u szeitik</b><i>10 Points</i></div>
+            </div>
+
+            <div class="list-item" data-rank="20" data-name="Tung After Tung" data-points="5" data-creator="ChefLime" data-verifier="ChefLime" data-id="139263888" data-video="" data-records="">
+                <img src="" class="thumb">
+                <div class="level-info"><b>#20 Tung After Tung</b><i>5 Points</i></div>
+            </div>
+
+            <div class="list-item" data-rank="21" data-name="Zoink WAVE" data-points="4" data-creator="ChefLime" data-verifier="ChefLime" data-id="139784604" data-video="" data-records="">
+                <img src="" class="thumb">
+                <div class="level-info"><b>#21 Zoink WAVE</b><i>4 Points</i></div>
+            </div>
+
+            <div class="list-item" data-rank="22" data-name="Swag Clubstep" data-points="2" data-creator="ChefLime" data-verifier="ChefLime" data-id="139661798" data-video="" data-records="">
+                <img src="" class="thumb">
+                <div class="level-info"><b>#22 Swag Clubstep</b><i>2 Points</i></div>
+            </div>
+
+            <div class="list-item" data-rank="23" data-name="Sakupen Hellcles" data-points="1" data-creator="ZiroGMD" data-verifier="ZiroGMD" data-id="140086389" data-video="" data-records="">
+                <img src="" class="thumb">
+                <div class="level-info"><b>#23 Sakupen Hellcles</b><i>1 Point</i></div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <!-- LEVEL PAGE -->
+            <div id="view-list" class="view active">
+                <div class="card">
+                    <div class="video-box"><iframe id="display-video"></iframe></div>
+                    <h2 id="display-title" style="margin:0; font-size: 2rem;"></h2>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-item"><b>Creator:</b> <span id="display-creator"></span></div>
+                        <div class="stat-item"><b>Verifier:</b> <span id="display-verifier"></span></div>
+                        <div class="stat-item"><b>ID:</b> <span id="display-id"></span></div>
+                        <div class="stat-item"><b>Points:</b> <span id="display-points"></span></div>
+                    </div>
+
+                    <div class="records">
+                        <h3 style="border-bottom: 1px solid var(--border); padding-bottom: 10px;">Victors</h3>
+                        <div id="display-records"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LEADERBOARD PAGE -->
+            <div id="view-lb" class="view">
+                <div class="card">
+                    <h2>Leaderboard</h2>
+                    <table>
+                        <thead><tr><th>Rank</th><th>Player</th><th>Points</th></tr></thead>
+                        <tbody id="lb-body"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Logic for Level Display
+        function showLevel(el) {
+            document.querySelectorAll('.list-item').forEach(i => i.classList.remove('active'));
+            el.classList.add('active');
+
+            const d = el.dataset;
+            document.getElementById('display-title').innerText = `#${d.rank} - ${d.name}`;
+            document.getElementById('display-creator').innerText = d.creator;
+            document.getElementById('display-verifier').innerText = d.verifier;
+            document.getElementById('display-id').innerText = d.id;
+            document.getElementById('display-points').innerText = d.points;
+            document.getElementById('display-video').src = `https://www.youtube-nocookie.com/embed/${d.video || 'dQw4w9WgXcQ'}`;
+
+            // List Victors
+            const list = document.getElementById('display-records');
+            list.innerHTML = `<div class="record-row"><span>${d.verifier} (Verifier)</span><span style="color:var(--accent)">100%</span></div>`;
+            if(d.records) {
+                d.records.split(',').forEach(name => {
+                    if(name.trim()) list.innerHTML += `<div class="record-row"><span>${name.trim()}</span><span style="color:var(--accent)">100%</span></div>`;
+                });
+            }
+        }
+
+        // Logic for Leaderboard
+        function updateLeaderboard() {
+            const scores = {};
+            document.querySelectorAll('.list-item').forEach(item => {
+                const pts = parseInt(item.dataset.points);
+                const victors = [item.dataset.verifier, ...item.dataset.records.split(',')];
+                
+                // Get unique names and add points
+                [...new Set(victors)].forEach(name => {
+                    const cleanName = name.trim();
+                    if(cleanName) scores[cleanName] = (scores[cleanName] || 0) + pts;
+                });
+            });
+
+            const sorted = Object.entries(scores).sort((a,b) => b[1] - a[1]);
+            const body = document.getElementById('lb-body');
+            body.innerHTML = sorted.map((p, i) => `<tr><td>#${i+1}</td><td><b>${p[0]}</b></td><td style="color:var(--accent)">${p[1]}</td></tr>`).join('');
+        }
+
+        // Navigation
+        document.getElementById('btn-list').onclick = () => {
+            document.getElementById('view-list').classList.add('active');
+            document.getElementById('view-lb').classList.remove('active');
+            document.getElementById('btn-list').classList.add('active');
+            document.getElementById('btn-lb').classList.remove('active');
+        };
+
+        document.getElementById('btn-lb').onclick = () => {
+            document.getElementById('view-lb').classList.add('active');
+            document.getElementById('view-list').classList.remove('active');
+            document.getElementById('btn-lb').classList.add('active');
+            document.getElementById('btn-list').classList.remove('active');
+            updateLeaderboard();
+        };
+
+        // Event Listeners for sidebar
+        document.querySelectorAll('.list-item').forEach(item => {
+            item.onclick = () => showLevel(item);
+        });
+
+        // Load First Level on Start
+        showLevel(document.querySelector('.list-item'));
+    </script>
+</body>
+</html>
