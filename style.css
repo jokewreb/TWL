@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
 
 :root {
-    --bg-darker: #0a0b0e;
-    --bg-main: rgba(18, 20, 25, 0.98);
-    --bg-card: rgba(26, 29, 36, 0.95);
+    --bg-darker: #050608;
+    --bg-main: #121419;
+    --bg-card: #1a1d24;
     --accent: #ff4757;
     --gold: #ffcc00;
     --silver: #d1d8e0;
@@ -23,49 +23,45 @@ body {
     flex-direction: column;
 }
 
-/* Nav Bar */
 nav { 
-    height: 80px; 
+    height: 70px; 
     background: var(--bg-main); 
     display: flex; 
     align-items: center; 
-    padding: 0 50px; 
+    padding: 0 40px; 
     border-bottom: 1px solid var(--border);
-    letter-spacing: 4px;
 }
 
 .wrapper { display: flex; flex: 1; overflow: hidden; }
 
-/* Sidebar - Bigger & Cleaner */
 .sidebar { 
-    width: 420px; 
+    width: 350px; 
     background: var(--bg-main); 
     border-right: 1px solid var(--border); 
     overflow-y: auto; 
 }
 
 .list-item { 
-    padding: 25px; 
+    padding: 20px; 
     border-bottom: 1px solid var(--border); 
     cursor: pointer; 
-    transition: all 0.3s ease; 
-    border-left: 5px solid transparent;
+    transition: 0.2s;
+    border-left: 4px solid transparent;
 }
 
-.list-item:hover { background: rgba(255, 255, 255, 0.03); transform: translateX(5px); }
+.list-item:hover { background: rgba(255, 255, 255, 0.03); }
 
-/* Rank Colors */
+/* Rankings Tints */
 .rank-1 { border-left-color: var(--gold); background: linear-gradient(90deg, rgba(255, 204, 0, 0.05), transparent); }
 .rank-2 { border-left-color: var(--silver); background: linear-gradient(90deg, rgba(209, 216, 224, 0.05), transparent); }
 .rank-3 { border-left-color: var(--bronze); background: linear-gradient(90deg, rgba(205, 127, 50, 0.05), transparent); }
 
-.level-info b { display: block; font-size: 1.1rem; margin-bottom: 5px; }
-.level-info i { color: var(--accent); font-weight: 900; font-style: normal; font-size: 0.9rem; }
+.level-info b { display: block; font-size: 1rem; }
+.level-info i { color: var(--accent); font-weight: 800; font-style: normal; font-size: 0.85rem; }
 
-/* Main Content - Fixes the "Small Video" Issue */
 .main-content { 
     flex: 1; 
-    padding: 60px; 
+    padding: 40px; 
     overflow-y: auto; 
     display: flex; 
     justify-content: center;
@@ -73,32 +69,29 @@ nav {
 
 .card { 
     width: 100%; 
-    max-width: 1000px; /* Limits width so it doesn't look stretched */
+    max-width: 900px; 
     background: var(--bg-card); 
-    padding: 40px; 
-    border-radius: 24px; 
+    padding: 30px; 
+    border-radius: 15px; 
     border: 1px solid var(--border);
-    box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+    height: fit-content;
 }
 
 .video-box { 
     width: 100%; 
-    aspect-ratio: 16 / 9; 
+    aspect-ratio: 16 / 9; /* This prevents the tiny video issue */
     background: #000; 
-    border-radius: 16px; 
-    margin-bottom: 30px; 
+    border-radius: 10px; 
+    margin-bottom: 25px; 
     overflow: hidden;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
 }
 
 iframe { width: 100%; height: 100%; border: none; }
 
-.stats-container { 
+.stats-grid { 
     display: grid; 
-    grid-template-columns: repeat(2, 1fr); 
-    gap: 30px; 
-    margin-top: 20px;
+    grid-template-columns: 1fr 1fr; 
+    gap: 20px; 
 }
-
-.stat-item small { color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; font-size: 0.7rem; }
-.stat-item div { font-size: 1.3rem; font-weight: 600; margin-top: 5px; }
+.stat-item small { color: var(--text-dim); display: block; margin-bottom: 5px; text-transform: uppercase; font-weight: 700; font-size: 0.7rem; }
+.stat-item div { font-size: 1.1rem; font-weight: 600; }
