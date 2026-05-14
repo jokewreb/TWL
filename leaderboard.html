@@ -2,126 +2,51 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>LEADERBOARD | THE WAVE LIST</title>
+    <title>LEADERBOARD | WAVE LIST</title>
+    <link rel="stylesheet" href="style.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
-        
-        :root {
-            --bg: #0a0b10;
-            --card: rgba(20, 22, 30, 0.7);
-            --gold: #ffcf4b;
-            --silver: #bebebe;
-            --bronze: #cd7f32;
-            --accent: #ff4141; /* Matching your red accent style */
-        }
-
-        body {
-            margin: 0; background: var(--bg); color: #fff;
-            font-family: 'Inter', sans-serif;
-            background-image: radial-gradient(circle at top, #1a1c29 0%, #0a0b10 100%);
-            min-height: 100vh;
-        }
-
-        nav {
-            padding: 20px 50px; display: flex; justify-content: space-between;
-            align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05);
-            backdrop-filter: blur(10px);
-        }
-
-        .btn-back {
-            color: #fff; text-decoration: none; font-size: 0.8rem;
-            border: 1px solid rgba(255,255,255,0.1); padding: 8px 20px;
-            transition: 0.3s;
-        }
-        .btn-back:hover { background: #fff; color: #000; transform: scale(1.05); }
-
-        .container { max-width: 900px; margin: 60px auto; padding: 0 20px; }
-
-        h1 { font-size: 2.5rem; letter-spacing: -1px; margin-bottom: 40px; }
-
-        .leaderboard-table {
-            width: 100%; border-collapse: separate; border-spacing: 0 10px;
-        }
-
-        .row {
-            background: var(--card); border: 1px solid rgba(255,255,255,0.03);
-            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .row:hover {
-            transform: scale(1.02);
-            background: rgba(30, 33, 45, 0.9);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            border-color: var(--accent);
-        }
-
-        td { padding: 20px; font-weight: 400; }
-        td:first-child { border-radius: 8px 0 0 8px; font-weight: 700; width: 60px; text-align: center; }
-        td:last-child { border-radius: 0 8px 8px 0; text-align: right; color: var(--accent); font-weight: 700; }
-
-        /* Top 3 Stylings */
-        .rank-1 { color: var(--gold); text-shadow: 0 0 15px rgba(255, 207, 75, 0.4); }
-        .rank-2 { color: var(--silver); text-shadow: 0 0 15px rgba(190, 190, 190, 0.4); }
-        .rank-3 { color: var(--bronze); text-shadow: 0 0 15px rgba(205, 127, 50, 0.4); }
-
-        .tag-verifier {
-            font-size: 0.6rem; background: rgba(255,255,255,0.05);
-            padding: 3px 8px; margin-left: 10px; border-radius: 4px;
-            vertical-align: middle; color: #888;
-        }
+        .lb-container { max-width: 800px; margin: 40px auto; width: 90%; }
+        table { width: 100%; border-collapse: separate; border-spacing: 0 8px; }
+        tr { background: var(--card); }
+        td { padding: 15px 25px; border: 1px solid var(--border); }
+        td:first-child { border-radius: 6px 0 0 6px; font-weight: 700; width: 50px; text-align: center; }
+        td:last-child { border-radius: 0 6px 6px 0; text-align: right; color: var(--accent); font-weight: 700; }
+        .gold { color: var(--gold); text-shadow: 0 0 10px rgba(255,207,75,0.3); }
+        .silver { color: var(--silver); }
+        .bronze { color: var(--bronze); }
     </style>
 </head>
-<body>
-
+<body style="overflow: auto;">
     <nav>
-        <div style="font-weight: 700; letter-spacing: 2px;">WAVE LIST</div>
-        <a href="index.html" class="btn-back">RETURN TO LIST</a>
+        <div class="nav-logo">LEADERBOARD</div>
+        <a href="index.html" class="nav-link">BACK TO LIST</a>
     </nav>
-
-    <div class="container">
-        <h1>Top Players</h1>
-        <table class="leaderboard-table">
-            <tbody id="lb-content">
-                </tbody>
-        </table>
+    <div class="lb-container">
+        <table><tbody id="lb-data"></tbody></table>
     </div>
 
     <script>
-        async function loadLeaderboard() {
-            const response = await fetch('./levels.json');
-            const data = await response.json();
-            
+        async function load() {
+            const res = await fetch('./levels.json');
+            const data = await res.json();
             const scores = {};
-
-            data.forEach(lvl => {
-                // Verifier gets points
-                scores[lvl.verifier] = (scores[lvl.verifier] || 0) + lvl.points;
-                // Victors get points
-                lvl.victors.forEach(v => {
-                    scores[v] = (scores[v] || 0) + lvl.points;
-                });
+            data.forEach(l => {
+                scores[l.verifier] = (scores[l.verifier] || 0) + l.points;
+                l.victors.forEach(v => { scores[v] = (scores[v] || 0) + l.points; });
             });
-
-            const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
-            const container = document.getElementById('lb-content');
-
-            sorted.forEach(([player, pts], i) => {
-                const rank = i + 1;
-                let rankClass = "";
-                if(rank === 1) rankClass = "rank-1";
-                if(rank === 2) rankClass = "rank-2";
-                if(rank === 3) rankClass = "rank-3";
-
-                container.innerHTML += `
-                    <tr class="row">
-                        <td class="${rankClass}">#${rank}</td>
-                        <td>${player} <span class="tag-verifier">PLAYER</span></td>
-                        <td>${pts.toLocaleString()} PTS</td>
-                    </tr>
-                `;
+            const sorted = Object.entries(scores).sort((a,b) => b[1]-a[1]);
+            const table = document.getElementById('lb-data');
+            sorted.forEach(([name, pts], i) => {
+                const r = i+1;
+                const rClass = r==1?'gold':r==2?'silver':r==3?'bronze':'';
+                table.innerHTML += `<tr style="transform: scale(1); transition: 0.2s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                    <td class="${rClass}">#${r}</td>
+                    <td>${name}</td>
+                    <td>${pts.toLocaleString()} PTS</td>
+                </tr>`;
             });
         }
-        loadLeaderboard();
+        load();
     </script>
 </body>
 </html>
