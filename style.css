@@ -41,7 +41,10 @@ nav {
     font-weight: 700;
     cursor: pointer;
     transition: 0.2s;
+    color: #000;
 }
+
+.btn-leaderboard:hover { filter: brightness(1.2); transform: scale(1.05); }
 
 .main-container { display: flex; height: calc(100vh - 70px); }
 
@@ -65,19 +68,20 @@ nav {
 
 .list-item:hover { background: rgba(255,255,255,0.03); }
 
+/* FIX FOR WEIRD BIG IMAGES */
 .list-thumb {
     width: 110px;
     height: 62px;
     border-radius: 4px;
     object-fit: cover;
     border: 1px solid rgba(255,255,255,0.1);
+    flex-shrink: 0; /* This strictly prevents the image from stretching */
 }
 
 .rank-number { width: 35px; font-weight: 900; color: #555; font-size: 1.1rem; }
 .list-title { font-weight: 700; font-size: 0.95rem; }
 .list-points { color: var(--accent); font-size: 0.8rem; font-weight: 700; }
 
-/* Rank Colors */
 .rank-gold .rank-number { color: var(--gold); }
 .rank-silver .rank-number { color: var(--silver); }
 .rank-bronze .rank-number { color: var(--bronze); }
@@ -98,13 +102,21 @@ nav {
 .video-container {
     width: 100%;
     aspect-ratio: 16/9;
-    background: #000;
+    background: #050505;
     border-radius: 12px;
     overflow: hidden;
     margin-bottom: 25px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
-iframe { width: 100%; height: 100%; border: none; }
+.no-video-overlay {
+    position: absolute; inset: 0; display: flex;
+    justify-content: center; align-items: center;
+    background: #111; color: #666; font-weight: bold; font-size: 1.2rem;
+}
+
+iframe { width: 100%; height: 100%; border: none; position: relative; z-index: 2; }
 
 .stats-grid {
     display: grid;
@@ -113,8 +125,29 @@ iframe { width: 100%; height: 100%; border: none; }
     background: rgba(0,0,0,0.2);
     padding: 20px;
     border-radius: 12px;
+    margin-top: 20px;
 }
 
 .stat-box .label { font-size: 0.7rem; color: #777; text-transform: uppercase; letter-spacing: 1px; }
 .stat-box .value { font-size: 1.2rem; font-weight: 700; margin-top: 5px; }
 .highlight { color: var(--accent); }
+
+/* LEADERBOARD MODAL */
+.modal {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(8px); z-index: 1000;
+    display: flex; justify-content: center; align-items: center;
+    opacity: 0; pointer-events: none; transition: 0.3s;
+}
+.modal.active { opacity: 1; pointer-events: all; }
+.modal-content {
+    background: var(--card-bg); padding: 40px; border-radius: 20px;
+    width: 90%; max-width: 500px; border: 1px solid var(--border);
+    max-height: 80vh; overflow-y: auto; position: relative;
+}
+.close-btn {
+    position: absolute; top: 20px; right: 20px; background: none;
+    border: none; color: white; font-size: 1.5rem; cursor: pointer;
+}
+.lb-player { display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid var(--border); font-weight: bold; }
+.lb-player span:last-child { color: var(--accent); }
