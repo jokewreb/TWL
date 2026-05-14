@@ -2,150 +2,98 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>THE WAVE LIST</title>
-    <style>
-        /* INDUSTRIAL CLEAN STYLE */
-        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
-        :root { --primary: #00f2ff; --bg: #0a0a0a; --surface: #121212; --border: #222; }
-        
-        * { box-sizing: border-box; border-radius: 0 !important; } /* FORCES SHARP EDGES */
-
-        body { 
-            margin: 0; background: var(--bg); color: #fff; 
-            font-family: 'Space Mono', monospace; overflow: hidden; 
-        }
-
-        #canvas { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
-
-        nav {
-            height: 60px; border-bottom: 2px solid var(--primary);
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 0 30px; background: rgba(0,0,0,0.9);
-        }
-
-        .nav-link {
-            color: var(--primary); text-decoration: none; font-weight: bold;
-            border: 1px solid var(--primary); padding: 5px 15px; font-size: 0.8rem;
-        }
-
-        .main-layout { display: flex; height: calc(100vh - 60px); }
-
-        .sidebar {
-            width: 350px; border-right: 1px solid var(--border);
-            overflow-y: auto; background: rgba(10,10,10,0.6);
-        }
-
-        .level-item {
-            padding: 15px; border-bottom: 1px solid var(--border);
-            cursor: pointer; display: flex; align-items: center; gap: 15px;
-        }
-        .level-item:hover { background: var(--surface); border-left: 4px solid var(--primary); }
-
-        .content { flex: 1; padding: 40px; overflow-y: auto; }
-        .video-frame { width: 100%; aspect-ratio: 16/9; border: 1px solid var(--border); background: #000; margin-bottom: 20px; }
-
-        .info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 20px; }
-        .info-cell { background: var(--bg); padding: 15px; }
-        .label { color: #555; font-size: 0.7rem; text-transform: uppercase; margin-bottom: 5px; }
-
-        .victors-box { border: 1px solid var(--border); padding: 20px; background: rgba(0,0,0,0.2); }
-        .victor-tag { display: inline-block; padding: 4px 10px; border: 1px solid #333; color: var(--primary); margin: 4px; font-size: 0.8rem; }
-        
-        /* ERROR REPORTER STYLE */
-        #status-msg { color: #ff4444; padding: 20px; text-align: center; display: none; }
-    </style>
+    <title>THE WAVE LIST | V2</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <canvas id="canvas"></canvas>
+
     <nav>
-        <div style="font-weight: bold; letter-spacing: 3px;">WAVE LIST</div>
+        <div class="nav-logo">THE WAVE LIST</div>
         <a href="leaderboard.html" class="nav-link">LEADERBOARD</a>
     </nav>
 
-    <div id="status-msg"></div>
-
     <div class="main-layout">
-        <div class="sidebar" id="side-list">
-            <div style="padding:20px; color:#444;">Loading levels...</div>
-        </div>
-        <div class="content" id="main-content" style="display:none;">
-            <iframe id="vid" class="video-frame" src="" allowfullscreen></iframe>
-            <h1 id="title" style="margin: 0 0 20px 0;"></h1>
-            <div class="info-grid">
-                <div class="info-cell"><div class="label">Creator</div><div id="c-creator">-</div></div>
-                <div class="info-cell"><div class="label">Verifier</div><div id="c-verifier">-</div></div>
-                <div class="info-cell"><div class="label">Points</div><div id="c-points" style="color:var(--primary)">-</div></div>
-            </div>
-            <div class="victors-box">
-                <div class="label" style="color:var(--primary); margin-bottom:10px;">Verified Victors</div>
-                <div id="v-list">None</div>
+        <div class="sidebar" id="sidebar"></div>
+        
+        <div class="content">
+            <div class="glass-card">
+                <div class="video-box">
+                    <iframe id="main-vid" width="100%" height="100%" src="" frameborder="0" allowfullscreen></iframe>
+                </div>
+                
+                <h1 id="main-title" style="margin:0; font-size: 1.6rem;">Loading...</h1>
+                
+                <div class="info-grid">
+                    <div class="stat-card"><div class="stat-label">Creator</div><div id="s-creator">-</div></div>
+                    <div class="stat-card"><div class="stat-label">Verifier</div><div id="s-verifier">-</div></div>
+                    <div class="stat-card"><div class="stat-label">Level ID</div><div id="s-id">-</div></div>
+                    <div class="stat-card"><div class="stat-label">Points</div><div id="s-pts" style="color:var(--accent)">-</div></div>
+                </div>
+
+                <div class="victors-section">
+                    <div class="stat-label" style="margin-bottom:10px">List Victors</div>
+                    <div id="victor-container">None</div>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        // 1. PARTICLES (The dots you see)
-        const canvas = document.getElementById('canvas');
-        const ctx = canvas.getContext('2d');
-        let dots = [];
-        function init() {
-            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-            dots = Array.from({length: 60}, () => ({ x: Math.random()*canvas.width, y: Math.random()*canvas.height, s: Math.random()*0.5 + 0.2 }));
-        }
-        function animate() {
-            ctx.clearRect(0,0,canvas.width, canvas.height);
-            ctx.fillStyle = 'rgba(0, 242, 255, 0.2)';
-            dots.forEach(d => { ctx.fillRect(d.x, d.y, 2, 2); d.y -= d.s; if(d.y<0) d.y=canvas.height; });
-            requestAnimationFrame(animate);
-        }
-        window.onresize = init; init(); animate();
-
-        // 2. DATA LOADING
-        async function start() {
-            const side = document.getElementById('side-list');
-            const status = document.getElementById('status-msg');
-            
+        async function run() {
             try {
-                const res = await fetch('./levels.json');
-                if(!res.ok) throw new Error("levels.json not found on server.");
-                const data = await res.json();
-                
-                side.innerHTML = '';
-                data.forEach((l, i) => {
-                    const div = document.createElement('div');
-                    div.className = 'level-item';
-                    div.innerHTML = `<b style="width:30px">#${i+1}</b> <div>${l.name}</div>`;
-                    div.onclick = () => show(l, i+1);
-                    side.appendChild(div);
+                const response = await fetch('./levels.json');
+                const levels = await response.json();
+                const sidebar = document.getElementById('sidebar');
+
+                levels.forEach((lvl, i) => {
+                    const item = document.createElement('div');
+                    item.className = `list-item ${i === 0 ? 'top-1' : ''}`;
+                    
+                    let thumb = lvl.video.includes('medal') 
+                        ? "https://cdn.medal.tv/assets/img/medal-logo.png" 
+                        : `https://img.youtube.com/vi/${lvl.video}/mqdefault.jpg`;
+
+                    item.innerHTML = `
+                        <div class="rank">#${i + 1}</div>
+                        <img src="${thumb}" class="thumb-mini">
+                        <div>
+                            <div style="font-weight:700; font-size:0.85rem">${lvl.name}</div>
+                            <div style="font-size:0.7rem; color:var(--text-dim)">${lvl.points} PTS</div>
+                        </div>
+                    `;
+                    item.onclick = () => update(lvl, i + 1);
+                    sidebar.appendChild(item);
                 });
 
-                document.getElementById('main-content').style.display = 'block';
-                show(data[0], 1);
+                // Auto-load #1
+                update(levels[0], 1);
 
-            } catch (e) {
-                status.style.display = 'block';
-                status.innerHTML = `<b>CRITICAL ERROR:</b> ${e.message}<br>Check if levels.json exists and is formatted correctly.`;
-                console.error(e);
+            } catch (error) {
+                console.error("Error loading levels:", error);
             }
         }
 
-        function show(l, rank) {
-            document.getElementById('title').innerText = `#${rank} ${l.name}`;
-            document.getElementById('c-creator').innerText = l.creator;
-            document.getElementById('c-verifier').innerText = l.verifier;
-            document.getElementById('c-points').innerText = l.points;
-            
-            const vid = document.getElementById('vid');
-            if(l.video.includes('medal')) {
-                vid.src = `https://medal.tv/clip/${l.video.split('/clips/')[1]}`;
+        function update(lvl, rank) {
+            document.getElementById('main-title').innerText = `#${rank} - ${lvl.name}`;
+            document.getElementById('s-creator').innerText = lvl.creator;
+            document.getElementById('s-verifier').innerText = lvl.verifier;
+            document.getElementById('s-id').innerText = lvl.id;
+            document.getElementById('s-pts').innerText = lvl.points;
+
+            const vid = document.getElementById('main-vid');
+            if (lvl.video.length > 11) {
+                vid.src = `https://medal.tv/clip/${lvl.video.split('/').pop()}`;
             } else {
-                vid.src = `https://www.youtube.com/embed/${l.video || 'dQw4w9WgXcQ'}`;
+                vid.src = `https://www.youtube.com/embed/${lvl.video}`;
             }
 
-            const vList = document.getElementById('v-list');
-            vList.innerHTML = l.victors.length > 0 ? l.victors.map(v => `<span class="victor-tag">${v}</span>`).join('') : "No victors yet.";
+            const vCont = document.getElementById('victor-container');
+            vCont.innerHTML = lvl.victors.length > 0 
+                ? lvl.victors.map(v => `<span class="victor-pill">${v}</span>`).join('') 
+                : "No verified victors yet.";
         }
-        start();
+
+        run();
     </script>
 </body>
 </html>
