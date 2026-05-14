@@ -6,17 +6,18 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav><h1>THE WAVE LIST</h1></nav>
+    <nav><h2>THE WAVE LIST</h2></nav>
+
     <div class="wrapper">
         <div class="sidebar" id="sidebar-list"></div>
         <div class="main-content">
             <div class="card">
                 <div class="video-box"><iframe id="display-video" allowfullscreen></iframe></div>
-                <h2 id="display-title">Loading List...</h2>
-                <div class="stats-container">
+                <h2 id="display-title">Loading...</h2>
+                <div class="stats-grid">
                     <div class="stat-item"><small>Creator</small><div id="stat-creator">-</div></div>
                     <div class="stat-item"><small>Verifier</small><div id="stat-verifier">-</div></div>
-                    <div class="stat-item"><small>Level ID</small><div id="stat-id">-</div></div>
+                    <div class="stat-item"><small>ID</small><div id="stat-id">-</div></div>
                     <div class="stat-item"><small>Points</small><div id="stat-points" style="color:var(--accent)">-</div></div>
                 </div>
             </div>
@@ -24,30 +25,31 @@
     </div>
 
     <script>
-        async function loadData() {
+        async function init() {
             try {
-                // Fetching from the separate file
                 const response = await fetch('./levels.json');
-                if (!response.ok) throw new Error("Could not find levels.json");
                 let levels = await response.json();
 
-                // Auto-sort by points
+                // AUTOMATIC POINT SORTING
                 levels.sort((a, b) => b.points - a.points);
 
                 const sidebar = document.getElementById('sidebar-list');
                 levels.forEach((lvl, index) => {
                     const rank = index + 1;
                     const div = document.createElement('div');
-                    div.className = `list-item rank-${rank <= 3 ? rank : 'default'}`;
+                    
+                    let rankClass = "";
+                    if(rank === 1) rankClass = "rank-1";
+                    else if(rank === 2) rankClass = "rank-2";
+                    else if(rank === 3) rankClass = "rank-3";
+
+                    div.className = `list-item ${rankClass}`;
                     div.innerHTML = `<div class="level-info"><b>#${rank} ${lvl.name}</b><i>${lvl.points} PTS</i></div>`;
                     div.onclick = () => updateUI(lvl, rank);
                     sidebar.appendChild(div);
                 });
                 updateUI(levels[0], 1);
-            } catch (err) {
-                document.getElementById('display-title').innerText = "Error Loading Data";
-                console.error(err);
-            }
+            } catch(e) { console.error(e); }
         }
 
         function updateUI(lvl, rank) {
@@ -56,16 +58,16 @@
             document.getElementById('stat-verifier').innerText = lvl.verifier;
             document.getElementById('stat-id').innerText = lvl.id;
             document.getElementById('stat-points').innerText = lvl.points;
-            
+
             const video = document.getElementById('display-video');
             if(lvl.video.includes('medal.tv')) {
-                const clipId = lvl.video.split('/clips/')[1]?.split('?')[0];
-                video.src = `https://medal.tv/clip/${clipId}`;
+                const id = lvl.video.split('/clips/')[1]?.split('?')[0];
+                video.src = `https://medal.tv/clip/${id}`;
             } else {
                 video.src = `https://www.youtube.com/embed/${lvl.video || 'dQw4w9WgXcQ'}`;
             }
         }
-        loadData();
+        init();
     </script>
 </body>
 </html>
