@@ -1,33 +1,73 @@
-// FETCH AND SORT LEVELS
-async function loadLevels() {
-    const response = await fetch('levels.json');
-    let levels = await response.json();
-    const sidebar = document.getElementById('sidebar-list');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The Wave List</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav style="height:70px; background:var(--bg-main); display:flex; align-items:center; padding:0 40px; border-bottom:1px solid var(--border)">
+        <h1 style="margin:0; font-size:1.5rem; letter-spacing:2px">THE WAVE LIST</h1>
+    </nav>
 
-    // SORT BY POINTS (Highest to Lowest)
-    levels.sort((a, b) => b.points - a.points);
-
-    // Render with Rank calculation
-    levels.forEach((lvl, index) => {
-        const displayRank = index + 1;
-        const item = document.createElement('div');
-        
-        // Add special Top 3 CSS classes automatically based on position
-        let rankClass = "";
-        if(displayRank === 1) rankClass = "rank-1";
-        else if(displayRank === 2) rankClass = "rank-2";
-        else if(displayRank === 3) rankClass = "rank-3";
-
-        item.className = `list-item ${rankClass}`;
-        item.innerHTML = `
-            <div class="level-info">
-                <b>#${displayRank} ${lvl.name}</b>
-                <i>${lvl.points} PTS</i>
+    <div class="wrapper">
+        <div class="sidebar" id="sidebar-list"></div>
+        <div class="main-content">
+            <div class="card">
+                <div class="video-box"><iframe id="display-video" src="" allowfullscreen></iframe></div>
+                <h2 id="display-title">Select a Level</h2>
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
+                    <div><small style="color:var(--text-dim)">CREATOR</small><div id="stat-creator">-</div></div>
+                    <div><small style="color:var(--text-dim)">VERIFIER</small><div id="stat-verifier">-</div></div>
+                    <div><small style="color:var(--text-dim)">ID</small><div id="stat-id">-</div></div>
+                    <div><small style="color:var(--text-dim)">POINTS</small><div id="stat-points" style="color:var(--accent); font-weight:800">-</div></div>
+                </div>
             </div>
-        `;
-        item.onclick = () => displayLevel(lvl, displayRank);
-        sidebar.appendChild(item);
-    });
+        </div>
+    </div>
 
-    displayLevel(levels[0], 1);
-}
+    <script>
+        async function init() {
+            const response = await fetch('levels.json');
+            let levels = await response.json();
+
+            // AUTOMATIC SORTING BY POINTS
+            levels.sort((a, b) => b.points - a.points);
+
+            const sidebar = document.getElementById('sidebar-list');
+            levels.forEach((lvl, index) => {
+                const rank = index + 1;
+                const div = document.createElement('div');
+                
+                let rankType = "default";
+                if(rank === 1) rankType = "rank-1";
+                else if(rank === 2) rankType = "rank-2";
+                else if(rank === 3) rankType = "rank-3";
+
+                div.className = `list-item ${rankType}`;
+                div.innerHTML = `<div class="level-info"><b>#${rank} ${lvl.name}</b><i>${lvl.points} PTS</i></div>`;
+                div.onclick = () => updateInfo(lvl, rank);
+                sidebar.appendChild(div);
+            });
+            updateInfo(levels[0], 1);
+        }
+
+        function updateInfo(lvl, rank) {
+            document.getElementById('display-title').innerText = `#${rank} ${lvl.name}`;
+            document.getElementById('stat-creator').innerText = lvl.creator;
+            document.getElementById('stat-verifier').innerText = lvl.verifier;
+            document.getElementById('stat-id').innerText = lvl.id;
+            document.getElementById('stat-points').innerText = lvl.points;
+            
+            const video = document.getElementById('display-video');
+            if(lvl.video.includes('medal.tv')) {
+                const clipId = lvl.video.split('/clips/')[1]?.split('?')[0];
+                video.src = `https://medal.tv/clip/${clipId}`;
+            } else {
+                video.src = `https://www.youtube.com/embed/${lvl.video || 'dQw4w9WgXcQ'}`;
+            }
+        }
+        init();
+    </script>
+</body>
+</html>
