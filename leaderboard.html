@@ -2,139 +2,79 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>TOP RANKINGS | WAVE LIST</title>
+    <title>THE WAVE LIST</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        body { overflow-y: auto; overflow-x: hidden; }
-        #canvas { position: fixed; top: 0; left: 0; z-index: -1; pointer-events: none; }
-        
-        .lb-container { 
-            max-width: 900px; margin: 60px auto; position: relative; 
-            animation: fadeIn 0.8s ease-out;
-        }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-        .header-box { text-align: center; margin-bottom: 50px; }
-        .header-box h1 { font-size: 3rem; letter-spacing: 5px; margin: 0; color: #fff; text-shadow: 0 0 20px rgba(255,65,65,0.5); }
-
-        table { width: 100%; border-collapse: separate; border-spacing: 0 12px; }
-        
-        tr { 
-            background: rgba(20, 22, 30, 0.6); 
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        tr:hover { 
-            background: rgba(255, 65, 65, 0.1); 
-            transform: scale(1.03) translateX(10px);
-            border-color: var(--accent);
-        }
-
-        td { padding: 25px; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); }
-        td:first-child { border-radius: 12px 0 0 12px; border-left: 1px solid rgba(255,255,255,0.05); width: 100px; text-align: center; font-size: 1.5rem; }
-        td:last-child { border-radius: 0 12px 12px 0; border-right: 1px solid rgba(255,255,255,0.05); text-align: right; font-size: 1.2rem; }
-
-        .player-name { font-size: 1.2rem; font-weight: 700; letter-spacing: 1px; }
-        .pt-val { color: var(--accent); text-shadow: 0 0 10px rgba(255,65,65,0.4); font-weight: 700; }
-
-        /* Medals */
-        .rank-1 { color: #ffcf4b; text-shadow: 0 0 20px rgba(255, 207, 75, 0.6); font-size: 2rem !important; }
-        .rank-2 { color: #bebebe; text-shadow: 0 0 20px rgba(190, 190, 190, 0.4); }
-        .rank-3 { color: #cd7f32; text-shadow: 0 0 20px rgba(205, 127, 50, 0.4); }
-    </style>
 </head>
 <body>
-    <canvas id="canvas"></canvas>
-    
     <nav>
-        <div class="nav-logo">WAVE LIST</div>
-        <a href="index.html" class="nav-link">BACK TO LIST</a>
+        <div class="nav-logo">THE WAVE LIST</div>
+        <a href="leaderboard.html" class="nav-link">LEADERBOARD</a>
     </nav>
 
-    <div class="lb-container">
-        <div class="header-box">
-            <h1>LEADERBOARD</h1>
-            <div style="color: var(--accent); font-size: 0.8rem; letter-spacing: 2px;">GLOBAL RANKINGS</div>
+    <div class="main-layout">
+        <div class="sidebar" id="sidebar"></div>
+        <div class="content">
+            <div class="glass-card">
+                <div class="video-box">
+                    <iframe id="main-vid" width="100%" height="100%" src="" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <h1 id="main-title" style="margin:0; font-size: 1.5rem;"></h1>
+                <div class="info-grid">
+                    <div class="stat-card"><div class="stat-label">Creator</div><div id="s-creator">-</div></div>
+                    <div class="stat-card"><div class="stat-label">Verifier</div><div id="s-verifier">-</div></div>
+                    <div class="stat-card"><div class="stat-label">ID</div><div id="s-id">-</div></div>
+                    <div class="stat-card"><div class="stat-label">Points</div><div id="s-pts" style="color:var(--accent)">-</div></div>
+                </div>
+                <div class="victors-box">
+                    <div class="stat-label">List Victors</div>
+                    <div id="v-cont" style="margin-top:10px;"></div>
+                </div>
+            </div>
         </div>
-        <table>
-            <tbody id="lb-data"></tbody>
-        </table>
     </div>
 
     <script>
-        // --- BUFFED PARTICLE SYSTEM ---
-        const canvas = document.getElementById('canvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-
-        function init() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            particles = [];
-            for(let i=0; i<150; i++) { // Increased to 150 particles
-                particles.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    size: Math.random() * 2 + 1,
-                    speed: Math.random() * 0.5 + 0.2,
-                    opacity: Math.random() * 0.5
-                });
-            }
-        }
-
-        function animate() {
-            ctx.clearRect(0,0,canvas.width, canvas.height);
-            particles.forEach(p => {
-                ctx.fillStyle = `rgba(255, 65, 65, ${p.opacity})`; // Red particles to match accent
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                ctx.fill();
-                p.y -= p.speed;
-                if(p.y < -10) p.y = canvas.height + 10;
-            });
-            requestAnimationFrame(animate);
-        }
-        window.onresize = init; init(); animate();
-
-        // --- FIXED POINT CALCULATION ---
-        async function load() {
+        async function init() {
             const res = await fetch('./levels.json');
             const data = await res.json();
-            const scores = {};
+            const side = document.getElementById('sidebar');
 
-            data.forEach(l => {
-                // Function to clean names (removes dots and spaces)
-                const clean = (name) => name.replace(/\./g, '').trim();
-
-                const verifier = clean(l.verifier);
-                scores[verifier] = (scores[verifier] || 0) + l.points;
-
-                l.victors.forEach(v => {
-                    const victor = clean(v);
-                    scores[victor] = (scores[victor] || 0) + l.points;
-                });
-            });
-
-            const sorted = Object.entries(scores).sort((a,b) => b[1]-a[1]);
-            const table = document.getElementById('lb-data');
-
-            sorted.forEach(([name, pts], i) => {
-                const r = i + 1;
-                let rClass = r === 1 ? 'rank-1' : r === 2 ? 'rank-2' : r === 3 ? 'rank-3' : '';
+            data.forEach((lvl, i) => {
+                const rank = i + 1;
+                const div = document.createElement('div');
+                div.className = `list-item ${rank <= 3 ? 'top-'+rank : ''}`;
                 
-                table.innerHTML += `
-                    <tr>
-                        <td class="${rClass}">#${r}</td>
-                        <td><span class="player-name">${name}</span></td>
-                        <td><span class="pt-val">${pts.toLocaleString()}</span> <small style="color:#444">PTS</small></td>
-                    </tr>
+                // Uses custom image from JSON, or a black placeholder if missing
+                const imgSource = lvl.thumbnail ? lvl.thumbnail : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=";
+
+                div.innerHTML = `
+                    <div class="rank">#${rank}</div>
+                    <img src="${imgSource}" class="thumb-mini">
+                    <div>
+                        <div style="font-weight:700; font-size:0.85rem">${lvl.name}</div>
+                        <div style="font-size:0.7rem; color:#666">${lvl.points} PTS</div>
+                    </div>
                 `;
+                div.onclick = () => update(lvl, rank);
+                side.appendChild(div);
             });
+            update(data[0], 1);
         }
-        load();
+
+        function update(lvl, rank) {
+            document.getElementById('main-title').innerText = `#${rank} - ${lvl.name}`;
+            document.getElementById('s-creator').innerText = lvl.creator;
+            document.getElementById('s-verifier').innerText = lvl.verifier;
+            document.getElementById('s-id').innerText = lvl.id;
+            document.getElementById('s-pts').innerText = lvl.points;
+
+            const vid = document.getElementById('main-vid');
+            vid.src = lvl.video.length > 11 ? `https://medal.tv/clip/${lvl.video.split('/').pop()}` : `https://www.youtube.com/embed/${lvl.video}`;
+
+            const vCont = document.getElementById('v-cont');
+            vCont.innerHTML = lvl.victors.length > 0 ? lvl.victors.map(v => `<span class="tag">${v}</span>`).join('') : "<span style='color:#444; font-size:0.8rem'>No victors yet.</span>";
+        }
+        init();
     </script>
 </body>
 </html>
