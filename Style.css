@@ -1,0 +1,13 @@
+.level-info i {
+    font-size: 0.8rem;
+    color: var(--accent);
+    font-style: normal;
+    font-weight: 800;
+    text-shadow: 0 0 10px rgba(255, 71, 87, 0.3);
+}
+
+/* Ensure the rank-1 gold tint is vibrant */
+.rank-1 i {
+    color: var(--gold) !important;
+    text-shadow: 0 0 12px rgba(255, 204, 0, 0.5);
+}
