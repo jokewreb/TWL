@@ -1,71 +1,118 @@
-async function start() {
-    try {
-        const res = await fetch('./levels.json');
-        let data = await res.json();
-        
-        // Ensure points are sorted correctly (Highest at Top)
-        data.sort((a, b) => b.points - a.points);
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE WAVE LIST</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">WAVE LIST</div>
+        <div class="nav-links">
+            <button class="btn-leaderboard" onclick="window.location.href='leaderboard.html'">LEADERBOARD</button>
+        </div>
+    </nav>
 
-        const sidebar = document.getElementById('sidebar-list');
-        sidebar.innerHTML = ''; // Clear loading text
+    <div class="main-container">
+        <aside class="sidebar" id="sidebar-list">
+            <div class="loading">Loading Levels...</div>
+        </aside>
 
-        data.forEach((lvl, i) => {
-            const rank = i + 1;
-            const item = document.createElement('div');
-            
-            // Apply rank-specific colors (Gold, Silver, Bronze)
-            let rankClass = "rank-default";
-            if(rank === 1) rankClass = "rank-1";
-            if(rank === 2) rankClass = "rank-2";
-            if(rank === 3) rankClass = "rank-3";
-
-            item.className = `list-item ${rankClass}`;
-            
-            // IMAGE FETCHING LOGIC
-            let thumbUrl = "";
-            if (lvl.video.includes('medal.tv')) {
-                // Placeholder for Medal clips or use a static logo
-                thumbUrl = "https://cdn.medal.tv/assets/img/medal-logo.png";
-            } else if (lvl.video && lvl.video !== "") {
-                // Get high-quality YouTube thumbnail
-                thumbUrl = `https://img.youtube.com/vi/${lvl.video}/mqdefault.jpg`;
-            } else {
-                // Default image if no video is provided
-                thumbUrl = "https://via.placeholder.com/100x56/1a1d24/ffffff?text=No+Video";
-            }
-
-            item.innerHTML = `
-                <img src="${thumbUrl}" class="side-thumb" onerror="this.src='https://via.placeholder.com/100x56/1a1d24/ffffff?text=Error'">
-                <div class="level-info">
-                    <b>#${rank} ${lvl.name}</b>
-                    <i>${lvl.points} PTS</i>
+        <main class="content">
+            <div class="level-card">
+                <div class="video-container">
+                    <iframe id="main-video" src="" allowfullscreen></iframe>
                 </div>
-            `;
-            
-            item.onclick = () => showLevel(lvl, rank);
-            sidebar.appendChild(item);
-        });
+                
+                <div class="level-header">
+                    <h1 id="level-name">Select a Level</h1>
+                    <div id="level-id-badge">ID: -</div>
+                </div>
 
-        // Automatically display the #1 level on load
-        showLevel(data[0], 1);
-    } catch (e) {
-        console.error("Error loading levels:", e);
-    }
-}
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <span class="label">CREATOR</span>
+                        <div id="stat-creator" class="value">-</div>
+                    </div>
+                    <div class="stat-box">
+                        <span class="label">VERIFIER</span>
+                        <div id="stat-verifier" class="value">-</div>
+                    </div>
+                    <div class="stat-box">
+                        <span class="label">POINTS</span>
+                        <div id="stat-points" class="value highlight">-</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
 
-function showLevel(lvl, rank) {
-    document.getElementById('display-title').innerText = `#${rank} ${lvl.name}`;
-    document.getElementById('stat-creator').innerText = lvl.creator;
-    document.getElementById('stat-verifier').innerText = lvl.verifier;
-    document.getElementById('stat-id').innerText = lvl.id;
-    document.getElementById('stat-points').innerText = lvl.points;
+    <script>
+        async function initList() {
+            try {
+                const response = await fetch('./levels.json');
+                let levels = await response.json();
+                
+                // Sort by points highest to lowest
+                levels.sort((a, b) => b.points - a.points);
 
-    const v = document.getElementById('display-video');
-    if(lvl.video.includes('medal.tv')) {
-        const medalId = lvl.video.split('/clips/')[1]?.split('?')[0];
-        v.src = `https://medal.tv/clip/${medalId}`;
-    } else {
-        v.src = `https://www.youtube.com/embed/${lvl.video || 'dQw4w9WgXcQ'}`;
-    }
-}
-start();
+                const sidebar = document.getElementById('sidebar-list');
+                sidebar.innerHTML = ''; 
+
+                levels.forEach((lvl, index) => {
+                    const rank = index + 1;
+                    const item = document.createElement('div');
+                    
+                    // Add special classes for Top 3
+                    let rankClass = "rank-standard";
+                    if(rank === 1) rankClass = "rank-gold";
+                    if(rank === 2) rankClass = "rank-silver";
+                    if(rank === 3) rankClass = "rank-bronze";
+
+                    item.className = `list-item ${rankClass}`;
+                    
+                    // Thumbnail Logic: YouTube or Medal
+                    let thumb = `https://img.youtube.com/vi/${lvl.video}/mqdefault.jpg`;
+                    if(lvl.video.includes('medal')) thumb = "https://cdn.medal.tv/assets/img/medal-logo.png";
+                    if(!lvl.video) thumb = "https://via.placeholder.com/120x68/1a1d24/ffffff?text=No+Video";
+
+                    item.innerHTML = `
+                        <div class="rank-number">#${rank}</div>
+                        <img src="${thumb}" class="list-thumb" onerror="this.src='https://via.placeholder.com/120x68/1a1d24/333?text=Error'">
+                        <div class="list-info">
+                            <div class="list-title">${lvl.name}</div>
+                            <div class="list-points">${lvl.points} PTS</div>
+                        </div>
+                    `;
+                    
+                    item.onclick = () => updateDisplay(lvl, rank);
+                    sidebar.appendChild(item);
+                });
+
+                updateDisplay(levels[0], 1);
+            } catch (error) {
+                console.error("Failed to load list:", error);
+            }
+        }
+
+        function updateDisplay(lvl, rank) {
+            document.getElementById('level-name').innerText = `#${rank} ${lvl.name}`;
+            document.getElementById('stat-creator').innerText = lvl.creator;
+            document.getElementById('stat-verifier').innerText = lvl.verifier;
+            document.getElementById('stat-points').innerText = lvl.points;
+            document.getElementById('level-id-badge').innerText = `ID: ${lvl.id}`;
+
+            const video = document.getElementById('main-video');
+            if(lvl.video.includes('medal')) {
+                const clipId = lvl.video.split('/clips/')[1]?.split('?')[0];
+                video.src = `https://medal.tv/clip/${clipId}`;
+            } else {
+                video.src = `https://www.youtube.com/embed/${lvl.video || 'dQw4w9WgXcQ'}`;
+            }
+        }
+
+        initList();
+    </script>
+</body>
+</html>
