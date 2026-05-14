@@ -10,24 +10,25 @@
     <nav>
         <div class="logo">WAVE LIST</div>
         <div class="nav-links">
-            <button class="btn-leaderboard" onclick="window.location.href='leaderboard.html'">LEADERBOARD</button>
+            <button class="btn-leaderboard" onclick="toggleLeaderboard()">LEADERBOARD</button>
         </div>
     </nav>
 
     <div class="main-container">
         <aside class="sidebar" id="sidebar-list">
-            <div class="loading">Loading Levels...</div>
+            <div style="padding: 20px;">Loading Levels...</div>
         </aside>
 
         <main class="content">
             <div class="level-card">
                 <div class="video-container">
+                    <div id="no-video" class="no-video-overlay hidden">No Video Available</div>
                     <iframe id="main-video" src="" allowfullscreen></iframe>
                 </div>
                 
                 <div class="level-header">
-                    <h1 id="level-name">Select a Level</h1>
-                    <div id="level-id-badge">ID: -</div>
+                    <h1 id="level-name" style="margin-top: 0;">Select a Level</h1>
+                    <div id="level-id-badge" style="color: #888; font-weight: bold;">ID: -</div>
                 </div>
 
                 <div class="stats-grid">
@@ -48,23 +49,33 @@
         </main>
     </div>
 
+    <div id="leaderboard-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="toggleLeaderboard()">✕</button>
+            <h2 style="margin-top: 0; color: var(--accent);">Top Players</h2>
+            <p style="color: #888; font-size: 0.9rem; margin-bottom: 20px;">Ranked by points of levels verified.</p>
+            <div id="leaderboard-data"></div>
+        </div>
+    </div>
+
     <script>
+        let globalLevels = [];
+
         async function initList() {
             try {
                 const response = await fetch('./levels.json');
-                let levels = await response.json();
+                globalLevels = await response.json();
                 
                 // Sort by points highest to lowest
-                levels.sort((a, b) => b.points - a.points);
+                globalLevels.sort((a, b) => b.points - a.points);
 
                 const sidebar = document.getElementById('sidebar-list');
                 sidebar.innerHTML = ''; 
 
-                levels.forEach((lvl, index) => {
+                globalLevels.forEach((lvl, index) => {
                     const rank = index + 1;
                     const item = document.createElement('div');
                     
-                    // Add special classes for Top 3
                     let rankClass = "rank-standard";
                     if(rank === 1) rankClass = "rank-gold";
                     if(rank === 2) rankClass = "rank-silver";
@@ -72,10 +83,13 @@
 
                     item.className = `list-item ${rankClass}`;
                     
-                    // Thumbnail Logic: YouTube or Medal
-                    let thumb = `https://img.youtube.com/vi/${lvl.video}/mqdefault.jpg`;
-                    if(lvl.video.includes('medal')) thumb = "https://cdn.medal.tv/assets/img/medal-logo.png";
-                    if(!lvl.video) thumb = "https://via.placeholder.com/120x68/1a1d24/ffffff?text=No+Video";
+                    // Bulletproof Image Logic
+                    let thumb = "https://via.placeholder.com/120x68/1a1d24/ffffff?text=No+Video";
+                    if(lvl.video && lvl.video.includes('medal.tv')) {
+                        thumb = "https://cdn.medal.tv/assets/img/medal-logo.png";
+                    } else if (lvl.video && lvl.video !== "") {
+                        thumb = `https://img.youtube.com/vi/${lvl.video}/mqdefault.jpg`;
+                    }
 
                     item.innerHTML = `
                         <div class="rank-number">#${rank}</div>
@@ -90,12 +104,15 @@
                     sidebar.appendChild(item);
                 });
 
-                updateDisplay(levels[0], 1);
+                updateDisplay(globalLevels[0], 1);
+                buildLeaderboard();
             } catch (error) {
                 console.error("Failed to load list:", error);
+                document.getElementById('sidebar-list').innerHTML = `<div style="padding: 20px; color: red;">Error loading levels.json</div>`;
             }
         }
 
+        // Bulletproof Video Logic
         function updateDisplay(lvl, rank) {
             document.getElementById('level-name').innerText = `#${rank} ${lvl.name}`;
             document.getElementById('stat-creator').innerText = lvl.creator;
@@ -103,13 +120,55 @@
             document.getElementById('stat-points').innerText = lvl.points;
             document.getElementById('level-id-badge').innerText = `ID: ${lvl.id}`;
 
-            const video = document.getElementById('main-video');
-            if(lvl.video.includes('medal')) {
-                const clipId = lvl.video.split('/clips/')[1]?.split('?')[0];
-                video.src = `https://medal.tv/clip/${clipId}`;
+            const videoIframe = document.getElementById('main-video');
+            const noVideo = document.getElementById('no-video');
+
+            if (!lvl.video || lvl.video === "") {
+                videoIframe.src = "";
+                videoIframe.style.display = "none";
+                noVideo.style.display = "flex";
             } else {
-                video.src = `https://www.youtube.com/embed/${lvl.video || 'dQw4w9WgXcQ'}`;
+                videoIframe.style.display = "block";
+                noVideo.style.display = "none";
+                
+                if(lvl.video.includes('medal.tv')) {
+                    const clipId = lvl.video.split('/clips/')[1]?.split('?')[0];
+                    videoIframe.src = `https://medal.tv/clip/${clipId}`;
+                } else {
+                    // Assumes lvl.video is just the YouTube ID (e.g., "dQw4w9WgXcQ")
+                    videoIframe.src = `https://www.youtube.com/embed/${lvl.video}`;
+                }
             }
+        }
+
+        // Automatic Leaderboard Logic
+        function buildLeaderboard() {
+            const players = {};
+            // Tally points based on verifier
+            globalLevels.forEach(lvl => {
+                if(!players[lvl.verifier]) players[lvl.verifier] = 0;
+                players[lvl.verifier] += lvl.points;
+            });
+
+            // Sort players
+            const sortedPlayers = Object.entries(players).sort((a, b) => b[1] - a[1]);
+            
+            const lbContainer = document.getElementById('leaderboard-data');
+            lbContainer.innerHTML = '';
+            
+            sortedPlayers.forEach(([name, points], index) => {
+                lbContainer.innerHTML += `
+                    <div class="lb-player">
+                        <span>#${index + 1} ${name}</span>
+                        <span>${points} PTS</span>
+                    </div>
+                `;
+            });
+        }
+
+        function toggleLeaderboard() {
+            const modal = document.getElementById('leaderboard-modal');
+            modal.classList.toggle('active');
         }
 
         initList();
