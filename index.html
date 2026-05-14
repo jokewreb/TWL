@@ -1,133 +1,107 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE WAVE LIST</title>
+    <title>WAVE LIST</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="particles-js"></div>
-
+    <canvas id="canvas"></canvas>
     <nav>
-        <div class="logo">WAVE LIST</div>
-        <button class="btn-leaderboard" id="lb-btn">LEADERBOARD</button>
+        <div style="font-weight: bold; letter-spacing: 2px;">WAVE LIST</div>
+        <a href="leaderboard.html" class="nav-link">LEADERBOARD</a>
     </nav>
 
-    <div class="app-container">
-        <aside class="sidebar" id="side-list">
-            </aside>
-
-        <main class="main-view">
-            <div class="level-hero">
-                <div class="video-box">
-                    <iframe id="hero-video" src="" allowfullscreen></iframe>
-                </div>
-                
-                <h1 id="hero-name" style="margin: 0 0 25px 0; font-size: 2.5rem; font-weight: 800;">Loading...</h1>
-
-                <div class="info-grid">
-                    <div class="stat-card">
-                        <div class="stat-label">Creator</div>
-                        <div id="hero-creator" class="stat-value">-</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-label">Verifier</div>
-                        <div id="hero-verifier" class="stat-value">-</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-label">List ID</div>
-                        <div id="hero-id" class="stat-value">-</div>
-                    </div>
-                </div>
+    <div class="main-layout">
+        <div class="sidebar" id="list"></div>
+        <div class="content">
+            <iframe id="video" class="video-frame" src="" allowfullscreen></iframe>
+            <h1 id="title" style="margin: 0 0 20px 0; color: var(--primary);">Select Level</h1>
+            
+            <div class="info-box">
+                <div class="info-row"><span class="label">Creator</span><span id="creator">-</span></div>
+                <div class="info-row"><span class="label">Verifier</span><span id="verifier">-</span></div>
+                <div class="info-row"><span class="label">Points</span><span id="points" style="color:var(--primary)">-</span></div>
             </div>
-        </main>
-    </div>
 
-    <div class="leaderboard-overlay" id="lb-overlay">
-        <div class="lb-modal">
-            <span class="close-lb" id="lb-close">✕</span>
-            <h2 style="margin: 0 0 30px 0; font-size: 2rem;">Top Players</h2>
-            <div id="lb-content"></div>
+            <div class="victors-list">
+                <div class="label" style="margin-bottom: 10px;">Verified Victors</div>
+                <div id="victors-container">None</div>
+            </div>
         </div>
     </div>
 
     <script>
-        let levels = [];
+        // PARTICLE SYSTEM
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.onresize = resize; resize();
 
-        // 1. Fetch and Populate
-        async function start() {
-            try {
-                const res = await fetch('./levels.json');
-                levels = await res.json();
-                levels.sort((a, b) => b.points - a.points);
-
-                const container = document.getElementById('side-list');
-                container.innerHTML = '';
-
-                levels.forEach((l, i) => {
-                    const div = document.createElement('div');
-                    div.className = 'list-item';
-                    
-                    let thumb = `https://img.youtube.com/vi/${l.video}/mqdefault.jpg`;
-                    if(l.video.includes('medal')) thumb = "https://cdn.medal.tv/assets/img/medal-logo.png";
-
-                    div.innerHTML = `
-                        <div class="item-rank">#${i+1}</div>
-                        <img src="${thumb}" class="item-thumb">
-                        <div>
-                            <div class="item-name">${l.name}</div>
-                            <div class="item-pts">${l.points} POINTS</div>
-                        </div>
-                    `;
-                    div.onclick = () => updateHero(l, i+1);
-                    container.appendChild(div);
-                });
-
-                updateHero(levels[0], 1);
-                buildLeaderboard();
-            } catch (e) { console.error("Error:", e); }
-        }
-
-        function updateHero(l, rank) {
-            document.getElementById('hero-name').innerText = `#${rank} ${l.name}`;
-            document.getElementById('hero-creator').innerText = l.creator;
-            document.getElementById('hero-verifier').innerText = l.verifier;
-            document.getElementById('hero-id').innerText = l.id;
-
-            const v = document.getElementById('hero-video');
-            if(l.video.includes('medal')) {
-                const id = l.video.split('/clips/')[1]?.split('?')[0];
-                v.src = `https://medal.tv/clip/${id}`;
-            } else {
-                v.src = `https://www.youtube.com/embed/${l.video}`;
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.v = Math.random() * 0.5 + 0.2;
+            }
+            draw() {
+                ctx.fillStyle = 'rgba(0, 242, 255, 0.2)';
+                ctx.fillRect(this.x, this.y, 2, 2);
+                this.y -= this.v;
+                if(this.y < 0) this.y = canvas.height;
             }
         }
+        for(let i=0; i<100; i++) particles.push(new Particle());
+        function animate() {
+            ctx.clearRect(0,0,canvas.width, canvas.height);
+            particles.forEach(p => p.draw());
+            requestAnimationFrame(animate);
+        }
+        animate();
 
-        // 2. Leaderboard Logic
-        function buildLeaderboard() {
-            const scores = {};
-            levels.forEach(l => {
-                scores[l.verifier] = (scores[l.verifier] || 0) + l.points;
+        // DATA LOADING
+        async function load() {
+            const res = await fetch('./levels.json');
+            const data = await res.json();
+            const list = document.getElementById('list');
+
+            data.forEach((l, i) => {
+                const rank = i + 1;
+                let rankClass = "";
+                if(rank === 1) rankClass = "top-1";
+                if(rank === 2) rankClass = "top-2";
+                if(rank === 3) rankClass = "top-3";
+
+                const div = document.createElement('div');
+                div.className = 'level-item';
+                div.innerHTML = `
+                    <div class="rank-text ${rankClass}">#${rank}</div>
+                    <img src="https://img.youtube.com/vi/${l.video}/mqdefault.jpg" class="level-thumb">
+                    <div>
+                        <div style="font-weight:bold">${l.name}</div>
+                        <div style="font-size:0.7rem; color:#666">${l.points} PTS</div>
+                    </div>
+                `;
+                div.onclick = () => show(l, rank, rankClass);
+                list.appendChild(div);
             });
-
-            const sorted = Object.entries(scores).sort((a,b) => b[1] - a[1]);
-            const content = document.getElementById('lb-content');
-            content.innerHTML = sorted.map(([name, pts], i) => `
-                <div class="lb-entry">
-                    <span>#${i+1} ${name}</span>
-                    <b>${pts} Pts</b>
-                </div>
-            `).join('');
+            show(data[0], 1, "top-1");
         }
 
-        // 3. Robust Modal Controls
-        const overlay = document.getElementById('lb-overlay');
-        document.getElementById('lb-btn').onclick = () => overlay.style.display = 'flex';
-        document.getElementById('lb-close').onclick = () => overlay.style.display = 'none';
-        window.onclick = (e) => { if(e.target == overlay) overlay.style.display = 'none'; }
+        function show(l, rank, rClass) {
+            document.getElementById('title').innerText = `#${rank} ${l.name}`;
+            document.getElementById('title').className = rClass;
+            document.getElementById('creator').innerText = l.creator;
+            document.getElementById('verifier').innerText = l.verifier;
+            document.getElementById('points').innerText = l.points;
+            
+            const v = document.getElementById('video');
+            v.src = l.video.includes('medal') ? `https://medal.tv/clip/${l.video.split('/clips/')[1]}` : `https://www.youtube.com/embed/${l.video}`;
 
-        start();
+            const vicCont = document.getElementById('victors-container');
+            vicCont.innerHTML = l.victors.length > 0 ? l.victors.map(v => `<span class="victor-name">${v}</span>`).join('') : "No victors yet.";
+        }
+        load();
     </script>
 </body>
 </html>
