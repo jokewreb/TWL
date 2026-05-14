@@ -1,0 +1,33 @@
+:root {
+    --bg-darker: #050608;
+    --bg-main: rgba(15, 17, 21, 0.98);
+    --bg-card: rgba(22, 25, 31, 0.9);
+    --accent: #ff4757;
+    --gold: #ffcc00;
+    --silver: #d1d8e0;
+    --bronze: #cd7f32;
+    --text-main: #f5f6fa;
+    --text-dim: #a1a1a1;
+    --border: rgba(255, 255, 255, 0.08);
+}
+
+body { background: var(--bg-darker); color: var(--text-main); font-family: 'Inter', sans-serif; margin: 0; overflow: hidden; }
+
+.wrapper { display: flex; height: calc(100vh - 70px); }
+
+.sidebar { width: 380px; background: var(--bg-main); border-right: 1px solid var(--border); overflow-y: auto; }
+
+.list-item { padding: 20px; border-bottom: 1px solid var(--border); cursor: pointer; transition: 0.2s; border-left: 4px solid transparent; }
+.list-item:hover { background: rgba(255,255,255,0.05); }
+
+/* Rank Specific Tints */
+.rank-1 { border-left-color: var(--gold); background: linear-gradient(90deg, rgba(255,204,0,0.1), transparent); }
+.rank-2 { border-left-color: var(--silver); background: linear-gradient(90deg, rgba(209,216,224,0.1), transparent); }
+.rank-3 { border-left-color: var(--bronze); background: linear-gradient(90deg, rgba(205,127,50,0.1), transparent); }
+
+.level-info b { display: block; font-size: 1rem; }
+.level-info i { color: var(--accent); font-style: normal; font-weight: 800; font-size: 0.85rem; }
+
+.main-content { flex: 1; padding: 40px; }
+.card { background: var(--bg-card); padding: 30px; border-radius: 15px; border: 1px solid var(--border); }
+.video-box { width: 100%; aspect-ratio: 16/9; background: #000; border-radius: 10px; margin-bottom: 20px; overflow: hidden; }
