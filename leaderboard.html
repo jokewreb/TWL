@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WAVE LIST - LEADERBOARD</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <nav>
+        <div style="font-weight: bold; letter-spacing: 2px;">LEADERBOARD</div>
+        <a href="index.html" class="nav-link">BACK TO LIST</a>
+    </nav>
+
+    <div style="max-width: 800px; margin: 40px auto; padding: 0 20px;">
+        <div class="info-box" style="background: rgba(0,0,0,0.8);">
+            <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                <thead>
+                    <tr style="border-bottom: 2px solid var(--primary); color: var(--primary);">
+                        <th style="padding: 15px;">RANK</th>
+                        <th>PLAYER</th>
+                        <th style="text-align: right;">POINTS</th>
+                    </tr>
+                </thead>
+                <tbody id="lb-body"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // (Copy the Canvas Particle script from index.html here to keep the background the same)
+
+        async function loadLB() {
+            const res = await fetch('./levels.json');
+            const data = await res.json();
+            const players = {};
+
+            data.forEach(l => {
+                // Add points to verifier
+                players[l.verifier] = (players[l.verifier] || 0) + l.points;
+                // Add points to victors
+                l.victors.forEach(v => {
+                    players[v] = (players[v] || 0) + l.points;
+                });
+            });
+
+            const sorted = Object.entries(players).sort((a,b) => b[1] - a[1]);
+            const body = document.getElementById('lb-body');
+
+            sorted.forEach(([name, pts], i) => {
+                const tr = document.createElement('tr');
+                tr.style.borderBottom = "1px solid #222";
+                tr.innerHTML = `
+                    <td style="padding: 15px; font-weight:bold">#${i+1}</td>
+                    <td>${name}</td>
+                    <td style="text-align: right; color: var(--primary); font-weight:bold">${pts}</td>
+                `;
+                body.appendChild(tr);
+            });
+        }
+        loadLB();
+    </script>
+</body>
+</html>
