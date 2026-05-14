@@ -1,107 +1,99 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>WAVE LIST</title>
+    <meta charset="UTF-8">
+    <title>THE WAVE LIST | V2</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <canvas id="canvas"></canvas>
+
     <nav>
-        <div style="font-weight: bold; letter-spacing: 2px;">WAVE LIST</div>
+        <div class="nav-logo">THE WAVE LIST</div>
         <a href="leaderboard.html" class="nav-link">LEADERBOARD</a>
     </nav>
 
     <div class="main-layout">
-        <div class="sidebar" id="list"></div>
+        <div class="sidebar" id="sidebar"></div>
+        
         <div class="content">
-            <iframe id="video" class="video-frame" src="" allowfullscreen></iframe>
-            <h1 id="title" style="margin: 0 0 20px 0; color: var(--primary);">Select Level</h1>
-            
-            <div class="info-box">
-                <div class="info-row"><span class="label">Creator</span><span id="creator">-</span></div>
-                <div class="info-row"><span class="label">Verifier</span><span id="verifier">-</span></div>
-                <div class="info-row"><span class="label">Points</span><span id="points" style="color:var(--primary)">-</span></div>
-            </div>
+            <div class="glass-card">
+                <div class="video-box">
+                    <iframe id="main-vid" width="100%" height="100%" src="" frameborder="0" allowfullscreen></iframe>
+                </div>
+                
+                <h1 id="main-title" style="margin:0; font-size: 1.6rem;">Loading...</h1>
+                
+                <div class="info-grid">
+                    <div class="stat-card"><div class="stat-label">Creator</div><div id="s-creator">-</div></div>
+                    <div class="stat-card"><div class="stat-label">Verifier</div><div id="s-verifier">-</div></div>
+                    <div class="stat-card"><div class="stat-label">Level ID</div><div id="s-id">-</div></div>
+                    <div class="stat-card"><div class="stat-label">Points</div><div id="s-pts" style="color:var(--accent)">-</div></div>
+                </div>
 
-            <div class="victors-list">
-                <div class="label" style="margin-bottom: 10px;">Verified Victors</div>
-                <div id="victors-container">None</div>
+                <div class="victors-section">
+                    <div class="stat-label" style="margin-bottom:10px">List Victors</div>
+                    <div id="victor-container">None</div>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        // PARTICLE SYSTEM
-        const canvas = document.getElementById('canvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-        window.onresize = resize; resize();
+        async function run() {
+            try {
+                const response = await fetch('./levels.json');
+                const levels = await response.json();
+                const sidebar = document.getElementById('sidebar');
 
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.v = Math.random() * 0.5 + 0.2;
+                levels.forEach((lvl, i) => {
+                    const item = document.createElement('div');
+                    item.className = `list-item ${i === 0 ? 'top-1' : ''}`;
+                    
+                    let thumb = lvl.video.includes('medal') 
+                        ? "https://cdn.medal.tv/assets/img/medal-logo.png" 
+                        : `https://img.youtube.com/vi/${lvl.video}/mqdefault.jpg`;
+
+                    item.innerHTML = `
+                        <div class="rank">#${i + 1}</div>
+                        <img src="${thumb}" class="thumb-mini">
+                        <div>
+                            <div style="font-weight:700; font-size:0.85rem">${lvl.name}</div>
+                            <div style="font-size:0.7rem; color:var(--text-dim)">${lvl.points} PTS</div>
+                        </div>
+                    `;
+                    item.onclick = () => update(lvl, i + 1);
+                    sidebar.appendChild(item);
+                });
+
+                // Auto-load #1
+                update(levels[0], 1);
+
+            } catch (error) {
+                console.error("Error loading levels:", error);
             }
-            draw() {
-                ctx.fillStyle = 'rgba(0, 242, 255, 0.2)';
-                ctx.fillRect(this.x, this.y, 2, 2);
-                this.y -= this.v;
-                if(this.y < 0) this.y = canvas.height;
+        }
+
+        function update(lvl, rank) {
+            document.getElementById('main-title').innerText = `#${rank} - ${lvl.name}`;
+            document.getElementById('s-creator').innerText = lvl.creator;
+            document.getElementById('s-verifier').innerText = lvl.verifier;
+            document.getElementById('s-id').innerText = lvl.id;
+            document.getElementById('s-pts').innerText = lvl.points;
+
+            const vid = document.getElementById('main-vid');
+            if (lvl.video.length > 11) {
+                vid.src = `https://medal.tv/clip/${lvl.video.split('/').pop()}`;
+            } else {
+                vid.src = `https://www.youtube.com/embed/${lvl.video}`;
             }
-        }
-        for(let i=0; i<100; i++) particles.push(new Particle());
-        function animate() {
-            ctx.clearRect(0,0,canvas.width, canvas.height);
-            particles.forEach(p => p.draw());
-            requestAnimationFrame(animate);
-        }
-        animate();
 
-        // DATA LOADING
-        async function load() {
-            const res = await fetch('./levels.json');
-            const data = await res.json();
-            const list = document.getElementById('list');
-
-            data.forEach((l, i) => {
-                const rank = i + 1;
-                let rankClass = "";
-                if(rank === 1) rankClass = "top-1";
-                if(rank === 2) rankClass = "top-2";
-                if(rank === 3) rankClass = "top-3";
-
-                const div = document.createElement('div');
-                div.className = 'level-item';
-                div.innerHTML = `
-                    <div class="rank-text ${rankClass}">#${rank}</div>
-                    <img src="https://img.youtube.com/vi/${l.video}/mqdefault.jpg" class="level-thumb">
-                    <div>
-                        <div style="font-weight:bold">${l.name}</div>
-                        <div style="font-size:0.7rem; color:#666">${l.points} PTS</div>
-                    </div>
-                `;
-                div.onclick = () => show(l, rank, rankClass);
-                list.appendChild(div);
-            });
-            show(data[0], 1, "top-1");
+            const vCont = document.getElementById('victor-container');
+            vCont.innerHTML = lvl.victors.length > 0 
+                ? lvl.victors.map(v => `<span class="victor-pill">${v}</span>`).join('') 
+                : "No verified victors yet.";
         }
 
-        function show(l, rank, rClass) {
-            document.getElementById('title').innerText = `#${rank} ${l.name}`;
-            document.getElementById('title').className = rClass;
-            document.getElementById('creator').innerText = l.creator;
-            document.getElementById('verifier').innerText = l.verifier;
-            document.getElementById('points').innerText = l.points;
-            
-            const v = document.getElementById('video');
-            v.src = l.video.includes('medal') ? `https://medal.tv/clip/${l.video.split('/clips/')[1]}` : `https://www.youtube.com/embed/${l.video}`;
-
-            const vicCont = document.getElementById('victors-container');
-            vicCont.innerHTML = l.victors.length > 0 ? l.victors.map(v => `<span class="victor-name">${v}</span>`).join('') : "No victors yet.";
-        }
-        load();
+        run();
     </script>
 </body>
 </html>
