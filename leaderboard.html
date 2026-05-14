@@ -2,79 +2,51 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>THE WAVE LIST</title>
+    <title>LEADERBOARD | WAVE LIST</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .lb-container { max-width: 800px; margin: 40px auto; width: 90%; }
+        table { width: 100%; border-collapse: separate; border-spacing: 0 8px; }
+        tr { background: var(--card); }
+        td { padding: 15px 25px; border: 1px solid var(--border); }
+        td:first-child { border-radius: 6px 0 0 6px; font-weight: 700; width: 50px; text-align: center; }
+        td:last-child { border-radius: 0 6px 6px 0; text-align: right; color: var(--accent); font-weight: 700; }
+        .gold { color: var(--gold); text-shadow: 0 0 10px rgba(255,207,75,0.3); }
+        .silver { color: var(--silver); }
+        .bronze { color: var(--bronze); }
+    </style>
 </head>
-<body>
+<body style="overflow: auto;">
     <nav>
-        <div class="nav-logo">THE WAVE LIST</div>
-        <a href="leaderboard.html" class="nav-link">LEADERBOARD</a>
+        <div class="nav-logo">LEADERBOARD</div>
+        <a href="index.html" class="nav-link">BACK TO LIST</a>
     </nav>
-
-    <div class="main-layout">
-        <div class="sidebar" id="sidebar"></div>
-        <div class="content">
-            <div class="glass-card">
-                <div class="video-box">
-                    <iframe id="main-vid" width="100%" height="100%" src="" frameborder="0" allowfullscreen></iframe>
-                </div>
-                <h1 id="main-title" style="margin:0; font-size: 1.5rem;"></h1>
-                <div class="info-grid">
-                    <div class="stat-card"><div class="stat-label">Creator</div><div id="s-creator">-</div></div>
-                    <div class="stat-card"><div class="stat-label">Verifier</div><div id="s-verifier">-</div></div>
-                    <div class="stat-card"><div class="stat-label">ID</div><div id="s-id">-</div></div>
-                    <div class="stat-card"><div class="stat-label">Points</div><div id="s-pts" style="color:var(--accent)">-</div></div>
-                </div>
-                <div class="victors-box">
-                    <div class="stat-label">List Victors</div>
-                    <div id="v-cont" style="margin-top:10px;"></div>
-                </div>
-            </div>
-        </div>
+    <div class="lb-container">
+        <table><tbody id="lb-data"></tbody></table>
     </div>
 
     <script>
-        async function init() {
+        async function load() {
             const res = await fetch('./levels.json');
             const data = await res.json();
-            const side = document.getElementById('sidebar');
-
-            data.forEach((lvl, i) => {
-                const rank = i + 1;
-                const div = document.createElement('div');
-                div.className = `list-item ${rank <= 3 ? 'top-'+rank : ''}`;
-                
-                // Uses custom image from JSON, or a black placeholder if missing
-                const imgSource = lvl.thumbnail ? lvl.thumbnail : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=";
-
-                div.innerHTML = `
-                    <div class="rank">#${rank}</div>
-                    <img src="${imgSource}" class="thumb-mini">
-                    <div>
-                        <div style="font-weight:700; font-size:0.85rem">${lvl.name}</div>
-                        <div style="font-size:0.7rem; color:#666">${lvl.points} PTS</div>
-                    </div>
-                `;
-                div.onclick = () => update(lvl, rank);
-                side.appendChild(div);
+            const scores = {};
+            data.forEach(l => {
+                scores[l.verifier] = (scores[l.verifier] || 0) + l.points;
+                l.victors.forEach(v => { scores[v] = (scores[v] || 0) + l.points; });
             });
-            update(data[0], 1);
+            const sorted = Object.entries(scores).sort((a,b) => b[1]-a[1]);
+            const table = document.getElementById('lb-data');
+            sorted.forEach(([name, pts], i) => {
+                const r = i+1;
+                const rClass = r==1?'gold':r==2?'silver':r==3?'bronze':'';
+                table.innerHTML += `<tr style="transform: scale(1); transition: 0.2s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                    <td class="${rClass}">#${r}</td>
+                    <td>${name}</td>
+                    <td>${pts.toLocaleString()} PTS</td>
+                </tr>`;
+            });
         }
-
-        function update(lvl, rank) {
-            document.getElementById('main-title').innerText = `#${rank} - ${lvl.name}`;
-            document.getElementById('s-creator').innerText = lvl.creator;
-            document.getElementById('s-verifier').innerText = lvl.verifier;
-            document.getElementById('s-id').innerText = lvl.id;
-            document.getElementById('s-pts').innerText = lvl.points;
-
-            const vid = document.getElementById('main-vid');
-            vid.src = lvl.video.length > 11 ? `https://medal.tv/clip/${lvl.video.split('/').pop()}` : `https://www.youtube.com/embed/${lvl.video}`;
-
-            const vCont = document.getElementById('v-cont');
-            vCont.innerHTML = lvl.victors.length > 0 ? lvl.victors.map(v => `<span class="tag">${v}</span>`).join('') : "<span style='color:#444; font-size:0.8rem'>No victors yet.</span>";
-        }
-        init();
+        load();
     </script>
 </body>
 </html>
