@@ -3,5 +3,5 @@
   { "name": "Silver", "minPoints": 51, "maxPoints": 100, "color": "#bebebe", "image": "Thumbnail/logos/silver.png", "size": "100%" },
   { "name": "Gold", "minPoints": 101, "maxPoints": 200, "color": "#ffcf4b", "image": "Thumbnail/logos/gold.png", "size": "100%" },
   { "name": "Platinum", "minPoints": 201, "maxPoints": 300, "color": "#50bfe6", "image": "Thumbnail/logos/platinum.png", "size": "130%" },
-  { "name": "Diamond", "minPoints": 301, "maxPoints": 9999, "color": "#47e5bc", "image": "Thumbnail/logos/diamond.png", "size": "135%" }
+  { "name": "Diamond", "minPoints": 301, "maxPoints": 9999, "color": "#47e5bc", "image": "Thumbnail/logos/diamond.png", "size": "110%" }
 ]
