@@ -14,21 +14,30 @@
     <div class="main-layout">
         <div class="sidebar" id="sidebar"></div>
         <div class="content">
-            <div class="glass-card">
-                <div class="video-box">
-                    <iframe id="main-vid" width="100%" height="100%" src="" frameborder="0" allowfullscreen></iframe>
+            <div style="display: flex; gap: 30px; width: 100%; max-width: 1200px; align-items: flex-start;">
+                
+                <div class="glass-card" style="flex: 1; max-width: 850px; margin: 0;">
+                    <div class="video-box">
+                        <iframe id="main-vid" width="100%" height="100%" src="" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <h1 id="main-title" style="margin:0; font-size: 1.5rem;"></h1>
+                    <div class="info-grid">
+                        <div class="stat-card"><div class="stat-label">Creator</div><div id="s-creator">-</div></div>
+                        <div class="stat-card"><div class="stat-label">Verifier</div><div id="s-verifier">-</div></div>
+                        <div class="stat-card"><div class="stat-label">ID</div><div id="s-id">-</div></div>
+                        <div class="stat-card"><div class="stat-label">Points</div><div id="s-pts" style="color:var(--accent)">-</div></div>
+                    </div>
+                    <div class="victors-box">
+                        <div class="stat-label">List Victors</div>
+                        <div id="v-cont" style="margin-top:10px;"></div>
+                    </div>
                 </div>
-                <h1 id="main-title" style="margin:0; font-size: 1.5rem;"></h1>
-                <div class="info-grid">
-                    <div class="stat-card"><div class="stat-label">Creator</div><div id="s-creator">-</div></div>
-                    <div class="stat-card"><div class="stat-label">Verifier</div><div id="s-verifier">-</div></div>
-                    <div class="stat-card"><div class="stat-label">ID</div><div id="s-id">-</div></div>
-                    <div class="stat-card"><div class="stat-label">Points</div><div id="s-pts" style="color:var(--accent)">-</div></div>
+
+                <div id="tier-legend-container" style="width: 280px; min-width: 280px; background: rgba(20, 22, 30, 0.95); border: 1px solid var(--border); border-radius: 12px; padding: 25px; box-shadow: 0 30px 60px rgba(0,0,0,0.6); position: sticky; top: 0px;">
+                    <div class="stat-label" style="margin-bottom: 15px; font-weight:700; letter-spacing:1px;">Tier Legend</div>
+                    <div id="legend-list"></div>
                 </div>
-                <div class="victors-box">
-                    <div class="stat-label">List Victors</div>
-                    <div id="v-cont" style="margin-top:10px;"></div>
-                </div>
+
             </div>
         </div>
     </div>
@@ -76,33 +85,24 @@
                     side.appendChild(div);
                 });
 
-                // --- Tiers Legend Section ---
-                const legendDiv = document.createElement('div');
-                legendDiv.style.marginTop = '25px';
-                legendDiv.style.padding = '15px';
-                legendDiv.style.borderTop = '1px solid var(--border)';
-                legendDiv.style.background = 'rgba(0,0,0,0.2)';
-                legendDiv.style.borderRadius = '6px';
+                // --- Render Tiers Legend Side-Panel ---
+                const legendList = document.getElementById('legend-list');
+                let legendHTML = "";
                 
-                let legendHTML = `<div class="stat-label" style="margin-bottom: 12px; font-weight:700; letter-spacing:1px;">Tier Legend</div>`;
-                
-                // Loops through tiers in reverse order (highest tiers at the top of the legend)
+                // Loops through tiers in reverse order (highest tiers at the top)
                 [...tiers].reverse().forEach(t => {
-                    // You can change "Thumbnail/logos/" to whatever path your icons will use
                     const logoSrc = `Thumbnail/logos/${t.name.toLowerCase()}.png`; 
                     
                     legendHTML += `
-                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-size: 0.8rem;">
-                            <img src="${logoSrc}" style="width: 20px; height: 20px; object-fit: contain; background: rgba(255,255,255,0.02);" onerror="this.style.display='none';">
+                        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px; font-size: 0.85rem;">
+                            <img src="${logoSrc}" style="width: 22px; height: 22px; object-fit: contain; background: rgba(255,255,255,0.02);" onerror="this.style.display='none';">
                             <span style="font-weight: 700; color: ${t.color}">${t.name}:</span>
-                            <span style="color: #888">${t.minPoints}${t.maxPoints > 9000 ? '+' : ' - ' + t.maxPoints} PTS</span>
+                            <span style="color: #888; margin-left: auto;">${t.minPoints}${t.maxPoints > 9000 ? '+' : ' - ' + t.maxPoints} PTS</span>
                         </div>
                     `;
                 });
-                
-                legendDiv.innerHTML = legendHTML;
-                side.appendChild(legendDiv);
-                // ----------------------------
+                legendList.innerHTML = legendHTML;
+                // --------------------------------------
 
                 if(data.length > 0) update(data[0], 1);
             } catch(e) {
