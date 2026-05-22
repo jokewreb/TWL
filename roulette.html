@@ -116,6 +116,7 @@
     <nav>
         <div class="nav-logo" onclick="window.location.href='index.html'" style="cursor:pointer;">THE WAVE LIST</div>
         <div>
+            <a href="index.html" class="nav-link" style="margin-right: 20px;">BACK TO LIST</a>
             <a href="roulette.html" class="nav-link active" style="color: var(--accent, #47e5bc); margin-right: 20px; font-weight: 700;">ROULETTE</a>
             <a href="leaderboard.html" class="nav-link">LEADERBOARD</a>
         </div>
@@ -227,6 +228,7 @@
             // Compute and apply active specific classification tier attributes
             const currentTier = allTiers.find(t => randomLevel.points >= t.minPoints && randomLevel.points <= t.maxPoints);
             const tierBadge = document.getElementById('r-tier');
+            
             if (currentTier) {
                 tierBadge.innerText = currentTier.name;
                 tierBadge.style.color = currentTier.color;
