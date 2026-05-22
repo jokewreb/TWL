@@ -45,7 +45,7 @@
     <script>
         // --- LOGO CONFIGURATION ---
         // Change this value to easily resize all tier rank logos instantly! (e.g., "40px", "32px", etc.)
-        const TIER_LOGO_SIZE = "54px"; 
+        const TIER_LOGO_SIZE = "36px"; 
         // ---------------------------
 
         async function init() {
@@ -101,7 +101,7 @@
                     
                     legendHTML += `
                         <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 16px; font-size: 1rem;">
-                            <img src="${logoSrc}" style="width: ${TIER_LOGO_SIZE}; height: ${TIER_LOGO_SIZE}; object-fit: contain;" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'36\' height=\'36\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%23333\' stroke-width=\'1.5\'><rect width=\'18\' height=\'18\' x=\'3\' y=\'3\' rx=\'2\'/></svg>';">
+                            <img src="${logoSrc}" style="width: ${TIER_LOGO_SIZE}; height: ${TIER_LOGO_SIZE}; object-fit: contain; aspect-ratio: 1 / 1;" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'36\' height=\'36\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%23333\' stroke-width=\'1.5\'><rect width=\'18\' height=\'18\' x=\'3\' y=\'3\' rx=\'2\'/></svg>';">
                             <span style="font-weight: 700; color: ${t.color}">${t.name}</span>
                             <span style="color: #888; margin-left: auto; font-size: 0.9rem; font-weight: 500;">${t.minPoints}${t.maxPoints > 9000 ? '+' : ' - ' + t.maxPoints} PTS</span>
                         </div>
