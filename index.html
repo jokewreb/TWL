@@ -91,8 +91,8 @@
                 
                 // Loops through tiers in reverse order (highest tiers at the top)
                 [...tiers].reverse().forEach(t => {
-                    // Points directly to your image file inside your repository structure
-                    const logoSrc = `Thumbnail/logos/${t.name.toLowerCase()}.png`; 
+                    // Pulls the image string value directly from your tiers.json file setup
+                    const logoSrc = t.image ? t.image : ''; 
                     
                     legendHTML += `
                         <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 16px; font-size: 1rem;">
