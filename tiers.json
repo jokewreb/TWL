@@ -1,0 +1,7 @@
+[
+  { "name": "Bronze", "minPoints": 0, "maxPoints": 50, "color": "#cd7f32" },
+  { "name": "Silver", "minPoints": 51, "maxPoints": 100, "color": "#bebebe" },
+  { "name": "Gold", "minPoints": 101, "maxPoints": 200, "color": "#ffcf4b" },
+  { "name": "Platinum", "minPoints": 201, "maxPoints": 300, "color": "#50bfe6" },
+  { "name": "Diamond", "minPoints": 301, "maxPoints": 9999, "color": "#47e5bc" }
+]
