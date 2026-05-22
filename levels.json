@@ -1,7 +1,7 @@
 [
   { 
     "name": "Defeated Brajan", 
-    "points": 345, 
+    "points": 375, 
     "creator": "Symm. & Armi12", 
     "verifier": "Symm", 
     "id": "127766355", 
@@ -11,12 +11,32 @@
   },
   { 
     "name": "TooSquared", 
-    "points": 330, 
+    "points": 350, 
     "creator": "puffballGD", 
     "verifier": "puffballGD", 
     "id": "126306734", 
     "video": "O9h9_W3G4-U", 
     "thumbnail": "Thumbnail/TooSquared.png", 
+    "victors": [] 
+  },
+  { 
+    "name": "WaVE ConTROL iG", 
+    "points": 335, 
+    "creator": "puffballGD", 
+    "verifier": "puffballGD", 
+    "id": "140718247", 
+    "video": "O9h9_W3G4-U", 
+    "thumbnail": "", 
+    "victors": [] 
+  },
+  { 
+    "name": "CIRCINUS", 
+    "points": 325, 
+    "creator": "puffballGD", 
+    "verifier": "puffballGD", 
+    "id": "126306734", 
+    "video": "O9h9_W3G4-U", 
+    "thumbnail": "", 
     "victors": [] 
   },
   { 
@@ -31,7 +51,7 @@
   },
   { 
     "name": "Vendetas Hair", 
-    "points": 300, 
+    "points": 250, 
     "creator": "Symm.", 
     "verifier": "Symm.", 
     "id": "140026254", 
