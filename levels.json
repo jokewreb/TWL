@@ -32,8 +32,8 @@
   { 
     "name": "CIRCINUS", 
     "points": 325, 
-    "creator": "puffballGD", 
-    "verifier": "puffballGD", 
+    "creator": "newbite", 
+    "verifier": "newbite", 
     "id": "126306734", 
     "video": "O9h9_W3G4-U", 
     "thumbnail": "", 
@@ -41,13 +41,23 @@
   },
   { 
     "name": "Solar Wave", 
-    "points": 315, 
+    "points": 300, 
     "creator": "newbite", 
     "verifier": "newbite", 
     "id": "140031712", 
-    "video": "dQw4w9WgXcQ", 
-    "thumbnail": "Thumbnail/3.jpg", 
-    "victors": ["ZizoGMD"] 
+    "video": "O9h9_W3G4-U", 
+    "thumbnail": "", 
+    "victors": [] 
+  },
+  { 
+    "name": "visca barca", 
+    "points": 275, 
+    "creator": "newbite", 
+    "verifier": "newbite", 
+    "id": "140490319", 
+    "video": "", 
+    "thumbnail": "", 
+    "victors": [""] 
   },
   { 
     "name": "Vendetas Hair", 
@@ -61,7 +71,7 @@
   },
   { 
     "name": "Unnerfed Wave Corridor", 
-    "points": 215, 
+    "points": 225, 
     "creator": "ChefLime & ItsJellyGD", 
     "verifier": "ItsJellyGD", 
     "id": "139994700", 
@@ -81,7 +91,7 @@
   },
   { 
     "name": "Silent Akbar II", 
-    "points": 150, 
+    "points": 200, 
     "creator": "ARandomBall", 
     "verifier": "ARandomBall", 
     "id": "140123255", 
@@ -91,7 +101,7 @@
   },
   { 
     "name": "ULTIMATE DIHRUCTION", 
-    "points": 125, 
+    "points": 150, 
     "creator": "ItsJellyGD", 
     "verifier": "ItsJellyGD", 
     "id": "139797989", 
@@ -110,13 +120,53 @@
     "victors": [] 
   },
   { 
+    "name": "Happiest Day Unnerfed", 
+    "points": 125, 
+    "creator": "HurryingJackM", 
+    "verifier": "HurryingJackM", 
+    "id": "140477318", 
+    "video": "", 
+    "thumbnail": "", 
+    "victors": [] 
+  },
+  { 
+    "name": "Wavering", 
+    "points": 115, 
+    "creator": "HurryingJackM and ItsJellyGD", 
+    "verifier": "ItsJellyGD", 
+    "id": "140422030", 
+    "video": "", 
+    "thumbnail": "", 
+    "victors": [] 
+  },
+  { 
     "name": "Moody Sigma", 
-    "points": 90, 
+    "points": 95, 
     "creator": "HurryingJackM", 
     "verifier": "HurryingJackM", 
     "id": "140163784", 
     "video": "dQw4w9WgXcQ", 
     "thumbnail": "Thumbnail/10.jpg", 
+    "victors": [] 
+  },
+  { 
+    "name": "Thought Wave Four", 
+    "points": 90, 
+    "creator": "Fallen", 
+    "verifier": "Karen", 
+    "id": "139922551", 
+    "video": "", 
+    "thumbnail": "", 
+    "victors": [] 
+  },
+  { 
+    "name": "watch the moon", 
+    "points": 80, 
+    "creator": "ChefLime", 
+    "verifier": "ChefLime", 
+    "id": "140666713", 
+    "video": "", 
+    "thumbnail": "", 
     "victors": [] 
   },
   { 
@@ -131,7 +181,7 @@
   },
   { 
     "name": "Lost Signal", 
-    "points": 80, "creator": 
+    "points": 65, "creator": 
     "ChefLime", "verifier": 
     "ChefLime", "id": "140217050", 
     "video": "dQw4w9WgXcQ", 
@@ -160,7 +210,7 @@
   },
   { 
     "name": "Figo Likes Wave", 
-    "points": 55, 
+    "points": 50, 
     "creator": "ChefLime", 
     "verifier": "ChefLime", 
     "id": "139854071", 
@@ -170,7 +220,7 @@
   },
   { 
     "name": "Cowboys Demise", 
-    "points": 50, 
+    "points": 60, 
     "creator": "ChefLime", 
     "verifier": "ChefLime", 
     "id": "140174223", 
@@ -180,7 +230,7 @@
   },
   { 
     "name": "Spam Practice", 
-    "points": 45, 
+    "points": 55, 
     "creator": "ZizoGMD", 
     "verifier": "ZizoGMD", 
     "id": "140117104", 
@@ -189,8 +239,18 @@
     "victors": [] 
   },
   { 
+    "name": "Gurkey Circles", 
+    "points": 45, 
+    "creator": "ChefLime", 
+    "verifier": "ChefLime", 
+    "id": "140284261", 
+    "video": "dQw4w9WgXcQ", 
+    "thumbnail": "Thumbnail/17.jpg", 
+    "victors": [] 
+  },
+  { 
     "name": "Azure Portal", 
-    "points": 30, 
+    "points": 40, 
     "creator": "ChefLime", 
     "verifier": "ChefLime", 
     "id": "140113463", 
@@ -200,7 +260,7 @@
   },
   { 
     "name": "Sakupen PooPoo", 
-    "points": 25, 
+    "points": 35, 
     "creator": "ChefLime", 
     "verifier": "ChefLime", 
     "id": "140060249", 
@@ -210,7 +270,7 @@
   },
   { 
     "name": "Blocked", 
-    "points": 20, 
+    "points": 30, 
     "creator": "ZizoGMD", 
     "verifier": "ZizoGMD", 
     "id": "140076320", 
@@ -240,10 +300,20 @@
   },
   { 
     "name": "Tung After Tung", 
-    "points": 5, 
+    "points": 25, 
     "creator": "ChefLime", 
     "verifier": "ChefLime", 
     "id": "138263889", 
+    "video": "dQw4w9WgXcQ", 
+    "thumbnail": "Thumbnail/23.jpg", 
+    "victors": [] 
+  },
+  { 
+    "name": "Dihmountain", 
+    "points": 20, 
+    "creator": "ChefLime", 
+    "verifier": "ChefLime", 
+    "id": "140476546", 
     "video": "dQw4w9WgXcQ", 
     "thumbnail": "Thumbnail/23.jpg", 
     "victors": [] 
@@ -264,6 +334,16 @@
     "creator": "ChefLime", 
     "verifier": "ChefLime", 
     "id": "139981798", 
+    "video": "dQw4w9WgXcQ", 
+    "thumbnail": "Thumbnail/25.jpg", 
+    "victors": [] 
+  },
+  { 
+    "name": "ChefLimeWaveBasic1", 
+    "points": 2, 
+    "creator": "ChefLime", 
+    "verifier": "ChefLime", 
+    "id": "140719114", 
     "video": "dQw4w9WgXcQ", 
     "thumbnail": "Thumbnail/25.jpg", 
     "victors": [] 
