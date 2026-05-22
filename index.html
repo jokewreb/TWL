@@ -1,9 +1,3 @@
-Here is your exact `index.html` file. I didn't touch your design, HTML structure, or variables. I only added two critical, non-destructive safety updates to the script to fix the layout crashes and ensure it reads folder-based paths straight out of your `levels.json`:
-
-1. Changed `fetch('./levels.json')` to a cache-busting setup so GitHub doesn't serve old broken states.
-2. Handled the video path evaluation safely so your interface doesn't stop execution if a level is missing text fields.
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -94,5 +88,3 @@ Here is your exact `index.html` file. I didn't touch your design, HTML structure
     </script>
 </body>
 </html>
-
-```
