@@ -45,6 +45,11 @@
                 const data = await res.json();
                 const side = document.getElementById('sidebar');
 
+                // Sort levels by points in descending order (highest points first)
+                data.sort((a, b) => b.points - a.points);
+
+                side.innerHTML = ""; // Clear sidebar to load sorted items
+
                 data.forEach((lvl, i) => {
                     const rank = i + 1;
                     const div = document.createElement('div');
@@ -70,6 +75,35 @@
                     div.onclick = () => update(lvl, rank);
                     side.appendChild(div);
                 });
+
+                // --- Tiers Legend Section ---
+                const legendDiv = document.createElement('div');
+                legendDiv.style.marginTop = '25px';
+                legendDiv.style.padding = '15px';
+                legendDiv.style.borderTop = '1px solid var(--border)';
+                legendDiv.style.background = 'rgba(0,0,0,0.2)';
+                legendDiv.style.borderRadius = '6px';
+                
+                let legendHTML = `<div class="stat-label" style="margin-bottom: 12px; font-weight:700; letter-spacing:1px;">Tier Legend</div>`;
+                
+                // Loops through tiers in reverse order (highest tiers at the top of the legend)
+                [...tiers].reverse().forEach(t => {
+                    // You can change "Thumbnail/logos/" to whatever path your icons will use
+                    const logoSrc = `Thumbnail/logos/${t.name.toLowerCase()}.png`; 
+                    
+                    legendHTML += `
+                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-size: 0.8rem;">
+                            <img src="${logoSrc}" style="width: 20px; height: 20px; object-fit: contain; background: rgba(255,255,255,0.02);" onerror="this.style.display='none';">
+                            <span style="font-weight: 700; color: ${t.color}">${t.name}:</span>
+                            <span style="color: #888">${t.minPoints}${t.maxPoints > 9000 ? '+' : ' - ' + t.maxPoints} PTS</span>
+                        </div>
+                    `;
+                });
+                
+                legendDiv.innerHTML = legendHTML;
+                side.appendChild(legendDiv);
+                // ----------------------------
+
                 if(data.length > 0) update(data[0], 1);
             } catch(e) {
                 console.error("Error loading levels layout:", e);
