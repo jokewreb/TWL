@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>THE WAVE LIST - SUBMIT RECORD</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .submit-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 600px;
+            margin: 40px auto;
+        }
+        .submit-card {
+            width: 100%;
+            background: rgba(20, 22, 30, 0.8);
+            border: 1px solid var(--border, rgba(255,255,255,0.05));
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.7);
+            backdrop-filter: blur(10px);
+        }
+        .form-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 5px;
+            letter-spacing: -0.5px;
+            text-align: center;
+        }
+        .form-sub {
+            font-size: 0.95rem;
+            color: #888;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 20px;
+            width: 100%;
+            text-align: left;
+        }
+        .form-group label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #aaa;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .form-group input {
+            width: 100%;
+            background: rgba(10, 11, 15, 0.8);
+            border: 1px solid var(--border, rgba(255,255,255,0.1));
+            padding: 14px;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .form-group input:focus {
+            border-color: var(--accent, #47e5bc);
+        }
+        .submit-btn {
+            width: 100%;
+            background: #fff;
+            color: #000;
+            border: none;
+            padding: 16px;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s, opacity 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 10px;
+        }
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+        .submit-btn:disabled {
+            background: #444;
+            color: #888;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .status-msg {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-align: center;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-logo" onclick="window.location.href='index.html'" style="cursor:pointer;">THE WAVE LIST</div>
+        <div>
+            <a href="index.html" class="nav-link">BACK TO LIST</a>
+            <a href="leaderboard.html" class="nav-link">LEADERBOARD</a>
+        </div>
+    </nav>
+
+    <div class="main-layout" style="display: block; padding: 40px 20px;">
+        <div class="submit-container">
+            
+            <h2 class="form-title">SUBMIT A RECORD</h2>
+            <div class="form-sub">Record Submission Form</div>
+
+            <div class="submit-card">
+                <form id="recordForm" onsubmit="sendSubmission(event)">
+                    <div class="form-group">
+                        <label for="playerName">Player Name</label>
+                        <input type="text" id="playerName" placeholder="Your in-game name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="levelName">Level Name</label>
+                        <input type="text" id="levelName" placeholder="Name of the wave level" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="videoLink">Video Proof Link</label>
+                        <input type="url" id="videoLink" placeholder="YouTube or Medal clip URL" required>
+                    </div>
+
+                    <button type="submit" class="submit-btn" id="subBtn">Send Submission</button>
+                    <div id="status" class="status-msg"></div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Paste your exact Discord Webhook URL right here inside the quotes
+        const DISCORD_WEBHOOK_URL = "YOUR_DISCORD_WEBHOOK_URL_HERE";
+
+        async function sendSubmission(event) {
+            event.preventDefault();
+            
+            const btn = document.getElementById('subBtn');
+            const status = document.getElementById('status');
+            
+            const player = document.getElementById('playerName').value;
+            const level = document.getElementById('levelName').value;
+            const video = document.getElementById('videoLink').value;
+
+            if (DISCORD_WEBHOOK_URL === "YOUR_DISCORD_WEBHOOK_URL_HERE") {
+                status.innerText = "Error: Setup incomplete. Please paste your Discord Webhook URL in the script tags.";
+                status.style.color = "#ff4a4a";
+                status.style.display = "block";
+                return;
+            }
+
+            btn.disabled = true;
+            btn.innerText = "Sending...";
+            status.style.display = "none";
+
+            // Format data into a stylized Discord Embed block
+            const payload = {
+                embeds: [{
+                    title: "📥 NEW LIST RECORD SUBMISSION",
+                    color: 4711868, // Hex value matching color presets
+                    fields: [
+                        { name: "👤 Player", value: player, inline: true },
+                        { name: "🌊 Level Name", value: level, inline: true },
+                        { name: "🔗 Video Proof", value: video }
+                    ],
+                    timestamp: new Date().toISOString()
+                }]
+            };
+
+            try {
+                const response = await fetch(DISCORD_WEBHOOK_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                });
+
+                if (response.ok) {
+                    status.innerText = "Record submitted successfully! Your run has been sent for evaluation.";
+                    status.style.color = "#47e5bc";
+                    status.style.display = "block";
+                    document.getElementById('recordForm').reset();
+                } else {
+                    throw new Error("Server error responding.");
+                }
+            } catch (error) {
+                console.error(error);
+                status.innerText = "An error occurred. Please verify your internet connection or check your webhook configuration.";
+                status.style.color = "#ff4a4a";
+                status.style.display = "block";
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "Send Submission";
+            }
+        }
+    </script>
+</body>
+</html>
