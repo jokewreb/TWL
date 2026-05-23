@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>OPEN VERIFICATIONS | THE WAVE LIST</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { overflow-y: auto !important; }
+        .open-container { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
+        .open-header { text-align: center; margin-bottom: 40px; background: rgba(20, 22, 30, 0.6); padding: 30px; border-radius: 16px; border: 1px dashed rgba(255, 65, 65, 0.3); backdrop-filter: blur(10px); }
+        .grid-layout { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+        .open-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; box-shadow: 0 15px 30px rgba(0,0,0,0.4); display: flex; flex-direction: column; gap: 12px; }
+        .open-card:hover { border-color: var(--accent); }
+        .video-mini-box { width: 100%; aspect-ratio: 16/9; border-radius: 6px; overflow: hidden; background: #000; }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-logo">OPEN VERIFICATIONS</div>
+        <a href="index.html" class="nav-link">BACK TO LIST</a>
+    </nav>
+
+    <div class="open-container">
+        <div class="open-header">
+            <h1 style="margin: 0 0 5px 0; font-size: 2rem; font-weight: 800;">🔥 OPEN VERIFICATIONS</h1>
+            <p style="margin: 0; color: #666; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Levels looking for an official verifier</p>
+        </div>
+        <div id="open-grid" class="grid-layout"></div>
+    </div>
+
+    <script>
+        async function loadOpenLevels() {
+            const grid = document.getElementById('open-grid');
+            try {
+                const res = await fetch(`OpenVerification.json?v=${new Date().getTime()}`);
+                const data = await res.res ? await res.json() : await res.json();
+                grid.innerHTML = "";
+
+                if (data.length === 0) {
+                    grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; color:#444; padding:40px;">No open verifications listed at the moment.</div>`;
+                    return;
+                }
+
+                data.forEach(lvl => {
+                    let videoHTML = "";
+                    if (lvl.video && lvl.video.trim() !== "") {
+                        videoHTML = `<div class="video-mini-box"><iframe width="100%" height="100%" src="${lvl.video}" frameborder="0" allowfullscreen></iframe></div>`;
+                    }
+
+                    grid.innerHTML += `
+                        <div class="open-card">
+                            ${videoHTML}
+                            <h3 style="margin: 0; font-size: 1.2rem; color: #fff;">${lvl.name}</h3>
+                            <div style="font-size: 0.85rem; color: #888;">
+                                <p style="margin: 4px 0;"><strong>Creator:</strong> ${lvl.creator}</p>
+                                <p style="margin: 4px 0;"><strong>Reward:</strong> <span style="color:var(--accent); font-weight:700;">${lvl.points} PTS</span></p>
+                                <p style="margin: 4px 0;"><strong>Level ID:</strong> <span style="color:var(--gold); font-weight:700;">${lvl.id || 'N/A'}</span></p>
+                            </div>
+                        </div>
+                    `;
+                });
+            } catch (e) {
+                console.error(e);
+                grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; color:var(--accent); padding:40px;">Error loading data configurations.</div>`;
+            }
+        }
+        loadOpenLevels();
+    </script>
+</body>
+</html>
