@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>THE WAVE LIST - PLAYER PROFILE</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .profile-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .profile-header {
+            text-align: center;
+            margin-bottom: 50px;
+            background: rgba(20, 22, 30, 0.6);
+            padding: 40px;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+        }
+        .profile-name {
+            font-size: 3rem;
+            font-weight: 800;
+            margin: 0 0 10px 0;
+            color: #fff;
+            text-transform: uppercase;
+        }
+        .stats-badge {
+            display: inline-block;
+            background: rgba(71, 229, 188, 0.1);
+            color: var(--accent, #47e5bc);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .completed-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+        }
+        .level-card {
+            background: rgba(20, 22, 30, 0.8);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+        .level-info {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .level-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin: 0;
+            color: #fff;
+        }
+        .level-meta {
+            font-size: 0.85rem;
+            color: #888;
+        }
+        .proof-btn {
+            display: block;
+            text-align: center;
+            background: #fff;
+            color: #000;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            text-decoration: none;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-logo" onclick="window.location.href='index.html'" style="cursor:pointer;">THE WAVE LIST</div>
+        <div>
+            <a href="index.html" class="nav-link">BACK TO LIST</a>
+        </div>
+    </nav>
+
+    <div class="profile-container">
+        <div class="profile-header">
+            <h1 id="playerNameHeading" class="profile-name">LOADING...</h1>
+            <div id="completionCount" class="stats-badge">0 COMPLETIONS</div>
+        </div>
+
+        <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px;">Completed Levels</h2>
+        <div id="completedGrid" class="completed-grid"></div>
+    </div>
+
+    <script>
+        // 1. Grab the username straight out of the URL bar parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const targetPlayer = urlParams.get('name');
+
+        async function loadPlayerProfile() {
+            const nameHeading = document.getElementById('playerNameHeading');
+            const countBadge = document.getElementById('completionCount');
+            const grid = document.getElementById('completedGrid');
+
+            if (!targetPlayer) {
+                nameHeading.innerText = "PLAYER NOT FOUND";
+                return;
+            }
+
+            nameHeading.innerText = targetPlayer;
+
+            try {
+                // 2. Fetch your main records database file (Replace with your actual JSON data file path)
+                const response = await fetch('data/levels.json'); 
+                const data = await response.json();
+
+                let completionCount = 0;
+                grid.innerHTML = "";
+
+                // 3. Scan through all your tier levels and locate this specific player's records
+                data.levels.forEach(level => {
+                    // Check if this player is listed as a record holder or verifier for the level
+                    const hasBeaten = level.records && level.records.some(record => record.user.toLowerCase() === targetPlayer.toLowerCase());
+                    const isVerifier = level.verifier && level.verifier.toLowerCase() === targetPlayer.toLowerCase();
+
+                    if (hasBeaten || isVerifier) {
+                        completionCount++;
+
+                        // Find the player's specific video proof link
+                        let videoLink = "#";
+                        if (isVerifier) videoLink = level.verification || "#";
+                        else {
+                            const match = level.records.find(r => r.user.toLowerCase() === targetPlayer.toLowerCase());
+                            videoLink = match ? match.video : "#";
+                        }
+
+                        const card = document.createElement('div');
+                        card.className = 'level-card';
+                        card.innerHTML = `
+                            <div class="level-info">
+                                <h3 class="level-title">${level.name}</h3>
+                                <div class="level-meta">
+                                    <p style="margin: 4px 0;"><strong>Creator:</strong> ${level.creator}</p>
+                                    <p style="margin: 4px 0;"><strong>Difficulty:</strong> Tier ${level.tier || '?'}</p>
+                                    <p style="margin: 4px 0; color: var(--accent, #47e5bc);"><strong>Role:</strong> ${isVerifier ? 'Verifier' : 'Victor'}</p>
+                                </div>
+                                <a href="${videoLink}" target="_blank" class="proof-btn">View Video Proof</a>
+                            </div>
+                        `;
+                        grid.appendChild(card);
+                    }
+                });
+
+                countBadge.innerText = `${completionCount} ${completionCount === 1 ? 'COMPLETION' : 'COMPLETIONS'}`;
+
+                if (completionCount === 0) {
+                    grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; color:#444; padding:40px;">No recorded completions found for this player.</div>`;
+                }
+
+            } catch (error) {
+                console.error(error);
+                grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; color:red; padding:40px;">Error loading player profile configurations.</div>`;
+            }
+        }
+
+        loadPlayerProfile();
+    </script>
+</body>
+</html>
