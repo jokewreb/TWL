@@ -10,6 +10,16 @@
     "victors": ["Karen"] 
   },
   { 
+    "name": "OZAWT Swag", 
+    "points": 230, 
+    "creator": "newbite", 
+    "verifier": "newbite", 
+    "id": "140806539", 
+    "video": "LM9pytsz0Ps", 
+    "thumbnail": "Thumbnail/OZAWTSwag.png", 
+    "victors": [] 
+  },
+  { 
     "name": "Alienation",
     "points": 255, 
     "creator": "Karen", 
