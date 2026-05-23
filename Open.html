@@ -34,49 +34,69 @@
         <div id="open-grid" class="grid-layout"></div>
     </div>
 
-    <script src="open_levels.js"></script>
-
     <script>
-        async function loadOpenLevels() {
+        // CONFIGURATION: Set your GitHub path here!
+        const GITHUB_OWNER = "jokewreb";
+        const GITHUB_REPO = "TWL";
+
+        async function loadOpenLevelsFromIssues() {
             const grid = document.getElementById('open-grid');
             try {
-                // Read directly from the loaded array variable
-                const data = openLevelsData;
+                // Fetch open issues from your public GitHub repository repo live
+                const response = await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/issues?state=open&per_page=100`);
+                
+                if (!response.ok) throw new Error("Could not reach GitHub API");
+                const issues = await response.ok ? await response.json() : [];
+                
                 grid.innerHTML = "";
 
-                if (!data || data.length === 0) {
+                // Filter down to only show issues created by your Submit form pipeline
+                const filteredSubmissions = issues.filter(issue => issue.title.startsWith("Open Verification Request:"));
+
+                if (filteredSubmissions.length === 0) {
                     grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; color:#444; padding:40px;">No open verifications listed at the moment.</div>`;
                     return;
                 }
 
-                data.forEach(lvl => {
-                    const fallbackThumb = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=";
-                    let thumbnailHTML = "";
+                filteredSubmissions.forEach(issue => {
+                    const bodyText = issue.body || "";
                     
-                    // Checks if it is a full HTML tag from GitHub or a plain URL path string
-                    if (lvl.thumbnail && lvl.thumbnail.includes("<img")) {
-                        thumbnailHTML = lvl.thumbnail.replace("<img", `<img class="thumb-img" onerror="this.src='${fallbackThumb}'"`);
-                    } else {
-                        const imgSource = lvl.thumbnail ? lvl.thumbnail : fallbackThumb;
-                        thumbnailHTML = `<img src="${imgSource}" class="thumb-img" onerror="this.src='${fallbackThumb}'">`;
-                    }
+                    // 1. Parsing text configurations out of the generated template
+                    const nameMatch = bodyText.match(/"name":\s*"(.*?)"/);
+                    const creatorMatch = bodyText.match(/"creator":\s*"(.*?)"/);
+                    const diffMatch = bodyText.match(/"estimatedDifficulty":\s*"(.*?)"/);
+                    const idMatch = bodyText.match(/"id":\s*"(.*?)"/);
+                    const videoMatch = bodyText.match(/"video":\s*"(.*?)"/);
+
+                    // 2. SMART EXTRACTION: Finds the raw URL inside the pasted GitHub image src tag
+                    const imageSrcMatch = bodyText.match(/src="(https:\/\/github\.com\/user-attachments\/assets\/.*?)"/);
+
+                    const fallbackThumb = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=";
+                    
+                    // Assign values if successfully matched out of text blocks, otherwise default back smoothly
+                    const lvlName = nameMatch ? nameMatch[1] : issue.title.replace("Open Verification Request:", "").trim();
+                    const lvlCreator = creatorMatch ? creatorMatch[1] : "Unknown";
+                    const lvlDiff = diffMatch ? diffMatch[1] : "Unrated";
+                    const lvlId = idMatch ? idMatch[1] : "N/A";
+                    const lvlVideo = videoMatch ? videoMatch[1] : "";
+                    const imgSource = imageSrcMatch ? imageSrcMatch[1] : fallbackThumb;
 
                     let actionButtonHTML = "";
-                    if (lvl.video && lvl.video.trim() !== "") {
-                        actionButtonHTML = `<a href="${lvl.video}" target="_blank" class="video-btn">View Showcase</a>`;
+                    if (lvlVideo && lvlVideo.trim() !== "") {
+                        actionButtonHTML = `<a href="${lvlVideo}" target="_blank" class="video-btn">View Showcase</a>`;
                     }
 
                     grid.innerHTML += `
                         <div class="open-card">
                             <div class="thumb-box">
-                                ${thumbnailHTML}
+                                <img src="${imgSource}" class="thumb-img" onerror="this.src='${fallbackThumb}'">
                             </div>
                             <div class="open-info">
-                                <h3 class="open-title">${lvl.name}</h3>
+                                <h3 class="open-title">${lvlName}</h3>
                                 <div class="open-meta">
-                                    <p style="margin: 4px 0;"><strong>Creator:</strong> ${lvl.creator}</p>
-                                    <p style="margin: 4px 0;"><strong>Estimated Difficulty:</strong> <span style="color: #aaa; font-weight:700;">${lvl.estimatedDifficulty || 'Unrated'}</span></p>
-                                    <p style="margin: 4px 0;"><strong>Level ID:</strong> <span style="color:var(--gold);">${lvl.id || 'N/A'}</span></p>
+                                    <p style="margin: 4px 0;"><strong>Creator:</strong> ${lvlCreator}</p>
+                                    <p style="margin: 4px 0;"><strong>Estimated Difficulty:</strong> <span style="color: #aaa; font-weight:700;">${lvlDiff}</span></p>
+                                    <p style="margin: 4px 0;"><strong>Level ID:</strong> <span style="color:var(--gold);">${lvlId}</span></p>
                                 </div>
                                 ${actionButtonHTML}
                             </div>
@@ -85,10 +105,11 @@
                 });
             } catch (e) {
                 console.error(e);
-                grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; color:var(--accent); padding:40px;">Error loading data configurations.</div>`;
+                grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; color:var(--accent); padding:40px;">Error loading data configurations directly from live tracker.</div>`;
             }
         }
-        loadOpenLevels();
+        
+        loadOpenLevelsFromIssues();
     </script>
 </body>
 </html>
