@@ -43,6 +43,7 @@
             outline: none;
             border-color: var(--accent, #47e5bc);
         }
+        /* File Upload Input Styles */
         .file-upload-wrapper {
             position: relative;
             display: flex;
@@ -126,7 +127,7 @@
         <p style="color: #666; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; margin-bottom: 25px; text-align: center;">Request a level to be added to the open verifications list</p>
 
         <div class="instructions-box">
-            <strong>How to submit:</strong> Fill out the form fields below. When you click submit, it will automatically package your data into a structured layout and open a GitHub Issue template on our tracker where you can review your request details!
+            <strong>How to submit:</strong> Fill out the details and upload your image. When you press the submit button, a GitHub Issue window will open. Simply follow the text guidelines inside the issue layout to complete the review pipeline!
         </div>
 
         <form id="open-submit-form">
@@ -151,12 +152,16 @@
             </div>
 
             <div class="form-group">
-                <label class="form-label" for="lvl-thumb-path">Thumbnail Image File Path</label>
-                <input type="text" id="lvl-thumb-path" class="form-input" placeholder="e.g., Thumbnail/Open/CorruptedCavern.png" required>
+                <label class="form-label">Level Thumbnail</label>
+                <div class="file-upload-wrapper">
+                    <button type="button" class="custom-file-btn">Choose File</button>
+                    <span id="file-name-status" class="file-status">No file chosen</span>
+                    <input type="file" id="lvl-thumb" class="file-input-hidden" accept="image/*" required>
+                </div>
             </div>
 
             <div class="form-group">
-                <label class="form-label" for="lvl-video">Video Proof Link</label>
+                <label class="form-label" for="lvl-video">Showcase Link</label>
                 <input type="url" id="lvl-video" class="form-input" placeholder="e.g., https://www.youtube.com/watch?v=IlnMceTWJmU" required>
             </div>
 
@@ -165,8 +170,20 @@
     </div>
 
     <script>
-        // Change this path to match your exact GitHub Username and Repository name!
         const GITHUB_REPO_URL = "https://github.com/jokewreb/TWL";
+
+        const fileInput = document.getElementById('lvl-thumb');
+        const statusLabel = document.getElementById('file-name-status');
+
+        fileInput.addEventListener('change', function() {
+            if (this.files && this.files.length > 0) {
+                statusLabel.innerText = this.files[0].name;
+                statusLabel.style.color = "#fff";
+            } else {
+                statusLabel.innerText = "No file chosen";
+                statusLabel.style.color = "#666";
+            }
+        });
 
         document.getElementById('open-submit-form').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -175,34 +192,34 @@
             const creator = document.getElementById('lvl-creator').value.trim();
             const difficulty = document.getElementById('lvl-diff').value.trim();
             const id = document.getElementById('lvl-id').value.trim();
-            const thumbPath = document.getElementById('lvl-thumb-path').value.trim();
             const video = document.getElementById('lvl-video').value.trim();
+            
+            // Get clean uploaded file name details
+            const uploadedFileName = fileInput.files.length > 0 ? fileInput.files[0].name : "thumbnail.png";
 
-            // Formats structural code blocks perfectly for open_levels.json parsing updates
+            // Structural JSON template for easy admin tracking integration
             const jsonSnippet = JSON.stringify({
                 name: name,
                 creator: creator,
                 estimatedDifficulty: difficulty,
                 id: id,
-                thumbnail: thumbPath,
+                thumbnail: `Thumbnail/Open/${uploadedFileName}`,
                 video: video
             }, null, 2);
 
             const issueTitle = encodeURIComponent(`Open Verification Request: ${name}`);
             
-            // Build the issue body details text layout
             const issueBody = encodeURIComponent(
-                `### Level Submission Data\n` +
-                `Please copy the raw code block configuration array snippet directly below into your \`open_levels.json\` tracking database file:\n\n` +
+                `### 📋 Level Submission Data\n` +
+                `Copy this code snippet directly into your \`open_levels.json\` file:\n\n` +
                 `\`\`\`json\n${jsonSnippet}\n\`\`\`\n\n` +
                 `--- \n` +
-                `*Submitted automatically via portal submission pipeline tools.*`
+                `### 🖼️ Uploaded Thumbnail image file\n` +
+                `👉 **USER ACTION REQUIRED:** Please drag-and-drop or paste your image file (\`${uploadedFileName}\`) directly right into this text block area so the admin can review your submission and save it inside your project's media asset directory folders!`
             );
 
-            // Construct link redirection endpoint target pathways
             const githubIssuesLink = `${GITHUB_REPO_URL}/issues/new?title=${issueTitle}&body=${issueBody}`;
 
-            // Send user to their repository issue tracker platform view
             window.open(githubIssuesLink, '_blank');
         });
     </script>
