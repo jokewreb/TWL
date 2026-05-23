@@ -129,20 +129,25 @@
     </div>
 
     <script>
-        // Set to match your exact GitHub details
-        const GITHUB_USER = "YOUR_GITHUB_USERNAME";
-        const GITHUB_REPO = "YOUR_REPO_NAME";
+        // Set to match your exact verified GitHub details
+        const GITHUB_USER = "jokewreb";
+        const GITHUB_REPO = "TWL";
 
         async function fetchSubmissions() {
             const grid = document.getElementById('submissionsGrid');
             const loading = document.getElementById('loading');
             
             try {
-                // Fetch open issues with the [SUBMISSION] title prefix directly from GitHub API
+                // Fetch open issues with the [SUBMISSION] title prefix directly from your repository's GitHub API
                 const response = await fetch(`https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/issues?state=open&per_page=100`);
                 const issues = await response.json();
                 
-                const filteredIssues = issues.filter(issue => issue.title.startsWith('[SUBMISSION]'));
+                // If it successfully returns data but it's an array error statement handled by GitHub
+                if (!Array.isArray(issues)) {
+                    throw new Error("Repository data response error.");
+                }
+
+                const filteredIssues = issues.filter(issue => issue.title && issue.title.startsWith('[SUBMISSION]'));
                 
                 loading.style.display = 'none';
                 if (filteredIssues.length === 0) {
@@ -150,18 +155,22 @@
                     return;
                 }
 
+                grid.innerHTML = ""; // Clear loader text explicitly
+
                 filteredIssues.forEach(issue => {
-                    // Parse variables out from formatting template block
+                    // Parse variables out from formatting template block cleanly
                     const data = {};
-                    const lines = issue.body.split('\n');
-                    lines.forEach(line => {
-                        const parts = line.split(': ');
-                        if (parts.length >= 2) {
-                            const key = parts[0].trim();
-                            const val = parts.slice(1).join(': ').trim();
-                            data[key] = val;
-                        }
-                    });
+                    if (issue.body) {
+                        const lines = issue.body.split('\n');
+                        lines.forEach(line => {
+                            const parts = line.split(': ');
+                            if (parts.length >= 2) {
+                                const key = parts[0].trim();
+                                const val = parts.slice(1).join(': ').trim();
+                                data[key] = val;
+                            }
+                        });
+                    }
 
                     const card = document.createElement('div');
                     card.className = 'sub-card';
@@ -194,7 +203,7 @@
 
             } catch (error) {
                 console.error(error);
-                loading.innerText = "Error pulling raw database records from GitHub API.";
+                loading.innerText = "Error pulling raw database records from GitHub API. Ensure your repository issues tracker features are turned on!";
             }
         }
 
