@@ -136,14 +136,20 @@
                 const response = await fetch(`levels.json?v=${new Date().getTime()}`); 
                 const data = await response.json();
 
+                // Sort data points descendingly to match index placement ranks accurately
+                data.sort((a, b) => b.points - a.points);
+
                 let completionCount = 0;
                 let creationCount = 0;
                 let hardestLvl = null;
+                let hardestRank = 0;
                 
                 grid.innerHTML = "";
                 creationsGrid.innerHTML = "";
 
-                data.forEach(level => {
+                data.forEach((level, index) => {
+                    const rank = index + 1; // Calculate actual list placement rank
+                    
                     const hasBeaten = level.victors && level.victors.some(v => v.toLowerCase() === targetPlayer.toLowerCase());
                     const isVerifier = level.verifier && level.verifier.toLowerCase() === targetPlayer.toLowerCase();
                     const isCreator = level.creator && level.creator.toLowerCase() === targetPlayer.toLowerCase();
@@ -154,13 +160,14 @@
 
                         if (!hardestLvl || level.points > hardestLvl.points) {
                             hardestLvl = level;
+                            hardestRank = rank;
                         }
 
                         const card = document.createElement('div');
                         card.className = 'level-card';
                         card.innerHTML = `
                             <div class="level-info">
-                                <h3 class="level-title">${level.name}</h3>
+                                <h3 class="level-title">#${rank} - ${level.name}</h3>
                                 <div class="level-meta">
                                     <p style="margin: 4px 0;"><strong>Creator:</strong> ${level.creator}</p>
                                     <p style="margin: 4px 0;"><strong>Value:</strong> ${level.points} PTS</p>
@@ -179,7 +186,7 @@
                         card.className = 'level-card';
                         card.innerHTML = `
                             <div class="level-info">
-                                <h3 class="level-title">${level.name}</h3>
+                                <h3 class="level-title">#${rank} - ${level.name}</h3>
                                 <div class="level-meta">
                                     <p style="margin: 4px 0;"><strong>Verifier:</strong> ${level.verifier || 'N/A'}</p>
                                     <p style="margin: 4px 0;"><strong>Value:</strong> ${level.points} PTS</p>
@@ -195,7 +202,7 @@
                 countBadge.innerText = `${completionCount} ${completionCount === 1 ? 'COMPLETION' : 'COMPLETIONS'}`;
 
                 if (hardestLvl) {
-                    hardestBadge.innerText = `HARDEST: ${hardestLvl.name.toUpperCase()} (${hardestLvl.points} PTS)`;
+                    hardestBadge.innerText = `HARDEST: #${hardestRank} ${hardestLvl.name.toUpperCase()} (${hardestLvl.points} PTS)`;
                     hardestBadge.style.display = "inline-block";
                 } else {
                     hardestBadge.style.display = "none";
