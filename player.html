@@ -5,6 +5,9 @@
     <title>THE WAVE LIST - PLAYER PROFILE</title>
     <link rel="stylesheet" href="style.css">
     <style>
+        /* This line overrides the global style.css rule to let this page scroll */
+        body { overflow-y: auto !important; }
+
         .profile-container {
             max-width: 1200px;
             margin: 40px auto;
@@ -118,14 +121,12 @@
             nameHeading.innerText = targetPlayer;
 
             try {
-                // Aligned exactly with index.html's data pulling structure
                 const response = await fetch(`levels.json?v=${new Date().getTime()}`); 
                 const data = await response.json();
 
                 let completionCount = 0;
                 grid.innerHTML = "";
 
-                // Aligned exactly with your JSON format (data array, level.victors string array)
                 data.forEach(level => {
                     const hasBeaten = level.victors && level.victors.some(v => v.toLowerCase() === targetPlayer.toLowerCase());
                     const isVerifier = level.verifier && level.verifier.toLowerCase() === targetPlayer.toLowerCase();
@@ -133,11 +134,9 @@
                     if (hasBeaten || isVerifier) {
                         completionCount++;
 
-                        // Handles video URLs cleanly
                         let videoLink = level.video || "#";
                         let finalUrl = videoLink;
                         
-                        // If it's a YouTube embed ID style string, turn it back into a clickable link
                         if (videoLink && !videoLink.includes('http')) {
                             finalUrl = `https://www.youtube.com/watch?v=${videoLink}`;
                         }
