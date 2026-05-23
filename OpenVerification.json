@@ -2,7 +2,7 @@
     {
         "name": "Open Level Example",
         "creator": "Symm",
-        "estimatedRank": 2,
+        "estimatedDifficulty": "Top 5",
         "id": "12345678",
         "thumbnail": "https://i.ytimg.com/vi/dQw4w9WgXcQ/mqdefault.jpg",
         "video": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -10,7 +10,7 @@
     {
         "name": "Challenge Layout",
         "creator": "Armi12",
-        "estimatedRank": 14,
+        "estimatedDifficulty": "Main List",
         "id": "87654321",
         "thumbnail": "",
         "video": ""
