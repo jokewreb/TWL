@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>THE WAVE LIST - SUBMIT OPEN VERIFICATION</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .form-container {
+            max-width: 600px;
+            margin: 60px auto;
+            padding: 40px;
+            background: rgba(20, 22, 30, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+            backdrop-filter: blur(10px);
+        }
+        .form-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+        .form-label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #aaa;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(10, 11, 16, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            color: #fff;
+            font-size: 0.95rem;
+            transition: border-color 0.2s;
+            box-sizing: border-box;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent, #47e5bc);
+        }
+        .submit-btn {
+            width: 100%;
+            background: #fff;
+            color: #000;
+            padding: 14px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+        .submit-btn:hover {
+            background: var(--accent, #47e5bc);
+        }
+        .submit-btn:active {
+            transform: scale(0.98);
+        }
+        .message {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-logo" onclick="window.location.href='index.html'" style="cursor:pointer;">THE WAVE LIST</div>
+        <div>
+            <a href="submit.html" class="nav-link" style="margin-right: 20px;">BACK TO HUB</a>
+            <a href="index.html" class="nav-link">VIEW LIST</a>
+        </div>
+    </nav>
+
+    <div class="form-container">
+        <h1 style="font-size: 2rem; font-weight: 800; margin-bottom: 5px; text-transform: uppercase; text-align: center;">Submit Open Verification</h1>
+        <p style="color: #666; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; margin-bottom: 35px; text-align: center;">Request a level to be added to the open verifications page</p>
+
+        <form id="open-submit-form">
+            <div class="form-group">
+                <label class="form-label" for="lvl-name">Level Name</label>
+                <input type="text" id="lvl-name" class="form-input" placeholder="e.g., Corrupted Cavern" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="lvl-creator">Creator</label>
+                <input type="text" id="lvl-creator" class="form-input" placeholder="e.g., Karen" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="lvl-diff">Estimated Difficulty</label>
+                <input type="text" id="lvl-diff" class="form-input" placeholder="e.g., Top 7 - 4" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="lvl-id">Level ID</label>
+                <input type="text" id="lvl-id" class="form-input" placeholder="e.g., 140282256" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="lvl-thumb">Thumbnail Path / Link</label>
+                <input type="text" id="lvl-thumb" class="form-input" placeholder="e.g., Thumbnail/Open/CorruptedCavern.png" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="lvl-video">Video Proof Link</label>
+                <input type="url" id="lvl-video" class="form-input" placeholder="e.g., https://www.youtube.com/watch?v=IlnMceTWJmU" required>
+            </div>
+
+            <button type="submit" class="submit-btn" id="btn-text">Submit Request</button>
+            <div id="form-msg" class="message"></div>
+        </form>
+    </div>
+
+    <script>
+        // Replace this with your actual Discord Webhook URL for open verification submissions
+        const DISCORD_WEBHOOK_URL = "YOUR_DISCORD_WEBHOOK_URL_HERE";
+
+        document.getElementById('open-submit-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const btnText = document.getElementById('btn-text');
+            const formMsg = document.getElementById('form-msg');
+            
+            const name = document.getElementById('lvl-name').value.trim();
+            const creator = document.getElementById('lvl-creator').value.trim();
+            const difficulty = document.getElementById('lvl-diff').value.trim();
+            const id = document.getElementById('lvl-id').value.trim();
+            const thumbnail = document.getElementById('lvl-thumb').value.trim();
+            const video = document.getElementById('lvl-video').value.trim();
+
+            btnText.innerText = "Sending...";
+            btnText.disabled = true;
+            formMsg.innerText = "";
+
+            // Formatted webhook content payload
+            const payload = {
+                username: "Open Verification Bot",
+                embeds: [{
+                    title: "🔓 New Open Verification Submission!",
+                    color: 4679100, // Mint/Greenish accent color
+                    fields: [
+                        { name: "Level Name", value: name, inline: true },
+                        { name: "Creator", value: creator, inline: true },
+                        { name: "Estimated Difficulty", value: difficulty, inline: true },
+                        { name: "Level ID", value: id, inline: true },
+                        { name: "Thumbnail Path", value: `\`${thumbnail}\``, inline: false },
+                        { name: "Video Link", value: video, inline: false }
+                    ],
+                    timestamp: new Date().toISOString()
+                }]
+            };
+
+            try {
+                if (DISCORD_WEBHOOK_URL === "YOUR_DISCORD_WEBHOOK_URL_HERE") {
+                    throw new Error("Webhook URL is unconfigured.");
+                }
+
+                const response = await fetch(DISCORD_WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (response.ok) {
+                    formMsg.style.color = "#47e5bc";
+                    formMsg.innerText = "Submission successfully sent to review logs!";
+                    document.getElementById('open-submit-form').reset();
+                } else {
+                    throw new Error("Network response encountered issues.");
+                }
+            } catch (error) {
+                console.error(error);
+                formMsg.style.color = "#ff4a4a";
+                formMsg.innerText = "Failed sending submission. Connection error.";
+            } finally {
+                btnText.innerText = "Submit Request";
+                btnText.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
