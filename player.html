@@ -72,7 +72,6 @@
             flex-direction: column;
             box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
-        /* Visual distinction style for locked/unbeaten levels */
         .unbeaten-card {
             opacity: 0.6;
             border-style: dashed;
@@ -146,7 +145,6 @@
                 const response = await fetch(`levels.json?v=${new Date().getTime()}`); 
                 const data = await response.json();
 
-                // Sort descending to establish correct layout placement values
                 data.sort((a, b) => b.points - a.points);
 
                 let completionCount = 0;
@@ -221,6 +219,7 @@
                                 <div class="level-meta">
                                     <p style="margin: 4px 0;"><strong>Creator:</strong> ${level.creator}</p>
                                     <p style="margin: 4px 0;"><strong>Value:</strong> ${level.points} PTS</p>
+                                    <p style="margin: 4px 0;"><strong>ID:</strong> ${level.id || 'Unknown'}</p>
                                     <p style="margin: 4px 0; color: #555;"><strong>Status:</strong> Unbeaten</p>
                                 </div>
                             </div>
@@ -229,7 +228,6 @@
                     }
                 });
 
-                // Update Header UI
                 countBadge.innerText = `${completionCount} ${completionCount === 1 ? 'COMPLETION' : 'COMPLETIONS'}`;
 
                 if (hardestLvl) {
@@ -239,7 +237,6 @@
                     hardestBadge.style.display = "none";
                 }
 
-                // Handle Empty States
                 if (completionCount === 0) {
                     grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; color:#444; padding:40px;">No recorded list records found for this player.</div>`;
                 }
