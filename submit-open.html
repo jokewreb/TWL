@@ -43,44 +43,6 @@
             outline: none;
             border-color: var(--accent, #47e5bc);
         }
-        /* File Upload Input Styles */
-        .file-upload-wrapper {
-            position: relative;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        .file-input-hidden {
-            position: absolute;
-            left: 0;
-            top: 0;
-            opacity: 0;
-            width: 100%;
-            height: 100%;
-            cursor: pointer;
-        }
-        .custom-file-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #fff;
-            padding: 12px 20px;
-            border-radius: 6px;
-            font-weight: 700;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: background 0.2s;
-        }
-        .file-upload-wrapper:hover .custom-file-btn {
-            background: rgba(255, 255, 255, 0.2);
-        }
-        .file-status {
-            color: #666;
-            font-size: 0.9rem;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
         .submit-btn {
             width: 100%;
             background: #fff;
@@ -127,7 +89,7 @@
         <p style="color: #666; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; margin-bottom: 25px; text-align: center;">Request a level to be added to the open verifications list</p>
 
         <div class="instructions-box">
-            <strong>How to submit:</strong> Fill out the details and upload your image. When you press the submit button, a GitHub Issue window will open. Simply follow the text guidelines inside the issue layout to complete the review pipeline!
+            <strong>How to submit:</strong> Fill out the form fields below. When you click submit, a GitHub Issue window will open. You will upload/attach your thumbnail image directly on that page!
         </div>
 
         <form id="open-submit-form">
@@ -152,12 +114,8 @@
             </div>
 
             <div class="form-group">
-                <label class="form-label">Level Thumbnail</label>
-                <div class="file-upload-wrapper">
-                    <button type="button" class="custom-file-btn">Choose File</button>
-                    <span id="file-name-status" class="file-status">No file chosen</span>
-                    <input type="file" id="lvl-thumb" class="file-input-hidden" accept="image/*" required>
-                </div>
+                <label class="form-label" for="lvl-thumb-name">Thumbnail File Name</label>
+                <input type="text" id="lvl-thumb-name" class="form-input" placeholder="e.g., CorruptedCavern.png" required>
             </div>
 
             <div class="form-group">
@@ -172,19 +130,6 @@
     <script>
         const GITHUB_REPO_URL = "https://github.com/jokewreb/TWL";
 
-        const fileInput = document.getElementById('lvl-thumb');
-        const statusLabel = document.getElementById('file-name-status');
-
-        fileInput.addEventListener('change', function() {
-            if (this.files && this.files.length > 0) {
-                statusLabel.innerText = this.files[0].name;
-                statusLabel.style.color = "#fff";
-            } else {
-                statusLabel.innerText = "No file chosen";
-                statusLabel.style.color = "#666";
-            }
-        });
-
         document.getElementById('open-submit-form').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -192,18 +137,19 @@
             const creator = document.getElementById('lvl-creator').value.trim();
             const difficulty = document.getElementById('lvl-diff').value.trim();
             const id = document.getElementById('lvl-id').value.trim();
+            const thumbName = document.getElementById('lvl-thumb-name').value.trim();
             const video = document.getElementById('lvl-video').value.trim();
-            
-            // Get clean uploaded file name details
-            const uploadedFileName = fileInput.files.length > 0 ? fileInput.files[0].name : "thumbnail.png";
 
-            // Structural JSON template for easy admin tracking integration
+            // Make sure it references the correct folder format inside the JSON
+            const finalThumbPath = thumbName.startsWith("Thumbnail/Open/") ? thumbName : `Thumbnail/Open/${thumbName}`;
+
+            // Structural JSON template for easy copy-pasting
             const jsonSnippet = JSON.stringify({
                 name: name,
                 creator: creator,
                 estimatedDifficulty: difficulty,
                 id: id,
-                thumbnail: `Thumbnail/Open/${uploadedFileName}`,
+                thumbnail: finalThumbPath,
                 video: video
             }, null, 2);
 
@@ -214,8 +160,8 @@
                 `Copy this code snippet directly into your \`open_levels.json\` file:\n\n` +
                 `\`\`\`json\n${jsonSnippet}\n\`\`\`\n\n` +
                 `--- \n` +
-                `### 🖼️ Uploaded Thumbnail image file\n` +
-                `👉 **USER ACTION REQUIRED:** Please drag-and-drop or paste your image file (\`${uploadedFileName}\`) directly right into this text block area so the admin can review your submission and save it inside your project's media asset directory folders!`
+                `### 🖼️ Upload Level Thumbnail Here\n` +
+                `👉 **USER ACTION Required:** Please drag-and-drop or upload your image file (\`${thumbName}\`) directly into the comment field area below before submitting this issue!`
             );
 
             const githubIssuesLink = `${GITHUB_REPO_URL}/issues/new?title=${issueTitle}&body=${issueBody}`;
