@@ -1,18 +1,10 @@
 [
     {
-        "name": "Open Level Example",
-        "creator": "Symm",
-        "estimatedDifficulty": "Top 5",
-        "id": "12345678",
-        "thumbnail": "https://i.ytimg.com/vi/dQw4w9WgXcQ/mqdefault.jpg",
-        "video": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        "name": "Corrupted Cavern",
+        "creator": "Karen",
+        "estimatedDifficulty": "Top 7 - 4",
+        "id": "140282256",
+        "thumbnail": "Thumbnail/Open/CorruptedCavern",
+        "video": "https://www.youtube.com/watch?v=IlnMceTWJmU"
     },
-    {
-        "name": "Challenge Layout",
-        "creator": "Armi12",
-        "estimatedDifficulty": "Top 10 - 2",
-        "id": "87654321",
-        "thumbnail": "",
-        "video": ""
-    }
 ]
