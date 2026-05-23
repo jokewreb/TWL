@@ -6,12 +6,18 @@
     <link rel="stylesheet" href="style.css">
     <style>
         body { overflow-y: auto !important; }
-        .open-container { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
-        .open-header { text-align: center; margin-bottom: 40px; background: rgba(20, 22, 30, 0.6); padding: 30px; border-radius: 16px; border: 1px dashed rgba(255, 65, 65, 0.3); backdrop-filter: blur(10px); }
-        .grid-layout { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
-        .open-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; box-shadow: 0 15px 30px rgba(0,0,0,0.4); display: flex; flex-direction: column; gap: 12px; }
-        .open-card:hover { border-color: var(--accent); }
-        .video-mini-box { width: 100%; aspect-ratio: 16/9; border-radius: 6px; overflow: hidden; background: #000; }
+        .open-container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+        .open-header { text-align: center; margin-bottom: 40px; background: rgba(20, 22, 30, 0.6); padding: 30px; border-radius: 16px; border: 1px solid var(--border); backdrop-filter: blur(10px); }
+        .grid-layout { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; }
+        .open-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.4); display: flex; flex-direction: column; }
+        .open-card:hover { border-color: #666; }
+        .thumb-box { width: 100%; aspect-ratio: 16/9; background: #0a0b0f; overflow: hidden; position: relative; }
+        .thumb-img { width: 100%; height: 100%; object-fit: cover; }
+        .open-info { padding: 20px; display: flex; flex-direction: column; gap: 10px; }
+        .open-title { font-size: 1.3rem; font-weight: 700; margin: 0; color: #fff; }
+        .open-meta { font-size: 0.85rem; color: #888; }
+        .video-btn { display: block; text-align: center; background: rgba(255, 255, 255, 0.1); color: #fff; padding: 10px; border-radius: 6px; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; text-decoration: none; margin-top: auto; border: 1px solid rgba(255,255,255,0.1); transition: background 0.2s; }
+        .video-btn:hover { background: rgba(255, 255, 255, 0.2); }
     </style>
 </head>
 <body>
@@ -22,7 +28,7 @@
 
     <div class="open-container">
         <div class="open-header">
-            <h1 style="margin: 0 0 5px 0; font-size: 2rem; font-weight: 800;">🔥 OPEN VERIFICATIONS</h1>
+            <h1 style="margin: 0 0 5px 0; font-size: 2rem; font-weight: 800; color: #fff;">OPEN VERIFICATIONS</h1>
             <p style="margin: 0; color: #666; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Levels looking for an official verifier</p>
         </div>
         <div id="open-grid" class="grid-layout"></div>
@@ -33,7 +39,7 @@
             const grid = document.getElementById('open-grid');
             try {
                 const res = await fetch(`OpenVerification.json?v=${new Date().getTime()}`);
-                const data = await res.res ? await res.json() : await res.json();
+                const data = await res.json();
                 grid.innerHTML = "";
 
                 if (data.length === 0) {
@@ -42,19 +48,27 @@
                 }
 
                 data.forEach(lvl => {
-                    let videoHTML = "";
+                    const fallbackThumb = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=";
+                    const imgSource = lvl.thumbnail ? lvl.thumbnail : fallbackThumb;
+
+                    let actionButtonHTML = "";
                     if (lvl.video && lvl.video.trim() !== "") {
-                        videoHTML = `<div class="video-mini-box"><iframe width="100%" height="100%" src="${lvl.video}" frameborder="0" allowfullscreen></iframe></div>`;
+                        actionButtonHTML = `<a href="${lvl.video}" target="_blank" class="video-btn">View Layout Showcase</a>`;
                     }
 
                     grid.innerHTML += `
                         <div class="open-card">
-                            ${videoHTML}
-                            <h3 style="margin: 0; font-size: 1.2rem; color: #fff;">${lvl.name}</h3>
-                            <div style="font-size: 0.85rem; color: #888;">
-                                <p style="margin: 4px 0;"><strong>Creator:</strong> ${lvl.creator}</p>
-                                <p style="margin: 4px 0;"><strong>Reward:</strong> <span style="color:var(--accent); font-weight:700;">${lvl.points} PTS</span></p>
-                                <p style="margin: 4px 0;"><strong>Level ID:</strong> <span style="color:var(--gold); font-weight:700;">${lvl.id || 'N/A'}</span></p>
+                            <div class="thumb-box">
+                                <img src="${imgSource}" class="thumb-img" onerror="this.src='${fallbackThumb}'">
+                            </div>
+                            <div class="open-info">
+                                <h3 class="open-title">${lvl.name}</h3>
+                                <div class="open-meta">
+                                    <p style="margin: 4px 0;"><strong>Creator:</strong> ${lvl.creator}</p>
+                                    <p style="margin: 4px 0;"><strong>Estimated Rank:</strong> <span style="color: #aaa; font-weight:700;">#${lvl.estimatedRank || 'Unranked'}</span></p>
+                                    <p style="margin: 4px 0;"><strong>Level ID:</strong> <span style="color:var(--gold);">${lvl.id || 'N/A'}</span></p>
+                                </div>
+                                ${actionButtonHTML}
                             </div>
                         </div>
                     `;
