@@ -172,9 +172,9 @@
     </div>
 
     <script>
-        // Set your GitHub info here
-        const GITHUB_USER = "YOUR_GITHUB_USERNAME";
-        const GITHUB_REPO = "YOUR_REPO_NAME";
+        // Set your verified live details directly
+        const GITHUB_USER = "jokewreb";
+        const GITHUB_REPO = "TWL";
 
         function handleSubmit(event) {
             event.preventDefault();
@@ -190,6 +190,8 @@
             const notes = document.getElementById('extraNotes').value || "None";
 
             const title = encodeURIComponent(`[SUBMISSION] ${name} by ${player}`);
+            
+            // Text values map exactly onto the key extraction sequence in submissions.html
             const body = encodeURIComponent(
 `PLAYER: ${player}
 NAME: ${name}
@@ -202,7 +204,7 @@ IMAGE OF THUMBNAIL: ${thumbnail}
 EXTRA NOTES: ${notes}`
             );
 
-            // Redirects player directly to create the record into your backend issue tracker logs
+            // Opens up the issue interface on your exact repo branch layout
             window.open(`https://github.com/${GITHUB_USER}/${GITHUB_REPO}/issues/new?title=${title}&body=${body}`, '_blank');
         }
     </script>
