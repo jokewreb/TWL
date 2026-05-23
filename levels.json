@@ -197,7 +197,7 @@
     "id": "139974918", 
     "video": "q9YDZzS8Ow", 
     "thumbnail": "Thumbnail/OldWaveCorridor.png", 
-    "victors": ["xpealox","Symm","newbite"] 
+    "victors": ["xpealox","Symm"] 
   },
   { 
     "name": "Lost Signal", 
@@ -216,7 +216,7 @@
     "id": "139972029", 
     "video": "8ELYwPl1sBY", 
     "thumbnail": "Thumbnail/WaveCorridor.png", 
-    "victors": ["xpealox","idontspeakenglish123","ZizoGMD","newbite","MrBazooka","Symm","puffiballgd"] 
+    "victors": ["xpealox","arandomball","ZizoGMD","newbite","MrBazooka","Symm","puffiballgd"] 
   },
   { 
     "name": "ChefLime Circles", 
@@ -226,7 +226,7 @@
     "id": "140080516", 
     "video": "SKdU9xnhDys", 
     "thumbnail": "Thumbnail/ChefLimeCircles.png", 
-    "victors": ["xpealox","Symm","idontspeakenglish123","MrBazooka","newbite"] 
+    "victors": ["xpealox","Symm","arandomball","MrBazooka","newbite"] 
   },
   { 
     "name": "Figo Likes Wave", 
@@ -276,7 +276,7 @@
     "id": "140113463", 
     "video": "DAK8pvU2diA", 
     "thumbnail": "Thumbnail/AzurePortal.png", 
-    "victors": ["puffiballgd","Symm","MrBazooka","idontspeakenglish123","newbite"] 
+    "victors": ["puffiballgd","Symm","MrBazooka","arandomball","newbite"] 
   },
   { 
     "name": "Sakupen PooPoo", 
@@ -296,7 +296,7 @@
     "id": "140076320", 
     "video": "https://medal.tv/games/geometry-dash/clips/mGiCwRKsm0PwQpOW-?invite=cr-MSwzZm0sNjI5MjU3MTI3", 
     "thumbnail": "Thumbnail/Blocked.png", 
-    "victors": ["xpealox","idontspeakenglish123","MrBazooka","Symm","puffiballgd","ChefLime"] 
+    "victors": ["xpealox","arandomball","MrBazooka","Symm","puffiballgd","ChefLime"] 
   },
   { 
     "name": "arbys dih burger", 
@@ -306,7 +306,7 @@
     "id": "139799043", 
     "video": "RZ9abrQnMDs", 
     "thumbnail": "Thumbnail/ArbysDihBurger.png", 
-    "victors": ["xpealox","idontspeakenglish123","newbite","ZizoGMD","Symm","puffiballgd"] 
+    "victors": ["xpealox","arandomball","newbite","ZizoGMD","Symm","puffiballgd"] 
   },
   { 
     "name": "i miss u szeltik", 
@@ -316,7 +316,7 @@
     "id": "140005842", 
     "video": "BrcaemQWm-M", 
     "thumbnail": "Thumbnail/IMissUSzeltik.png", 
-    "victors": ["xpealox","idontspeakenglish123","newbite","ZizoGMD","Symm","MrBazooka"] 
+    "victors": ["xpealox","arandomball","newbite","ZizoGMD","Symm","MrBazooka"] 
   },
   { 
     "name": "Tung After Tung", 
@@ -326,7 +326,7 @@
     "id": "138263889", 
     "video": "ULjAQQ4CLrY", 
     "thumbnail": "Thumbnail/TungAfterTung.png", 
-    "victors": ["xpealox","idontspeakenglish123","newbite","ZizoGMD","Symm","puffiballgd","MrBazooka"] 
+    "victors": ["xpealox","arandomball","newbite","ZizoGMD","Symm","puffiballgd","MrBazooka"] 
   },
   { 
     "name": "Dihmountain", 
@@ -346,7 +346,7 @@
     "id": "139784604", 
     "video": "aXD7pMCZRc8", 
     "thumbnail": "Thumbnail/ZoinkWave.png", 
-    "victors": ["xpealox","idontspeakenglish123","newbite","ZizoGMD","Symm","puffiballgd","MrBazooka"] 
+    "victors": ["xpealox","arandomball","newbite","ZizoGMD","Symm","puffiballgd","MrBazooka"] 
   },
   { 
     "name": "Swag Clubstep", 
@@ -356,7 +356,7 @@
     "id": "139981798", 
     "video": "YirRB3Wbneg", 
     "thumbnail": "Thumbnail/SwagClubstep.png", 
-    "victors": ["xpealox","idontspeakenglish123","ZizoGMD","newbite","Symm","puffiballgd","MrBazooka"] 
+    "victors": ["xpealox","arandomball","ZizoGMD","newbite","Symm","puffiballgd","MrBazooka"] 
   },
   { 
     "name": "ChefLimeWaveBasic1", 
@@ -376,6 +376,6 @@
     "id": "140086188", 
     "video": "https://medal.tv/games/geometry-dash/clips/mGkOegjLEfNh2eCgA?invite=cr-MSwyVFAsNjI5MjU3MTI3&v=22", 
     "thumbnail": "Thumbnail/SakupenHellcles.png", 
-    "victors": ["xpealox","Symm","idontspeakenglish123","puffiballgd","MrBazooka","newbite","Karen","ChefLime","ItsJellyGD"] 
+    "victors": ["xpealox","Symm","arandomball","puffiballgd","MrBazooka","newbite","Karen","ChefLime","ItsJellyGD"] 
   }
 ]
