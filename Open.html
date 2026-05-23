@@ -53,7 +53,7 @@
 
                     let actionButtonHTML = "";
                     if (lvl.video && lvl.video.trim() !== "") {
-                        actionButtonHTML = `<a href="${lvl.video}" target="_blank" class="video-btn">View Layout Showcase</a>`;
+                        actionButtonHTML = `<a href="${lvl.video}" target="_blank" class="video-btn">View Level</a>`;
                     }
 
                     grid.innerHTML += `
@@ -65,7 +65,7 @@
                                 <h3 class="open-title">${lvl.name}</h3>
                                 <div class="open-meta">
                                     <p style="margin: 4px 0;"><strong>Creator:</strong> ${lvl.creator}</p>
-                                    <p style="margin: 4px 0;"><strong>Estimated Rank:</strong> <span style="color: #aaa; font-weight:700;">#${lvl.estimatedRank || 'Unranked'}</span></p>
+                                    <p style="margin: 4px 0;"><strong>Estimated Difficulty:</strong> <span style="color: #aaa; font-weight:700;">${lvl.estimatedDifficulty || 'Unrated'}</span></p>
                                     <p style="margin: 4px 0;"><strong>Level ID:</strong> <span style="color:var(--gold);">${lvl.id || 'N/A'}</span></p>
                                 </div>
                                 ${actionButtonHTML}
