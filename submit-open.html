@@ -43,6 +43,44 @@
             outline: none;
             border-color: var(--accent, #47e5bc);
         }
+        /* Custom File Upload Styling */
+        .file-upload-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .file-input-hidden {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+        .custom-file-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.2s;
+        }
+        .file-upload-wrapper:hover .custom-file-btn {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .file-status {
+            color: #666;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
         .submit-btn {
             width: 100%;
             background: #fff;
@@ -106,8 +144,12 @@
             </div>
 
             <div class="form-group">
-                <label class="form-label" for="lvl-thumb">Thumbnail Path / Link</label>
-                <input type="text" id="lvl-thumb" class="form-input" placeholder="e.g., Thumbnail/Open/CorruptedCavern.png" required>
+                <label class="form-label">Level Thumbnail</label>
+                <div class="file-upload-wrapper">
+                    <button type="button" class="custom-file-btn">Choose File</button>
+                    <span id="file-name-status" class="file-status">No file chosen</span>
+                    <input type="file" id="lvl-thumb" class="file-input-hidden" accept="image/*" required>
+                </div>
             </div>
 
             <div class="form-group">
@@ -121,8 +163,32 @@
     </div>
 
     <script>
-        // Replace this with your actual Discord Webhook URL for open verification submissions
+        // Insert your targeted Discord tracking webhook URL right below
         const DISCORD_WEBHOOK_URL = "YOUR_DISCORD_WEBHOOK_URL_HERE";
+
+        // Keeps track of visual UI filename updates
+        const fileInput = document.getElementById('lvl-thumb');
+        const statusLabel = document.getElementById('file-name-status');
+
+        fileInput.addEventListener('change', function() {
+            if (this.files && this.files.length > 0) {
+                statusLabel.innerText = this.files[0].name;
+                statusLabel.style.color = "#fff";
+            } else {
+                statusLabel.innerText = "No file chosen";
+                statusLabel.style.color = "#666";
+            }
+        });
+
+        // Helper framework converting image inputs into Base64 format
+        function convertToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = error => reject(error);
+            });
+        }
 
         document.getElementById('open-submit-form').addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -134,35 +200,40 @@
             const creator = document.getElementById('lvl-creator').value.trim();
             const difficulty = document.getElementById('lvl-diff').value.trim();
             const id = document.getElementById('lvl-id').value.trim();
-            const thumbnail = document.getElementById('lvl-thumb').value.trim();
             const video = document.getElementById('lvl-video').value.trim();
-
-            btnText.innerText = "Sending...";
+            
+            btnText.innerText = "Processing Image...";
             btnText.disabled = true;
             formMsg.innerText = "";
 
-            // Formatted webhook content payload
-            const payload = {
-                username: "Open Verification Bot",
-                embeds: [{
-                    title: "🔓 New Open Verification Submission!",
-                    color: 4679100, // Mint/Greenish accent color
-                    fields: [
-                        { name: "Level Name", value: name, inline: true },
-                        { name: "Creator", value: creator, inline: true },
-                        { name: "Estimated Difficulty", value: difficulty, inline: true },
-                        { name: "Level ID", value: id, inline: true },
-                        { name: "Thumbnail Path", value: `\`${thumbnail}\``, inline: false },
-                        { name: "Video Link", value: video, inline: false }
-                    ],
-                    timestamp: new Date().toISOString()
-                }]
-            };
-
             try {
                 if (DISCORD_WEBHOOK_URL === "YOUR_DISCORD_WEBHOOK_URL_HERE") {
-                    throw new Error("Webhook URL is unconfigured.");
+                    throw new Error("Webhook channel endpoint unconfigured.");
                 }
+
+                // Process image compression extraction
+                let base64Image = "";
+                if (fileInput.files.length > 0) {
+                    base64Image = await convertToBase64(fileInput.files[0]);
+                }
+
+                btnText.innerText = "Sending Request...";
+
+                // This structure generates the exact format needed for your open_levels.json
+                const jsonTemplateBlock = `{\n  "name": "${name}",\n  "creator": "${creator}",\n  "estimatedDifficulty": "${difficulty}",\n  "id": "${id}",\n  "thumbnail": "${base64Image}",\n  "video": "${video}"\n}`;
+
+                const payload = {
+                    username: "Open Verification Bot",
+                    content: "📢 **New Open Verification Form Submitted!** Here is the structured code snippet to add directly into your `open_levels.json` file:",
+                    embeds: [
+                        {
+                            title: `📋 Data Code for: ${name}`,
+                            description: `\`\`\`json\n${jsonTemplateBlock}\n\`\`\``,
+                            color: 4679100,
+                            timestamp: new Date().toISOString()
+                        }
+                    ]
+                };
 
                 const response = await fetch(DISCORD_WEBHOOK_URL, {
                     method: 'POST',
@@ -174,8 +245,10 @@
                     formMsg.style.color = "#47e5bc";
                     formMsg.innerText = "Submission successfully sent to review logs!";
                     document.getElementById('open-submit-form').reset();
+                    statusLabel.innerText = "No file chosen";
+                    statusLabel.style.color = "#666";
                 } else {
-                    throw new Error("Network response encountered issues.");
+                    throw new Error("Failed to post payload to endpoint.");
                 }
             } catch (error) {
                 console.error(error);
