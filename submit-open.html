@@ -5,134 +5,47 @@
     <title>THE WAVE LIST - SUBMIT OPEN VERIFICATION</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        .form-container {
-            max-width: 600px;
-            margin: 60px auto;
-            padding: 40px;
-            background: rgba(20, 22, 30, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
-            backdrop-filter: blur(10px);
-        }
-        .form-group {
-            margin-bottom: 25px;
-            text-align: left;
-        }
-        .form-label {
-            display: block;
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: #aaa;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .form-input {
-            width: 100%;
-            padding: 12px 16px;
-            background: rgba(10, 11, 16, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 6px;
-            color: #fff;
-            font-size: 0.95rem;
-            transition: border-color 0.2s;
-            box-sizing: border-box;
-        }
-        .form-input:focus {
-            outline: none;
-            border-color: var(--accent, #47e5bc);
-        }
-        .submit-btn {
-            width: 100%;
-            background: #fff;
-            color: #000;
-            padding: 14px;
-            border: none;
-            border-radius: 6px;
-            font-weight: 700;
-            font-size: 0.95rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: background-color 0.2s, transform 0.1s;
-        }
-        .submit-btn:hover {
-            background: var(--accent, #47e5bc);
-        }
-        .submit-btn:active {
-            transform: scale(0.98);
-        }
-        .instructions-box {
-            background: rgba(71, 229, 188, 0.05);
-            border: 1px solid rgba(71, 229, 188, 0.15);
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 30px;
-            font-size: 0.85rem;
-            line-height: 1.4;
-            color: #ccc;
-        }
-        .red-upload-warning {
-            color: #ff4a4a;
-            font-size: 0.9rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            text-align: center;
-            margin-bottom: 20px;
-            line-height: 1.4;
-        }
+        body { background: #0a0b10; color: #fff; font-family: sans-serif; text-align: center; }
+        .form-container { max-width: 600px; margin: 60px auto; padding: 40px; background: rgba(20, 22, 30, 0.8); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; box-shadow: 0 30px 60px rgba(0,0,0,0.6); backdrop-filter: blur(10px); }
+        .form-group { margin-bottom: 25px; text-align: left; }
+        .form-label { display: block; font-size: 0.85rem; font-weight: 700; color: #aaa; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
+        .form-input { width: 100%; padding: 12px 16px; background: rgba(10, 11, 16, 0.7); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 6px; color: #fff; font-size: 0.95rem; box-sizing: border-box; }
+        .form-input:focus { outline: none; border-color: #47e5bc; }
+        .submit-btn { width: 100%; background: #fff; color: #000; padding: 14px; border: none; border-radius: 6px; font-weight: 700; font-size: 0.95rem; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
+        .submit-btn:hover { background: #47e5bc; }
+        .red-upload-warning { color: #ff4a4a; font-size: 0.9rem; font-weight: 700; text-transform: uppercase; margin-bottom: 20px; }
     </style>
 </head>
 <body>
-    <nav>
-        <div class="nav-logo" onclick="window.location.href='index.html'" style="cursor:pointer;">THE WAVE LIST</div>
-        <div>
-            <a href="submit.html" class="nav-link" style="margin-right: 20px;">BACK TO HUB</a>
-            <a href="index.html" class="nav-link">VIEW LIST</a>
-        </div>
-    </nav>
-
     <div class="form-container">
-        <h1 style="font-size: 2rem; font-weight: 800; margin-bottom: 5px; text-transform: uppercase; text-align: center;">Submit Open Verification</h1>
-        <p style="color: #666; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; margin-bottom: 25px; text-align: center;">Request a level to be added to the open verifications list</p>
-
-        <div class="instructions-box">
-            <strong>How to submit:</strong> Fill out the level details below. When you click submit, a GitHub Issue window will open where you can officially drop off the data.
-        </div>
-
+        <h1 style="font-size: 2rem; font-weight: 800; margin-bottom: 25px; text-transform: uppercase;">Submit Open Verification</h1>
         <form id="open-submit-form">
             <div class="form-group">
                 <label class="form-label" for="lvl-name">Level Name</label>
                 <input type="text" id="lvl-name" class="form-input" placeholder="e.g., Corrupted Cavern" required>
             </div>
-
             <div class="form-group">
                 <label class="form-label" for="lvl-creator">Creator</label>
                 <input type="text" id="lvl-creator" class="form-input" placeholder="e.g., Karen" required>
             </div>
-
             <div class="form-group">
                 <label class="form-label" for="lvl-diff">Estimated Difficulty</label>
                 <input type="text" id="lvl-diff" class="form-input" placeholder="e.g., Top 7 - 4" required>
             </div>
-
             <div class="form-group">
                 <label class="form-label" for="lvl-id">Level ID</label>
                 <input type="text" id="lvl-id" class="form-input" placeholder="e.g., 140282256" required>
             </div>
-
             <div class="form-group">
                 <label class="form-label" for="lvl-video">Showcase Link</label>
-                <input type="url" id="lvl-video" class="form-input" placeholder="e.g., https://www.youtube.com/watch?v=IlnMceTWJmU" required>
+                <input type="url" id="lvl-video" class="form-input" placeholder="e.g., https://youtube.com/..." required>
             </div>
 
             <div class="red-upload-warning">
-                ⚠️ Copy and paste or upload the thumbnail image on the next page!
+                ⚠️ Upload or copy-paste your thumbnail image directly into the box on the next page!
             </div>
 
-            <button type="submit" class="submit-btn">Generate Submission Issue</button>
+            <button type="submit" class="submit-btn">Continue to GitHub Submission</button>
         </form>
     </div>
 
@@ -148,18 +61,17 @@
             const id = document.getElementById('lvl-id').value.trim();
             const video = document.getElementById('lvl-video').value.trim();
 
-            const jsBlock = `  {\n    "name": "${name}",\n    "creator": "${creator}",\n    "estimatedDifficulty": "${difficulty}",\n    "id": "${id}",\n    "thumbnail": \`PASTE_THE_GITHUB_IMAGE_TAG_HERE\`,\n    "video": "${video}"\n  }`;
+            // Clear, basic text layout parameters that match your submissions logic perfectly
+            const issueBody = `NAME: ${name}\n` +
+                              `ID: ${id}\n` +
+                              `CREATOR: ${creator}\n` +
+                              `DIFFICULTY: ${difficulty}\n` +
+                              `VIDEO: ${video}\n\n` +
+                              `IMAGE OF THUMBNAIL:\n` +
+                              `[👉 DRAG AND DROP OR PASTE YOUR THUMBNAIL IMAGE DIRECTLY HERE]`;
 
             const issueTitle = encodeURIComponent(`Open Verification Request: ${name}`);
-            
-            const issueBody = encodeURIComponent(
-                `### 📋 Level Submission Data\n` +
-                `1. Drag-and-drop or copy-paste your layout thumbnail screenshot directly inside the box below to generate your image code tag!\n` +
-                `2. Replace \\\`PASTE_THE_GITHUB_IMAGE_TAG_HERE\\\` inside this block with your generated image tag, and submit:\n\n` +
-                `\`\`\`javascript\n${jsBlock}\n\`\`\``
-            );
-
-            const githubIssuesLink = `${GITHUB_REPO_URL}/issues/new?title=${issueTitle}&body=${issueBody}`;
+            const githubIssuesLink = `${GITHUB_REPO_URL}/issues/new?title=${issueTitle}&body=${encodeURIComponent(issueBody)}`;
 
             window.open(githubIssuesLink, '_blank');
         });
