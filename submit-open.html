@@ -43,7 +43,6 @@
             outline: none;
             border-color: var(--accent, #47e5bc);
         }
-        /* Custom File Upload Styling */
         .file-upload-wrapper {
             position: relative;
             display: flex;
@@ -101,11 +100,15 @@
         .submit-btn:active {
             transform: scale(0.98);
         }
-        .message {
-            margin-top: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            text-align: center;
+        .instructions-box {
+            background: rgba(71, 229, 188, 0.05);
+            border: 1px solid rgba(71, 229, 188, 0.15);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 30px;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            color: #ccc;
         }
     </style>
 </head>
@@ -120,7 +123,11 @@
 
     <div class="form-container">
         <h1 style="font-size: 2rem; font-weight: 800; margin-bottom: 5px; text-transform: uppercase; text-align: center;">Submit Open Verification</h1>
-        <p style="color: #666; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; margin-bottom: 35px; text-align: center;">Request a level to be added to the open verifications page</p>
+        <p style="color: #666; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; margin-bottom: 25px; text-align: center;">Request a level to be added to the open verifications list</p>
+
+        <div class="instructions-box">
+            <strong>How to submit:</strong> Fill out the form fields below. When you click submit, it will automatically package your data into a structured layout and open a GitHub Issue template on our tracker where you can review your request details!
+        </div>
 
         <form id="open-submit-form">
             <div class="form-group">
@@ -144,12 +151,8 @@
             </div>
 
             <div class="form-group">
-                <label class="form-label">Level Thumbnail</label>
-                <div class="file-upload-wrapper">
-                    <button type="button" class="custom-file-btn">Choose File</button>
-                    <span id="file-name-status" class="file-status">No file chosen</span>
-                    <input type="file" id="lvl-thumb" class="file-input-hidden" accept="image/*" required>
-                </div>
+                <label class="form-label" for="lvl-thumb-path">Thumbnail Image File Path</label>
+                <input type="text" id="lvl-thumb-path" class="form-input" placeholder="e.g., Thumbnail/Open/CorruptedCavern.png" required>
             </div>
 
             <div class="form-group">
@@ -157,107 +160,50 @@
                 <input type="url" id="lvl-video" class="form-input" placeholder="e.g., https://www.youtube.com/watch?v=IlnMceTWJmU" required>
             </div>
 
-            <button type="submit" class="submit-btn" id="btn-text">Submit Request</button>
-            <div id="form-msg" class="message"></div>
+            <button type="submit" class="submit-btn">Generate Submission Issue</button>
         </form>
     </div>
 
     <script>
-        // Insert your targeted Discord tracking webhook URL right below
-        const DISCORD_WEBHOOK_URL = "YOUR_DISCORD_WEBHOOK_URL_HERE";
+        // Change this path to match your exact GitHub Username and Repository name!
+        const GITHUB_REPO_URL = "https://github.com/jokewreb/TWL";
 
-        // Keeps track of visual UI filename updates
-        const fileInput = document.getElementById('lvl-thumb');
-        const statusLabel = document.getElementById('file-name-status');
-
-        fileInput.addEventListener('change', function() {
-            if (this.files && this.files.length > 0) {
-                statusLabel.innerText = this.files[0].name;
-                statusLabel.style.color = "#fff";
-            } else {
-                statusLabel.innerText = "No file chosen";
-                statusLabel.style.color = "#666";
-            }
-        });
-
-        // Helper framework converting image inputs into Base64 format
-        function convertToBase64(file) {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onload = () => resolve(reader.result);
-                reader.onerror = error => reject(error);
-            });
-        }
-
-        document.getElementById('open-submit-form').addEventListener('submit', async function(e) {
+        document.getElementById('open-submit-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            const btnText = document.getElementById('btn-text');
-            const formMsg = document.getElementById('form-msg');
             
             const name = document.getElementById('lvl-name').value.trim();
             const creator = document.getElementById('lvl-creator').value.trim();
             const difficulty = document.getElementById('lvl-diff').value.trim();
             const id = document.getElementById('lvl-id').value.trim();
+            const thumbPath = document.getElementById('lvl-thumb-path').value.trim();
             const video = document.getElementById('lvl-video').value.trim();
+
+            // Formats structural code blocks perfectly for open_levels.json parsing updates
+            const jsonSnippet = JSON.stringify({
+                name: name,
+                creator: creator,
+                estimatedDifficulty: difficulty,
+                id: id,
+                thumbnail: thumbPath,
+                video: video
+            }, null, 2);
+
+            const issueTitle = encodeURIComponent(`Open Verification Request: ${name}`);
             
-            btnText.innerText = "Processing Image...";
-            btnText.disabled = true;
-            formMsg.innerText = "";
+            // Build the issue body details text layout
+            const issueBody = encodeURIComponent(
+                `### Level Submission Data\n` +
+                `Please copy the raw code block configuration array snippet directly below into your \`open_levels.json\` tracking database file:\n\n` +
+                `\`\`\`json\n${jsonSnippet}\n\`\`\`\n\n` +
+                `--- \n` +
+                `*Submitted automatically via portal submission pipeline tools.*`
+            );
 
-            try {
-                if (DISCORD_WEBHOOK_URL === "YOUR_DISCORD_WEBHOOK_URL_HERE") {
-                    throw new Error("Webhook channel endpoint unconfigured.");
-                }
+            // Construct link redirection endpoint target pathways
+            const githubIssuesLink = `${GITHUB_REPO_URL}/issues/new?title=${issueTitle}&body=${issueBody}`;
 
-                // Process image compression extraction
-                let base64Image = "";
-                if (fileInput.files.length > 0) {
-                    base64Image = await convertToBase64(fileInput.files[0]);
-                }
-
-                btnText.innerText = "Sending Request...";
-
-                // This structure generates the exact format needed for your open_levels.json
-                const jsonTemplateBlock = `{\n  "name": "${name}",\n  "creator": "${creator}",\n  "estimatedDifficulty": "${difficulty}",\n  "id": "${id}",\n  "thumbnail": "${base64Image}",\n  "video": "${video}"\n}`;
-
-                const payload = {
-                    username: "Open Verification Bot",
-                    content: "📢 **New Open Verification Form Submitted!** Here is the structured code snippet to add directly into your `open_levels.json` file:",
-                    embeds: [
-                        {
-                            title: `📋 Data Code for: ${name}`,
-                            description: `\`\`\`json\n${jsonTemplateBlock}\n\`\`\``,
-                            color: 4679100,
-                            timestamp: new Date().toISOString()
-                        }
-                    ]
-                };
-
-                const response = await fetch(DISCORD_WEBHOOK_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                if (response.ok) {
-                    formMsg.style.color = "#47e5bc";
-                    formMsg.innerText = "Submission successfully sent to review logs!";
-                    document.getElementById('open-submit-form').reset();
-                    statusLabel.innerText = "No file chosen";
-                    statusLabel.style.color = "#666";
-                } else {
-                    throw new Error("Failed to post payload to endpoint.");
-                }
-            } catch (error) {
-                console.error(error);
-                formMsg.style.color = "#ff4a4a";
-                formMsg.innerText = "Failed sending submission. Connection error.";
-            } finally {
-                btnText.innerText = "Submit Request";
-                btnText.disabled = false;
-            }
+            // Send user to their repository issue tracker platform view
+            window.open(githubIssuesLink, '_blank');
         });
     </script>
 </body>
