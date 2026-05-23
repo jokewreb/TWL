@@ -16,7 +16,7 @@
             background: rgba(20, 22, 30, 0.6);
             padding: 40px;
             border-radius: 16px;
-            border: 1px solid rgba(255,255,255,0.05);
+            border: 1px solid var(--border);
             backdrop-filter: blur(10px);
         }
         .profile-name {
@@ -28,14 +28,15 @@
         }
         .stats-badge {
             display: inline-block;
-            background: rgba(71, 229, 188, 0.1);
-            color: var(--accent, #47e5bc);
+            background: rgba(255, 65, 65, 0.1);
+            color: var(--accent);
             padding: 6px 16px;
             border-radius: 20px;
             font-weight: 700;
             font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 1px;
+            border: 1px solid rgba(255, 65, 65, 0.2);
         }
         .completed-grid {
             display: grid;
@@ -43,8 +44,8 @@
             gap: 25px;
         }
         .level-card {
-            background: rgba(20, 22, 30, 0.8);
-            border: 1px solid rgba(255,255,255,0.05);
+            background: var(--card);
+            border: 1px solid var(--border);
             border-radius: 12px;
             overflow: hidden;
             display: flex;
@@ -101,7 +102,6 @@
     </div>
 
     <script>
-        // 1. Grab the username straight out of the URL bar parameters
         const urlParams = new URLSearchParams(window.location.search);
         const targetPlayer = urlParams.get('name');
 
@@ -118,23 +118,20 @@
             nameHeading.innerText = targetPlayer;
 
             try {
-                // 2. Fetch your main records database file (Replace with your actual JSON data file path)
+                // Change 'data/levels.json' to the correct path where your site holds list database info!
                 const response = await fetch('data/levels.json'); 
                 const data = await response.json();
 
                 let completionCount = 0;
                 grid.innerHTML = "";
 
-                // 3. Scan through all your tier levels and locate this specific player's records
                 data.levels.forEach(level => {
-                    // Check if this player is listed as a record holder or verifier for the level
                     const hasBeaten = level.records && level.records.some(record => record.user.toLowerCase() === targetPlayer.toLowerCase());
                     const isVerifier = level.verifier && level.verifier.toLowerCase() === targetPlayer.toLowerCase();
 
                     if (hasBeaten || isVerifier) {
                         completionCount++;
 
-                        // Find the player's specific video proof link
                         let videoLink = "#";
                         if (isVerifier) videoLink = level.verification || "#";
                         else {
@@ -150,7 +147,7 @@
                                 <div class="level-meta">
                                     <p style="margin: 4px 0;"><strong>Creator:</strong> ${level.creator}</p>
                                     <p style="margin: 4px 0;"><strong>Difficulty:</strong> Tier ${level.tier || '?'}</p>
-                                    <p style="margin: 4px 0; color: var(--accent, #47e5bc);"><strong>Role:</strong> ${isVerifier ? 'Verifier' : 'Victor'}</p>
+                                    <p style="margin: 4px 0; color: var(--accent);"><strong>Role:</strong> ${isVerifier ? 'Verifier' : 'Victor'}</p>
                                 </div>
                                 <a href="${videoLink}" target="_blank" class="proof-btn">View Video Proof</a>
                             </div>
@@ -167,7 +164,7 @@
 
             } catch (error) {
                 console.error(error);
-                grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; color:red; padding:40px;">Error loading player profile configurations.</div>`;
+                grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; color:var(--accent); padding:40px;">Error loading player profile database configurations.</div>`;
             }
         }
 
