@@ -2,112 +2,72 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>THE WAVE LIST - SUBMIT RECORD</title>
+    <title>THE WAVE LIST - SUBMIT</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        .submit-container {
+        .hub-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            width: 100%;
-            max-width: 700px;
-            margin: 40px auto;
+            max-width: 800px;
+            margin: 60px auto;
             padding: 0 20px;
         }
-        .submit-card {
-            width: 100%;
-            background: rgba(20, 22, 30, 0.8);
-            border: 1px solid var(--border, rgba(255,255,255,0.05));
-            border-radius: 16px;
-            padding: 40px;
-            box-shadow: 0 40px 80px rgba(0,0,0,0.7);
-            backdrop-filter: blur(10px);
-        }
-        .form-title {
-            font-size: 2rem;
-            font-weight: 800;
-            margin-bottom: 5px;
-            letter-spacing: -0.5px;
-            text-align: center;
-        }
-        .form-sub {
-            font-size: 0.95rem;
-            color: #888;
-            margin-bottom: 30px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-align: center;
-        }
-        .form-grid {
+        .hub-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            gap: 25px;
             width: 100%;
+            margin-top: 30px;
         }
-        .form-group {
+        .hub-card {
+            background: rgba(20, 22, 30, 0.8);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+            backdrop-filter: blur(10px);
+            transition: transform 0.2s, border-color 0.2s;
+            cursor: pointer;
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            margin-bottom: 20px;
-            width: 100%;
-            text-align: left;
+            justify-content: space-between;
         }
-        .form-group.full-width {
-            grid-column: span 2;
-        }
-        .form-group label {
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: #aaa;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .form-group input, .form-group textarea {
-            width: 100%;
-            background: rgba(10, 11, 15, 0.8);
-            border: 1px solid var(--border, rgba(255,255,255,0.1));
-            padding: 14px;
-            border-radius: 8px;
-            color: #fff;
-            font-size: 1rem;
-            outline: none;
-            transition: border-color 0.2s;
-            font-family: inherit;
-        }
-        .form-group input:focus, .form-group textarea:focus {
+        .hub-card:hover {
+            transform: translateY(-5px);
             border-color: var(--accent, #47e5bc);
         }
-        .form-group textarea {
-            resize: vertical;
-            min-height: 80px;
+        .hub-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
         }
-        .submit-btn {
-            width: 100%;
+        .hub-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        .hub-desc {
+            font-size: 0.9rem;
+            color: #888;
+            line-height: 1.5;
+            margin-bottom: 25px;
+        }
+        .hub-btn {
             background: #fff;
             color: #000;
-            border: none;
-            padding: 16px;
-            font-size: 1rem;
+            padding: 12px 20px;
+            border-radius: 6px;
             font-weight: 700;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: transform 0.2s, opacity 0.2s;
+            font-size: 0.9rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 10px;
+            letter-spacing: 0.5px;
+            text-decoration: none;
         }
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            opacity: 0.9;
-        }
-        @media (max-width: 600px) {
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-            .form-group.full-width {
-                grid-column: span 1;
-            }
+        @media (max-width: 650px) {
+            .hub-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -116,95 +76,34 @@
         <div class="nav-logo" onclick="window.location.href='index.html'" style="cursor:pointer;">THE WAVE LIST</div>
         <div>
             <a href="index.html" class="nav-link" style="margin-right: 20px;">BACK TO LIST</a>
-            <a href="submissions.html" class="nav-link">PENDING SUBMISSIONS</a>
+            <a href="submissions.html" class="nav-link" style="margin-right: 20px;">PENDING LEVELS</a>
+            <a href="records-pending.html" class="nav-link">PENDING RECORDS</a>
         </div>
     </nav>
 
-    <div class="main-layout" style="display: block; padding: 40px 20px;">
-        <div class="submit-container">
-            <h2 class="form-title">SUBMIT A RECORD</h2>
-            <div class="form-sub">Send run data to pending list</div>
+    <div class="hub-container">
+        <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 5px; text-transform: uppercase;">Submit Levels</h1>
+        <p style="color: #666; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem;">Select what you want to submit to the list</p>
 
-            <div class="submit-card">
-                <form id="recordForm" onsubmit="handleSubmit(event)">
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label for="playerName">Player Name</label>
-                            <input type="text" id="playerName" placeholder="Your in-game name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="levelName">Name</label>
-                            <input type="text" id="levelName" placeholder="Name of the wave level" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="levelId">ID</label>
-                            <input type="text" id="levelId" placeholder="Geometry Dash Level ID" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="levelCreator">Creator</label>
-                            <input type="text" id="levelCreator" placeholder="Level creator's name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="levelVerifier">Verifier</label>
-                            <input type="text" id="levelVerifier" placeholder="Level verifier's name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="levelDifficulty">Difficulty</label>
-                            <input type="text" id="levelDifficulty" placeholder="e.g., Top 18 - 23" required>
-                        </div>
-                        <div class="form-group full-width">
-                            <label for="videoLink">YouTube Video / Proof Link</label>
-                            <input type="url" id="videoLink" placeholder="https://www.youtube.com/watch?v=..." required>
-                        </div>
-                        <div class="form-group full-width">
-                            <label style="color: var(--accent, #47e5bc);">Image of Thumbnail (Upload on next step)</label>
-                            <div style="font-size: 0.85rem; color: #888; background: rgba(0,0,0,0.2); padding: 12px; border-radius: 8px; border: 1px dashed #444;">
-                                Leave the placeholder line on GitHub as-is, and simply <strong>Drag & Drop</strong> or <strong>Paste (Ctrl+V)</strong> your image directly into the text box on the next screen!
-                            </div>
-                        </div>
-                        <div class="form-group full-width">
-                            <label for="extraNotes">Extra Notes</label>
-                            <textarea id="extraNotes" placeholder="Any additional information..."></textarea>
-                        </div>
-                    </div>
-                    <button type="submit" class="submit-btn">Create GitHub Submission</button>
-                </form>
+        <div class="hub-grid">
+            <div class="hub-card" onclick="window.location.href='submit-level.html'">
+                <div>
+                    <div class="hub-icon">🌊</div>
+                    <div class="hub-title">Submit a New Level</div>
+                    <div class="hub-desc">Suggest a brand-new wave level layout to be evaluated and added directly onto the main tier lists.</div>
+                </div>
+                <a href="submit-level.html" class="hub-btn">Go to Form</a>
+            </div>
+
+            <div class="hub-card" onclick="window.location.href='submit-record.html'">
+                <div>
+                    <div class="hub-icon">🏆</div>
+                    <div class="hub-title">Submit a Player Record</div>
+                    <div class="hub-desc">Submit your personal 100% completion video proof to get credit on an existing level's leaderboard tracking.</div>
+                </div>
+                <a href="submit-record.html" class="hub-btn">Go to Form</a>
             </div>
         </div>
     </div>
-
-    <script>
-        const GITHUB_USER = "jokewreb";
-        const GITHUB_REPO = "TWL";
-
-        function handleSubmit(event) {
-            event.preventDefault();
-            
-            const player = document.getElementById('playerName').value;
-            const name = document.getElementById('levelName').value;
-            const id = document.getElementById('levelId').value;
-            const creator = document.getElementById('levelCreator').value;
-            const verifier = document.getElementById('levelVerifier').value;
-            const difficulty = document.getElementById('levelDifficulty').value;
-            const video = document.getElementById('videoLink').value;
-            const notes = document.getElementById('extraNotes').value || "None";
-
-            const title = encodeURIComponent(`[SUBMISSION] ${name} by ${player}`);
-            
-            const body = encodeURIComponent(
-`PLAYER: ${player}
-NAME: ${name}
-ID: ${id}
-CREATOR: ${creator}
-VERIFIER: ${verifier}
-DIFFICULTY: ${difficulty}
-YOUTUBE VIDEO: ${video}
-IMAGE OF THUMBNAIL: [Drop your image right here!]
-EXTRA NOTES: ${notes}`
-            );
-
-            window.open(`https://github.com/${GITHUB_USER}/${GITHUB_REPO}/issues/new?title=${title}&body=${body}`, '_blank');
-        }
-    </script>
 </body>
 </html>
