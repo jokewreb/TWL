@@ -118,25 +118,28 @@
             nameHeading.innerText = targetPlayer;
 
             try {
-                // Change 'data/levels.json' to the correct path where your site holds list database info!
-                const response = await fetch('data/levels.json'); 
+                // Aligned exactly with index.html's data pulling structure
+                const response = await fetch(`levels.json?v=${new Date().getTime()}`); 
                 const data = await response.json();
 
                 let completionCount = 0;
                 grid.innerHTML = "";
 
-                data.levels.forEach(level => {
-                    const hasBeaten = level.records && level.records.some(record => record.user.toLowerCase() === targetPlayer.toLowerCase());
+                // Aligned exactly with your JSON format (data array, level.victors string array)
+                data.forEach(level => {
+                    const hasBeaten = level.victors && level.victors.some(v => v.toLowerCase() === targetPlayer.toLowerCase());
                     const isVerifier = level.verifier && level.verifier.toLowerCase() === targetPlayer.toLowerCase();
 
                     if (hasBeaten || isVerifier) {
                         completionCount++;
 
-                        let videoLink = "#";
-                        if (isVerifier) videoLink = level.verification || "#";
-                        else {
-                            const match = level.records.find(r => r.user.toLowerCase() === targetPlayer.toLowerCase());
-                            videoLink = match ? match.video : "#";
+                        // Handles video URLs cleanly
+                        let videoLink = level.video || "#";
+                        let finalUrl = videoLink;
+                        
+                        // If it's a YouTube embed ID style string, turn it back into a clickable link
+                        if (videoLink && !videoLink.includes('http')) {
+                            finalUrl = `https://www.youtube.com/watch?v=${videoLink}`;
                         }
 
                         const card = document.createElement('div');
@@ -146,10 +149,10 @@
                                 <h3 class="level-title">${level.name}</h3>
                                 <div class="level-meta">
                                     <p style="margin: 4px 0;"><strong>Creator:</strong> ${level.creator}</p>
-                                    <p style="margin: 4px 0;"><strong>Difficulty:</strong> Tier ${level.tier || '?'}</p>
+                                    <p style="margin: 4px 0;"><strong>Value:</strong> ${level.points} PTS</p>
                                     <p style="margin: 4px 0; color: var(--accent);"><strong>Role:</strong> ${isVerifier ? 'Verifier' : 'Victor'}</p>
                                 </div>
-                                <a href="${videoLink}" target="_blank" class="proof-btn">View Video Proof</a>
+                                <a href="${finalUrl}" target="_blank" class="proof-btn">View Video Proof</a>
                             </div>
                         `;
                         grid.appendChild(card);
@@ -159,12 +162,12 @@
                 countBadge.innerText = `${completionCount} ${completionCount === 1 ? 'COMPLETION' : 'COMPLETIONS'}`;
 
                 if (completionCount === 0) {
-                    grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; color:#444; padding:40px;">No recorded completions found for this player.</div>`;
+                    grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; color:#444; padding:40px;">No recorded list records found for this player.</div>`;
                 }
 
             } catch (error) {
                 console.error(error);
-                grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; color:var(--accent); padding:40px;">Error loading player profile database configurations.</div>`;
+                grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; color:var(--accent); padding:40px;">Error loading player profile layout data.</div>`;
             }
         }
 
