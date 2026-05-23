@@ -73,6 +73,17 @@
             line-height: 1.4;
             color: #ccc;
         }
+        /* Bright red instruction warning label */
+        .red-upload-warning {
+            color: #ff4a4a;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
     </style>
 </head>
 <body>
@@ -89,7 +100,7 @@
         <p style="color: #666; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; margin-bottom: 25px; text-align: center;">Request a level to be added to the open verifications list</p>
 
         <div class="instructions-box">
-            <strong>How to submit:</strong> Fill out the form fields below. When you click submit, a GitHub Issue window will open. You will upload/attach your thumbnail image directly on that page!
+            <strong>How to submit:</strong> Fill out the level details below. When you click submit, a GitHub Issue window will open where you can officially drop off the data.
         </div>
 
         <form id="open-submit-form">
@@ -114,13 +125,12 @@
             </div>
 
             <div class="form-group">
-                <label class="form-label" for="lvl-thumb-name">Thumbnail File Name</label>
-                <input type="text" id="lvl-thumb-name" class="form-input" placeholder="e.g., CorruptedCavern.png" required>
-            </div>
-
-            <div class="form-group">
                 <label class="form-label" for="lvl-video">Showcase Link</label>
                 <input type="url" id="lvl-video" class="form-input" placeholder="e.g., https://www.youtube.com/watch?v=IlnMceTWJmU" required>
+            </div>
+
+            <div class="red-upload-warning">
+                ⚠️ Copy and paste or upload the thumbnail image on the next page!
             </div>
 
             <button type="submit" class="submit-btn">Generate Submission Issue</button>
@@ -137,19 +147,20 @@
             const creator = document.getElementById('lvl-creator').value.trim();
             const difficulty = document.getElementById('lvl-diff').value.trim();
             const id = document.getElementById('lvl-id').value.trim();
-            const thumbName = document.getElementById('lvl-thumb-name').value.trim();
             const video = document.getElementById('lvl-video').value.trim();
+            
+            // Generate a stylized filename automatically based on the level name
+            // e.g., "Corrupted Cavern" turns into "CorruptedCavern.png"
+            const cleanedName = name.replace(/[^a-zA-Z0-9]/g, "");
+            const assumedThumbPath = `Thumbnail/Open/${cleanedName || "thumbnail"}.png`;
 
-            // Make sure it references the correct folder format inside the JSON
-            const finalThumbPath = thumbName.startsWith("Thumbnail/Open/") ? thumbName : `Thumbnail/Open/${thumbName}`;
-
-            // Structural JSON template for easy copy-pasting
+            // Setup JSON block structural code snippet for easy copy-pasting
             const jsonSnippet = JSON.stringify({
                 name: name,
                 creator: creator,
                 estimatedDifficulty: difficulty,
                 id: id,
-                thumbnail: finalThumbPath,
+                thumbnail: assumedThumbPath,
                 video: video
             }, null, 2);
 
@@ -161,7 +172,7 @@
                 `\`\`\`json\n${jsonSnippet}\n\`\`\`\n\n` +
                 `--- \n` +
                 `### 🖼️ Upload Level Thumbnail Here\n` +
-                `👉 **USER ACTION Required:** Please drag-and-drop or upload your image file (\`${thumbName}\`) directly into the comment field area below before submitting this issue!`
+                `👉 **USER ACTION REQUIRED:** Please copy-paste or drag-and-drop your layout thumbnail screenshot directly inside this description area below!`
             );
 
             const githubIssuesLink = `${GITHUB_REPO_URL}/issues/new?title=${issueTitle}&body=${issueBody}`;
