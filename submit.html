@@ -10,13 +10,13 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            max-width: 800px;
+            max-width: 1200px; /* Expanded max-width to look better with 3 column layout */
             margin: 60px auto;
             padding: 0 20px;
         }
         .hub-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr; /* Updated to 3 columns */
             gap: 25px;
             width: 100%;
             margin-top: 30px;
@@ -66,8 +66,11 @@
             letter-spacing: 0.5px;
             text-decoration: none;
         }
+        @media (max-width: 900px) {
+            .hub-grid { grid-template-columns: 1fr 1fr; } /* Tablet view fallback */
+        }
         @media (max-width: 650px) {
-            .hub-grid { grid-template-columns: 1fr; }
+            .hub-grid { grid-template-columns: 1fr; } /* Mobile view fallback */
         }
     </style>
 </head>
@@ -102,6 +105,15 @@
                     <div class="hub-desc">Submit your personal 100% completion video proof to get credit on an existing level's leaderboard tracking.</div>
                 </div>
                 <a href="submit-record.html" class="hub-btn">Go to Form</a>
+            </div>
+
+            <div class="hub-card" onclick="window.location.href='submit-open.html'">
+                <div>
+                    <div class="hub-icon">🔓</div>
+                    <div class="hub-title">Open Verifications</div>
+                    <div class="hub-desc">Submit a level that needs verification so other community players can try out out and claim it.</div>
+                </div>
+                <a href="submit-open.html" class="hub-btn">Go to Form</a>
             </div>
         </div>
     </div>
