@@ -72,6 +72,12 @@
             flex-direction: column;
             box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
+        /* Visual distinction style for locked/unbeaten levels */
+        .unbeaten-card {
+            opacity: 0.6;
+            border-style: dashed;
+            background: rgba(10, 11, 15, 0.4);
+        }
         .level-info {
             padding: 20px;
             display: flex;
@@ -112,6 +118,9 @@
 
         <h2 class="section-title">Created Levels</h2>
         <div id="createdGrid" class="completed-grid"></div>
+
+        <h2 class="section-title" style="color: #666;">Non-Completed Levels</h2>
+        <div id="unbeatenGrid" class="completed-grid"></div>
     </div>
 
     <script>
@@ -124,6 +133,7 @@
             const hardestBadge = document.getElementById('hardestLevel');
             const grid = document.getElementById('completedGrid');
             const creationsGrid = document.getElementById('createdGrid');
+            const unbeatenGrid = document.getElementById('unbeatenGrid');
 
             if (!targetPlayer) {
                 nameHeading.innerText = "PLAYER NOT FOUND";
@@ -136,19 +146,21 @@
                 const response = await fetch(`levels.json?v=${new Date().getTime()}`); 
                 const data = await response.json();
 
-                // Sort data points descendingly to match index placement ranks accurately
+                // Sort descending to establish correct layout placement values
                 data.sort((a, b) => b.points - a.points);
 
                 let completionCount = 0;
                 let creationCount = 0;
+                let unbeatenCount = 0;
                 let hardestLvl = null;
                 let hardestRank = 0;
                 
                 grid.innerHTML = "";
                 creationsGrid.innerHTML = "";
+                unbeatenGrid.innerHTML = "";
 
                 data.forEach((level, index) => {
-                    const rank = index + 1; // Calculate actual list placement rank
+                    const rank = index + 1;
                     
                     const hasBeaten = level.victors && level.victors.some(v => v.toLowerCase() === targetPlayer.toLowerCase());
                     const isVerifier = level.verifier && level.verifier.toLowerCase() === targetPlayer.toLowerCase();
@@ -196,9 +208,28 @@
                         `;
                         creationsGrid.appendChild(card);
                     }
+
+                    // --- PROCESS NON-COMPLETIONS ---
+                    if (!hasBeaten && !isVerifier) {
+                        unbeatenCount++;
+
+                        const card = document.createElement('div');
+                        card.className = 'level-card unbeaten-card';
+                        card.innerHTML = `
+                            <div class="level-info">
+                                <h3 class="level-title" style="color: #aaa;">#${rank} - ${level.name}</h3>
+                                <div class="level-meta">
+                                    <p style="margin: 4px 0;"><strong>Creator:</strong> ${level.creator}</p>
+                                    <p style="margin: 4px 0;"><strong>Value:</strong> ${level.points} PTS</p>
+                                    <p style="margin: 4px 0; color: #555;"><strong>Status:</strong> Unbeaten</p>
+                                </div>
+                            </div>
+                        `;
+                        unbeatenGrid.appendChild(card);
+                    }
                 });
 
-                // Update Completion Stats
+                // Update Header UI
                 countBadge.innerText = `${completionCount} ${completionCount === 1 ? 'COMPLETION' : 'COMPLETIONS'}`;
 
                 if (hardestLvl) {
@@ -215,6 +246,10 @@
                 
                 if (creationCount === 0) {
                     creationsGrid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; color:#444; padding:40px;">No created levels found on the list for this player.</div>`;
+                }
+
+                if (unbeatenCount === 0) {
+                    unbeatenGrid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; color:var(--gold); padding:40px; font-weight:700;">100% LIST CLEAR! This player has beaten every level!</div>`;
                 }
 
             } catch (error) {
