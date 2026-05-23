@@ -70,8 +70,18 @@
     "victors": ["puffiballgd"] 
   },
   { 
-    "name": "Vendetas Hair", 
+    "name": "REDEMPTION DAY", 
     "points": 250, 
+    "creator": "puffiballgd", 
+    "verifier": "puffiballgd", 
+    "id": "140523629", 
+    "video": "https://medal.tv/games/geometry-dash/clips/mLihZgGFM5k00Ujao?invite=cr-MSxWOWYsMTg4NDY3MDM3&v=39", 
+    "thumbnail": "Thumbnail/RedemptionDay.png", 
+    "victors": [] 
+  },
+  { 
+    "name": "Vendetas Hair", 
+    "points": 240, 
     "creator": "Symm.", 
     "verifier": "Symm.", 
     "id": "140026254", 
