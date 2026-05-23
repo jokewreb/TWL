@@ -125,7 +125,10 @@
         function update(lvl, rank) {
             document.getElementById('main-title').innerText = `#${rank} - ${lvl.name}`;
             document.getElementById('s-creator').innerText = lvl.creator;
-            document.getElementById('s-verifier').innerText = lvl.verifier;
+            
+            // Turn verifier name into a profile link
+            document.getElementById('s-verifier').innerHTML = `<a href="player.html?name=${encodeURIComponent(lvl.verifier)}" class="player-link">${lvl.verifier}</a>`;
+            
             document.getElementById('s-id').innerText = lvl.id;
             document.getElementById('s-pts').innerText = lvl.points;
 
@@ -141,7 +144,7 @@
 
             const vCont = document.getElementById('v-cont');
             vCont.innerHTML = validVictors.length > 0 
-                ? validVictors.map(v => `<span class="tag" style="white-space: nowrap; display: inline-block;">${v}</span>`).join('') 
+                ? validVictors.map(v => `<a href="player.html?name=${encodeURIComponent(v)}" class="tag player-link" style="white-space: nowrap; display: inline-block; text-decoration: none;">${v}</a>`).join('') 
                 : "<span style='color:#444; font-size:0.8rem'>No victors yet.</span>";
         }
         init();
