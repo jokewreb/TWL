@@ -51,6 +51,13 @@
             color: var(--gold);
             border: 1px solid rgba(255, 207, 75, 0.2);
         }
+        .section-title {
+            font-size: 1.5rem; 
+            font-weight: 700; 
+            margin: 40px 0 20px 0; 
+            text-transform: uppercase; 
+            letter-spacing: 1px;
+        }
         .completed-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -100,8 +107,11 @@
             </div>
         </div>
 
-        <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px;">Completed Levels</h2>
+        <h2 class="section-title">Completed Levels</h2>
         <div id="completedGrid" class="completed-grid"></div>
+
+        <h2 class="section-title">Created Levels</h2>
+        <div id="createdGrid" class="completed-grid"></div>
     </div>
 
     <script>
@@ -113,6 +123,7 @@
             const countBadge = document.getElementById('completionCount');
             const hardestBadge = document.getElementById('hardestLevel');
             const grid = document.getElementById('completedGrid');
+            const creationsGrid = document.getElementById('createdGrid');
 
             if (!targetPlayer) {
                 nameHeading.innerText = "PLAYER NOT FOUND";
@@ -126,13 +137,18 @@
                 const data = await response.json();
 
                 let completionCount = 0;
+                let creationCount = 0;
                 let hardestLvl = null;
+                
                 grid.innerHTML = "";
+                creationsGrid.innerHTML = "";
 
                 data.forEach(level => {
                     const hasBeaten = level.victors && level.victors.some(v => v.toLowerCase() === targetPlayer.toLowerCase());
                     const isVerifier = level.verifier && level.verifier.toLowerCase() === targetPlayer.toLowerCase();
+                    const isCreator = level.creator && level.creator.toLowerCase() === targetPlayer.toLowerCase();
 
+                    // --- PROCESS COMPLETIONS / VERIFICATIONS ---
                     if (hasBeaten || isVerifier) {
                         completionCount++;
 
@@ -154,8 +170,28 @@
                         `;
                         grid.appendChild(card);
                     }
+
+                    // --- PROCESS CREATIONS ---
+                    if (isCreator) {
+                        creationCount++;
+                        
+                        const card = document.createElement('div');
+                        card.className = 'level-card';
+                        card.innerHTML = `
+                            <div class="level-info">
+                                <h3 class="level-title">${level.name}</h3>
+                                <div class="level-meta">
+                                    <p style="margin: 4px 0;"><strong>Verifier:</strong> ${level.verifier || 'N/A'}</p>
+                                    <p style="margin: 4px 0;"><strong>Value:</strong> ${level.points} PTS</p>
+                                    <p style="margin: 4px 0; color: var(--gold);"><strong>ID:</strong> ${level.id || 'Unknown'}</p>
+                                </div>
+                            </div>
+                        `;
+                        creationsGrid.appendChild(card);
+                    }
                 });
 
+                // Update Completion Stats
                 countBadge.innerText = `${completionCount} ${completionCount === 1 ? 'COMPLETION' : 'COMPLETIONS'}`;
 
                 if (hardestLvl) {
@@ -165,8 +201,13 @@
                     hardestBadge.style.display = "none";
                 }
 
+                // Handle Empty States
                 if (completionCount === 0) {
                     grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; color:#444; padding:40px;">No recorded list records found for this player.</div>`;
+                }
+                
+                if (creationCount === 0) {
+                    creationsGrid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; color:#444; padding:40px;">No created levels found on the list for this player.</div>`;
                 }
 
             } catch (error) {
