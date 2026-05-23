@@ -207,7 +207,7 @@
     "id": "139974918", 
     "video": "q9YDZzS8Ow", 
     "thumbnail": "Thumbnail/OldWaveCorridor.png", 
-    "victors": ["xpealox","Symm"] 
+    "victors": ["xpealox","Symm","MrBazooka"] 
   },
   { 
     "name": "Lost Signal", 
@@ -216,7 +216,7 @@
     "ChefLime", "id": "140217050", 
     "video": "SPJuTwbBSeo", 
     "thumbnail": "Thumbnail/LostSignal.png", 
-    "victors": ["puffiballgd"] 
+    "victors": ["puffiballgd","MrBazooka"] 
   },
   { 
     "name": "Wave Corridor", 
@@ -266,7 +266,7 @@
     "id": "140117104", 
     "video": "https://medal.tv/games/geometry-dash/clips/mGrKy9vKqDaVrlZ0t?invite=cr-MSxxdjksNjI5MjU3MTI3", 
     "thumbnail": "Thumbnail/SpamPractice.png", 
-    "victors": ["newbite","Symm","ChefLime"] 
+    "victors": ["newbite","Symm","ChefLime","MrBazooka"] 
   },
   { 
     "name": "Gurkey Circles", 
@@ -286,7 +286,7 @@
     "id": "140113463", 
     "video": "DAK8pvU2diA", 
     "thumbnail": "Thumbnail/AzurePortal.png", 
-    "victors": ["puffiballgd","Symm","MrBazooka","ARandomBall","newbite"] 
+    "victors": ["puffiballgd","Symm","MrBazooka","ARandomBall","newbite","MrBazooka"] 
   },
   { 
     "name": "Sakupen PooPoo", 
@@ -316,7 +316,7 @@
     "id": "139799043", 
     "video": "RZ9abrQnMDs", 
     "thumbnail": "Thumbnail/ArbysDihBurger.png", 
-    "victors": ["xpealox","ARandomBall","newbite","ZizoGMD","Symm","puffiballgd"] 
+    "victors": ["xpealox","ARandomBall","newbite","ZizoGMD","Symm","puffiballgd","MrBazooka"] 
   },
   { 
     "name": "i miss u szeltik", 
@@ -346,7 +346,7 @@
     "id": "140476546", 
     "video": "hgxkwBJTMbI", 
     "thumbnail": "Thumbnail/DihMountain.png", 
-    "victors": [] 
+    "victors": ["MrBazooka"] 
   },
   { 
     "name": "Zoink WAVE", 
