@@ -2,15 +2,17 @@
     {
         "name": "Open Level Example",
         "creator": "Symm",
-        "points": 250,
+        "estimatedRank": 2,
         "id": "12345678",
-        "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+        "thumbnail": "https://i.ytimg.com/vi/dQw4w9WgXcQ/mqdefault.jpg",
+        "video": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
     },
     {
         "name": "Challenge Layout",
         "creator": "Armi12",
-        "points": 180,
+        "estimatedRank": 14,
         "id": "87654321",
+        "thumbnail": "",
         "video": ""
     }
 ]
