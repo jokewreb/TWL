@@ -73,7 +73,6 @@
             line-height: 1.4;
             color: #ccc;
         }
-        /* Bright red instruction warning label */
         .red-upload-warning {
             color: #ff4a4a;
             font-size: 0.9rem;
@@ -148,31 +147,16 @@
             const difficulty = document.getElementById('lvl-diff').value.trim();
             const id = document.getElementById('lvl-id').value.trim();
             const video = document.getElementById('lvl-video').value.trim();
-            
-            // Generate a stylized filename automatically based on the level name
-            // e.g., "Corrupted Cavern" turns into "CorruptedCavern.png"
-            const cleanedName = name.replace(/[^a-zA-Z0-9]/g, "");
-            const assumedThumbPath = `Thumbnail/Open/${cleanedName || "thumbnail"}.png`;
 
-            // Setup JSON block structural code snippet for easy copy-pasting
-            const jsonSnippet = JSON.stringify({
-                name: name,
-                creator: creator,
-                estimatedDifficulty: difficulty,
-                id: id,
-                thumbnail: assumedThumbPath,
-                video: video
-            }, null, 2);
+            const jsBlock = `  {\n    "name": "${name}",\n    "creator": "${creator}",\n    "estimatedDifficulty": "${difficulty}",\n    "id": "${id}",\n    "thumbnail": \`PASTE_THE_GITHUB_IMAGE_TAG_HERE\`,\n    "video": "${video}"\n  }`;
 
             const issueTitle = encodeURIComponent(`Open Verification Request: ${name}`);
             
             const issueBody = encodeURIComponent(
                 `### 📋 Level Submission Data\n` +
-                `Copy this code snippet directly into your \`open_levels.json\` file:\n\n` +
-                `\`\`\`json\n${jsonSnippet}\n\`\`\`\n\n` +
-                `--- \n` +
-                `### 🖼️ Upload Level Thumbnail Here\n` +
-                `👉 **USER ACTION REQUIRED:** Please copy-paste or drag-and-drop your layout thumbnail screenshot directly inside this description area below!`
+                `1. Drag-and-drop or copy-paste your layout thumbnail screenshot directly inside the box below to generate your image code tag!\n` +
+                `2. Replace \\\`PASTE_THE_GITHUB_IMAGE_TAG_HERE\\\` inside this block with your generated image tag, and submit:\n\n` +
+                `\`\`\`javascript\n${jsBlock}\n\`\`\``
             );
 
             const githubIssuesLink = `${GITHUB_REPO_URL}/issues/new?title=${issueTitle}&body=${issueBody}`;
