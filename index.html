@@ -32,7 +32,7 @@
                     </div>
                     <div class="victors-box">
                         <div class="stat-label">List Victors</div>
-                        <div id="v-cont" style="margin-top:10px;"></div>
+                        <div id="v-cont" style="margin-top:10px; display: flex; flex-wrap: wrap; gap: 8px;"></div>
                     </div>
                 </div>
 
@@ -45,64 +45,61 @@
         </div>
     </div>
 
+    <a href="https://discord.com/invite/7SjKU8vy8x" target="_blank" style="position: fixed; bottom: 25px; right: 25px; width: 56px; height: 56px; background: #5865F2; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 25px rgba(0,0,0,0.5); z-index: 9999; transition: transform 0.2s ease, background-color 0.2s ease;" onmouseover="this.style.transform='scale(1.1)'; this.style.backgroundColor='#4752C4';" onmouseout="this.style.transform='scale(1)'; this.style.backgroundColor='#5865F2';">
+        <img src="discord.png" alt="Discord" style="width: 28px; height: 28px; object-fit: contain;" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'%23ffffff\'><path d=\'M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.094 13.094 0 0 1-1.873-.894.077.077 0 0 1-.008-.128c.126-.093.252-.19.372-.287a.075.075 0 0 1 .077-.011c3.92 1.793 8.18 1.793 12.061 0a.073.073 0 0 1 .078.009c.12.099.246.195.373.289a.077.077 0 0 1-.006.127 12.298 12.298 0 0 1-1.873.894.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.156-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.156 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.156-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.156 2.418z\'/></svg>';">
+    </a>
+
     <script>
         // --- LOGO CONFIGURATION ---
-        // Base container layout size for tier logos
         const TIER_LOGO_SIZE = "36px"; 
         // ---------------------------
 
         async function init() {
             try {
-                // Fetch tier settings from your external configuration file
                 const resTiers = await fetch(`tiers.json?v=${new Date().getTime()}`);
                 const tiers = await resTiers.json();
 
-                // Bypasses local browser caching to ensure changes to levels.json drop instantly
                 const res = await fetch(`levels.json?v=${new Date().getTime()}`);
                 const data = await res.json();
                 const side = document.getElementById('sidebar');
 
-                // Sort levels by points in descending order (highest points first)
                 data.sort((a, b) => b.points - a.points);
 
-                side.innerHTML = ""; // Clear sidebar to load sorted items
+                side.innerHTML = ""; 
 
                 data.forEach((lvl, i) => {
                     const rank = i + 1;
                     const div = document.createElement('div');
                     div.className = `list-item ${rank <= 3 ? 'top-'+rank : ''}`;
                     
-                    // Match the tier configuration based on level points range
+                    div.style.display = "flex";
+                    div.style.alignItems = "center";
+                    div.style.gap = "12px";
+                    
                     const currentTier = tiers.find(t => lvl.points >= t.minPoints && lvl.points <= t.maxPoints);
                     if (currentTier) {
                         div.style.borderLeft = `4px solid ${currentTier.color}`;
                     }
                     
-                    // Uses custom image path from JSON (including folder names), or a black placeholder if missing
                     const imgSource = lvl.thumbnail ? lvl.thumbnail : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=";
 
                     div.innerHTML = `
-                        <div class="rank" style="${currentTier ? 'color:' + currentTier.color : ''}">#${rank}</div>
-                        <img src="${imgSource}" class="thumb-mini" style="width: 80px; height: 45px; object-fit: cover;">
-                        <div>
-                            <div style="font-weight:700; font-size:0.85rem">${lvl.name}</div>
-                            <div style="font-size:0.7rem; color:#666">${lvl.points} PTS</div>
+                        <div class="rank" style="${currentTier ? 'color:' + currentTier.color : ''}; flex-shrink: 0; min-width: 35px;">#${rank}</div>
+                        <img src="${imgSource}" class="thumb-mini" style="width: 80px; height: 45px; object-fit: cover; flex-shrink: 0; border-radius: 4px;">
+                        <div style="flex: 1; min-width: 0; overflow: hidden; text-align: left;">
+                            <div style="font-weight:700; font-size:0.85rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${lvl.name}</div>
+                            <div style="font-size:0.7rem; color:#666; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${lvl.points} PTS</div>
                         </div>
                     `;
                     div.onclick = () => update(lvl, rank);
                     side.appendChild(div);
                 });
 
-                // --- Render Tiers Legend Side-Panel ---
                 const legendList = document.getElementById('legend-list');
                 let legendHTML = "";
                 
-                // Loops through tiers in reverse order (highest tiers at the top)
                 [...tiers].reverse().forEach(t => {
-                    // Pulls the image string value directly from your tiers.json file setup
                     const logoSrc = t.image ? t.image : ''; 
-                    
-                    // Checks if a custom manual scale exists in JSON (e.g. "125%"), default back to "100%" if missing
                     const manualScale = t.size ? t.size : "100%";
 
                     legendHTML += `
@@ -116,7 +113,6 @@
                     `;
                 });
                 legendList.innerHTML = legendHTML;
-                // --------------------------------------
 
                 if(data.length > 0) update(data[0], 1);
             } catch(e) {
@@ -139,8 +135,13 @@
                 vid.src = lvl.video ? `https://www.youtube.com/embed/${lvl.video}` : '';
             }
 
+            // Filter out any blank text strings before generating badges
+            const validVictors = lvl.victors ? lvl.victors.filter(v => v.trim() !== "") : [];
+
             const vCont = document.getElementById('v-cont');
-            vCont.innerHTML = lvl.victors && lvl.victors.length > 0 ? lvl.victors.map(v => `<span class="tag">${v}</span>`).join('') : "<span style='color:#444; font-size:0.8rem'>No victors yet.</span>";
+            vCont.innerHTML = validVictors.length > 0 
+                ? validVictors.map(v => `<span class="tag" style="white-space: nowrap; display: inline-block;">${v}</span>`).join('') 
+                : "<span style='color:#444; font-size:0.8rem'>No victors yet.</span>";
         }
         init();
     </script>
