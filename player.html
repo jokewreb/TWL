@@ -46,7 +46,6 @@
             letter-spacing: 1px;
             border: 1px solid rgba(255, 65, 65, 0.2);
         }
-        /* Style variation for the hardest level badge */
         .hardest-badge {
             background: rgba(255, 207, 75, 0.1);
             color: var(--gold);
@@ -81,19 +80,6 @@
         .level-meta {
             font-size: 0.85rem;
             color: #888;
-        }
-        .proof-btn {
-            display: block;
-            text-align: center;
-            background: #fff;
-            color: #000;
-            padding: 10px;
-            border-radius: 6px;
-            font-weight: 700;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            text-decoration: none;
-            margin-top: auto;
         }
     </style>
 </head>
@@ -150,16 +136,8 @@
                     if (hasBeaten || isVerifier) {
                         completionCount++;
 
-                        // Track the level with the highest point value
                         if (!hardestLvl || level.points > hardestLvl.points) {
                             hardestLvl = level;
-                        }
-
-                        let videoLink = level.video || "#";
-                        let finalUrl = videoLink;
-                        
-                        if (videoLink && !videoLink.includes('http')) {
-                            finalUrl = `https://www.youtube.com/watch?v=${videoLink}`;
                         }
 
                         const card = document.createElement('div');
@@ -172,7 +150,6 @@
                                     <p style="margin: 4px 0;"><strong>Value:</strong> ${level.points} PTS</p>
                                     <p style="margin: 4px 0; color: var(--accent);"><strong>Role:</strong> ${isVerifier ? 'Verifier' : 'Victor'}</p>
                                 </div>
-                                <a href="${finalUrl}" target="_blank" class="proof-btn">View Video Proof</a>
                             </div>
                         `;
                         grid.appendChild(card);
@@ -181,7 +158,6 @@
 
                 countBadge.innerText = `${completionCount} ${completionCount === 1 ? 'COMPLETION' : 'COMPLETIONS'}`;
 
-                // Update and display hardest level badge if they have beaten anything
                 if (hardestLvl) {
                     hardestBadge.innerText = `HARDEST: ${hardestLvl.name.toUpperCase()} (${hardestLvl.points} PTS)`;
                     hardestBadge.style.display = "inline-block";
