@@ -11,8 +11,9 @@
             align-items: center;
             justify-content: center;
             width: 100%;
-            max-width: 600px;
+            max-width: 700px;
             margin: 40px auto;
+            padding: 0 20px;
         }
         .submit-card {
             width: 100%;
@@ -38,6 +39,12 @@
             letter-spacing: 2px;
             text-align: center;
         }
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            width: 100%;
+        }
         .form-group {
             display: flex;
             flex-direction: column;
@@ -46,6 +53,9 @@
             width: 100%;
             text-align: left;
         }
+        .form-group.full-width {
+            grid-column: span 2;
+        }
         .form-group label {
             font-size: 0.85rem;
             font-weight: 700;
@@ -53,7 +63,7 @@
             text-transform: uppercase;
             letter-spacing: 1px;
         }
-        .form-group input {
+        .form-group input, .form-group textarea {
             width: 100%;
             background: rgba(10, 11, 15, 0.8);
             border: 1px solid var(--border, rgba(255,255,255,0.1));
@@ -63,9 +73,14 @@
             font-size: 1rem;
             outline: none;
             transition: border-color 0.2s;
+            font-family: inherit;
         }
-        .form-group input:focus {
+        .form-group input:focus, .form-group textarea:focus {
             border-color: var(--accent, #47e5bc);
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
         }
         .submit-btn {
             width: 100%;
@@ -86,18 +101,13 @@
             transform: translateY(-2px);
             opacity: 0.9;
         }
-        .submit-btn:disabled {
-            background: #444;
-            color: #888;
-            cursor: not-allowed;
-            transform: none;
-        }
-        .status-msg {
-            margin-top: 15px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            text-align: center;
-            display: none;
+        @media (max-width: 600px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            .form-group.full-width {
+                grid-column: span 1;
+            }
         }
     </style>
 </head>
@@ -105,105 +115,95 @@
     <nav>
         <div class="nav-logo" onclick="window.location.href='index.html'" style="cursor:pointer;">THE WAVE LIST</div>
         <div>
-            <a href="index.html" class="nav-link">BACK TO LIST</a>
-            <a href="leaderboard.html" class="nav-link">LEADERBOARD</a>
+            <a href="index.html" class="nav-link" style="margin-right: 20px;">BACK TO LIST</a>
+            <a href="submissions.html" class="nav-link">PENDING SUBMISSIONS</a>
         </div>
     </nav>
 
     <div class="main-layout" style="display: block; padding: 40px 20px;">
         <div class="submit-container">
-            
             <h2 class="form-title">SUBMIT A RECORD</h2>
-            <div class="form-sub">Record Submission Form</div>
+            <div class="form-sub">Send run data to pending list</div>
 
             <div class="submit-card">
-                <form id="recordForm" onsubmit="sendSubmission(event)">
-                    <div class="form-group">
-                        <label for="playerName">Player Name</label>
-                        <input type="text" id="playerName" placeholder="Your in-game name" required>
+                <form id="recordForm" onsubmit="handleSubmit(event)">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="playerName">Player Name</label>
+                            <input type="text" id="playerName" placeholder="Your in-game name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="levelName">Name</label>
+                            <input type="text" id="levelName" placeholder="Name of the wave level" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="levelId">ID</label>
+                            <input type="text" id="levelId" placeholder="Geometry Dash Level ID" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="levelCreator">Creator</label>
+                            <input type="text" id="levelCreator" placeholder="Level creator's name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="levelVerifier">Verifier</label>
+                            <input type="text" id="levelVerifier" placeholder="Level verifier's name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="levelDifficulty">Difficulty</label>
+                            <input type="text" id="levelDifficulty" placeholder="e.g., Tier 5" required>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="videoLink">YouTube Video / Proof Link</label>
+                            <input type="url" id="videoLink" placeholder="https://www.youtube.com/watch?v=..." required>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="thumbnailLink">Image of Thumbnail (URL)</label>
+                            <input type="url" id="thumbnailLink" placeholder="Image URL address" required>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="extraNotes">Extra Notes</label>
+                            <textarea id="extraNotes" placeholder="Any additional information..."></textarea>
+                        </div>
                     </div>
-
-                    <div class="form-group">
-                        <label for="levelName">Level Name</label>
-                        <input type="text" id="levelName" placeholder="Name of the wave level" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="videoLink">Video Proof Link</label>
-                        <input type="url" id="videoLink" placeholder="YouTube or Medal clip URL" required>
-                    </div>
-
-                    <button type="submit" class="submit-btn" id="subBtn">Send Submission</button>
-                    <div id="status" class="status-msg"></div>
+                    <button type="submit" class="submit-btn">Create GitHub Submission</button>
                 </form>
             </div>
-
         </div>
     </div>
 
     <script>
-        // Paste your exact Discord Webhook URL right here inside the quotes
-        const DISCORD_WEBHOOK_URL = "YOUR_DISCORD_WEBHOOK_URL_HERE";
+        // Set your GitHub info here
+        const GITHUB_USER = "YOUR_GITHUB_USERNAME";
+        const GITHUB_REPO = "YOUR_REPO_NAME";
 
-        async function sendSubmission(event) {
+        function handleSubmit(event) {
             event.preventDefault();
             
-            const btn = document.getElementById('subBtn');
-            const status = document.getElementById('status');
-            
             const player = document.getElementById('playerName').value;
-            const level = document.getElementById('levelName').value;
+            const name = document.getElementById('levelName').value;
+            const id = document.getElementById('levelId').value;
+            const creator = document.getElementById('levelCreator').value;
+            const verifier = document.getElementById('levelVerifier').value;
+            const difficulty = document.getElementById('levelDifficulty').value;
             const video = document.getElementById('videoLink').value;
+            const thumbnail = document.getElementById('thumbnailLink').value;
+            const notes = document.getElementById('extraNotes').value || "None";
 
-            if (DISCORD_WEBHOOK_URL === "YOUR_DISCORD_WEBHOOK_URL_HERE") {
-                status.innerText = "Error: Setup incomplete. Please paste your Discord Webhook URL in the script tags.";
-                status.style.color = "#ff4a4a";
-                status.style.display = "block";
-                return;
-            }
+            const title = encodeURIComponent(`[SUBMISSION] ${name} by ${player}`);
+            const body = encodeURIComponent(
+`PLAYER: ${player}
+NAME: ${name}
+ID: ${id}
+CREATOR: ${creator}
+VERIFIER: ${verifier}
+DIFFICULTY: ${difficulty}
+YOUTUBE VIDEO: ${video}
+IMAGE OF THUMBNAIL: ${thumbnail}
+EXTRA NOTES: ${notes}`
+            );
 
-            btn.disabled = true;
-            btn.innerText = "Sending...";
-            status.style.display = "none";
-
-            // Format data into a stylized Discord Embed block
-            const payload = {
-                embeds: [{
-                    title: "📥 NEW LIST RECORD SUBMISSION",
-                    color: 4711868, // Hex value matching color presets
-                    fields: [
-                        { name: "👤 Player", value: player, inline: true },
-                        { name: "🌊 Level Name", value: level, inline: true },
-                        { name: "🔗 Video Proof", value: video }
-                    ],
-                    timestamp: new Date().toISOString()
-                }]
-            };
-
-            try {
-                const response = await fetch(DISCORD_WEBHOOK_URL, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(payload)
-                });
-
-                if (response.ok) {
-                    status.innerText = "Record submitted successfully! Your run has been sent for evaluation.";
-                    status.style.color = "#47e5bc";
-                    status.style.display = "block";
-                    document.getElementById('recordForm').reset();
-                } else {
-                    throw new Error("Server error responding.");
-                }
-            } catch (error) {
-                console.error(error);
-                status.innerText = "An error occurred. Please verify your internet connection or check your webhook configuration.";
-                status.style.color = "#ff4a4a";
-                status.style.display = "block";
-            } finally {
-                btn.disabled = false;
-                btn.innerText = "Send Submission";
-            }
+            // Redirects player directly to create the record into your backend issue tracker logs
+            window.open(`https://github.com/${GITHUB_USER}/${GITHUB_REPO}/issues/new?title=${title}&body=${body}`, '_blank');
         }
     </script>
 </body>
