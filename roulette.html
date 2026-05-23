@@ -142,7 +142,10 @@
 
                     <div id="r-tier" class="tier-badge" style="color: #fff;">-</div>
                     
-                    <button class="roulette-btn" id="action-btn" onclick="advanceRoulette()">I Beat It! Next Level</button>
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
+                        <button class="roulette-btn" id="action-btn" onclick="advanceRoulette()">I Beat It! Next Level</button>
+                        <button class="roulette-btn" id="skip-btn" onclick="skipLevel()" style="background: rgba(255, 255, 255, 0.1); color: #fff; border: 1px solid rgba(255, 255, 255, 0.2);">Skip Level</button>
+                    </div>
                 </div>
 
                 <div id="win-content" class="win-screen">
@@ -248,6 +251,11 @@
                 currentStep++;
                 getNewRandomLevel();
             }
+        }
+
+        // Action loop to skip the current item and get a fresh selection without adding target counts
+        function skipLevel() {
+            getNewRandomLevel();
         }
 
         // Run instantiation loop functions
