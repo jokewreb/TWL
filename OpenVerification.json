@@ -1,0 +1,16 @@
+[
+    {
+        "name": "Open Level Example",
+        "creator": "Symm",
+        "points": 250,
+        "id": "12345678",
+        "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+    },
+    {
+        "name": "Challenge Layout",
+        "creator": "Armi12",
+        "points": 180,
+        "id": "87654321",
+        "video": ""
+    }
+]
