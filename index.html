@@ -141,10 +141,19 @@
             document.getElementById('s-pts').innerText = lvl.points;
 
             const vid = document.getElementById('main-vid');
-            if(lvl.video && lvl.video.length > 11) {
-                vid.src = lvl.video.includes('medal') ? `https://medal.tv/clip/${lvl.video.split('/').pop()}` : `https://www.youtube.com/embed/${lvl.video}`;
+            if (lvl.video) {
+                if (lvl.video.includes('medal')) {
+                    vid.src = `https://medal.tv/clip/${lvl.video.split('/').pop()}`;
+                } else if (lvl.video.includes('youtube.com/watch?v=')) {
+                    const urlParams = new URLSearchParams(lvl.video.split('?')[1]);
+                    vid.src = `https://www.youtube.com/embed/${urlParams.get('v')}`;
+                } else if (lvl.video.includes('youtu.be/')) {
+                    vid.src = `https://www.youtube.com/embed/${lvl.video.split('/').pop()}`;
+                } else {
+                    vid.src = `https://www.youtube.com/embed/${lvl.video}`;
+                }
             } else {
-                vid.src = lvl.video ? `https://www.youtube.com/embed/${lvl.video}` : '';
+                vid.src = '';
             }
 
             const validVictors = lvl.victors ? lvl.victors.filter(v => v.trim() !== "") : [];
