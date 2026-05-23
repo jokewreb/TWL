@@ -16,7 +16,15 @@
     </nav>
 
     <div class="main-layout">
-        <div class="sidebar" id="sidebar"></div>
+        <div style="display: flex; flex-direction: column; gap: 15px;">
+            <div class="sidebar" id="sidebar"></div>
+            <div style="padding: 5px 10px; text-align: left;">
+                <span onclick="window.location.href='Open.html'" style="cursor: pointer; font-size: 0.85rem; font-weight: 700; color: #666; letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s;" onmouseover="this.style.color='#aaa'" onmouseout="this.style.color='#666'">
+                    OPEN VERIFICATIONS
+                </span>
+            </div>
+        </div>
+
         <div class="content">
             <div style="display: flex; gap: 30px; width: 100%; max-width: 1650px; align-items: flex-start;">
                 
@@ -34,12 +42,6 @@
                     <div class="victors-box">
                         <div class="stat-label">List Victors</div>
                         <div id="v-cont" style="margin-top:10px; display: flex; flex-wrap: wrap; gap: 8px;"></div>
-                    </div>
-
-                    <div style="margin-top: 30px; border-top: 1px solid var(--border); padding-top: 20px; text-align: left;">
-                        <span onclick="window.location.href='Open.html'" style="cursor: pointer; font-size: 0.85rem; font-weight: 700; color: #666; letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s;" onmouseover="this.style.color='#aaa'" onmouseout="this.style.color='#666'">
-                            OPEN VERIFICATIONS
-                        </span>
                     </div>
                 </div>
 
