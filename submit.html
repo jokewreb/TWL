@@ -157,8 +157,10 @@
                             <input type="url" id="videoLink" placeholder="https://www.youtube.com/watch?v=..." required>
                         </div>
                         <div class="form-group full-width">
-                            <label for="thumbnailLink">Image of Thumbnail (URL)</label>
-                            <input type="url" id="thumbnailLink" placeholder="Image URL address" required>
+                            <label style="color: var(--accent, #47e5bc);">Image of Thumbnail (Upload on next step)</label>
+                            <div style="font-size: 0.85rem; color: #888; background: rgba(0,0,0,0.2); padding: 12px; border-radius: 8px; border: 1px dashed #444;">
+                                Leave the placeholder line on GitHub as-is, and simply <strong>Drag & Drop</strong> or <strong>Paste (Ctrl+V)</strong> your image directly into the text box on the next screen!
+                            </div>
                         </div>
                         <div class="form-group full-width">
                             <label for="extraNotes">Extra Notes</label>
@@ -172,7 +174,6 @@
     </div>
 
     <script>
-        // Set your verified live details directly
         const GITHUB_USER = "jokewreb";
         const GITHUB_REPO = "TWL";
 
@@ -186,12 +187,10 @@
             const verifier = document.getElementById('levelVerifier').value;
             const difficulty = document.getElementById('levelDifficulty').value;
             const video = document.getElementById('videoLink').value;
-            const thumbnail = document.getElementById('thumbnailLink').value;
             const notes = document.getElementById('extraNotes').value || "None";
 
             const title = encodeURIComponent(`[SUBMISSION] ${name} by ${player}`);
             
-            // Text values map exactly onto the key extraction sequence in submissions.html
             const body = encodeURIComponent(
 `PLAYER: ${player}
 NAME: ${name}
@@ -200,11 +199,10 @@ CREATOR: ${creator}
 VERIFIER: ${verifier}
 DIFFICULTY: ${difficulty}
 YOUTUBE VIDEO: ${video}
-IMAGE OF THUMBNAIL: ${thumbnail}
+IMAGE OF THUMBNAIL: [Drop your image right here!]
 EXTRA NOTES: ${notes}`
             );
 
-            // Opens up the issue interface on your exact repo branch layout
             window.open(`https://github.com/${GITHUB_USER}/${GITHUB_REPO}/issues/new?title=${title}&body=${body}`, '_blank');
         }
     </script>
