@@ -360,7 +360,7 @@
   },
   { 
     "name": "Zoink WAVE", 
-    "points": 4, 
+    "points": 10, 
     "creator": "ChefLime", 
     "verifier": "ChefLime", 
     "id": "139784604", 
@@ -370,7 +370,7 @@
   },
   { 
     "name": "Swag Clubstep", 
-    "points": 2, 
+    "points": 4, 
     "creator": "ChefLime", 
     "verifier": "ChefLime", 
     "id": "139981798", 
@@ -380,12 +380,22 @@
   },
   { 
     "name": "ChefLimeWaveBasic1", 
+    "points": 3, 
+    "creator": "ChefLime", 
+    "verifier": "ChefLime", 
+    "id": "140833328", 
+    "video": "1Fk0cX8IN2U", 
+    "thumbnail": "Thumbnail/ChefLimeWaveBasic1.png", 
+    "victors": [] 
+  },
+  { 
+    "name": "Jynxzi Never Clear", 
     "points": 2, 
     "creator": "ChefLime", 
     "verifier": "ChefLime", 
     "id": "140719114", 
     "video": "kZfAQXHzhug", 
-    "thumbnail": "Thumbnail/ChefLimeWaveBasic1.png", 
+    "thumbnail": "Thumbnail/Jynxi.webp", 
     "victors": ["puffiballgd","MrBazooka","ItsJellyGD"] 
   },
   { 
