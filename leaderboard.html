@@ -59,7 +59,19 @@
             sorted.forEach(([name, pts], i) => {
                 const r = i+1;
                 const c = r==1?'gold':r==2?'silver':r==3?'bronze':'';
-                table.innerHTML += `<tr><td class="${c}">#${r}</td><td>${name}</td><td>${pts.toLocaleString()} PTS</td></tr>`;
+                
+                // Wrapped the name inside an anchor link targeting player.html
+                table.innerHTML += `
+                    <tr>
+                        <td class="${c}">#${r}</td>
+                        <td>
+                            <a href="player.html?name=${encodeURIComponent(name)}" class="player-link" style="text-decoration: none;">
+                                ${name}
+                            </a>
+                        </td>
+                        <td>${pts.toLocaleString()} PTS</td>
+                    </tr>
+                `;
             });
         }
         load();
