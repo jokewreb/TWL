@@ -70,3 +70,15 @@ nav {
 
 .victors-box { margin-top: 25px; padding-top: 20px; border-top: 1px solid var(--border); }
 .tag { display: inline-block; padding: 5px 12px; background: rgba(255, 65, 65, 0.1); border: 1px solid rgba(255, 65, 65, 0.2); color: var(--accent); border-radius: 4px; margin: 4px; font-size: 0.75rem; }
+
+/* PLAYER LINKS (NEW ADDITION) */
+.player-link {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.player-link:hover {
+    text-decoration: underline;
+    opacity: 0.85;
+}
