@@ -27,7 +27,7 @@
     "id": "126306734", 
     "video": "jlYzk2y33wM", 
     "thumbnail": "Thumbnail/TooSquared.png", 
-    "victors": [] 
+    "victors": ["Symm"] 
   },
   { 
     "name": "WaVE ConTROL iG", 
@@ -57,7 +57,7 @@
     "id": "140031712", 
     "video": "bo6HXMN_8LE", 
     "thumbnail": "Thumbnail/SolarWave.png", 
-    "victors": [] 
+    "victors": ["puffballgd","Symm"] 
   },
   { 
     "name": "visca barca", 
@@ -77,7 +77,7 @@
     "id": "140026254", 
     "video": "hKVZMhnEitk", 
     "thumbnail": "Thumbnail/VendetasHair.png", 
-    "victors": [] 
+    "victors": ["puffballgd"] 
   },
   { 
     "name": "Unnerfed Wave Corridor", 
@@ -187,7 +187,7 @@
     "id": "139974918", 
     "video": "q9YDZzS8Ow", 
     "thumbnail": "Thumbnail/OldWaveCorridor.png", 
-    "victors": ["xpealox","MrBazooka"] 
+    "victors": ["xpealox","MrBazooka","Symm"] 
   },
   { 
     "name": "Lost Signal", 
@@ -206,7 +206,7 @@
     "id": "139972029", 
     "video": "8ELYwPl1sBY", 
     "thumbnail": "Thumbnail/WaveCorridor.png", 
-    "victors": ["xpealox","idontspeakenglish123"] 
+    "victors": ["xpealox","idontspeakenglish123","ZizoGMD","newbite","MrBazooka","Symm","puffballgd"] 
   },
   { 
     "name": "ChefLime Circles", 
@@ -216,7 +216,7 @@
     "id": "140080516", 
     "video": "SKdU9xnhDys", 
     "thumbnail": "Thumbnail/ChefLimeCircles.png", 
-    "victors": ["xpealox","Symm","idontspeakenglish123","MrBazooka"] 
+    "victors": ["xpealox","Symm","idontspeakenglish123","MrBazooka","newbite"] 
   },
   { 
     "name": "Figo Likes Wave", 
@@ -226,7 +226,7 @@
     "id": "139854071", 
     "video": "CTtChqnIGy4", 
     "thumbnail": "Thumbnail/FigoLikesWave.png", 
-    "victors": [] 
+    "victors": ["newbite","puffballgd"] 
   },
   { 
     "name": "Cowboys Demise", 
@@ -276,7 +276,7 @@
     "id": "140060249", 
     "video": "8LgXdYPXQyE", 
     "thumbnail": "Thumbnail/SakupenPooPoo.png", 
-    "victors": ["xpealox"] 
+    "victors": ["xpealox","Symm","puffballgd","ZizoGMD","MrBazooka"] 
   },
   { 
     "name": "Blocked", 
@@ -286,7 +286,7 @@
     "id": "140076320", 
     "video": "https://medal.tv/games/geometry-dash/clips/mGiCwRKsm0PwQpOW-?invite=cr-MSwzZm0sNjI5MjU3MTI3", 
     "thumbnail": "Thumbnail/Blocked.png", 
-    "victors": ["xpealox","idontspeakenglish123"] 
+    "victors": ["xpealox","idontspeakenglish123","MrBazooka","Symm","puffballgd","ChefLime"] 
   },
   { 
     "name": "arbys dih burger", 
@@ -296,7 +296,7 @@
     "id": "139799043", 
     "video": "RZ9abrQnMDs", 
     "thumbnail": "Thumbnail/ArbysDihBurger.png", 
-    "victors": ["xpealox","idontspeakenglish123"] 
+    "victors": ["xpealox","idontspeakenglish123","newbite","ZizoGMD","Symm","puffballgd"] 
   },
   { 
     "name": "i miss u szeltik", 
@@ -306,7 +306,7 @@
     "id": "140005842", 
     "video": "BrcaemQWm-M", 
     "thumbnail": "Thumbnail/IMissUSzeltik.png", 
-    "victors": ["xpealox","idontspeakenglish123"] 
+    "victors": ["xpealox","idontspeakenglish123","newbite","ZizoGMD","Symm"] 
   },
   { 
     "name": "Tung After Tung", 
@@ -316,7 +316,7 @@
     "id": "138263889", 
     "video": "ULjAQQ4CLrY", 
     "thumbnail": "Thumbnail/TungAfterTung.png", 
-    "victors": ["xpealox","idontspeakenglish123"] 
+    "victors": ["xpealox","idontspeakenglish123","newbite","ZizoGMD","Symm","puffballgd"] 
   },
   { 
     "name": "Dihmountain", 
@@ -336,7 +336,7 @@
     "id": "139784604", 
     "video": "aXD7pMCZRc8", 
     "thumbnail": "Thumbnail/ZoinkWave.png", 
-    "victors": ["xpealox","idontspeakenglish123"] 
+    "victors": ["xpealox","idontspeakenglish123","newbite","ZizoGMD","Symm"] 
   },
   { 
     "name": "Swag Clubstep", 
@@ -346,7 +346,7 @@
     "id": "139981798", 
     "video": "YirRB3Wbneg", 
     "thumbnail": "Thumbnail/SwagClubstep.png", 
-    "victors": ["xpealox","idontspeakenglish123"] 
+    "victors": ["xpealox","idontspeakenglish123","ZizoGMD","newbite","Symm","puffballgd"] 
   },
   { 
     "name": "ChefLimeWaveBasic1", 
@@ -366,6 +366,6 @@
     "id": "140086188", 
     "video": "https://medal.tv/games/geometry-dash/clips/mGkOegjLEfNh2eCgA?invite=cr-MSwyVFAsNjI5MjU3MTI3&v=22", 
     "thumbnail": "Thumbnail/SakupenHellcles.png", 
-    "victors": ["xpealox","Symm","idontspeakenglish123","puffballgd"] 
+    "victors": ["xpealox","Symm","idontspeakenglish123","puffballgd","MrBazooka","newbite","Karen","ChefLime"] 
   }
 ]
