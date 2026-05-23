@@ -34,24 +34,32 @@
         <div id="open-grid" class="grid-layout"></div>
     </div>
 
+    <script src="open_levels.js"></script>
+
     <script>
         async function loadOpenLevels() {
             const grid = document.getElementById('open-grid');
             try {
-                // Fetching the standardized open_levels.json file with a cache buster
-                const res = await fetch(`open_levels.json?v=${new Date().getTime()}`);
-                const data = await res.json();
+                // Read directly from the loaded array variable
+                const data = openLevelsData;
                 grid.innerHTML = "";
 
-                if (data.length === 0) {
+                if (!data || data.length === 0) {
                     grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; color:#444; padding:40px;">No open verifications listed at the moment.</div>`;
                     return;
                 }
 
                 data.forEach(lvl => {
-                    // Transparent 1x1 base64 pixel fallback if the thumbnail file hasn't been uploaded yet
                     const fallbackThumb = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=";
-                    const imgSource = lvl.thumbnail ? lvl.thumbnail : fallbackThumb;
+                    let thumbnailHTML = "";
+                    
+                    // Checks if it is a full HTML tag from GitHub or a plain URL path string
+                    if (lvl.thumbnail && lvl.thumbnail.includes("<img")) {
+                        thumbnailHTML = lvl.thumbnail.replace("<img", `<img class="thumb-img" onerror="this.src='${fallbackThumb}'"`);
+                    } else {
+                        const imgSource = lvl.thumbnail ? lvl.thumbnail : fallbackThumb;
+                        thumbnailHTML = `<img src="${imgSource}" class="thumb-img" onerror="this.src='${fallbackThumb}'">`;
+                    }
 
                     let actionButtonHTML = "";
                     if (lvl.video && lvl.video.trim() !== "") {
@@ -61,7 +69,7 @@
                     grid.innerHTML += `
                         <div class="open-card">
                             <div class="thumb-box">
-                                <img src="${imgSource}" class="thumb-img" onerror="this.src='${fallbackThumb}'">
+                                ${thumbnailHTML}
                             </div>
                             <div class="open-info">
                                 <h3 class="open-title">${lvl.name}</h3>
