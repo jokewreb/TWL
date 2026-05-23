@@ -38,7 +38,8 @@
         async function loadOpenLevels() {
             const grid = document.getElementById('open-grid');
             try {
-                const res = await fetch(`OpenVerification.json?v=${new Date().getTime()}`);
+                // Switched from openverificationbs.json to open_levels.json
+                const res = await fetch(`open_levels.json?v=${new Date().getTime()}`);
                 const data = await res.json();
                 grid.innerHTML = "";
 
