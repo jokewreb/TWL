@@ -246,7 +246,7 @@
     "ChefLime", "id": "140217050", 
     "video": "SPJuTwbBSeo", 
     "thumbnail": "Thumbnail/LostSignal.png", 
-    "victors": ["puffiballgd","MrBazooka"] 
+    "victors": ["puffiballgd","MrBazooka","ZizoGMD"] 
   },
   { 
     "name": "Wave Corridor", 
@@ -286,7 +286,7 @@
     "id": "141011086", 
     "video": "https://medal.tv/games/geometry-dash/clips/mLMtGPFuMuZiXNwTi?invite=cr-MSxpNnEsNjI5MjU3MTI3", 
     "thumbnail": "Thumbnail/3Squared.png", 
-    "victors": [] 
+    "victors": ["ChefLime"] 
   },
   { 
     "name": "Cowboys Demise", 
@@ -340,7 +340,7 @@
   },
   { 
     "name": "Blocked", 
-    "points": 30, 
+    "points": 37, 
     "creator": "ZizoGMD", 
     "verifier": "ZizoGMD", 
     "id": "140076320", 
