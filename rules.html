@@ -5,6 +5,12 @@
     <title>THE WAVE LIST - RULES</title>
     <link rel="stylesheet" href="style.css">
     <style>
+        /* Force vertical scrolling specifically for this page if style.css disables it */
+        html, body {
+            overflow-y: auto !important;
+            height: auto !important;
+        }
+
         .rules-container {
             max-width: 1000px;
             margin: 60px auto;
@@ -17,6 +23,7 @@
             padding: 40px;
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(10px);
+            margin-bottom: 80px; /* Gives some breathing room at the bottom of the page */
         }
         .rules-section {
             margin-bottom: 35px;
