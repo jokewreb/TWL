@@ -47,7 +47,7 @@
     "id": "140788819", 
     "video": "uNJyorfcHng", 
     "thumbnail": "Thumbnail/Alienation.png", 
-    "victors": [] 
+    "victors": ["OneShot786"] 
   },
   { 
     "name": "TooSquared", 
@@ -57,7 +57,7 @@
     "id": "126306734", 
     "video": "jlYzk2y33wM", 
     "thumbnail": "Thumbnail/TooSquared.png", 
-    "victors": ["Symm"] 
+    "victors": ["Symm","OneShot786"] 
   },
   { 
     "name": "WaVE ConTROL iG", 
@@ -77,7 +77,7 @@
     "id": "140602536", 
     "video": "sfc-bXNfX-8", 
     "thumbnail": "Thumbnail/Circinus.png", 
-    "victors": [] 
+    "victors": ["OneShot786"] 
   },
   { 
     "name": "Solar Wave", 
@@ -87,7 +87,7 @@
     "id": "140031712", 
     "video": "bo6HXMN_8LE", 
     "thumbnail": "Thumbnail/SolarWave.png", 
-    "victors": ["puffiballgd","Symm"] 
+    "victors": ["puffiballgd","Symm","OneShot786"] 
   },
   { 
     "name": "visca barca", 
@@ -97,7 +97,7 @@
     "id": "140490319", 
     "video": "https://medal.tv/games/geometry-dash/clips/mIOBD3RwZ4JZAgqPJ?invite=cr-MSx6d2csNDk3ODU2OTQ2", 
     "thumbnail": "Thumbnail/ViscaBarca.png", 
-    "victors": ["puffiballgd"] 
+    "victors": ["puffiballgd","OneShot786"] 
   },
   { 
     "name": "REDEMPTION DAY", 
@@ -127,7 +127,7 @@
     "id": "139994700", 
     "video": "D4ovfowsg7s", 
     "thumbnail": "Thumbnail/UnnerfedWaveCorridor.png", 
-    "victors": ["puffiballgd"] 
+    "victors": ["puffiballgd","OneShot786"] 
   },
   { 
     "name": "Purgatori", 
@@ -296,7 +296,7 @@
     "id": "140174223", 
     "video": "7nJAYRoxoJ8", 
     "thumbnail": "Thumbnail/CowboysDemise.png", 
-    "victors": ["puffiballgd","MrBazooka"] 
+    "victors": ["puffiballgd","MrBazooka","Exterme"] 
   },
   { 
     "name": "Spam Practice", 
