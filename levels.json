@@ -259,6 +259,16 @@
     "thumbnail": "Thumbnail/WatchTheMoon.png", 
     "victors": ["puffiballgd","MrBazooka","OneShot786"] 
   },
+    { 
+    "name": "bro think he BoJ", 
+    "points": 83, 
+    "creator": "jtohobby", 
+    "verifier": "jtohobby", 
+    "id": "141317731", 
+    "video": "USa2ZFGN93Q", 
+    "thumbnail": "Thumbnail/Bro.jpg", 
+    "victors": [] 
+  },
   { 
     "name": "Old Wave Corridor", 
     "points": 85, 
@@ -317,6 +327,16 @@
     "video": "https://medal.tv/games/geometry-dash/clips/mLMtGPFuMuZiXNwTi?invite=cr-MSxpNnEsNjI5MjU3MTI3", 
     "thumbnail": "Thumbnail/3Squared.png", 
     "victors": ["ChefLime","OneShot786","OzzyBazooka"] 
+  },
+  { 
+    "name": "Sakupen PooPoo X", 
+    "points": 66, 
+    "creator": "ChefLime", 
+    "verifier": "ChefLime", 
+    "id": "141006285", 
+    "video": "KfMKBmVnY6E", 
+    "thumbnail": "Thumbnail/Poo.png", 
+    "victors": [] 
   },
   { 
     "name": "Cowboys Demise", 
@@ -415,6 +435,16 @@
     "verifier": "ChefLime", 
     "id": "140476546", 
     "video": "hgxkwBJTMbI", 
+    "thumbnail": "Thumbnail/DihMountain.png", 
+    "victors": ["MrBazooka","puffiballgd","OneShot786"] 
+  },
+  { 
+    "name": "Dihmountain Is Heck", 
+    "points": 49, 
+    "creator": "ChefLime", 
+    "verifier": "ChefLime", 
+    "id": "141052107", 
+    "video": "oWoAM4WzeNc", 
     "thumbnail": "Thumbnail/DihMountain.png", 
     "victors": ["MrBazooka","puffiballgd","OneShot786"] 
   },
