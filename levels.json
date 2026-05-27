@@ -130,6 +130,16 @@
     "victors": ["puffiballgd","OneShot786"] 
   },
   { 
+    "name": "Weon", 
+    "points": 277, 
+    "creator": "Symm", 
+    "verifier": "Symm", 
+    "id": "141323618", 
+    "video": "SpDn56nPVJg", 
+    "thumbnail": "Thumbnail/Weon.png", 
+    "victors": [] 
+  },
+  { 
     "name": "REDEMPTION DAY", 
     "points": 250, 
     "creator": "HurryingJackM, ZizoGMD and MrBazooka", 
@@ -217,7 +227,7 @@
     "id": "140477318", 
     "video": "https://medal.tv/games/geometry-dash/clips/mGPCs5t5kjpyQi6S8?invite=cr-MSx4SXYsNDMyMzU1MDM3&v=26", 
     "thumbnail": "Thumbnail/HappiestDayUnnerfed.png", 
-    "victors": ["puffiballgd","xpealox","OneShot786"] 
+    "victors": ["puffiballgd","xpealox","OneShot786","MrBazooka"] 
   },
   { 
     "name": "Wavering", 
@@ -257,7 +267,7 @@
     "id": "140666713", 
     "video": "sGOXVv6n-8A", 
     "thumbnail": "Thumbnail/WatchTheMoon.png", 
-    "victors": ["puffiballgd","MrBazooka","OneShot786"] 
+    "victors": ["puffiballgd","MrBazooka","OneShot786","HurryingJackM"] 
   },
     { 
     "name": "bro think he BoJ", 
@@ -286,7 +296,7 @@
     "ChefLime", "id": "140217050", 
     "video": "SPJuTwbBSeo", 
     "thumbnail": "Thumbnail/LostSignal.png", 
-    "victors": ["puffiballgd","MrBazooka","ZizoGMD","OneShot786"] 
+    "victors": ["puffiballgd","MrBazooka","ZizoGMD","OneShot786","HurryingJackM"] 
   },
   { 
     "name": "Wave Corridor", 
@@ -326,7 +336,7 @@
     "id": "141011086", 
     "video": "https://medal.tv/games/geometry-dash/clips/mLMtGPFuMuZiXNwTi?invite=cr-MSxpNnEsNjI5MjU3MTI3", 
     "thumbnail": "Thumbnail/3Squared.png", 
-    "victors": ["ChefLime","OneShot786","MrBazooka"] 
+    "victors": ["ChefLime","OneShot786","MrBazooka","HurryingJackM"] 
   },
   { 
     "name": "Sakupen PooPoo X", 
@@ -336,7 +346,7 @@
     "id": "141006285", 
     "video": "KfMKBmVnY6E", 
     "thumbnail": "Thumbnail/Poo.png", 
-    "victors": [] 
+    "victors": ["MrBazooka","HurryingJackM"] 
   },
   { 
     "name": "Cowboys Demise", 
@@ -356,7 +366,7 @@
     "id": "140117104", 
     "video": "https://medal.tv/games/geometry-dash/clips/mGrKy9vKqDaVrlZ0t?invite=cr-MSxxdjksNjI5MjU3MTI3", 
     "thumbnail": "Thumbnail/SpamPractice.png", 
-    "victors": ["newbite","Symm","ChefLime","MrBazooka","OneShot786"] 
+    "victors": ["newbite","Symm","ChefLime","MrBazooka","OneShot786","HurryingJackM"] 
   },
   { 
     "name": "Gurkey Circles", 
@@ -436,7 +446,7 @@
     "id": "140476546", 
     "video": "hgxkwBJTMbI", 
     "thumbnail": "Thumbnail/DihMountain.png", 
-    "victors": ["MrBazooka","puffiballgd","OneShot786"] 
+    "victors": ["MrBazooka","puffiballgd","OneShot786","HurryingJackM"] 
   },
   { 
     "name": "Dihmountain Is Heck", 
@@ -446,7 +456,7 @@
     "id": "141052107", 
     "video": "oWoAM4WzeNc", 
     "thumbnail": "Thumbnail/Dih.png", 
-    "victors": [] 
+    "victors": ["MrBazooka"] 
   },
   { 
     "name": "Zoink WAVE", 
