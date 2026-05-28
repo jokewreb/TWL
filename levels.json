@@ -7,7 +7,7 @@
     "id": "141009216", 
     "video": "qaJ506dG0AQ", 
     "thumbnail": "Thumbnail/SymmNoSclears.png", 
-    "victors": [] 
+    "victors": ["OneShot786"] 
   },
   { 
     "name": "Sakupen Hellcles II", 
@@ -57,7 +57,7 @@
     "id": "140806539", 
     "video": "LM9pytsz0Ps", 
     "thumbnail": "Thumbnail/OZAWTSwag.png", 
-    "victors": ["OneShot786"] 
+    "victors": ["OneShot786","puffiballgd"] 
   },
   { 
     "name": "Alienation",
@@ -167,7 +167,7 @@
     "id": "140018517", 
     "video": "eQpD9o5q8Pk", 
     "thumbnail": "Thumbnail/Purgatori.png", 
-    "victors": ["xpealox","OneShot786","Karen"] 
+    "victors": ["xpealox","OneShot786","Karen","puffiballgd"] 
   },
   { 
     "name": "Silent Akbar II", 
@@ -197,7 +197,7 @@
     "id": "139797989", 
     "video": "eVzYSmmUvpE", 
     "thumbnail": "Thumbnail/UltimateDihruction.png", 
-    "victors": ["xpealox","newbite","Symm","OneShot786","Karen"] 
+    "victors": ["xpealox","newbite","Symm","OneShot786","Karen","puffiballgd"] 
   },
   { 
     "name": "Happiest Day", 
@@ -227,7 +227,7 @@
     "id": "140422030", 
     "video": "https://medal.tv/games/geometry-dash/clips/mIHMPPdzJ-FqegAXI?invite=cr-MSxrOGUsNDk3ODU2OTQ2", 
     "thumbnail": "Thumbnail/Wavering.png", 
-    "victors": ["xpealox","OneShot786","MrBazooka","Karen"] 
+    "victors": ["xpealox","OneShot786","MrBazooka","Karen","puffiballgd"] 
   },
   { 
     "name": "Moody Sigma", 
@@ -257,7 +257,7 @@
     "id": "140666713", 
     "video": "sGOXVv6n-8A", 
     "thumbnail": "Thumbnail/WatchTheMoon.png", 
-    "victors": ["puffiballgd","MrBazooka","OneShot786","HurryingJackM","Karen"] 
+    "victors": ["puffiballgd","MrBazooka","OneShot786","HurryingJackM","Karen","jtohobby"] 
   },
     { 
     "name": "bro think he BoJ", 
@@ -267,7 +267,7 @@
     "id": "141317731", 
     "video": "USa2ZFGN93Q", 
     "thumbnail": "Thumbnail/Bro.jpg", 
-    "victors": ["OneShot786","Karen"] 
+    "victors": ["OneShot786","Karen","puffiballgd"] 
   },
   { 
     "name": "Old Wave Corridor", 
@@ -277,7 +277,7 @@
     "id": "139974918", 
     "video": "q9YDZzS8Ow", 
     "thumbnail": "Thumbnail/OldWaveCorridor.png", 
-    "victors": ["xpealox","Symm","MrBazooka","OneShot786","Karen"] 
+    "victors": ["xpealox","Symm","MrBazooka","OneShot786","Karen","HurryingJackM","puffiballgd"] 
   },
   { 
     "name": "Lost Signal", 
@@ -296,7 +296,7 @@
     "id": "139972029", 
     "video": "8ELYwPl1sBY", 
     "thumbnail": "Thumbnail/WaveCorridor.png", 
-    "victors": ["xpealox","ARandomBall","ZizoGMD","newbite","MrBazooka","Symm","puffiballgd","OneShot786","Karen"] 
+    "victors": ["xpealox","ARandomBall","ZizoGMD","newbite","MrBazooka","Symm","puffiballgd","OneShot786","Karen","HurryingJackM"] 
   },
   { 
     "name": "ChefLime Circles", 
@@ -306,7 +306,7 @@
     "id": "140080516", 
     "video": "SKdU9xnhDys", 
     "thumbnail": "Thumbnail/ChefLimeCircles.png", 
-    "victors": ["xpealox","Symm","ARandomBall","MrBazooka","newbite","OneShot786","Karen"] 
+    "victors": ["xpealox","Symm","ARandomBall","MrBazooka","newbite","OneShot786","Karen","HurryingJackM","puffiballgd"] 
   },
   { 
     "name": "Figo Likes Wave", 
@@ -326,7 +326,7 @@
     "id": "141011086", 
     "video": "https://medal.tv/games/geometry-dash/clips/mLMtGPFuMuZiXNwTi?invite=cr-MSxpNnEsNjI5MjU3MTI3", 
     "thumbnail": "Thumbnail/3Squared.png", 
-    "victors": ["ChefLime","OneShot786","MrBazooka","HurryingJackM","Karen"] 
+    "victors": ["ChefLime","OneShot786","MrBazooka","HurryingJackM","Karen","puffiballgd"] 
   },
   { 
     "name": "Sakupen PooPoo X", 
@@ -336,7 +336,7 @@
     "id": "141006285", 
     "video": "KfMKBmVnY6E", 
     "thumbnail": "Thumbnail/Poo.png", 
-    "victors": ["MrBazooka","HurryingJackM","Karen"] 
+    "victors": ["MrBazooka","HurryingJackM","Karen","OneShot786","puffiballgd"] 
   },
   { 
     "name": "Cowboys Demise", 
@@ -356,7 +356,7 @@
     "id": "140117104", 
     "video": "https://medal.tv/games/geometry-dash/clips/mGrKy9vKqDaVrlZ0t?invite=cr-MSxxdjksNjI5MjU3MTI3", 
     "thumbnail": "Thumbnail/SpamPractice.png", 
-    "victors": ["newbite","Symm","ChefLime","MrBazooka","OneShot786","HurryingJackM","Karen"] 
+    "victors": ["newbite","Symm","ChefLime","MrBazooka","OneShot786","HurryingJackM","Karen","puffiballgd"] 
   },
   { 
     "name": "Gurkey Circles", 
@@ -446,7 +446,7 @@
     "id": "141052107", 
     "video": "oWoAM4WzeNc", 
     "thumbnail": "Thumbnail/Dih.png", 
-    "victors": ["MrBazooka","OneShot786","Karen"] 
+    "victors": ["MrBazooka","OneShot786","Karen","puffiballgd"] 
   },
   { 
     "name": "Zoink WAVE", 
