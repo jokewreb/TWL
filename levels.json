@@ -1,5 +1,15 @@
 [
   { 
+    "name": "ZIRCONIUM SHARD", 
+    "points": 420, 
+    "creator": "newbite", 
+    "verifier": "lunikay", 
+    "id": "141489060", 
+    "video": "cRZX8agj1hg", 
+    "thumbnail": "Thumbnail/Zir.jpg", 
+    "victors": [] 
+  },
+  { 
     "name": "SYMM NO SCLEARS", 
     "points": 400, 
     "creator": "puffiballgd", 
@@ -337,6 +347,16 @@
     "video": "https://medal.tv/games/geometry-dash/clips/mLMtGPFuMuZiXNwTi?invite=cr-MSxpNnEsNjI5MjU3MTI3", 
     "thumbnail": "Thumbnail/3Squared.png", 
     "victors": ["ChefLime","OneShot786","MrBazooka","HurryingJackM","Karen","puffiballgd"] 
+  },
+  { 
+    "name": "clutterfunk auto", 
+    "points": 130, 
+    "creator": "Flibbertwiggins", 
+    "verifier": "Flibbertwiggins", 
+    "id": "141721939", 
+    "video": "https://medal.tv/games/geometry-dash/clips/mPqaFPJlsZVik003C?invite=cr-MSxadFUsNjQxNDk4Nzkz&v=34", 
+    "thumbnail": "Thumbnail/Fibber.png", 
+    "victors": [] 
   },
   { 
     "name": "Sakupen PooPoo X", 
