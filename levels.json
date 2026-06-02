@@ -20,16 +20,6 @@
     "victors": ["OneShot786","lunikay"] 
   },
   { 
-    "name": "Sakupen Hellcles II", 
-    "points": 380, 
-    "creator": "Karen", 
-    "verifier": "Karen", 
-    "id": "141272648", 
-    "video": "tYUPsNWLYXs", 
-    "thumbnail": "Thumbnail/Sak2.png", 
-    "victors": [] 
-  },
-  { 
     "name": "Defeated Brajan", 
     "points": 375, 
     "creator": "Symm. & Armi12", 
@@ -48,6 +38,16 @@
     "video": "https://medal.tv/games/geometry-dash/clips/mN1Gq8ElmKAdX6HWm?invite=cr-MSxxMjgsNTE5NTM4MDk4&v=60", 
     "thumbnail": "Thumbnail/Jelly.png", 
     "victors": [] 
+  },
+  { 
+    "name": "Hypersonic Wave", 
+    "points": 260, 
+    "creator": "newbite", 
+    "verifier": "newbite", 
+    "id": "141482863", 
+    "video": "QxR3C-augMg", 
+    "thumbnail": "Thumbnail/Hyper.png", 
+    "victors": []
   },
   { 
     "name": "avrg sleep experience", 
@@ -78,6 +78,16 @@
     "video": "uNJyorfcHng", 
     "thumbnail": "Thumbnail/Alienation.png", 
     "victors": ["OneShot786"] 
+  },
+  { 
+    "name": "Weon",
+    "points": 265, 
+    "creator": "Karen", 
+    "verifier": "Karen", 
+    "id": "141323618", 
+    "video": "SpDn56nPVJg", 
+    "thumbnail": "Thumbnail/Weon.png", 
+    "victors": ["Karen"] 
   },
     { 
     "name": "consistency god",
