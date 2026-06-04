@@ -459,6 +459,26 @@
     "victors": ["xpealox","ARandomBall","newbite","ZizoGMD","Symm","MrBazooka","puffiballgd","OneShot786","Karen","Flibbertwiggins"] 
   },
   { 
+    "name": "Temple Of Doom", 
+    "points": 17, 
+    "creator": "ChefLime", 
+    "verifier": "ChefLime", 
+    "id": "141301382", 
+    "video": "TVcf3U5g9Lc", 
+    "thumbnail": "Thumbnail/Temple.png", 
+    "victors": [] 
+  },
+  { 
+    "name": "ChefLimeWaveBasic2", 
+    "points": 17, 
+    "creator": "ChefLime", 
+    "verifier": "ChefLime", 
+    "id": "141301382", 
+    "video": "TVcf3U5g9Lc", 
+    "thumbnail": "Thumbnail/Temple.png", 
+    "victors": [] 
+  },
+  { 
     "name": "Tung After Tung", 
     "points": 25, 
     "creator": "ChefLime", 
@@ -500,7 +520,7 @@
   },
   { 
     "name": "Swag Clubstep", 
-    "points": 4, 
+    "points": 5, 
     "creator": "ChefLime", 
     "verifier": "ChefLime", 
     "id": "139981798", 
@@ -509,8 +529,18 @@
     "victors": ["xpealox","ARandomBall","ZizoGMD","newbite","Symm","puffiballgd","MrBazooka","OneShot786","Karen"] 
   },
   { 
+    "name": "10 Seconds Hell", 
+    "points": 120, 
+    "creator": "jtohobby", 
+    "verifier": "jtohobby", 
+    "id": "141824810", 
+    "video": "thY1wL8eDh3bfJht", 
+    "thumbnail": "Thumbnail/10.jpg", 
+    "victors": [] 
+  },
+  { 
     "name": "ChefLimeWaveBasic1", 
-    "points": 3, 
+    "points": 4, 
     "creator": "ChefLime", 
     "verifier": "ChefLime", 
     "id": "140719114", 
@@ -520,7 +550,7 @@
   },
   { 
     "name": "Jynxzi Never Clear", 
-    "points": 2, 
+    "points": 3, 
     "creator": "ChefLime", 
     "verifier": "ChefLime", 
     "id": "140833328", 
@@ -529,8 +559,18 @@
     "victors": ["MrBazooka","puffiballgd","OneShot786","Karen","beat"] 
   },
   { 
-    "name": "Sakupen Hellcles", 
+    "name": "ChefLimeWaveBasic2", 
     "points": 1, 
+    "creator": "ChefLime", 
+    "verifier": "ChefLime", 
+    "id": "141384914", 
+    "video": "ATQzpVbzw8k", 
+    "thumbnail": "Thumbnail/Cheflime2.webp", 
+    "victors": [] 
+  },
+  { 
+    "name": "Sakupen Hellcles", 
+    "points": 2, 
     "creator": "ZizoGMD", 
     "verifier": "ZizoGMD", 
     "id": "140086188", 
