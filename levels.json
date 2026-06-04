@@ -459,6 +459,36 @@
     "victors": ["xpealox","ARandomBall","newbite","ZizoGMD","Symm","MrBazooka","puffiballgd","OneShot786","Karen","Flibbertwiggins"] 
   },
   { 
+    "name": "Gameplay", 
+    "points": 38, 
+    "creator": "MrBazooka", 
+    "verifier": "MrBazooka", 
+    "id": "141409898", 
+    "video": "QnywM-Oqw60", 
+    "thumbnail": "Thumbnail/Gameplay.jpg", 
+    "victors": [] 
+  },
+  { 
+    "name": "Chinese Anthem", 
+    "points": 70, 
+    "creator": "MrBazooka", 
+    "verifier": "MrBazooka", 
+    "id": "141856884", 
+    "video": "https://medal.tv/games/geometry-dash/clips/mPTzFp7iSowtB2E4Q?invite=cr-MSx2dTQsNjIzNjE5NTI1", 
+    "thumbnail": "Thumbnail/Chinese.png", 
+    "victors": [] 
+  },
+  { 
+    "name": "4444", 
+    "points": 280, 
+    "creator": "newbite", 
+    "verifier": "OneShot786", 
+    "id": "141335863", 
+    "video": "mxl7__eCoP4", 
+    "thumbnail": "Thumbnail/444.png", 
+    "victors": [] 
+  },
+  { 
     "name": "Temple Of Doom", 
     "points": 17, 
     "creator": "ChefLime", 
