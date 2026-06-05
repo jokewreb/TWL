@@ -177,7 +177,7 @@
     "id": "139994700", 
     "video": "D4ovfowsg7s", 
     "thumbnail": "Thumbnail/UnnerfedWaveCorridor.png", 
-    "victors": ["puffiballgd","OneShot786"] 
+    "victors": ["puffiballgd","OneShot786","Nova_Remnant","Nova_Remnant"] 
   },
   { 
     "name": "Purgatori", 
@@ -188,6 +188,16 @@
     "video": "eQpD9o5q8Pk", 
     "thumbnail": "Thumbnail/Purgatori.png", 
     "victors": ["xpealox","OneShot786","Karen","puffiballgd","MrBazooka"] 
+  },
+  { 
+    "name": "WAVERHOUSE", 
+    "points": 123, 
+    "creator": "ChefLime and Figo", 
+    "verifier": "puffiballgd", 
+    "id": "141919311", 
+    "video": "https://medal.tv/games/geometry-dash/clips/mR3EKpasZXd2Zyjhg?invite=cr-MSxjOGUsMTg4NDY3MDM3&v=37", 
+    "thumbnail": "Thumbnail/Waverhouse.png", 
+    "victors": [] 
   },
   { 
     "name": "Silent Akbar II", 
@@ -287,7 +297,7 @@
     "id": "141386522", 
     "video": "https://medal.tv/games/geometry-dash/clips/mNLjti2poAnuJSp_Y?invite=cr-MSxwMWYsNjIzNjE5NTI1", 
     "thumbnail": "Thumbnail/WAHH.png", 
-    "victors": ["OneShot786"] 
+    "victors": ["OneShot786","puffiballgd"] 
   },
     { 
     "name": "bro think he BoJ", 
@@ -366,7 +376,7 @@
     "id": "141721939", 
     "video": "https://medal.tv/games/geometry-dash/clips/mPqaFPJlsZVik003C?invite=cr-MSxadFUsNjQxNDk4Nzkz&v=34", 
     "thumbnail": "Thumbnail/Fibber.png", 
-    "victors": [] 
+    "victors": ["puffiballgd"] 
   },
   { 
     "name": "Sakupen PooPoo X", 
@@ -466,7 +476,7 @@
     "id": "141409898", 
     "video": "QnywM-Oqw60", 
     "thumbnail": "Thumbnail/Gameplay.jpg", 
-    "victors": [] 
+    "victors": ["ChefLime"] 
   },
   { 
     "name": "Chinese Anthem", 
@@ -476,7 +486,7 @@
     "id": "141856884", 
     "video": "https://medal.tv/games/geometry-dash/clips/mPTzFp7iSowtB2E4Q?invite=cr-MSx2dTQsNjIzNjE5NTI1", 
     "thumbnail": "Thumbnail/Chinese.png", 
-    "victors": [] 
+    "victors": ["puffiballgd"] 
   },
   { 
     "name": "4444", 
@@ -496,7 +506,7 @@
     "id": "141301382", 
     "video": "TVcf3U5g9Lc", 
     "thumbnail": "Thumbnail/Temple.png", 
-    "victors": [] 
+    "victors": ["puffiballgd"] 
   },
   { 
     "name": "Tung After Tung", 
@@ -586,7 +596,7 @@
     "id": "141384914", 
     "video": "ATQzpVbzw8k", 
     "thumbnail": "Thumbnail/Cheflime2.png", 
-    "victors": [] 
+    "victors": ["puffiballgd"] 
   },
   { 
     "name": "Sakupen Hellcles", 
