@@ -20,6 +20,16 @@
     "victors": ["OneShot786","lunikay"] 
   },
   { 
+    "name": "The Brajan dih", 
+    "points": 355, 
+    "creator": "Armi12", 
+    "verifier": "puffiballgd", 
+    "id": "142071407", 
+    "video": "Z1Ug_3PeFnY", 
+    "thumbnail": "Thumbnail/Brajan.png", 
+    "victors": [] 
+  },
+  { 
     "name": "Defeated Brajan", 
     "points": 375, 
     "creator": "Symm. & Armi12", 
@@ -579,6 +589,26 @@
     "victors": ["puffiballgd","MrBazooka","ItsJellyGD","OneShot786","Karen"] 
   },
   { 
+    "name": "yes", 
+    "points": 7, 
+    "creator": "jtohobby", 
+    "verifier": "jtohobby", 
+    "id": "142076595", 
+    "video": "UWXTIpy7-Rc", 
+    "thumbnail": "Thumbnail/yes.jpg", 
+    "victors": [] 
+  },
+  { 
+    "name": "no", 
+    "points": 160, 
+    "creator": "jtohobby", 
+    "verifier": "jtohobby", 
+    "id": "142076595", 
+    "video": "Ujby6T6uBaOw", 
+    "thumbnail": "Thumbnail/no.jpg", 
+    "victors": [] 
+  },
+  { 
     "name": "Jynxzi Never Clear", 
     "points": 3, 
     "creator": "ChefLime", 
@@ -587,6 +617,16 @@
     "video": "1Fk0cX8IN2U", 
     "thumbnail": "Thumbnail/Jynxzi.webp", 
     "victors": ["MrBazooka","puffiballgd","OneShot786","Karen","beat"] 
+  },
+  { 
+    "name": "Spiked", 
+    "points": 97, 
+    "creator": "MrBazooka", 
+    "verifier": "MrBazooka", 
+    "id": "142076529", 
+    "video": "https://medal.tv/games/geometry-dash/clips/mRrJbbHgjz5tpGHox?invite=cr-MSxwdTgsNjIzNjE5NTI1", 
+    "thumbnail": "Thumbnail/Spiked.webp", 
+    "victors": [] 
   },
   { 
     "name": "ChefLimeWaveBasic2", 
