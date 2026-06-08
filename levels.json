@@ -309,6 +309,26 @@
     "thumbnail": "Thumbnail/WAHH.png", 
     "victors": ["OneShot786","puffiballgd","newbite"] 
   },
+  { 
+    "name": "Bloodier Bath", 
+    "points": 124, 
+    "creator": "Karen", 
+    "verifier": "Karen", 
+    "id": "142083239", 
+    "video": "sPO2KJZi3kY", 
+    "thumbnail": "Thumbnail/Bloodier.png", 
+    "victors": [] 
+  },
+  { 
+    "name": "D Blocked", 
+    "points": 84, 
+    "creator": "MrBazooka", 
+    "verifier": "MrBazooka", 
+    "id": "142111163", 
+    "video": "https://medal.tv/games/geometry-dash/clips/mRzIP5ALba2F4J3fH?invite=cr-MSxnaHMsNjIzNjE5NTI1", 
+    "thumbnail": "Thumbnail/D.png", 
+    "victors": [] 
+  },
     { 
     "name": "bro think he BoJ", 
     "points": 83, 
@@ -318,6 +338,16 @@
     "video": "USa2ZFGN93Q", 
     "thumbnail": "Thumbnail/Bro.jpg", 
     "victors": ["OneShot786","Karen","puffiballgd","MrBazooka","Flibbertwiggins"] 
+  },
+    { 
+    "name": "maybe he is BoJ", 
+    "points": 89, 
+    "creator": "jtohobby", 
+    "verifier": "jtohobby", 
+    "id": "141390076", 
+    "video": "o7GFtyckkXo", 
+    "thumbnail": "Thumbnail/Maybe.jpg", 
+    "victors": [] 
   },
   { 
     "name": "Old Wave Corridor", 
@@ -387,6 +417,16 @@
     "video": "https://medal.tv/games/geometry-dash/clips/mPqaFPJlsZVik003C?invite=cr-MSxadFUsNjQxNDk4Nzkz&v=34", 
     "thumbnail": "Thumbnail/Fibber.png", 
     "victors": ["puffiballgd"] 
+  },
+  { 
+    "name": "auto play area", 
+    "points": 127, 
+    "creator": "Flibbertwiggins", 
+    "verifier": "Flibbertwiggins", 
+    "id": "142192812", 
+    "video": "https://medal.tv/games/geometry-dash/clips/mRX2KFHWmnNVZc4e5?invite=cr-MSxYQkksNjQxNDk4Nzkz", 
+    "thumbnail": "Thumbnail/Auto.png", 
+    "victors": [] 
   },
   { 
     "name": "Sakupen PooPoo X", 
