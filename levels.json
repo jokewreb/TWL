@@ -30,6 +30,16 @@
     "victors": [] 
   },
   { 
+    "name": "Toocub3d", 
+    "points": 365, 
+    "creator": "puffiballGD", 
+    "verifier": "puffiballgd", 
+    "id": "137723829", 
+    "video": "Fgl51rwpMP8", 
+    "thumbnail": "Thumbnail/Too.png", 
+    "victors": [] 
+  },
+  { 
     "name": "Defeated Brajan", 
     "points": 375, 
     "creator": "Symm. & Armi12", 
@@ -308,6 +318,26 @@
     "video": "sGOXVv6n-8A", 
     "thumbnail": "Thumbnail/WatchTheMoon.png", 
     "victors": ["puffiballgd","MrBazooka","OneShot786","HurryingJackM","Karen","jtohobby","Flibbertwiggins","beat","newbite"] 
+  },
+  { 
+    "name": "WAVEWHALS", 
+    "points": 70, 
+    "creator": "ChefLime", 
+    "verifier": "ChefLime", 
+    "id": "143284986", 
+    "video": "6Pp8EcPLOPQ", 
+    "thumbnail": "Thumbnail/whals.png", 
+    "victors": ["ZizoGMD"] 
+  },
+  { 
+    "name": "Nerfed Wave Corridor", 
+    "points": 43, 
+    "creator": "ChefLime", 
+    "verifier": "ChefLime", 
+    "id": "142515558", 
+    "video": "2DIs3UAjpEs", 
+    "thumbnail": "Thumbnail/corridorn.png", 
+    "victors": [] 
   },
   { 
     "name": "WAHH", 
