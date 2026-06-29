@@ -90,14 +90,24 @@
     "victors": ["OneShot786","puffiballgd"] 
   },
   { 
-      "name": "Furry Circles", 
+    "name": "Furry Circles", 
     "points": 215, 
     "creator": "MrBazooka", 
     "verifier": "MrBazooka", 
     "id": "143648777", 
-    "video": "https://medal.tv/games/geometry-dash/clips/n09rsRf5xo1ZdBpko?invite=cr-MSw5YWQsMzc5MDEwMTE2", 
+    "video": "https://medal.tv/games/geometry-dash/clips/n09rsRf5xo1ZdBpko?invite=cr-MSx0NWssMzc5MDEwMTE2", 
     "thumbnail": "Thumbnail/FurryCircles.png", 
     "victors": ["puffiballgd","newbite","Nova_Remnant"] 
+  },
+  { 
+    "name": "Bazooka Wave Basic 1", 
+    "points": 88, 
+    "creator": "MrBazooka", 
+    "verifier": "MrBazooka", 
+    "id": "143725534", 
+    "video": "https://medal.tv/games/geometry-dash/clips/n0yBsQVWrPfMuCFoh?invite=cr-MSxzcmMsMzc5MDEwMTE2", 
+    "thumbnail": "Thumbnail/Bazooka.jpg", 
+    "victors": [] 
   },
   { 
     "name": "Alienation",
@@ -248,6 +258,16 @@
     "video": "https://medal.tv/games/geometry-dash/clips/mLKiVBAGDyyj4nXKY?invite=cr-MSxpd0EsMTg4NDY3MDM3&v=20", 
     "thumbnail": "Thumbnail/Defeated.png", 
     "victors": ["OneShot786","Karen"] 
+  },
+  { 
+    "name": "cycles wave", 
+    "points": 175, 
+    "creator": "HurryingJackM", 
+    "verifier": "puffiballgd", 
+    "id": "141854863", 
+    "video": "https://medal.tv/games/geometry-dash/clips/n0xaIiPnEUCWCWw08?invite=cr-MSxvVFMsMTg4NDY3MDM3&v=22", 
+    "thumbnail": "Thumbnail/cycleswave.png", 
+    "victors": [] 
   },
   { 
     "name": "ULTIMATE DIHRUCTION", 
@@ -447,6 +467,16 @@
     "video": "CTtChqnIGy4", 
     "thumbnail": "Thumbnail/FigoLikesWave.png", 
     "victors": ["newbite","puffiballgd","OneShot786","Karen","Flibbertwiggins","MrBazooka"] 
+  },
+  { 
+    "name": "Figo Likes Wave", 
+    "points": 57, 
+    "creator": "MrBazooka", 
+    "verifier": "MrBazooka", 
+    "id": "143693449", 
+    "video": "https://medal.tv/games/geometry-dash/clips/n0piAgEfp1hjss31A?invite=cr-MSx5cXcsMzc5MDEwMTE2", 
+    "thumbnail": "Thumbnail/YTShorts.jpg", 
+    "victors": [] 
   },
   { 
     "name": "3squared", 
