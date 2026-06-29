@@ -387,7 +387,7 @@
     "id": "142083239", 
     "video": "sPO2KJZi3kY", 
     "thumbnail": "Thumbnail/Bloodier.png", 
-    "victors": [] 
+    "victors": ["puffiballgd"] 
   },
   { 
     "name": "D Blocked", 
@@ -397,7 +397,7 @@
     "id": "142111163", 
     "video": "https://medal.tv/games/geometry-dash/clips/mRzIP5ALba2F4J3fH?invite=cr-MSxnaHMsNjIzNjE5NTI1", 
     "thumbnail": "Thumbnail/D.png", 
-    "victors": ["newbite"] 
+    "victors": ["newbite","puffiballgd"] 
   },
   { 
     "name": "bro think he BoJ", 
@@ -417,7 +417,7 @@
     "id": "141390076", 
     "video": "o7GFtyckkXo", 
     "thumbnail": "Thumbnail/Maybe.jpg", 
-    "victors": ["Okrun","MrBazooka","newbite"] 
+    "victors": ["Okrun","MrBazooka","newbite","puffiballgd"] 
   },
   { 
     "name": "Old Wave Corridor", 
@@ -506,7 +506,7 @@
     "id": "142192812", 
     "video": "https://medal.tv/games/geometry-dash/clips/mRX2KFHWmnNVZc4e5?invite=cr-MSxYQkksNjQxNDk4Nzkz", 
     "thumbnail": "Thumbnail/Auto.jpg", 
-    "victors": ["Okrun"] 
+    "victors": ["Okrun","puffiballgd"] 
   },
   { 
     "name": "Sakupen PooPoo X", 
@@ -616,7 +616,7 @@
     "id": "141409898", 
     "video": "QnywM-Oqw60", 
     "thumbnail": "Thumbnail/Gameplay.jpg", 
-    "victors": ["ChefLime","newbite"] 
+    "victors": ["ChefLime","newbite","puffiballgd"] 
   },
   { 
     "name": "Chinese Anthem", 
@@ -726,7 +726,7 @@
     "id": "142076605", 
     "video": "UWXTIpy7-Rc", 
     "thumbnail": "Thumbnail/yes.jpg", 
-    "victors": ["MrBazooka","ChefLime","newbite"] 
+    "victors": ["MrBazooka","ChefLime","newbite","puffiballgd"] 
   },
   { 
     "name": "no", 
@@ -736,7 +736,7 @@
     "id": "142076595", 
     "video": "jby6T6uBaOw", 
     "thumbnail": "Thumbnail/no.jpg", 
-    "victors": ["Okrun","newbite","MrBazooka"] 
+    "victors": ["Okrun","newbite","MrBazooka","puffiballgd"] 
   },
   { 
     "name": "Jynxzi Never Clear", 
@@ -756,7 +756,7 @@
     "id": "142076529", 
     "video": "https://medal.tv/games/geometry-dash/clips/mRrJbbHgjz5tpGHox?invite=cr-MSxwdTgsNjIzNjE5NTI1", 
     "thumbnail": "Thumbnail/Spiked.png", 
-    "victors": ["newbite"] 
+    "victors": ["newbite","puffiballgd"] 
   },
   { 
     "name": "ChefLimeWaveBasic2", 
