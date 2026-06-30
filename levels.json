@@ -20,6 +20,16 @@
     "victors": ["OneShot786","lunikay"] 
   },
   { 
+    "name": "ULTIMATE pants eater", 
+    "points": 390, 
+    "creator": "newbite", 
+    "verifier": "newbite", 
+    "id": "143500994", 
+    "video": "Tqy9BJ6mJEU", 
+    "thumbnail": "Thumbnail/panteat.jpg", 
+    "victors": [] 
+  },
+  { 
     "name": "The Brajan dih", 
     "points": 355, 
     "creator": "Armi12", 
@@ -200,6 +210,16 @@
     "victors": ["OneShot786"] 
   },
   { 
+    "name": "Dumbfound Cosmos II", 
+    "points": 260, 
+    "creator": "Symm", 
+    "verifier": "Symm", 
+    "id": "143505580", 
+    "video": "https://medal.tv/games/geometry-dash/clips/mZn7oWKvjD11Sva2y?invite=cr-MSxvMnEsNDMyMzU1MDM3&v=18", 
+    "thumbnail": "Thumbnail/dumbfound.jpg",
+    "victors": [] 
+  },
+  { 
     "name": "Vendetas Hair", 
     "points": 240, 
     "creator": "Symm.", 
@@ -267,6 +287,16 @@
     "id": "141854863", 
     "video": "https://medal.tv/games/geometry-dash/clips/n0xaIiPnEUCWCWw08?invite=cr-MSxvVFMsMTg4NDY3MDM3&v=22", 
     "thumbnail": "Thumbnail/cycleswave.png", 
+    "victors": [] 
+  },
+  { 
+    "name": "Hell Spam", 
+    "points": 96, 
+    "creator": "MrBazooka", 
+    "verifier": "puffiballgd", 
+    "id": "143793875", 
+    "video": "https://medal.tv/games/geometry-dash/clips/n0XgclXyCJOECdvIB?invite=cr-MSxwOUwsMTg4NDY3MDM3&v=20", 
+    "thumbnail": "Thumbnail/hellspam.jpg", 
     "victors": [] 
   },
   { 
@@ -639,6 +669,16 @@
     "victors": ["Karen"] 
   },
   { 
+    "name": "Cat City", 
+    "points": 277, 
+    "creator": "newbite", 
+    "verifier": "newbite", 
+    "id": "143842742", 
+    "video": "Bm4R0HBRWsE", 
+    "thumbnail": "Thumbnail/catcity.png", 
+    "victors": [] 
+  },
+  { 
     "name": "Temple Of Doom", 
     "points": 36, 
     "creator": "ChefLime", 
@@ -647,6 +687,16 @@
     "video": "TVcf3U5g9Lc", 
     "thumbnail": "Thumbnail/Temple.png", 
     "victors": ["puffiballgd","MrBazooka"] 
+  },
+  { 
+    "name": "ChefLimeWaveBasic3", 
+    "points": 8, 
+    "creator": "ChefLime", 
+    "verifier": "ChefLime", 
+    "id": "143694353", 
+    "video": "7WnQ9PEDbUM", 
+    "thumbnail": "Thumbnail/cheflime3.png", 
+    "victors": ["MrBazooka"] 
   },
   { 
     "name": "Tung After Tung", 
