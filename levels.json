@@ -110,6 +110,16 @@
     "victors": ["puffiballgd","newbite","Nova_Remnant"] 
   },
   { 
+    "name": "polargeisted", 
+    "points": 210, 
+    "creator": "HurryingJackM", 
+    "verifier": "HurryingJackM", 
+    "id": "144152641", 
+    "video": "https://medal.tv/games/geometry-dash/clips/n325RZX1AZT64lJGd?invite=cr-MSxuODgsNjI5OTQ2MTIx", 
+    "thumbnail": "Thumbnail/polargeist.JPG", 
+    "victors": [] 
+  },
+  { 
     "name": "Bazooka Wave Basic 1", 
     "points": 88, 
     "creator": "MrBazooka", 
@@ -188,6 +198,16 @@
     "video": "bo6HXMN_8LE", 
     "thumbnail": "Thumbnail/SolarWave.png", 
     "victors": ["puffiballgd","Symm","OneShot786"] 
+  },
+  { 
+    "name": "DUAL !", 
+    "points": 290, 
+    "creator": "newbite", 
+    "verifier": "newbite", 
+    "id": "143885815", 
+    "video": "oq3BHsUGRrU", 
+    "thumbnail": "Thumbnail/dual!.png", 
+    "victors": [] 
   },
   { 
     "name": "visca barca", 
