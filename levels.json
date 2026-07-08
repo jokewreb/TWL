@@ -521,9 +521,10 @@
   },
   { 
     "name": "Lost Signal", 
-    "points": 65, "creator": 
-    "ChefLime", "verifier": 
-    "ChefLime", "id": "140217050", 
+    "points": 65, 
+    "creator":"ChefLime",
+    "verifier":"ChefLime",
+     "id": "140217050", 
     "video": "SPJuTwbBSeo", 
     "thumbnail": "Thumbnail/LostSignal.png", 
     "victors": ["puffiballgd","MrBazooka","ZizoGMD","OneShot786","HurryingJackM","Karen","Flibbertwiggins"] 
@@ -600,7 +601,7 @@
   },
   { 
     "name": "Sakupen PooPoo X", 
-    "points": 66, 
+    "points": 67, 
     "creator": "ChefLime", 
     "verifier": "ChefLime", 
     "id": "141006285", 
