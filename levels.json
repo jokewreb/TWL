@@ -100,6 +100,16 @@
     "victors": ["OneShot786"] 
   },
   { 
+    "name": "W E A K L I N G", 
+    "points": 228, 
+    "creator": "HurryingJackM", 
+    "verifier": "HurryingJackM", 
+    "id": "145160199", 
+    "video": "https://medal.tv/games/geometry-dash/clips/n8TeS2YY4XAJn2LYq?invite=cr-MSxPU2QsNjI5OTQ2MTIx", 
+    "thumbnail": "Thumbnail/WEAKLING.JPG", 
+    "victors": [] 
+  },
+  { 
     "name": "OZAWT Swag", 
     "points": 230, 
     "creator": "newbite", 
@@ -138,6 +148,26 @@
     "video": "https://medal.tv/games/geometry-dash/clips/n0yBsQVWrPfMuCFoh?invite=cr-MSxzcmMsMzc5MDEwMTE2", 
     "thumbnail": "Thumbnail/Bazooka.jpg", 
     "victors": ["ChefLime","bleepboopbop"] 
+  },
+  { 
+    "name": "Loud Hexagon", 
+    "points": 125, 
+    "creator": "MrBazooka and HurryingJackM", 
+    "verifier": "MrBazooka", 
+    "id": "143725534", 
+    "video": "https://medal.tv/games/geometry-dash/clips/n0yBsQVWrPfMuCFoh?invite=cr-MSxzcmMsMzc5MDEwMTE2", 
+    "thumbnail": "Thumbnail/LoudHexagon.png", 
+    "victors": [] 
+  },
+  { 
+    "name": "Title Wav", 
+    "points": 135, 
+    "creator": "HurryingJackM", 
+    "verifier": "MrBazooka", 
+    "id": "140218746", 
+    "video": "https://medal.tv/games/geometry-dash/clips/n8TSk5SpmZzZIU4tr?invite=cr-MSxmSEEsMzc5MDEwMTE22", 
+    "thumbnail": "Thumbnail/TitleWav.png", 
+    "victors": [] 
   },
   { 
     "name": "Alienation",
