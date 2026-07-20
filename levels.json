@@ -500,6 +500,16 @@
     "victors": ["MrBazooka","bleepboopbop"] 
   },
   { 
+    "name": "Silent Wave Corridor Infinity Unleashed XYZ", 
+    "points": 128, 
+    "creator": "ChefLime", 
+    "verifier": "MrBazooka", 
+    "id": "145254597", 
+    "video": "https://medal.tv/games/screen-capture/clips/n9u7vfSGrZYWrNDQJ?invite=cr-MSxZRE0sMzc5MDEwMTE2", 
+    "thumbnail": "Thumbnail/SWCIUXYZ.png", 
+    "victors": [] 
+  },
+  { 
     "name": "WAHH", 
     "points": 83, 
     "creator": "MrBazooka", 
@@ -998,6 +1008,16 @@
     "video": "ATQzpVbzw8k", 
     "thumbnail": "Thumbnail/Cheflime2.png", 
     "victors": ["puffiballgd","MrBazooka","boiledbacon"] 
+  },
+  { 
+    "name": "ChefLimeWaveBasic4", 
+    "points": 39, 
+    "creator": "ChefLime", 
+    "verifier": "ChefLime", 
+    "id": "145254406", 
+    "video": "F32FezBFhGg", 
+    "thumbnail": "Thumbnail/cheflime4.png", 
+    "victors": [] 
   },
   { 
     "name": "Sakupen Hellcles", 
