@@ -667,7 +667,7 @@
     "id": "145172634", 
     "video": "WP7rvZCDUGY", 
     "thumbnail": "Thumbnail/TWLVSC.png", 
-    "victors": [] 
+    "victors": ["MrBazooka"] 
   },
   { 
     "name": "TWL always clear", 
@@ -677,7 +677,7 @@
     "id": "144745144", 
     "video": "u-eN27eL5go", 
     "thumbnail": "Thumbnail/twlALWAYS.png", 
-    "victors": [] 
+    "victors": ["MrBazooka"] 
   },
   { 
     "name": "Loonboon Wave", 
@@ -687,7 +687,7 @@
     "id": "145240941", 
     "video": "Q_dxkdfvs5Q", 
     "thumbnail": "Thumbnail/Loonboon.png", 
-    "victors": [] 
+    "victors": ["MrBazooka"] 
   },
   {
     "name": "King Kong", 
@@ -817,7 +817,7 @@
     "id": "145200299", 
     "video": "0JoaapeYTz4", 
     "thumbnail": "Thumbnail/pigeon.jpg", 
-    "victors": [] 
+    "victors": ["MrBazooka"] 
   },
   { 
     "name": "Cat City", 
