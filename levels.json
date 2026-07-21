@@ -175,9 +175,19 @@
     "creator": "MrBazooka", 
     "verifier": "MrBazooka", 
     "id": "145168175", 
-    "video": "https://medal.tv/games/geometry-dash/clips/n95iShIUWosDWbgPZ?invite=cr-MSxrSkYsMzc5MDEwMTE2 ", 
+    "video": "https://medal.tv/games/geometry-dash/clips/n95iShIUWosDWbgPZ?invite=cr-MSxrSkYsMzc5MDEwMTE2", 
     "thumbnail": "Thumbnail/Belief.jpg", 
     "victors": ["puffiballgd","HurryingJackM"] 
+  },
+  { 
+    "name": "Autism          Wave", 
+    "points": 223, 
+    "creator": "MrBazooka", 
+    "verifier": "MrBazooka", 
+    "id": "145262719", 
+    "video": "https://medal.tv/games/geometry-dash/clips/n9x9Teh5QYP15y5Y6?invite=cr-MSxheEgsMzc5MDEwMTE2", 
+    "thumbnail": "Thumbnail/autism.png", 
+    "victors": [] 
   },
   { 
     "name": "Alienation",
