@@ -540,6 +540,26 @@
     "victors": ["puffiballgd"] 
   },
   { 
+    "name": "wave nation", 
+    "points": 119, 
+    "creator": "bleepboopbop", 
+    "verifier": "bleepboopbop", 
+    "id": "145348389", 
+    "video": "R5MJLq80vsYY", 
+    "thumbnail": "Thumbnail/wavenation.png", 
+    "victors": ["HurryingJackM","MrBazooka"] 
+  },
+  { 
+    "name": "dc wave but good", 
+    "points": 52, 
+    "creator": "bleepboopbop", 
+    "verifier": "bleepboopbop", 
+    "id": "145353444", 
+    "video": "OGA9p3IZ6IM", 
+    "thumbnail": "Thumbnail/dcwavevutgood.png", 
+    "victors": [] 
+  },
+  { 
     "name": "D Blocked", 
     "points": 85, 
     "creator": "MrBazooka", 
