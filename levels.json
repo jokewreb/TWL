@@ -380,6 +380,96 @@
     "victors": ["puffiballgd","xpealox","OneShot786","Karen","newbite","lunikay"] 
   },
   { 
+    "name": "crazy dave", 
+    "points": 116, 
+    "creator": "bleepboopbop", 
+    "verifier": "MrBazooka", 
+    "id": "145357162", 
+    "video": "https://medal.tv/games/geometry-dash/clips/na4r9soft_BvKDkNP?invite=cr-MSxVU0osMzc5MDEwMTE2", 
+    "thumbnail": "Thumbnail/crazydave.png", 
+    "victors": [] 
+  },
+  { 
+    "name": "helen keller chal", 
+    "points": 82, 
+    "creator": "bleepboopbop", 
+    "verifier": "bleepboopbop", 
+    "id": "145483552", 
+    "video": "gL6-d-FOO4U", 
+    "thumbnail": "Thumbnail/hellenkeller.png", 
+    "victors": [] 
+  },
+  { 
+    "name": "A", 
+    "points": 129, 
+    "creator": "Symm, 
+    "verifier": "Symm", 
+    "id": "145483552", 
+    "video": "gL6-d-FOO4U", 
+    "thumbnail": "Thumbnail/Bsymm.png", 
+    "victors": [] 
+  },
+  { 
+    "name": "C", 
+    "points": 213, 
+    "creator": "Symm, 
+    "verifier": "Symm", 
+    "id": "145531795", 
+    "video": "l9zEmQRkzDQ", 
+    "thumbnail": "Thumbnail/Csymm.png", 
+    "victors": [] 
+  },
+  { 
+    "name": "B", 
+    "points": 121, 
+    "creator": "Symm, 
+    "verifier": "Symm", 
+    "id": "145486335", 
+    "video": "jnwtLzsgSfY", 
+    "thumbnail": "Thumbnail/Asymm.png", 
+    "victors": [] 
+  },
+  { 
+    "name": "hi hru", 
+    "points": 86, 
+    "creator": "Symm, 
+    "verifier": "Symm", 
+    "id": "145425094", 
+    "video": "OiRHxh_ImEw", 
+    "thumbnail": "Thumbnail/hihru.jpg", 
+    "victors": [] 
+  },
+  { 
+    "name": "linba", 
+    "points": 92, 
+    "creator": "HurryingJackM, 
+    "verifier": "HurryingJackM", 
+    "id": "145485471", 
+    "video": "https://medal.tv/games/geometry-dash/clips/naRQhCLQaoJZ45wV5?invite=cr-MSxNNmMsNjI5OTQ2MTIx", 
+    "thumbnail": "Thumbnail/linba.JPG", 
+    "victors": [] 
+  },
+  { 
+    "name": "VSC unnerfed", 
+    "points": 352, 
+    "creator": "puffiballgd", 
+    "verifier": "puffiballgd", 
+    "id": "145551425", 
+    "video": "ECbA_RePMzY", 
+    "thumbnail": "Thumbnail/VSCunnerfed.png", 
+    "victors": [] 
+  },
+  { 
+    "name": "Titan", 
+    "points": 258, 
+    "creator": "ProBro675", 
+    "verifier": "ProBro675", 
+    "id": "135450881", 
+    "video": "7iZHdocX-HCGbTmc", 
+    "thumbnail": "Thumbnail/Titan.png", 
+    "victors": [] 
+  },
+  { 
     "name": "defeated ez nerf", 
     "points": 180, 
     "creator": "puffiballgd", 
@@ -591,7 +681,7 @@
   },
   { 
     "name": "Old Wave Corridor", 
-    "points": 82, 
+    "points": 81, 
     "creator": "ChefLime", 
     "verifier": "newbite", 
     "id": "139974918", 
@@ -701,7 +791,7 @@
   },
   { 
     "name": "TWL VSC", 
-    "points": 90, 
+    "points": 91, 
     "creator": "bleepboopbop", 
     "verifier": "bleepboopbop", 
     "id": "145172634", 
@@ -711,7 +801,7 @@
   },
   { 
     "name": "TWL always clear", 
-    "points": 86, 
+    "points": 87, 
     "creator": "bleepboopbop", 
     "verifier": "bleepboopbop", 
     "id": "144745144", 
@@ -721,7 +811,7 @@
   },
   { 
     "name": "Loonboon Wave", 
-    "points": 88, 
+    "points": 89, 
     "creator": "bleepboopbop", 
     "verifier": "bleepboopbop", 
     "id": "145240941", 
@@ -831,7 +921,7 @@
   },
   { 
     "name": "Chinese Anthem", 
-    "points": 87, 
+    "points": 88, 
     "creator": "MrBazooka", 
     "verifier": "MrBazooka", 
     "id": "141856884", 
