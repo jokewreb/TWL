@@ -7,7 +7,7 @@
     "id": "144369660", 
     "video": "wzks1jRunhw", 
     "thumbnail": "Thumbnail/aquarium.webp", 
-    "victors": [] 
+    "victors": ["melhandro"] 
   },
   { 
     "name": "ZIRCONIUM SHARD", 
@@ -17,6 +17,16 @@
     "id": "141489060", 
     "video": "cRZX8agj1hg", 
     "thumbnail": "Thumbnail/Zir.jpg", 
+    "victors": [] 
+  },
+  { 
+    "name": "tel aviv", 
+    "points": 410, 
+    "creator": "lunikay", 
+    "verifier": "lunikay", 
+    "id": "137192393", 
+    "video": "v=dabEUloGyQE&pp=0gcJCaMLAYcqIYzv", 
+    "thumbnail": "Thumbnail/telaviv.gif", 
     "victors": [] 
   },
   { 
@@ -48,6 +58,16 @@
     "video": "Z1Ug_3PeFnY", 
     "thumbnail": "Thumbnail/Brajan.png", 
     "victors": ["Ash43r","Symm"] 
+  },
+  { 
+    "name": "bikini bottom for go", 
+    "points": 370, 
+    "creator": "lunikay", 
+    "verifier": "lunikay", 
+    "id": "135634510", 
+    "video": "EON90JcGTcU&pp=0gcJCaMLAYcqIYzv", 
+    "thumbnail": "Thumbnail/bikinibottomforgo.png", 
+    "victors": [] 
   },
   { 
     "name": "Toocub3d", 
@@ -107,7 +127,7 @@
     "id": "145160199", 
     "video": "https://medal.tv/games/geometry-dash/clips/n8TeS2YY4XAJn2LYq?invite=cr-MSxPU2QsNjI5OTQ2MTIx", 
     "thumbnail": "Thumbnail/WEAKLING.JPG", 
-    "victors": ["lunikay"] 
+    "victors": ["lunikay","Symm"] 
   },
   { 
     "name": "OZAWT Swag", 
@@ -147,7 +167,7 @@
     "id": "143725534", 
     "video": "https://medal.tv/games/geometry-dash/clips/n0yBsQVWrPfMuCFoh?invite=cr-MSxzcmMsMzc5MDEwMTE2", 
     "thumbnail": "Thumbnail/Bazooka.jpg", 
-    "victors": ["ChefLime","bleepboopbop","puffiballgd"] 
+    "victors": ["ChefLime","bleepboopbop","puffiballgd","Symm"] 
   },
   { 
     "name": "Loud Hexagon", 
@@ -187,7 +207,7 @@
     "id": "145262719", 
     "video": "https://medal.tv/games/geometry-dash/clips/n9x9Teh5QYP15y5Y6?invite=cr-MSxheEgsMzc5MDEwMTE2", 
     "thumbnail": "Thumbnail/autism.png", 
-    "victors": ["puffiballgd","lunikay"] 
+    "victors": ["puffiballgd","lunikay","Symm"] 
   },
   { 
     "name": "Alienation",
@@ -357,7 +377,7 @@
     "id": "140018517", 
     "video": "eQpD9o5q8Pk", 
     "thumbnail": "Thumbnail/Purgatori.png", 
-    "victors": ["xpealox","OneShot786","Karen","puffiballgd","MrBazooka","newbite","Josh"] 
+    "victors": ["xpealox","OneShot786","Karen","puffiballgd","MrBazooka","newbite","Josh","Symm"] 
   },
   { 
     "name": "WAVERHOUSE", 
@@ -404,7 +424,7 @@
     "points": 129, 
     "creator": "Symm", 
     "verifier": "Symm", 
-    "id": "145483552", 
+    "id": "145477446", 
     "video": "6ZPdjiAKOJI", 
     "thumbnail": "Thumbnail/Bsymm.png", 
     "victors": [] 
@@ -448,6 +468,16 @@
     "video": "https://medal.tv/games/geometry-dash/clips/naRQhCLQaoJZ45wV5?invite=cr-MSxNNmMsNjI5OTQ2MTIx", 
     "thumbnail": "Thumbnail/linba.JPG", 
     "victors": ["Symm"] 
+  },
+  { 
+    "name": "Unknown Question", 
+    "points": 229, 
+    "creator": "HurryingJackM", 
+    "verifier": "Fallen and HurryingJackM", 
+    "id": "145625141", 
+    "video": "https://medal.tv/games/geometry-dash/clips/nbGoKAB1fq1koblmF?invite=cr-MSxYMWEsNjI5OTQ2MTIx", 
+    "thumbnail": "Thumbnail/unknownquestion.png", 
+    "victors": [] 
   },
   { 
     "name": "VSC unnerfed", 
@@ -513,11 +543,11 @@
     "name": "Happiest Day Unnerfed", 
     "points": 126, 
     "creator": "HurryingJackM", 
-    "verifier": "HurryingJackM", 
+    "verifier": "Symm", 
     "id": "140477318", 
     "video": "https://medal.tv/games/geometry-dash/clips/mGPCs5t5kjpyQi6S8?invite=cr-MSx4SXYsNDMyMzU1MDM3&v=26", 
     "thumbnail": "Thumbnail/HappiestDayUnnerfed.png", 
-    "victors": ["puffiballgd","xpealox","OneShot786","MrBazooka","Karen","Flibbertwiggins","Okrun","newbite"] 
+    "victors": ["puffiballgd","xpealox","OneShot786","MrBazooka","Karen","Flibbertwiggins","Okrun","newbite","HurryingJackM"] 
   },
   { 
     "name": "Wavering", 
@@ -577,7 +607,7 @@
     "id": "143284986", 
     "video": "6Pp8EcPLOPQ", 
     "thumbnail": "Thumbnail/whals.png", 
-    "victors": ["ZizoGMD","MrBazooka","newbite","bleepboopbop","puffiballgd","lunikay"] 
+    "victors": ["ZizoGMD","MrBazooka","newbite","bleepboopbop","puffiballgd","lunikay","Symm"] 
   },
   { 
     "name": "Nerfed Wave Corridor", 
@@ -657,7 +687,7 @@
     "id": "141317731", 
     "video": "USa2ZFGN93Q", 
     "thumbnail": "Thumbnail/Bro.jpg", 
-    "victors": ["OneShot786","Karen","puffiballgd","MrBazooka","Flibbertwiggins","lunikay"] 
+    "victors": ["OneShot786","Karen","puffiballgd","MrBazooka","Flibbertwiggins","lunikay","Symm"] 
   },
   { 
     "name": "maybe he is BoJ", 
@@ -717,7 +747,7 @@
     "id": "139854071", 
     "video": "CTtChqnIGy4", 
     "thumbnail": "Thumbnail/FigoLikesWave.png", 
-    "victors": ["newbite","puffiballgd","OneShot786","Karen","Flibbertwiggins","MrBazooka","bleepboopbop","lunikay","HurryingJackM"] 
+    "victors": ["newbite","puffiballgd","OneShot786","Karen","Flibbertwiggins","MrBazooka","bleepboopbop","lunikay","HurryingJackM","Symm"] 
   },
   { 
     "name": "YT Shorts Be Like", 
@@ -767,7 +797,7 @@
     "id": "141006285", 
     "video": "KfMKBmVnY6E", 
     "thumbnail": "Thumbnail/Poo.png", 
-    "victors": ["MrBazooka","HurryingJackM","Karen","OneShot786","puffiballgd","Flibbertwiggins","beat","Okrun","lunikay"] 
+    "victors": ["MrBazooka","HurryingJackM","Karen","OneShot786","puffiballgd","Flibbertwiggins","beat","Okrun","lunikay","Symm"] 
   },
   { 
     "name": "Cowboys Demise", 
@@ -987,7 +1017,7 @@
     "id": "144238787", 
     "video": "FedusNN604s", 
     "thumbnail": "Thumbnail/Gorrila.jpeg", 
-    "victors": ["ChefLime","MrBazooka","puffiballgd","lunikay"] 
+    "victors": ["ChefLime","MrBazooka","puffiballgd","lunikay","Symm"] 
   },
   { 
     "name": "Tung After Tung", 
@@ -1017,7 +1047,7 @@
     "id": "141052107", 
     "video": "oWoAM4WzeNc", 
     "thumbnail": "Thumbnail/Dih.png", 
-    "victors": ["MrBazooka","OneShot786","Karen","puffiballgd","lunikay"] 
+    "victors": ["MrBazooka","OneShot786","Karen","puffiballgd","lunikay","Symm"] 
   },
   { 
     "name": "Zoink WAVE", 
@@ -1107,7 +1137,7 @@
     "id": "143890983", 
     "video": "Kx1XrbrC5ek", 
     "thumbnail": "Thumbnail/GubbyWave.png", 
-    "victors": ["ChefLime","MrBazooka","puffiballgd","HurryingJackM","lunikay"] 
+    "victors": ["ChefLime","MrBazooka","puffiballgd","HurryingJackM","lunikay","Symm"] 
   },
   { 
     "name": "ChefLimeWaveBasic2", 
