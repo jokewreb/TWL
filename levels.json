@@ -421,7 +421,7 @@
   },
   { 
     "name": "A", 
-    "points": 129, 
+    "points": 222, 
     "creator": "Symm", 
     "verifier": "Symm", 
     "id": "145477446", 
@@ -431,7 +431,7 @@
   },
   { 
     "name": "C", 
-    "points": 213, 
+    "points": 256, 
     "creator": "Symm", 
     "verifier": "Symm", 
     "id": "145531795", 
@@ -441,12 +441,22 @@
   },
   { 
     "name": "B", 
-    "points": 121, 
+    "points": 217, 
     "creator": "Symm", 
     "verifier": "Symm", 
     "id": "145486335", 
     "video": "jnwtLzsgSfY", 
     "thumbnail": "Thumbnail/Asymm.png", 
+    "victors": [] 
+  },
+  { 
+    "name": "D", 
+    "points": 353, 
+    "creator": "Symm", 
+    "verifier": "Symm", 
+    "id": "145624285", 
+    "video": "KdtISLBfTlY", 
+    "thumbnail": "Thumbnail/Dsymm.png", 
     "victors": [] 
   },
   { 
