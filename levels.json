@@ -1,5 +1,15 @@
 [
   { 
+    "name": "EmErAlD", 
+    "points": 475, 
+    "creator": "Ash43r", 
+    "verifier": "Ash43r", 
+    "id": "145763031", 
+    "video": "d2xh3Ivz5tc", 
+    "thumbnail": "Thumbnail/EmErAlD.jpg", 
+    "victors": [] 
+  },
+  { 
     "name": "The Aquarium", 
     "points": 450, 
     "creator": "lunikay", 
@@ -278,6 +288,16 @@
     "video": "69xRbuBF6bQ", 
     "thumbnail": "Thumbnail/WaveControlIg.png", 
     "victors": ["OneShot786","stain","Blendro","lunikay"] 
+  },
+  { 
+    "name": "OLG Challenge", 
+    "points": 118, 
+    "creator": "FJKR", 
+    "verifier": "FJKR", 
+    "id": "145160199", 
+    "video": "https://medal.tv/games/geometry-dash/clips/ncp370lEmfWFyZOdv?invite=cr-MSxCTFIsNDM2Nzg5MDc5", 
+    "thumbnail": "Thumbnail/OLGchall.png", 
+    "victors": [] 
   },
   { 
     "name": "CIRCINUS", 
