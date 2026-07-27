@@ -30,6 +30,16 @@
     "victors": [] 
   },
   { 
+    "name": "DBS", 
+    "points": 405, 
+    "creator": "Ash43r", 
+    "verifier": "Ash43r", 
+    "id": "145635042", 
+    "video": "RvBQD-X5xE0", 
+    "thumbnail": "Thumbnail/dbs.png", 
+    "victors": [] 
+  },
+  { 
     "name": "SYMM NO SCLEARS", 
     "points": 400, 
     "creator": "puffiballgd", 
@@ -41,7 +51,7 @@
   },
   { 
     "name": "ULTIMATE pants eater", 
-    "points": 390, 
+    "points": 375 , 
     "creator": "newbite", 
     "verifier": "newbite", 
     "id": "143500994", 
@@ -81,13 +91,23 @@
   },
   { 
     "name": "Defeated Brajan", 
-    "points": 375, 
+    "points": 390, 
     "creator": "Symm & Armi12", 
     "verifier": "Symm", 
     "id": "127766355", 
     "video": "ZmX_l_ALCd4", 
     "thumbnail": "Thumbnail/DefeatedBrajan.png", 
     "victors": ["Karen"] 
+  },
+  { 
+    "name": "free era", 
+    "points": 363, 
+    "creator": "FJKR", 
+    "verifier": "FJKR", 
+    "id": "145731601", 
+    "video": "https://medal.tv/games/geometry-dash/clips/ncjz3ywqRVDdRccKC?invite=cr-MSxMbmcsNDM2Nzg5MDc5", 
+    "thumbnail": "Thumbnail/freeera.png", 
+    "victors": [] 
   },
   { 
     "name": "Jelly NEVER Clear", 
@@ -460,6 +480,26 @@
     "victors": [] 
   },
   { 
+    "name": "E", 
+    "points": 351, 
+    "creator": "Symm", 
+    "verifier": "Symm", 
+    "id": "145678027", 
+    "video": "ALtq8mQ5yQg", 
+    "thumbnail": "Thumbnail/Esymm.png", 
+    "victors": [] 
+  },
+  { 
+    "name": "F", 
+    "points": 357, 
+    "creator": "Symm", 
+    "verifier": "Symm", 
+    "id": "145678027", 
+    "video": "ALtq8mQ5yQg", 
+    "thumbnail": "Thumbnail/Fsymm.png", 
+    "victors": [] 
+  },
+  { 
     "name": "hi hru", 
     "points": 86, 
     "creator": "Symm", 
@@ -601,7 +641,7 @@
   },
   { 
     "name": "watch the moon", 
-    "points": 79, 
+    "points": 78, 
     "creator": "ChefLime", 
     "verifier": "ChefLime", 
     "id": "140666713", 
@@ -701,7 +741,7 @@
   },
   { 
     "name": "maybe he is BoJ", 
-    "points": 89, 
+    "points": 90, 
     "creator": "jtohobby", 
     "verifier": "jtohobby", 
     "id": "141390076", 
@@ -891,7 +931,7 @@
   },
   { 
     "name": "Beefeated Brajan", 
-    "points": 78, 
+    "points": 77, 
     "creator": "ChefLime", 
     "verifier": "ChefLime", 
     "id": "144302722", 
@@ -928,6 +968,16 @@
     "video": "RZ9abrQnMDs", 
     "thumbnail": "Thumbnail/ArbysDihBurger.png", 
     "victors": ["xpealox","ARandomBall","newbite","ZizoGMD","Symm","puffiballgd","MrBazooka","OneShot786","Karen","Okrun","lunikay","FJKR"] 
+  },
+  { 
+    "name": "wendys pluh fries", 
+    "points": 80, 
+    "creator": "ChefLime", 
+    "verifier": "ChefLime", 
+    "id": "145695401", 
+    "video": "n6MRAcH2ynM", 
+    "thumbnail": "Thumbnail/wendys.png", 
+    "victors": [] 
   },
   { 
     "name": "i miss u szeltik", 
@@ -971,7 +1021,7 @@
   },
   { 
     "name": "pigeon", 
-    "points": 80, 
+    "points": 79, 
     "creator": "ChefLime", 
     "verifier": "ChefLime", 
     "id": "145200299", 
