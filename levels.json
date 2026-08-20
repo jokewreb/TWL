@@ -151,7 +151,7 @@
   },
   { 
     "name": "OZAWT Swag", 
-    "points": 230, 
+    "points": 235, 
     "creator": "newbite", 
     "verifier": "newbite", 
     "id": "140806539", 
@@ -340,12 +340,22 @@
     "victors": ["OneShot786","FJKR","MrBazooka"] 
   },
   { 
+    "name": "4 wide", 
+    "points": 230, 
+    "creator": "HurryingJackM", 
+    "verifier": "HurryingJackM", 
+    "id": "146210800", 
+    "video": "https://medal.tv/games/geometry-dash/clips/nf6NekxA4p3fUjJm7?invite=cr-MSx1bmYsNjI5OTQ2MTIx", 
+    "thumbnail": "Thumbnail/4wide.JPG", 
+    "victors": ["OneShot786","FJKR","MrBazooka"] 
+  },
+  { 
     "name": "Dumbfound Cosmos II", 
     "points": 257, 
     "creator": "Symm", 
     "verifier": "Symm", 
     "id": "143505580", 
-    "video": "https://medal.tv/games/geometry-dash/clips/mZn7oWKvjD11Sva2y?invite=cr-MSxvMnEsNDMyMzU1MDM3&v=18", 
+    "video": "https://medal.tv/games/geometry-dash/clips/nf6NekxA4p3fUjJm7?invite=cr-MSx1bmYsNjI5OTQ2MTIx", 
     "thumbnail": "Thumbnail/dumbfound.jpg",
     "victors": ["FJKR"] 
   },
@@ -408,6 +418,16 @@
     "video": "https://medal.tv/games/geometry-dash/clips/mR3EKpasZXd2Zyjhg?invite=cr-MSxjOGUsMTg4NDY3MDM3&v=37", 
     "thumbnail": "Thumbnail/Waverhouse.png", 
     "victors": ["Karen","Okrun","MrBazooka","Symm","FJKR"] 
+  },
+  { 
+    "name": "URANIUM", 
+    "points": 165, 
+    "creator": "ChefLime", 
+    "verifier": "ChefLime", 
+    "id": "147171390", 
+    "video": "bOqzEWYrRsc", 
+    "thumbnail": "Thumbnail/URANIUM.png", 
+    "victors": [] 
   },
   { 
     "name": "Silent Akbar II", 
@@ -1051,7 +1071,7 @@
   },
   { 
     "name": "ChefLimeWaveBasic3", 
-    "points": 9, 
+    "points": 10, 
     "creator": "ChefLime", 
     "verifier": "ChefLime", 
     "id": "143694353", 
@@ -1101,7 +1121,7 @@
   },
   { 
     "name": "Zoink WAVE", 
-    "points": 10, 
+    "points": 11, 
     "creator": "ChefLime", 
     "verifier": "ChefLime", 
     "id": "139784604", 
@@ -1141,7 +1161,7 @@
   },
   { 
     "name": "yes", 
-    "points": 8, 
+    "points": 9, 
     "creator": "jtohobby", 
     "verifier": "jtohobby", 
     "id": "142076605", 
@@ -1208,6 +1228,16 @@
     "video": "F32FezBFhGg", 
     "thumbnail": "Thumbnail/cheflime4.png", 
     "victors": ["MrBazooka","HurryingJackM","puffiballgd","lunikay","Symm","FJKR"] 
+  },
+  { 
+    "name": "ChefLimeWaveBasic5", 
+    "points": 8, 
+    "creator": "ChefLime", 
+    "verifier": "ChefLime", 
+    "id": "145766436", 
+    "video": "TlZpIddPSOM", 
+    "thumbnail": "Thumbnail/ChefLime5.png", 
+    "victors": ["MrBazooka"] 
   },
   { 
     "name": "Sakupen Hellcles", 
