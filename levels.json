@@ -320,6 +320,26 @@
     "victors": ["Symm","Ash43r"] 
   },
   { 
+    "name": "PLUTONIUM", 
+    "points": 85, 
+    "creator": "ChefLime", 
+    "verifier": "ChefLime", 
+    "id": "147436995", 
+    "video": "ypaAnhkIKxo", 
+    "thumbnail": "Thumbnail/PLUTONIUM.png", 
+    "victors": [] 
+  },
+  { 
+    "name": "NEPTUNIUM", 
+    "points": 211, 
+    "creator": "ChefLime", 
+    "verifier": "ChefLime", 
+    "id": "147378917", 
+    "video": "1PslC9HzcLw", 
+    "thumbnail": "Thumbnail/NEPTUNIUM.png", 
+    "victors": ["MrBazooka"] 
+  },
+  { 
     "name": "visca barca", 
     "points": 275, 
     "creator": "xpealox", 
@@ -778,6 +798,16 @@
     "video": "SPJuTwbBSeo", 
     "thumbnail": "Thumbnail/LostSignal.png", 
     "victors": ["puffiballgd","MrBazooka","ZizoGMD","OneShot786","HurryingJackM","Karen","Flibbertwiggins","lunikay","Symm","FJKR"] 
+  },
+  { 
+    "name": "Crying Heart", 
+    "points": 78, 
+    "creator": "ZizoGMD", 
+    "verifier": "ZizoGMD", 
+    "id": "147436995", 
+    "video": "https://medal.tv/games/geometry-dash/clips/nmLAZ7sOG9DDzXWX_?invite=cr-MSw5VUMsNzUwNDgwNDIz", 
+    "thumbnail": "Thumbnail/CryingHeart.png", 
+    "victors": ["ChefLime"] 
   },
   { 
     "name": "Wave Corridor", 
