@@ -341,7 +341,7 @@
   },
   { 
     "name": "visca barca", 
-    "points": 275, 
+    "points": 270, 
     "creator": "xpealox", 
     "verifier": "xpealox", 
     "id": "140490319", 
@@ -1278,5 +1278,16 @@
     "video": "https://medal.tv/games/geometry-dash/clips/mGkOegjLEfNh2eCgA?invite=cr-MSwyVFAsNjI5MjU3MTI3&v=22", 
     "thumbnail": "Thumbnail/SakupenHellcles.png", 
     "victors": ["xpealox","Symm","ARandomBall","puffiballgd","MrBazooka","newbite","Karen","ChefLime","ItsJellyGD","OneShot786","lunikay","FJKR","fearflora"] 
+  },
+  {
+    "name": "quoi", 
+    "points": 273, 
+    "creator": "Okrun", 
+    "verifier": "Okrun", 
+    "id": "147477033", 
+    "video": "https://youtu.be/gY5GkjlYxTc", 
+    "thumbnail": "Thumbnail/quoi (temporary).png", 
+    "victors": []
   }
+  
 ]
