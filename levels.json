@@ -111,7 +111,7 @@
   },
   { 
     "name": "free era", 
-    "points": 221, 
+    "points": 220, 
     "creator": "FJKR", 
     "verifier": "FJKR", 
     "id": "145731601", 
@@ -141,7 +141,7 @@
   },
   { 
     "name": "W E A K L I N G", 
-    "points": 225, 
+    "points": 224, 
     "creator": "HurryingJackM", 
     "verifier": "HurryingJackM", 
     "id": "145160199", 
@@ -221,7 +221,7 @@
   },
   { 
     "name": "Autism          Wave", 
-    "points": 223, 
+    "points": 222, 
     "creator": "MrBazooka", 
     "verifier": "MrBazooka", 
     "id": "145262719", 
@@ -421,7 +421,7 @@
   },
   { 
     "name": "Unnerfed Wave Corridor", 
-    "points": 226, 
+    "points": 225, 
     "creator": "ChefLime & ItsJellyGD", 
     "verifier": "ItsJellyGD", 
     "id": "139994700", 
@@ -481,7 +481,7 @@
   },
   { 
     "name": "A", 
-    "points": 222, 
+    "points": 221, 
     "creator": "Symm", 
     "verifier": "Symm", 
     "id": "145477446", 
@@ -581,7 +581,7 @@
   },
   { 
     "name": "defeated ez nerf", 
-    "points": 224, 
+    "points": 223, 
     "creator": "puffiballgd", 
     "verifier": "puffiballgd", 
     "id": "141000779", 
@@ -591,7 +591,7 @@
   },
   { 
     "name": "cycles wave", 
-    "points": 220, 
+    "points": 219, 
     "creator": "HurryingJackM", 
     "verifier": "puffiballgd", 
     "id": "141854863", 
@@ -1288,6 +1288,15 @@
     "video": "https://youtu.be/gY5GkjlYxTc", 
     "thumbnail": "Thumbnail/quoi (temporary).png", 
     "victors": []
-  }
+  },
+  {
+    "name": "sh1awase", 
+    "points": 226, 
+    "creator": "sevehweveh", 
+    "verifier": "ChillTipTop", 
+    "id": "147448660", 
+    "video": "https://www.youtube.com/watch?v=-IXV49zzoRg", 
+    "thumbnail": "", 
+    "victors": []
   
 ]
