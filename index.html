@@ -77,6 +77,39 @@
 
                 data.forEach((lvl, i) => {
                     const rank = i + 1;
+
+                    if (rank === 1) {
+                        const header = document.createElement('div');
+                        header.style.cssText = "font-weight: 800; font-size: 0.9rem; color: var(--accent, #47e5bc); letter-spacing: 1.5px; text-transform: uppercase; padding: 12px 10px 6px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 8px;";
+                        header.innerText = "Main List";
+                        side.appendChild(header);
+                    } else if (rank === 76) {
+                        const header = document.createElement('div');
+                        header.style.cssText = "font-weight: 800; font-size: 0.9rem; color: #aaa; letter-spacing: 1.5px; text-transform: uppercase; padding: 18px 10px 6px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 8px;";
+                        header.innerText = "Extended List";
+                        side.appendChild(header);
+                    } else if (rank === 151) {
+                        const legacyContainer = document.createElement('div');
+                        legacyContainer.style.cssText = "display: flex; align-items: center; justify-content: space-between; padding: 18px 10px 6px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 8px;";
+                        
+                        const header = document.createElement('div');
+                        header.style.cssText = "font-weight: 800; font-size: 0.9rem; color: #666; letter-spacing: 1.5px; text-transform: uppercase;";
+                        header.innerText = "Legacy List";
+                        
+                        const btn = document.createElement('a');
+                        btn.href = "legacy.html";
+                        btn.innerText = "VIEW ALL";
+                        btn.style.cssText = "font-size: 0.7rem; font-weight: 700; color: var(--accent, #47e5bc); text-decoration: none; border: 1px solid var(--accent, #47e5bc); padding: 3px 8px; border-radius: 4px; transition: all 0.2s ease;";
+                        btn.onmouseover = () => { btn.style.background = 'var(--accent, #47e5bc)'; btn.style.color = '#000'; };
+                        btn.onmouseout = () => { btn.style.background = 'transparent'; btn.style.color = 'var(--accent, #47e5bc)'; };
+
+                        legacyContainer.appendChild(header);
+                        legacyContainer.appendChild(btn);
+                        side.appendChild(legacyContainer);
+                    }
+
+                    const displayPts = rank > 150 ? "LEGACY" : `${lvl.points} PTS`;
+
                     const div = document.createElement('div');
                     div.className = `list-item ${rank <= 3 ? 'top-'+rank : ''}`;
                     
@@ -96,7 +129,7 @@
                         <img src="${imgSource}" class="thumb-mini" style="width: 80px; height: 45px; object-fit: cover; flex-shrink: 0; border-radius: 4px;">
                         <div style="flex: 1; min-width: 0; overflow: hidden; text-align: left;">
                             <div style="font-weight:700; font-size:0.85rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${lvl.name}</div>
-                            <div style="font-size:0.7rem; color:#666; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${lvl.points} PTS</div>
+                            <div style="font-size:0.7rem; color:#666; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${displayPts}</div>
                         </div>
                     `;
                     div.onclick = () => update(lvl, rank);
@@ -136,7 +169,7 @@
             document.getElementById('s-verifier').innerHTML = `<a href="player.html?name=${encodeURIComponent(lvl.verifier)}" class="player-link">${lvl.verifier}</a>`;
             
             document.getElementById('s-id').innerText = lvl.id;
-            document.getElementById('s-pts').innerText = lvl.points;
+            document.getElementById('s-pts').innerText = rank > 150 ? "LEGACY" : lvl.points;
 
             const vid = document.getElementById('main-vid');
             if (lvl.video) {
