@@ -1335,8 +1335,9 @@
     "creator": "sevehweveh",
     "verifier": "sevehweveh",
     "id": "147658436",
-    "video": "VX24EFSldvv1snQn"
-    "thumbnail": "Thumbnail/ordinarylife.png"
+    "video": "VX24EFSldvv1snQn",
+    "thumbnail": "Thumbnail/ordinarylife.png",
+    "victors": []
   },
   {
     "name": "newbites nightmare (boner)",
@@ -1344,7 +1345,8 @@
     "creator": "puufy",
     "verifier": "puufy",
     "id": "147596018",
-    "video": "eyauPsZV-k4"
-    "thumbnail": "Thumbnail/newbitenightmare.png"
+    "video": "eyauPsZV-k4",
+    "thumbnail": "Thumbnail/newbitenightmare.png",
+    "victors": []
   }
 ]
