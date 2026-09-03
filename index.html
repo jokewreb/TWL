@@ -177,7 +177,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 1;
+            z-index: 2;
             pointer-events: none;
         }
 
@@ -205,7 +205,7 @@
 
         .list-item-content {
             position: relative;
-            z-index: 2;
+            z-index: 3;
             display: flex;
             align-items: center;
             gap: 16px;
@@ -343,7 +343,31 @@
             flex-shrink: 0;
         }
 
+        .video-box-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.45;
+            z-index: 0;
+            transition: background-image 0.35s ease;
+            filter: blur(2px);
+        }
+
+        .video-box-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                180deg, 
+                rgba(11, 12, 16, 0.3) 0%, 
+                rgba(11, 12, 16, 0.75) 100%
+            );
+            z-index: 0;
+        }
+
         .video-box iframe {
+            position: relative;
+            z-index: 1;
             width: 100%;
             height: 100%;
             border: none;
@@ -511,6 +535,8 @@
 
             <div class="glass-card">
                 <div class="video-box">
+                    <div id="vid-bg" class="video-box-bg"></div>
+                    <div class="video-box-overlay"></div>
                     <iframe id="main-vid" src="" frameborder="0" allowfullscreen></iframe>
                 </div>
 
@@ -595,19 +621,16 @@
 
         function initBarParticleCanvas(canvasEl, colorHex) {
             const ctx = canvasEl.getContext('2d');
-            const rect = canvasEl.parentElement.getBoundingClientRect();
-            canvasEl.width = rect.width || 400;
-            canvasEl.height = rect.height || 96;
-
+            
             let pList = [];
-            for (let i = 0; i < 14; i++) {
+            for (let i = 0; i < 18; i++) {
                 pList.push({
-                    x: Math.random() * canvasEl.width,
-                    y: Math.random() * canvasEl.height,
-                    radius: Math.random() * 1.6 + 0.5,
-                    speedX: (Math.random() - 0.5) * 0.4,
-                    speedY: -Math.random() * 0.4 - 0.1,
-                    alpha: Math.random() * 0.5 + 0.2
+                    x: Math.random() * 400,
+                    y: Math.random() * 96,
+                    radius: Math.random() * 1.8 + 0.6,
+                    speedX: (Math.random() - 0.5) * 0.5,
+                    speedY: -Math.random() * 0.5 - 0.15,
+                    alpha: Math.random() * 0.6 + 0.25
                 });
             }
 
@@ -621,6 +644,11 @@
 
         function animateBarParticles() {
             barParticleSystems.forEach(sys => {
+                if (sys.canvas.width !== sys.canvas.offsetWidth && sys.canvas.offsetWidth > 0) {
+                    sys.canvas.width = sys.canvas.offsetWidth;
+                    sys.canvas.height = sys.canvas.offsetHeight;
+                }
+
                 sys.ctx.clearRect(0, 0, sys.canvas.width, sys.canvas.height);
                 sys.particles.forEach(p => {
                     sys.ctx.fillStyle = sys.color;
@@ -633,11 +661,11 @@
                     p.y += p.speedY;
 
                     if (p.y < 0) {
-                        p.y = sys.canvas.height;
-                        p.x = Math.random() * sys.canvas.width;
+                        p.y = sys.canvas.height || 96;
+                        p.x = Math.random() * (sys.canvas.width || 400);
                     }
-                    if (p.x < 0 || p.x > sys.canvas.width) {
-                        p.x = Math.random() * sys.canvas.width;
+                    if (p.x < 0 || p.x > (sys.canvas.width || 400)) {
+                        p.x = Math.random() * (sys.canvas.width || 400);
                     }
                 });
             });
@@ -789,6 +817,9 @@
 
             document.getElementById('s-id').innerText = lvl.id || '-';
             document.getElementById('s-pts').innerText = rank > 150 ? "LEGACY" : lvl.points;
+
+            const imgSource = lvl.thumbnail ? lvl.thumbnail : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVOVERRIDES=";
+            document.getElementById('vid-bg').style.backgroundImage = `url('${imgSource}')`;
 
             const fpsCard = document.getElementById('fps-card');
             if (lvl.fps) {
