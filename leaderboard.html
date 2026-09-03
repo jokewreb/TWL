@@ -5,9 +5,15 @@
     <title>LEADERBOARD | WAVE LIST</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        body { overflow-y: auto; background-color: #0b0c10; margin: 0; padding-bottom: 50px; }
+        body { 
+            overflow-y: auto; 
+            background-color: #0b0c10; 
+            margin: 0; 
+            padding-bottom: 50px; 
+            font-family: system-ui, -apple-system, sans-serif;
+        }
         
-        /* Canvas fixed as background only */
+        /* Particle Background Canvas */
         #canvas { 
             position: fixed; 
             top: 0; 
@@ -26,7 +32,7 @@
             padding: 0 20px; 
         }
 
-        /* Top 3 Podium Cards */
+        /* Top 3 Pods */
         .podium-container {
             display: flex;
             gap: 20px;
@@ -49,12 +55,12 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             transition: transform 0.3s ease;
         }
-        .pod-card:hover { transform: translateY(-5px); }
+        .pod-card:hover { transform: translateY(-4px); }
 
         .pod-card.rank-1 {
             order: 2;
             border-color: #ffd700;
-            box-shadow: 0 0 25px rgba(255, 215, 0, 0.2);
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.25);
             padding-top: 25px;
         }
         .pod-card.rank-2 { order: 1; border-color: #c0c0c0; }
@@ -65,7 +71,7 @@
             top: 0; left: 0; width: 100%; height: 100%;
             background-size: cover;
             background-position: center;
-            opacity: 0.18;
+            opacity: 0.2;
             z-index: 0;
             pointer-events: none;
         }
@@ -85,7 +91,7 @@
         .pod-pts {
             font-size: 1.3rem;
             font-weight: 900;
-            color: var(--accent, #47e5bc);
+            color: var(--accent, #ff4141);
             margin-bottom: 8px;
         }
 
@@ -98,21 +104,30 @@
             align-items: center;
         }
 
-        /* Leaderboard Table Styles */
-        table { width: 100%; border-collapse: separate; border-spacing: 0 10px; }
+        /* Table Structure with Fixed Cell Heights & Clipping */
+        table { 
+            width: 100%; 
+            border-collapse: separate; 
+            border-spacing: 0 10px; 
+            table-layout: fixed; /* Guarantees strict column bounds */
+        }
         
         tr { 
             position: relative;
             background: rgba(20, 22, 30, 0.85); 
             backdrop-filter: blur(10px); 
             transition: transform 0.2s ease;
-            border-radius: 8px;
+            height: 64px; /* Strict height lock prevents vertical overlapping */
         }
-        tr:hover { transform: scale(1.01); }
+        tr:hover { transform: scale(1.008); }
 
+        /* Clipped Background Image Banner */
         .tr-bg {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
             background-size: cover;
             background-position: center;
             opacity: 0.15;
@@ -120,47 +135,70 @@
             pointer-events: none;
             border-radius: 8px;
             transition: opacity 0.3s ease;
+            overflow: hidden;
         }
         tr:hover .tr-bg { opacity: 0.28; }
 
         td { 
             position: relative;
             z-index: 1;
-            padding: 16px 20px; 
-            border-top: 1px solid var(--border, rgba(255,255,255,0.1)); 
-            border-bottom: 1px solid var(--border, rgba(255,255,255,0.1)); 
+            padding: 0 16px; 
+            height: 64px;
+            vertical-align: middle;
+            border-top: 1px solid var(--border, rgba(255,255,255,0.08)); 
+            border-bottom: 1px solid var(--border, rgba(255,255,255,0.08)); 
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis; /* Truncates overflowing text safely */
         }
         
         td:first-child { 
             border-radius: 8px 0 0 8px; 
-            border-left: 1px solid var(--border, rgba(255,255,255,0.1)); 
-            width: 50px; 
+            border-left: 1px solid var(--border, rgba(255,255,255,0.08)); 
+            width: 60px; 
             text-align: center; 
             font-weight: 800; 
-            color: #fff;
+            color: #888;
         }
 
-        td.col-player { width: 220px; }
+        td.col-player { width: 30%; }
         
         td.col-pts { 
+            width: 25%;
             text-align: center; 
-            color: var(--accent, #47e5bc); 
+            color: var(--accent, #ff4141); 
             font-weight: 800; 
-            font-size: 1.05rem;
+            font-size: 1rem;
         }
 
         td.col-hardest { 
             border-radius: 0 8px 8px 0; 
-            border-right: 1px solid var(--border, rgba(255,255,255,0.1)); 
+            border-right: 1px solid var(--border, rgba(255,255,255,0.08)); 
             text-align: right; 
             font-size: 0.85rem;
             color: #aaa;
+            width: 35%;
         }
 
-        .player-title { font-weight: 700; color: #fff; font-size: 1rem; text-decoration: none; }
-        .sub-stat { font-size: 0.75rem; color: #888; margin-top: 2px; }
+        .player-wrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+        }
 
-        /* Dynamic Tier Color Classes */
+        .player-title { 
+            font-weight: 700; 
+            color: #fff; 
+            font-size: 0.95rem; 
+            text-decoration: none; 
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .sub-stat { font-size: 0.72rem; color: #777; margin-top: 2px; }
+
+        /* Dynamic Tier Colors */
         .tier-ruby { color: #ff3355 !important; }
         .tier-diamond { color: #00d2ff !important; }
         .tier-platinum { color: #e5e4e2 !important; }
@@ -238,7 +276,7 @@
             }
         ];
 
-        // Background Particle Effect
+        // Background Particles
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
         let parts = [];
@@ -246,14 +284,14 @@
             canvas.width = window.innerWidth; 
             canvas.height = window.innerHeight;
             parts = []; 
-            for(let i=0; i<100; i++) {
-                parts.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, s: Math.random()*2, sp: Math.random()*0.5+0.1});
+            for(let i=0; i<80; i++) {
+                parts.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, s: Math.random()*2, sp: Math.random()*0.4+0.1});
             }
         }
         function anim() {
             ctx.clearRect(0,0,canvas.width,canvas.height);
             parts.forEach(p => { 
-                ctx.fillStyle = "rgba(255,65,65,0.3)"; 
+                ctx.fillStyle = "rgba(255,65,65,0.25)"; 
                 ctx.beginPath(); 
                 ctx.arc(p.x, p.y, p.s, 0, Math.PI*2); 
                 ctx.fill(); 
@@ -327,7 +365,7 @@
 
             const sorted = Object.entries(scores).sort((a,b) => b[1]-a[1]);
             
-            // Render Top 3 Podiums
+            // Top 3 Podium
             const podiumContainer = document.getElementById('podium-data');
             const top3 = sorted.slice(0, 3);
             let podiumHTML = "";
@@ -358,7 +396,7 @@
             });
             podiumContainer.innerHTML = podiumHTML;
 
-            // Render Leaderboard Rows from #4 onward
+            // Ranks 4+
             const table = document.getElementById('lb-data');
             const remaining = sorted.slice(3);
 
@@ -375,14 +413,16 @@
                         ${bgThumb ? `<div class="tr-bg" style="background-image: url('${bgThumb}');"></div>` : ''}
                         <td>#${r}</td>
                         <td class="col-player">
-                            <a href="player.html?name=${encodeURIComponent(name)}" class="player-title">
-                                ${name}
-                            </a>
-                            <div class="sub-stat">${compCount} completed</div>
+                            <div class="player-wrapper">
+                                <a href="player.html?name=${encodeURIComponent(name)}" class="player-title">
+                                    ${name}
+                                </a>
+                                <div class="sub-stat">${compCount} completed</div>
+                            </div>
                         </td>
                         <td class="col-pts">${pts.toLocaleString()} PTS</td>
                         <td class="col-hardest">
-                            <span style="opacity:0.6;">Hardest:</span> 
+                            <span style="opacity:0.5;">Hardest:</span> 
                             <strong class="${hardestClass}">${hardestName}</strong>
                         </td>
                     </tr>
