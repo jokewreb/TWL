@@ -11,7 +11,7 @@
         }
 
         html, body {
-            height: 100%;
+            min-height: 100vh;
             margin: 0;
             padding: 0;
             background-color: #0b0c10;
@@ -22,11 +22,10 @@
         body {
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
             overflow-x: hidden;
         }
 
-        /* Background Canvas */
+        /* Particle Background Canvas */
         #canvas { 
             position: fixed; 
             top: 0; 
@@ -37,25 +36,35 @@
             pointer-events: none; 
         }
 
-        /* Full Height Layout Wrapper */
+        /* Nav Header Override */
+        nav {
+            position: relative;
+            z-index: 2;
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Main Page Wrapper - Shifted Upward & Expanded */
         .page-wrapper {
             position: relative;
             z-index: 1;
             flex: 1;
             display: flex;
-            align-items: center;
             justify-content: center;
-            padding: 30px 20px;
+            align-items: flex-start; /* Positions card higher up */
+            padding: 10px 40px 40px 40px;
             width: 100%;
         }
 
-        /* Main Container - Scaled up for Widescreen Screens */
+        /* Container - Scaled for high-res wide displays */
         .roulette-container {
             width: 100%;
-            max-width: 1350px;
+            max-width: 1600px;
             display: flex;
             flex-direction: column;
-            gap: 24px;
+            gap: 20px;
         }
 
         /* Header Bar */
@@ -67,27 +76,27 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .progress-banner {
-            font-size: 3.5rem;
+            font-size: 4.2rem;
             font-weight: 900;
             color: var(--accent, #ff4141);
-            text-shadow: 0 0 30px rgba(255, 65, 65, 0.4);
+            text-shadow: 0 0 35px rgba(255, 65, 65, 0.45);
             margin: 0;
             line-height: 1;
-            letter-spacing: -1px;
+            letter-spacing: -1.5px;
         }
 
         .target-sub {
-            font-size: 1.1rem;
-            color: #ccc;
+            font-size: 1.15rem;
+            color: #ddd;
             text-transform: uppercase;
             letter-spacing: 2.5px;
             font-weight: 800;
             background: rgba(255, 255, 255, 0.06);
-            padding: 10px 24px;
+            padding: 10px 26px;
             border-radius: 30px;
             border: 1px solid rgba(255, 255, 255, 0.12);
         }
@@ -95,7 +104,7 @@
         /* Progress Bar */
         .progress-bar-bg {
             width: 100%;
-            height: 10px;
+            height: 12px;
             background: rgba(255, 255, 255, 0.08);
             border-radius: 12px;
             overflow: hidden;
@@ -108,19 +117,19 @@
             background: linear-gradient(90deg, #ff4141, #ff7171);
             border-radius: 12px;
             transition: width 0.4s ease;
-            box-shadow: 0 0 16px rgba(255, 65, 65, 0.7);
+            box-shadow: 0 0 20px rgba(255, 65, 65, 0.8);
         }
 
-        /* Main Game Card */
+        /* Main Game Card - Expanded Layout */
         .roulette-card {
             position: relative;
             width: 100%;
-            background: rgba(20, 22, 30, 0.88);
-            border: 1px solid var(--border, rgba(255, 255, 255, 0.1));
+            background: rgba(20, 22, 30, 0.90);
+            border: 1px solid var(--border, rgba(255, 255, 255, 0.12));
             border-radius: 24px;
-            padding: 45px;
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(16px);
+            padding: 45px 55px;
+            box-shadow: 0 35px 90px rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(18px);
             overflow: hidden;
         }
 
@@ -129,8 +138,8 @@
             top: 0; left: 0; width: 100%; height: 100%;
             background-size: cover;
             background-position: center;
-            opacity: 0.15;
-            filter: blur(30px);
+            opacity: 0.16;
+            filter: blur(35px);
             z-index: 0;
             pointer-events: none;
             transition: background-image 0.4s ease;
@@ -141,43 +150,43 @@
             position: relative;
             z-index: 1;
             display: grid;
-            grid-template-columns: 1.25fr 1fr;
-            gap: 45px;
+            grid-template-columns: 1.35fr 1fr;
+            gap: 55px;
             align-items: center;
         }
 
-        @media (max-width: 1024px) {
+        @media (max-width: 1100px) {
             .card-grid {
                 grid-template-columns: 1fr;
-                gap: 30px;
+                gap: 35px;
             }
         }
 
-        /* Media Side */
+        /* Media Column */
         .media-col {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 18px;
         }
 
         .roulette-thumb {
             width: 100%;
-            height: 380px;
+            height: 450px;
             object-fit: cover;
-            border-radius: 16px;
+            border-radius: 18px;
             border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65);
         }
 
-        /* Info Side */
+        /* Info Column */
         .info-col {
             display: flex;
             flex-direction: column;
-            gap: 22px;
+            gap: 24px;
         }
 
         .level-rank-tag {
-            font-size: 1rem;
+            font-size: 1.15rem;
             font-weight: 800;
             color: var(--accent, #ff4141);
             text-transform: uppercase;
@@ -187,27 +196,27 @@
         }
 
         .level-name {
-            font-size: 3.2rem;
+            font-size: 3.8rem;
             font-weight: 900;
             color: #fff;
             margin: 0;
             line-height: 1.05;
-            letter-spacing: -1px;
+            letter-spacing: -1.5px;
             text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
             word-break: break-word;
         }
 
         .badge-row {
             display: flex;
-            gap: 12px;
+            gap: 14px;
             align-items: center;
             flex-wrap: wrap;
         }
 
         .tier-badge {
-            padding: 8px 20px;
+            padding: 10px 24px;
             border-radius: 30px;
-            font-size: 0.85rem;
+            font-size: 0.95rem;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1.5px;
@@ -217,9 +226,9 @@
         }
 
         .points-badge {
-            padding: 8px 20px;
+            padding: 10px 24px;
             border-radius: 30px;
-            font-size: 0.85rem;
+            font-size: 0.95rem;
             font-weight: 800;
             color: #ffd700;
             background: rgba(255, 215, 0, 0.12);
@@ -230,11 +239,11 @@
         .details-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 18px 24px;
+            gap: 20px 30px;
             width: 100%;
             background: rgba(0, 0, 0, 0.35);
-            padding: 24px;
-            border-radius: 16px;
+            padding: 28px;
+            border-radius: 18px;
             border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
@@ -244,7 +253,7 @@
         }
 
         .detail-label {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: #888;
             text-transform: uppercase;
             font-weight: 800;
@@ -252,7 +261,7 @@
         }
 
         .detail-value {
-            font-size: 1.15rem;
+            font-size: 1.3rem;
             color: #fff;
             font-weight: 700;
             margin-top: 4px;
@@ -261,10 +270,10 @@
             white-space: nowrap;
         }
 
-        /* Buttons */
+        /* Action Buttons */
         .btn-group {
             display: flex;
-            gap: 16px;
+            gap: 18px;
             width: 100%;
             margin-top: 5px;
         }
@@ -274,10 +283,10 @@
             background: var(--accent, #ff4141);
             color: #fff;
             border: none;
-            padding: 18px 28px;
-            font-size: 1.05rem;
+            padding: 20px 32px;
+            font-size: 1.15rem;
             font-weight: 800;
-            border-radius: 12px;
+            border-radius: 14px;
             cursor: pointer;
             transition: all 0.2s ease;
             text-transform: uppercase;
@@ -298,7 +307,7 @@
         }
 
         .btn-secondary {
-            flex: 0.5;
+            flex: 0.45;
             background: rgba(255, 255, 255, 0.08) !important;
             color: #ccc !important;
             border: 1px solid rgba(255, 255, 255, 0.15) !important;
@@ -320,11 +329,11 @@
             justify-content: center;
             gap: 8px;
             width: 100%;
-            padding: 14px;
-            font-size: 0.95rem;
+            padding: 16px;
+            font-size: 1rem;
         }
 
-        /* Win View Screen */
+        /* Win Screen */
         .win-screen {
             display: none;
             flex-direction: column;
@@ -332,7 +341,7 @@
             text-align: center;
             gap: 24px;
             animation: fadeIn 0.5s ease forwards;
-            padding: 40px 0;
+            padding: 50px 0;
             width: 100%;
         }
 
@@ -345,7 +354,7 @@
 <body>
     <canvas id="canvas"></canvas>
 
-    <nav style="position: relative; z-index: 1;">
+    <nav>
         <div class="nav-logo" onclick="window.location.href='index.html'" style="cursor:pointer;">THE WAVE LIST</div>
         <div>
             <a href="index.html" class="nav-link">BACK TO LIST</a>
@@ -370,7 +379,6 @@
                 <div class="card-bg-blur" id="card-bg-blur"></div>
 
                 <div id="game-content" class="card-grid">
-                    <!-- Left Media Column -->
                     <div class="media-col">
                         <img id="r-thumb" src="" class="roulette-thumb">
                         <a id="r-video-btn" href="#" target="_blank" class="roulette-btn btn-video" style="display:none;">
@@ -378,7 +386,6 @@
                         </a>
                     </div>
 
-                    <!-- Right Details Column -->
                     <div class="info-col">
                         <div>
                             <span id="r-rank" class="level-rank-tag">List Rank #--</span>
@@ -390,7 +397,6 @@
                             <div id="r-points" class="points-badge">0 PTS</div>
                         </div>
 
-                        <!-- Full Details Table Grid -->
                         <div class="details-grid">
                             <div class="detail-item">
                                 <span class="detail-label">Creator</span>
@@ -417,14 +423,13 @@
                     </div>
                 </div>
 
-                <!-- Win Overlay -->
                 <div id="win-content" class="win-screen">
-                    <div style="font-size: 6rem; filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.5));">👑</div>
-                    <h2 class="level-name" style="color: var(--accent, #ff4141); font-size: 3.5rem;">ROULETTE COMPLETED!</h2>
-                    <p style="color: #aaa; max-width: 550px; margin: 0 auto; line-height: 1.7; font-size: 1.1rem;">
+                    <div style="font-size: 6.5rem; filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.5));">👑</div>
+                    <h2 class="level-name" style="color: var(--accent, #ff4141); font-size: 4rem;">ROULETTE COMPLETED!</h2>
+                    <p style="color: #aaa; max-width: 600px; margin: 0 auto; line-height: 1.7; font-size: 1.2rem;">
                         Incredible performance! You completed all 20 random challenges from 5% all the way up to a 100% completion!
                     </p>
-                    <button class="roulette-btn" style="max-width:280px; margin-top: 15px;" onclick="resetGame()">Play Again</button>
+                    <button class="roulette-btn" style="max-width:300px; margin-top: 15px;" onclick="resetGame()">Play Again</button>
                 </div>
             </div>
 
@@ -432,7 +437,6 @@
     </div>
 
     <script>
-        // Background Particle Loop
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
         let parts = [];
