@@ -46,7 +46,7 @@
         nav {
             position: relative;
             z-index: 100;
-            padding: 12px 28px;
+            padding: 14px 32px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -54,12 +54,12 @@
             backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--border);
             width: 100%;
-            height: 60px;
+            height: 64px;
             flex-shrink: 0;
         }
 
         .nav-logo {
-            font-size: 1.25rem;
+            font-size: 1.35rem;
             font-weight: 900;
             letter-spacing: 2px;
             color: #fff;
@@ -74,7 +74,7 @@
 
         .nav-links {
             display: flex;
-            gap: 20px;
+            gap: 22px;
             align-items: center;
         }
 
@@ -82,11 +82,11 @@
             color: #aaa;
             text-decoration: none;
             font-weight: 700;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             letter-spacing: 1.5px;
             text-transform: uppercase;
             transition: all 0.2s ease;
-            padding: 4px 10px;
+            padding: 6px 12px;
             border-radius: 6px;
         }
 
@@ -95,16 +95,16 @@
             background: rgba(255, 255, 255, 0.05);
         }
 
-        /* Compact Layout - Prevents Scrolling on Desktop */
+        /* Balanced Main Layout */
         .main-layout {
             position: relative;
             z-index: 1;
             display: grid;
-            grid-template-columns: clamp(360px, 26vw, 480px) 1fr;
-            gap: 16px;
-            padding: 16px 20px;
+            grid-template-columns: clamp(380px, 27vw, 520px) 1fr;
+            gap: 20px;
+            padding: 20px 24px;
             width: 100%;
-            height: calc(100vh - 60px);
+            height: calc(100vh - 64px);
             box-sizing: border-box;
             overflow: hidden;
         }
@@ -112,7 +112,7 @@
         .sidebar-column {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 14px;
             height: 100%;
             width: 100%;
             min-height: 0;
@@ -121,8 +121,8 @@
         .search-container {
             background: var(--card-bg);
             border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 8px 12px;
+            border-radius: 12px;
+            padding: 10px 14px;
             backdrop-filter: blur(12px);
             width: 100%;
             flex-shrink: 0;
@@ -130,12 +130,12 @@
 
         #level-search {
             width: 100%;
-            padding: 10px 14px;
+            padding: 12px 16px;
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid var(--border);
-            border-radius: 6px;
+            border-radius: 8px;
             color: #fff;
-            font-size: 0.88rem;
+            font-size: 0.92rem;
             outline: none;
             transition: all 0.25s ease;
             box-sizing: border-box;
@@ -152,20 +152,20 @@
             overflow-x: hidden;
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            padding-right: 4px;
+            gap: 12px;
+            padding-right: 6px;
         }
 
-        /* Side Bar Items with Canvas Particles */
+        /* Prominent Sidebar Items with Canvas Particles */
         .list-item {
             position: relative;
             display: flex;
             align-items: center;
-            padding: 12px 16px;
-            min-height: 88px;
+            padding: 14px 18px;
+            min-height: 96px;
             background: rgba(18, 22, 31, 0.85);
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: 14px;
             cursor: pointer;
             overflow: hidden;
             user-select: none;
@@ -173,7 +173,6 @@
             width: 100%;
         }
 
-        /* Dynamic Canvas Particle Layer for Bars */
         .item-particle-canvas {
             position: absolute;
             top: 0;
@@ -189,7 +188,7 @@
             inset: 0;
             background-size: cover;
             background-position: center;
-            opacity: 0.45;
+            opacity: 0.5;
             transition: all 0.35s ease;
             z-index: 0;
         }
@@ -211,44 +210,44 @@
             z-index: 2;
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 16px;
             width: 100%;
         }
 
         .list-item:hover {
             transform: translateY(-2px);
             border-color: rgba(255, 255, 255, 0.4);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.65);
         }
 
         .list-item:hover .list-item-bg {
-            opacity: 0.75;
-            transform: scale(1.04);
+            opacity: 0.8;
+            transform: scale(1.05);
         }
 
-        /* Selection Outline Changed to WHITE */
+        /* Active Outline: White */
         .list-item.active {
             border-color: #ffffff !important;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.2) !important;
+            box-shadow: 0 0 22px rgba(255, 255, 255, 0.6), inset 0 0 12px rgba(255, 255, 255, 0.2) !important;
             background: rgba(255, 255, 255, 0.12) !important;
         }
 
         .rank {
             font-weight: 900;
-            font-size: 1.3rem;
-            min-width: 42px;
+            font-size: 1.35rem;
+            min-width: 46px;
             flex-shrink: 0;
             text-align: center;
         }
 
         .thumb-mini {
-            width: 95px;
-            height: 56px;
+            width: 105px;
+            height: 62px;
             object-fit: cover;
             flex-shrink: 0;
-            border-radius: 6px;
+            border-radius: 8px;
             border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.6);
         }
 
         .level-info-text {
@@ -261,7 +260,7 @@
 
         .level-title-row {
             font-weight: 800;
-            font-size: 1.1rem;
+            font-size: 1.18rem;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -272,17 +271,17 @@
         }
 
         .level-pts-row {
-            font-size: 0.82rem;
+            font-size: 0.88rem;
             color: #ccc;
             font-weight: 700;
-            margin-top: 2px;
+            margin-top: 3px;
         }
 
-        /* Compact Right Column Showcase Area */
+        /* Right Showcase Column */
         .content {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 16px;
             width: 100%;
             height: 100%;
             min-width: 0;
@@ -292,13 +291,13 @@
         .top-tier-bar {
             background: var(--card-bg);
             border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 8px 16px;
+            border-radius: 12px;
+            padding: 10px 20px;
             backdrop-filter: blur(16px);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 8px;
+            gap: 10px;
             width: 100%;
             flex-shrink: 0;
             overflow-x: auto;
@@ -307,26 +306,26 @@
         .tier-pill {
             display: flex;
             align-items: center;
-            gap: 6px;
-            font-size: 0.78rem;
+            gap: 8px;
+            font-size: 0.82rem;
             font-weight: 700;
             white-space: nowrap;
             background: rgba(0,0,0,0.3);
-            padding: 4px 10px;
-            border-radius: 16px;
+            padding: 6px 12px;
+            border-radius: 18px;
             border: 1px solid rgba(255,255,255,0.06);
         }
 
         .glass-card {
             background: var(--card-bg);
             border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 16px 20px;
+            border-radius: 18px;
+            padding: 24px 28px;
             backdrop-filter: blur(20px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 16px;
             width: 100%;
             flex: 1;
             min-height: 0;
@@ -336,15 +335,15 @@
         .video-box {
             position: relative;
             width: 100%;
-            max-width: 720px;
+            max-width: 880px;
             aspect-ratio: 16 / 9;
-            max-height: 42vh;
+            max-height: 48vh;
             margin: 0 auto;
             background: #000;
-            border-radius: 10px;
+            border-radius: 14px;
             overflow: hidden;
             border: 1px solid var(--border);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.8);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.8);
             flex-shrink: 0;
         }
 
@@ -355,7 +354,7 @@
         }
 
         .main-title-text {
-            font-size: 1.7rem;
+            font-size: 2.2rem;
             font-weight: 900;
             margin: 0;
             letter-spacing: -0.5px;
@@ -365,8 +364,8 @@
 
         .info-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 10px;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 14px;
             width: 100%;
             flex-shrink: 0;
         }
@@ -374,15 +373,15 @@
         .stat-card {
             background: rgba(0, 0, 0, 0.4);
             border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 8px 14px;
+            border-radius: 12px;
+            padding: 12px 18px;
             display: flex;
             flex-direction: column;
-            gap: 2px;
+            gap: 4px;
         }
 
         .stat-label {
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             color: #888;
             text-transform: uppercase;
             font-weight: 800;
@@ -390,7 +389,7 @@
         }
 
         .stat-card div:last-child {
-            font-size: 1.05rem;
+            font-size: 1.15rem;
             font-weight: 700;
             color: #fff;
             overflow: hidden;
@@ -401,11 +400,11 @@
         .victors-box {
             background: rgba(0, 0, 0, 0.4);
             border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 10px 16px;
+            border-radius: 12px;
+            padding: 14px 20px;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 10px;
             flex-shrink: 0;
         }
 
@@ -413,9 +412,9 @@
             background: rgba(255, 255, 255, 0.06);
             border: 1px solid rgba(255, 255, 255, 0.12);
             color: #e0e0e0;
-            padding: 4px 12px;
-            border-radius: 16px;
-            font-size: 0.8rem;
+            padding: 6px 14px;
+            border-radius: 18px;
+            font-size: 0.85rem;
             font-weight: 600;
             transition: all 0.2s ease;
             text-decoration: none;
@@ -439,8 +438,8 @@
 
         .floating-btn {
             position: fixed;
-            width: 44px;
-            height: 44px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -452,8 +451,8 @@
         }
 
         .rules-btn {
-            bottom: 16px;
-            right: 70px;
+            bottom: 20px;
+            right: 80px;
             background: rgba(30, 34, 45, 0.9);
             border: 1px solid var(--border);
         }
@@ -464,8 +463,8 @@
         }
 
         .discord-btn {
-            bottom: 16px;
-            right: 16px;
+            bottom: 20px;
+            right: 20px;
             background: #5865F2;
             border: none;
         }
@@ -486,7 +485,7 @@
                 overflow: visible;
             }
             .sidebar-column {
-                height: 450px;
+                height: 480px;
             }
         }
     </style>
@@ -553,15 +552,15 @@
     </div>
 
     <a href="rules.html" class="floating-btn rules-btn" title="Rules">
-        <span style="font-size: 1.2rem; user-select: none;">📜</span>
+        <span style="font-size: 1.3rem; user-select: none;">📜</span>
     </a>
 
     <a href="https://discord.com/invite/7SjKU8vy8x" target="_blank" class="floating-btn discord-btn" title="Discord Community">
-        <img src="discord.png" alt="Discord" style="width: 22px; height: 22px; object-fit: contain;" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'%23ffffff\'><path d=\'M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.094 13.094 0 0 1-1.873-.894.077.077 0 0 1-.008-.128c.126-.093.252-.19.372-.287a.075.075 0 0 1 .077-.011c3.92 1.793 8.18 1.793 12.061 0a.073.073 0 0 1 .078.009c.12.099.246.195.373.289a.077.077 0 0 1-.006.127 12.298 12.298 0 0 1-1.873.894.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.156-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.156 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.156-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.156 2.418z\'/></svg>';">
+        <img src="discord.png" alt="Discord" style="width: 24px; height: 24px; object-fit: contain;" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'%23ffffff\'><path d=\'M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.094 13.094 0 0 1-1.873-.894.077.077 0 0 1-.008-.128c.126-.093.252-.19.372-.287a.075.075 0 0 1 .077-.011c3.92 1.793 8.18 1.793 12.061 0a.073.073 0 0 1 .078.009c.12.099.246.195.373.289a.077.077 0 0 1-.006.127 12.298 12.298 0 0 1-1.873.894.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.156-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.156 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.156-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.156 2.418z\'/></svg>';">
     </a>
 
     <script>
-        /* Main Background Particles */
+        /* Main Canvas Particle Background */
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
@@ -570,7 +569,7 @@
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
             particles = [];
-            for (let i = 0; i < 60; i++) {
+            for (let i = 0; i < 65; i++) {
                 particles.push({
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height,
@@ -603,15 +602,15 @@
         function initBarParticleCanvas(canvasEl, colorHex) {
             const ctx = canvasEl.getContext('2d');
             const rect = canvasEl.parentElement.getBoundingClientRect();
-            canvasEl.width = rect.width || 350;
-            canvasEl.height = rect.height || 88;
+            canvasEl.width = rect.width || 400;
+            canvasEl.height = rect.height || 96;
 
             let pList = [];
-            for (let i = 0; i < 12; i++) {
+            for (let i = 0; i < 14; i++) {
                 pList.push({
                     x: Math.random() * canvasEl.width,
                     y: Math.random() * canvasEl.height,
-                    radius: Math.random() * 1.5 + 0.5,
+                    radius: Math.random() * 1.6 + 0.5,
                     speedX: (Math.random() - 0.5) * 0.4,
                     speedY: -Math.random() * 0.4 - 0.1,
                     alpha: Math.random() * 0.5 + 0.2
@@ -653,7 +652,7 @@
 
         animateBarParticles();
 
-        const TIER_LOGO_SIZE = "22px";
+        const TIER_LOGO_SIZE = "24px";
         let allLevels = [];
         let allTiers = [];
 
@@ -682,7 +681,7 @@
                                 <img src="${logoSrc}" style="width: ${manualScale}; height: ${manualScale}; object-fit: contain;" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%23333\' stroke-width=\'1.5\'><rect width=\'18\' height=\'18\' x=\'3\' y=\'3\' rx=\'2\'/></svg>';">
                             </div>
                             <span style="color: ${t.color}">${t.name}</span>
-                            <span style="color: #777; font-size: 0.72rem;">${t.minPoints}${t.maxPoints > 9000 ? '+' : '-' + t.maxPoints}</span>
+                            <span style="color: #777; font-size: 0.75rem;">${t.minPoints}${t.maxPoints > 9000 ? '+' : '-' + t.maxPoints}</span>
                         </div>
                     `;
                 });
@@ -710,26 +709,26 @@
 
                 if (rank === 1) {
                     const header = document.createElement('div');
-                    header.style.cssText = "font-weight: 800; font-size: 0.8rem; color: var(--accent); letter-spacing: 1.5px; text-transform: uppercase; padding: 6px 4px 2px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 4px;";
+                    header.style.cssText = "font-weight: 800; font-size: 0.85rem; color: var(--accent); letter-spacing: 1.5px; text-transform: uppercase; padding: 8px 4px 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 4px;";
                     header.innerText = "Main List";
                     side.appendChild(header);
                 } else if (rank === 76) {
                     const header = document.createElement('div');
-                    header.style.cssText = "font-weight: 800; font-size: 0.8rem; color: #aaa; letter-spacing: 1.5px; text-transform: uppercase; padding: 12px 4px 2px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 4px;";
+                    header.style.cssText = "font-weight: 800; font-size: 0.85rem; color: #aaa; letter-spacing: 1.5px; text-transform: uppercase; padding: 14px 4px 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 4px;";
                     header.innerText = "Extended List";
                     side.appendChild(header);
                 } else if (rank === 151) {
                     const legacyContainer = document.createElement('div');
-                    legacyContainer.style.cssText = "display: flex; align-items: center; justify-content: space-between; padding: 12px 4px 2px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 4px;";
+                    legacyContainer.style.cssText = "display: flex; align-items: center; justify-content: space-between; padding: 14px 4px 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 4px;";
 
                     const header = document.createElement('div');
-                    header.style.cssText = "font-weight: 800; font-size: 0.8rem; color: #666; letter-spacing: 1.5px; text-transform: uppercase;";
+                    header.style.cssText = "font-weight: 800; font-size: 0.85rem; color: #666; letter-spacing: 1.5px; text-transform: uppercase;";
                     header.innerText = "Legacy List";
 
                     const btn = document.createElement('a');
                     btn.href = "legacy.html";
                     btn.innerText = "VIEW ALL";
-                    btn.style.cssText = "font-size: 0.68rem; font-weight: 700; color: var(--accent); text-decoration: none; border: 1px solid var(--accent); padding: 2px 6px; border-radius: 4px; transition: all 0.2s ease;";
+                    btn.style.cssText = "font-size: 0.7rem; font-weight: 700; color: var(--accent); text-decoration: none; border: 1px solid var(--accent); padding: 3px 8px; border-radius: 4px; transition: all 0.2s ease;";
                     btn.onmouseover = () => { btn.style.background = 'var(--accent)'; btn.style.color = '#000'; };
                     btn.onmouseout = () => { btn.style.background = 'transparent'; btn.style.color = 'var(--accent)'; };
 
@@ -739,7 +738,7 @@
                 }
 
                 const displayPts = rank > 150 ? "LEGACY" : `${lvl.points} PTS`;
-                const fpsBadge = lvl.fps ? `<span style="font-size:0.65rem; color:#ffcf4b; border: 1px solid rgba(255, 207, 75, 0.3); padding: 1px 5px; border-radius: 4px; margin-left: 4px; flex-shrink: 0;">${lvl.fps}</span>` : '';
+                const fpsBadge = lvl.fps ? `<span style="font-size:0.7rem; color:#ffcf4b; border: 1px solid rgba(255, 207, 75, 0.3); padding: 2px 6px; border-radius: 4px; margin-left: 6px; flex-shrink: 0;">${lvl.fps}</span>` : '';
 
                 const currentTier = allTiers.find(t => lvl.points >= t.minPoints && lvl.points <= t.maxPoints);
                 const imgSource = lvl.thumbnail ? lvl.thumbnail : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVOVERRIDES=";
@@ -826,7 +825,7 @@
             const vCont = document.getElementById('v-cont');
             vCont.innerHTML = validVictors.length > 0
                 ? validVictors.map(v => `<a href="player.html?name=${encodeURIComponent(v)}" class="tag player-link">${v}</a>`).join('')
-                : "<span style='color:#666; font-size:0.8rem'>No victors yet.</span>";
+                : "<span style='color:#666; font-size:0.85rem'>No victors yet.</span>";
         }
 
         init();
