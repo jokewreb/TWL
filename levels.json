@@ -501,6 +501,46 @@
     "victors": ["Symm","FJKR","MrBazooka","puffiballgd"] 
   },
   { 
+    "name": "AstroX", 
+    "points": 84, 
+    "creator": "sevehweveh", 
+    "verifier": "sevehweveh", 
+    "id": "148018681", 
+    "video": "wFmreOwMRbY", 
+    "thumbnail": "Thumbnail/AstroX.png", 
+    "victors": [] 
+  },
+  { 
+    "name": "Hells demise", 
+    "points": 128, 
+    "creator": "Flibbertwiggins", 
+    "verifier": "Flibbertwiggins", 
+    "id": "148149773", 
+    "video": "https://medal.tv/games/geometry-dash/clips/nrouaNOLrmvotrbOM?invite=cr-MSwwZDIsNjQxNDk4Nzkz", 
+    "thumbnail": "Thumbnail/Hellsdemise.jpg", 
+    "victors": [] 
+  },
+  { 
+    "name": "Silent Buffed Tidal Wave Circles", 
+    "points": 169, 
+    "creator": "sevehweveh", 
+    "verifier": "sevehweveh", 
+    "id": "148191225", 
+    "video": "https://youtu.be/VZ6xZqb3Eck?si=dpxsqXh3oqBLpb9G", 
+    "thumbnail": "Thumbnail/SBTWC.png", 
+    "victors": [] 
+  },
+  { 
+    "name": "real hapines", 
+    "points": 224, 
+    "creator": "MrBazooka", 
+    "verifier": "MrBazooka", 
+    "id": "148080369", 
+    "video": "https://medal.tv/games/geometry-dash/clips/nqT7l6Nd98cGPOQku?invite=cr-MSxyZmMsMzc5MDEwMTE2", 
+    "thumbnail": "Thumbnail/realhappi.png", 
+    "victors": [] 
+  },
+  { 
     "name": "A", 
     "points": 221, 
     "creator": "Symm", 
@@ -569,6 +609,26 @@
     "video": "OiRHxh_ImEw", 
     "thumbnail": "Thumbnail/hihru.jpg", 
     "victors": ["FJKR","MrBazooka","puffiballgd"] 
+  },
+  { 
+    "name": "car insurance", 
+    "points": 233, 
+    "creator": "ChillTipTop", 
+    "verifier": "ChillTipTop", 
+    "id": "148216831", 
+    "video": "dhzi9xji99s, 
+    "thumbnail": "Thumbnail/carinsura.png", 
+    "victors": [] 
+  },
+  { 
+    "name": "SUPERDUALLEVEL", 
+    "points": 81, 
+    "creator": "ChefLime", 
+    "verifier": "ChefLime", 
+    "id": "148216831", 
+    "video": "l_cw_i8kvl8s, 
+    "thumbnail": "Thumbnail/SUPERDUALLEVEL.png", 
+    "victors": [] 
   },
   { 
     "name": "linba", 
@@ -722,7 +782,7 @@
   },
   { 
     "name": "Silent Wave Corridor Infinity Unleashed XYZ", 
-    "points": 128, 
+    "points": 129, 
     "creator": "ChefLime", 
     "verifier": "MrBazooka", 
     "id": "145254597", 
