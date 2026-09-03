@@ -6,17 +6,27 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="style.css">
     <style>
-        body { 
-            overflow-y: auto; 
-            background-color: #0b0c10; 
-            margin: 0; 
-            padding-bottom: 40px; 
-            font-family: system-ui, -apple-system, sans-serif;
-            color: #fff;
-            min-height: 100vh;
+        * {
+            box-sizing: border-box;
         }
 
-        /* Particle Background Canvas */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: #0b0c10;
+            font-family: system-ui, -apple-system, sans-serif;
+            color: #fff;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Background Canvas */
         #canvas { 
             position: fixed; 
             top: 0; 
@@ -27,84 +37,90 @@
             pointer-events: none; 
         }
 
-        /* Main Container - Extended for full screen fitting */
-        .roulette-container {
+        /* Full Height Layout Wrapper */
+        .page-wrapper {
             position: relative;
             z-index: 1;
+            flex: 1;
             display: flex;
-            flex-direction: column;
             align-items: center;
-            width: 94%;
-            max-width: 1150px;
-            margin: 20px auto;
+            justify-content: center;
+            padding: 30px 20px;
+            width: 100%;
         }
 
-        /* Compact Header Area */
-        #game-header {
-            margin-bottom: 20px;
+        /* Main Container - Scaled up for Widescreen Screens */
+        .roulette-container {
             width: 100%;
-            text-align: center;
+            max-width: 1350px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        /* Header Bar */
+        #game-header {
+            width: 100%;
         }
 
         .header-top-line {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
+            align-items: flex-end;
+            margin-bottom: 12px;
         }
 
         .progress-banner {
-            font-size: 2.4rem;
+            font-size: 3.5rem;
             font-weight: 900;
             color: var(--accent, #ff4141);
-            text-shadow: 0 0 25px rgba(255, 65, 65, 0.4);
+            text-shadow: 0 0 30px rgba(255, 65, 65, 0.4);
             margin: 0;
-            letter-spacing: -0.5px;
+            line-height: 1;
+            letter-spacing: -1px;
         }
 
         .target-sub {
-            font-size: 0.9rem;
-            color: #aaa;
+            font-size: 1.1rem;
+            color: #ccc;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 2.5px;
             font-weight: 800;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 6px 16px;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.06);
+            padding: 10px 24px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
         }
 
         /* Progress Bar */
         .progress-bar-bg {
             width: 100%;
-            height: 8px;
+            height: 10px;
             background: rgba(255, 255, 255, 0.08);
-            border-radius: 10px;
-            margin-top: 10px;
+            border-radius: 12px;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.06);
         }
 
         .progress-bar-fill {
             height: 100%;
             width: 5%;
-            background: linear-gradient(90deg, #ff4141, #ff6b6b);
-            border-radius: 10px;
+            background: linear-gradient(90deg, #ff4141, #ff7171);
+            border-radius: 12px;
             transition: width 0.4s ease;
-            box-shadow: 0 0 12px rgba(255, 65, 65, 0.6);
+            box-shadow: 0 0 16px rgba(255, 65, 65, 0.7);
         }
 
-        /* Widescreen Glassmorphic Card Layout */
+        /* Main Game Card */
         .roulette-card {
             position: relative;
             width: 100%;
-            background: rgba(20, 22, 30, 0.85);
-            border: 1px solid var(--border, rgba(255, 255, 255, 0.08));
-            border-radius: 18px;
-            padding: 30px;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65);
-            backdrop-filter: blur(14px);
-            box-sizing: border-box;
+            background: rgba(20, 22, 30, 0.88);
+            border: 1px solid var(--border, rgba(255, 255, 255, 0.1));
+            border-radius: 24px;
+            padding: 45px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(16px);
             overflow: hidden;
         }
 
@@ -113,121 +129,113 @@
             top: 0; left: 0; width: 100%; height: 100%;
             background-size: cover;
             background-position: center;
-            opacity: 0.12;
-            filter: blur(25px);
+            opacity: 0.15;
+            filter: blur(30px);
             z-index: 0;
             pointer-events: none;
             transition: background-image 0.4s ease;
         }
 
-        /* Split Screen Grid for Content */
+        /* Split View Grid */
         .card-grid {
             position: relative;
             z-index: 1;
             display: grid;
-            grid-template-columns: 1.1fr 1fr;
-            gap: 30px;
+            grid-template-columns: 1.25fr 1fr;
+            gap: 45px;
             align-items: center;
         }
 
-        @media (max-width: 850px) {
+        @media (max-width: 1024px) {
             .card-grid {
                 grid-template-columns: 1fr;
-                gap: 20px;
+                gap: 30px;
             }
         }
 
-        /* Left Column: Visual Media */
+        /* Media Side */
         .media-col {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            align-items: center;
+            gap: 16px;
         }
 
         .roulette-thumb {
             width: 100%;
-            height: 280px;
+            height: 380px;
             object-fit: cover;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
         }
 
-        /* Right Column: Detailed Info */
+        /* Info Side */
         .info-col {
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
-            text-align: left;
-            gap: 16px;
-        }
-
-        .level-header {
-            width: 100%;
+            gap: 22px;
         }
 
         .level-rank-tag {
-            font-size: 0.85rem;
+            font-size: 1rem;
             font-weight: 800;
             color: var(--accent, #ff4141);
             text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-bottom: 4px;
+            letter-spacing: 2px;
+            margin-bottom: 6px;
             display: block;
         }
 
         .level-name {
-            font-size: 2.4rem;
+            font-size: 3.2rem;
             font-weight: 900;
             color: #fff;
             margin: 0;
-            line-height: 1.1;
-            letter-spacing: -0.5px;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            line-height: 1.05;
+            letter-spacing: -1px;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
             word-break: break-word;
         }
 
         .badge-row {
             display: flex;
-            gap: 10px;
+            gap: 12px;
             align-items: center;
             flex-wrap: wrap;
         }
 
         .tier-badge {
-            padding: 5px 14px;
-            border-radius: 20px;
-            font-size: 0.75rem;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 0.85rem;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 1.2px;
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid currentColor;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            letter-spacing: 1.5px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1.5px solid currentColor;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
         }
 
         .points-badge {
-            padding: 5px 14px;
-            border-radius: 20px;
-            font-size: 0.75rem;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 0.85rem;
             font-weight: 800;
             color: #ffd700;
-            background: rgba(255, 215, 0, 0.1);
-            border: 1px solid rgba(255, 215, 0, 0.3);
+            background: rgba(255, 215, 0, 0.12);
+            border: 1.5px solid rgba(255, 215, 0, 0.4);
         }
 
-        /* Structured Level Details Table/Grid */
+        /* Details Grid */
         .details-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 10px 16px;
+            gap: 18px 24px;
             width: 100%;
-            background: rgba(0, 0, 0, 0.25);
-            padding: 16px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-sizing: border-box;
+            background: rgba(0, 0, 0, 0.35);
+            padding: 24px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .detail-item {
@@ -236,27 +244,27 @@
         }
 
         .detail-label {
-            font-size: 0.75rem;
-            color: #777;
+            font-size: 0.8rem;
+            color: #888;
             text-transform: uppercase;
-            font-weight: 700;
-            letter-spacing: 0.5px;
+            font-weight: 800;
+            letter-spacing: 1px;
         }
 
         .detail-value {
-            font-size: 0.95rem;
+            font-size: 1.15rem;
             color: #fff;
             font-weight: 700;
-            margin-top: 2px;
+            margin-top: 4px;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
         }
 
-        /* Action Buttons */
+        /* Buttons */
         .btn-group {
             display: flex;
-            gap: 12px;
+            gap: 16px;
             width: 100%;
             margin-top: 5px;
         }
@@ -266,23 +274,23 @@
             background: var(--accent, #ff4141);
             color: #fff;
             border: none;
-            padding: 14px 20px;
-            font-size: 0.9rem;
+            padding: 18px 28px;
+            font-size: 1.05rem;
             font-weight: 800;
-            border-radius: 8px;
+            border-radius: 12px;
             cursor: pointer;
             transition: all 0.2s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
-            box-shadow: 0 6px 20px rgba(255, 65, 65, 0.3);
+            box-shadow: 0 8px 25px rgba(255, 65, 65, 0.35);
             text-align: center;
             text-decoration: none;
         }
 
         .roulette-btn:hover {
-            transform: translateY(-2px);
+            transform: translateY(-3px);
             filter: brightness(1.15);
-            box-shadow: 0 8px 25px rgba(255, 65, 65, 0.45);
+            box-shadow: 0 12px 30px rgba(255, 65, 65, 0.5);
         }
 
         .roulette-btn:active {
@@ -290,41 +298,41 @@
         }
 
         .btn-secondary {
-            flex: 0.6;
-            background: rgba(255, 255, 255, 0.06) !important;
+            flex: 0.5;
+            background: rgba(255, 255, 255, 0.08) !important;
             color: #ccc !important;
-            border: 1px solid rgba(255, 255, 255, 0.12) !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
             box-shadow: none !important;
         }
 
         .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.12) !important;
+            background: rgba(255, 255, 255, 0.15) !important;
             color: #fff !important;
         }
 
         .btn-video {
             background: rgba(255, 0, 0, 0.2) !important;
-            color: #ff5555 !important;
-            border: 1px solid rgba(255, 0, 0, 0.3) !important;
+            color: #ff6b6b !important;
+            border: 1px solid rgba(255, 0, 0, 0.35) !important;
             box-shadow: none !important;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
+            gap: 8px;
             width: 100%;
-            padding: 10px;
-            font-size: 0.8rem;
+            padding: 14px;
+            font-size: 0.95rem;
         }
 
-        /* Win Overlay */
+        /* Win View Screen */
         .win-screen {
             display: none;
             flex-direction: column;
             align-items: center;
             text-align: center;
-            gap: 20px;
+            gap: 24px;
             animation: fadeIn 0.5s ease forwards;
-            padding: 30px 0;
+            padding: 40px 0;
             width: 100%;
         }
 
@@ -332,15 +340,6 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
-        /* Dynamic Tier Colors */
-        .tier-ruby { color: #ff3355 !important; }
-        .tier-diamond { color: #00d2ff !important; }
-        .tier-platinum { color: #e5e4e2 !important; }
-        .tier-gold { color: #ffd700 !important; }
-        .tier-silver { color: #c0c0c0 !important; }
-        .tier-bronze { color: #cd7f32 !important; }
-        .tier-default { color: #ffffff !important; }
     </style>
 </head>
 <body>
@@ -354,80 +353,86 @@
         </div>
     </nav>
 
-    <div class="roulette-container">
-        
-        <div id="game-header">
-            <div class="header-top-line">
-                <div class="progress-banner" id="target-percentage">Get 5%</div>
-                <div class="target-sub" id="level-counter">Level 1 of 20</div>
-            </div>
-            <div class="progress-bar-bg">
-                <div class="progress-bar-fill" id="progress-fill"></div>
-            </div>
-        </div>
-
-        <div class="roulette-card" id="roulette-card">
-            <div class="card-bg-blur" id="card-bg-blur"></div>
-
-            <div id="game-content" class="card-grid">
-                <div class="media-col">
-                    <img id="r-thumb" src="" class="roulette-thumb">
-                    <a id="r-video-btn" href="#" target="_blank" class="roulette-btn btn-video" style="display:none;">
-                        ▶ Watch Level Showcase
-                    </a>
+    <div class="page-wrapper">
+        <div class="roulette-container">
+            
+            <div id="game-header">
+                <div class="header-top-line">
+                    <div class="progress-banner" id="target-percentage">Get 5%</div>
+                    <div class="target-sub" id="level-counter">Level 1 of 20</div>
                 </div>
-
-                <div class="info-col">
-                    <div class="level-header">
-                        <span id="r-rank" class="level-rank-tag">List Rank #--</span>
-                        <h2 id="r-name" class="level-name">---</h2>
-                    </div>
-
-                    <div class="badge-row">
-                        <div id="r-tier" class="tier-badge">-</div>
-                        <div id="r-points" class="points-badge">0 PTS</div>
-                    </div>
-
-                    <div class="details-grid">
-                        <div class="detail-item">
-                            <span class="detail-label">Creator</span>
-                            <span id="r-creator" class="detail-value">-</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Verifier</span>
-                            <span id="r-verifier" class="detail-value">-</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Level ID</span>
-                            <span id="r-id" class="detail-value">-</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Victors Count</span>
-                            <span id="r-victors" class="detail-value">0</span>
-                        </div>
-                    </div>
-                    
-                    <div class="btn-group">
-                        <button class="roulette-btn" id="action-btn" onclick="advanceRoulette()">I Beat It! Next Level</button>
-                        <button class="roulette-btn btn-secondary" id="skip-btn" onclick="skipLevel()">Skip</button>
-                    </div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" id="progress-fill"></div>
                 </div>
             </div>
 
-            <div id="win-content" class="win-screen">
-                <div style="font-size: 5rem; filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.4));">👑</div>
-                <h2 class="level-name" style="color: var(--accent, #ff4141);">ROULETTE COMPLETED!</h2>
-                <p style="color: #aaa; max-width: 480px; margin: 0 auto 10px auto; line-height: 1.6; font-size: 0.95rem;">
-                    Unstoppable! You successfully conquered all 20 random levels ranging from 5% all the way to a 100% completion!
-                </p>
-                <button class="roulette-btn" style="max-width:250px;" onclick="resetGame()">Play Again</button>
-            </div>
-        </div>
+            <div class="roulette-card" id="roulette-card">
+                <div class="card-bg-blur" id="card-bg-blur"></div>
 
+                <div id="game-content" class="card-grid">
+                    <!-- Left Media Column -->
+                    <div class="media-col">
+                        <img id="r-thumb" src="" class="roulette-thumb">
+                        <a id="r-video-btn" href="#" target="_blank" class="roulette-btn btn-video" style="display:none;">
+                            ▶ Watch Level Showcase
+                        </a>
+                    </div>
+
+                    <!-- Right Details Column -->
+                    <div class="info-col">
+                        <div>
+                            <span id="r-rank" class="level-rank-tag">List Rank #--</span>
+                            <h2 id="r-name" class="level-name">---</h2>
+                        </div>
+
+                        <div class="badge-row">
+                            <div id="r-tier" class="tier-badge">-</div>
+                            <div id="r-points" class="points-badge">0 PTS</div>
+                        </div>
+
+                        <!-- Full Details Table Grid -->
+                        <div class="details-grid">
+                            <div class="detail-item">
+                                <span class="detail-label">Creator</span>
+                                <span id="r-creator" class="detail-value">-</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Verifier</span>
+                                <span id="r-verifier" class="detail-value">-</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Level ID</span>
+                                <span id="r-id" class="detail-value">-</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Victors Count</span>
+                                <span id="r-victors" class="detail-value">0</span>
+                            </div>
+                        </div>
+                        
+                        <div class="btn-group">
+                            <button class="roulette-btn" id="action-btn" onclick="advanceRoulette()">I Beat It! Next Level</button>
+                            <button class="roulette-btn btn-secondary" id="skip-btn" onclick="skipLevel()">Skip</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Win Overlay -->
+                <div id="win-content" class="win-screen">
+                    <div style="font-size: 6rem; filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.5));">👑</div>
+                    <h2 class="level-name" style="color: var(--accent, #ff4141); font-size: 3.5rem;">ROULETTE COMPLETED!</h2>
+                    <p style="color: #aaa; max-width: 550px; margin: 0 auto; line-height: 1.7; font-size: 1.1rem;">
+                        Incredible performance! You completed all 20 random challenges from 5% all the way up to a 100% completion!
+                    </p>
+                    <button class="roulette-btn" style="max-width:280px; margin-top: 15px;" onclick="resetGame()">Play Again</button>
+                </div>
+            </div>
+
+        </div>
     </div>
 
     <script>
-        // Particle Background Canvas
+        // Background Particle Loop
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
         let parts = [];
@@ -435,8 +440,8 @@
             canvas.width = window.innerWidth; 
             canvas.height = window.innerHeight;
             parts = []; 
-            for(let i = 0; i < 80; i++) {
-                parts.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, s: Math.random()*2, sp: Math.random()*0.4+0.1});
+            for(let i = 0; i < 90; i++) {
+                parts.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, s: Math.random()*2.2, sp: Math.random()*0.4+0.1});
             }
         }
         function anim() {
@@ -499,18 +504,15 @@
             
             usedLevelIds.add(randomLevel.id);
 
-            // Compute Rank in the list based on array index
             const listRank = allLevels.findIndex(l => l.id === randomLevel.id) + 1;
 
             const targetPercent = targets[currentStep - 1];
             document.getElementById('target-percentage').innerText = `Get ${targetPercent}%`;
             document.getElementById('level-counter').innerText = `Level ${currentStep} of 20`;
             
-            // Progress Fill Width
             const fillPercent = (currentStep / 20) * 100;
             document.getElementById('progress-fill').style.width = `${fillPercent}%`;
 
-            // Populate Metadata Fields
             document.getElementById('r-rank').innerText = listRank > 0 ? `List Rank #${listRank}` : `Unranked`;
             document.getElementById('r-name').innerText = randomLevel.name || 'Unknown Level';
             document.getElementById('r-creator').innerText = randomLevel.creator || 'Unknown';
@@ -518,11 +520,9 @@
             document.getElementById('r-id').innerText = randomLevel.id || '-';
             document.getElementById('r-points').innerText = `${randomLevel.points || 0} PTS`;
             
-            // Calculate Victors Count
             const victorsArray = Array.isArray(randomLevel.victors) ? randomLevel.victors : [];
             document.getElementById('r-victors').innerText = `${victorsArray.length} Victor${victorsArray.length === 1 ? '' : 's'}`;
 
-            // Video Link Integration
             const videoBtn = document.getElementById('r-video-btn');
             const videoUrl = randomLevel.video || randomLevel.verification || randomLevel.yt;
             if (videoUrl) {
@@ -532,12 +532,10 @@
                 videoBtn.style.display = 'none';
             }
 
-            // Thumbnail and Background Image
             const imgSource = randomLevel.thumbnail ? randomLevel.thumbnail : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORUSCYII=";
             document.getElementById('r-thumb').src = imgSource;
             document.getElementById('card-bg-blur').style.backgroundImage = `url('${imgSource}')`;
 
-            // Compute Tier Badges
             const currentTier = allTiers.find(t => randomLevel.points >= t.minPoints && randomLevel.points <= t.maxPoints);
             const tierBadge = document.getElementById('r-tier');
             
