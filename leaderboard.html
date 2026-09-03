@@ -6,10 +6,27 @@
     <link rel="stylesheet" href="style.css">
     <style>
         body { overflow-y: auto; background-color: #0b0c10; margin: 0; padding-bottom: 50px; }
-        #canvas { position: fixed; top: 0; left: 0; z-index: -1; pointer-events: none; }
-        .lb-container { max-width: 1050px; margin: 40px auto; padding: 0 20px; }
+        
+        /* Canvas fixed as background only */
+        #canvas { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100vw; 
+            height: 100vh; 
+            z-index: 0; 
+            pointer-events: none; 
+        }
 
-        /* Top 3 Pods Layout */
+        .lb-container { 
+            position: relative; 
+            z-index: 1; 
+            max-width: 1000px; 
+            margin: 40px auto; 
+            padding: 0 20px; 
+        }
+
+        /* Top 3 Podium Cards */
         .podium-container {
             display: flex;
             gap: 20px;
@@ -21,7 +38,7 @@
         .pod-card {
             position: relative;
             flex: 1;
-            max-width: 320px;
+            max-width: 310px;
             background: rgba(20, 22, 30, 0.85);
             border: 1px solid var(--border, rgba(255, 255, 255, 0.1));
             border-radius: 12px;
@@ -48,18 +65,13 @@
             top: 0; left: 0; width: 100%; height: 100%;
             background-size: cover;
             background-position: center;
-            opacity: 0.15;
+            opacity: 0.18;
             z-index: 0;
             pointer-events: none;
         }
 
         .pod-content { position: relative; z-index: 1; }
-        
-        .crown-icon {
-            font-size: 1.8rem;
-            margin-bottom: 5px;
-            display: block;
-        }
+        .crown-icon { font-size: 1.8rem; margin-bottom: 5px; display: block; }
 
         .pod-name {
             font-size: 1.2rem;
@@ -78,11 +90,12 @@
         }
 
         .pod-stats {
-            font-size: 0.75rem;
+            font-size: 0.78rem;
             color: #888;
             display: flex;
-            justify-content: center;
-            gap: 12px;
+            flex-direction: column;
+            gap: 4px;
+            align-items: center;
         }
 
         /* Leaderboard Table Styles */
@@ -117,42 +130,50 @@
             border-top: 1px solid var(--border, rgba(255,255,255,0.1)); 
             border-bottom: 1px solid var(--border, rgba(255,255,255,0.1)); 
         }
+        
         td:first-child { 
             border-radius: 8px 0 0 8px; 
             border-left: 1px solid var(--border, rgba(255,255,255,0.1)); 
-            width: 60px; 
+            width: 50px; 
             text-align: center; 
             font-weight: 800; 
+            color: #fff;
         }
-        td:last-child { 
-            border-radius: 0 8px 8px 0; 
-            border-right: 1px solid var(--border, rgba(255,255,255,0.1)); 
-            text-align: right; 
+
+        td.col-player { width: 220px; }
+        
+        td.col-pts { 
+            text-align: center; 
             color: var(--accent, #47e5bc); 
             font-weight: 800; 
             font-size: 1.05rem;
         }
 
-        .player-cell { display: flex; align-items: center; gap: 10px; }
-        .player-title { font-weight: 700; color: #fff; font-size: 1rem; text-decoration: none; }
-        
-        .sub-stat {
-            font-size: 0.75rem;
-            color: #888;
-            margin-top: 2px;
-        }
-
-        .hardest-cell {
-            text-align: right;
+        td.col-hardest { 
+            border-radius: 0 8px 8px 0; 
+            border-right: 1px solid var(--border, rgba(255,255,255,0.1)); 
+            text-align: right; 
             font-size: 0.85rem;
             color: #aaa;
         }
-        .hardest-cell strong { color: #fff; }
+
+        .player-title { font-weight: 700; color: #fff; font-size: 1rem; text-decoration: none; }
+        .sub-stat { font-size: 0.75rem; color: #888; margin-top: 2px; }
+
+        /* Dynamic Tier Color Classes */
+        .tier-ruby { color: #ff3355 !important; }
+        .tier-diamond { color: #00d2ff !important; }
+        .tier-platinum { color: #e5e4e2 !important; }
+        .tier-gold { color: #ffd700 !important; }
+        .tier-silver { color: #c0c0c0 !important; }
+        .tier-bronze { color: #cd7f32 !important; }
+        .tier-default { color: #ffffff !important; }
     </style>
 </head>
 <body>
     <canvas id="canvas"></canvas>
-    <nav>
+    
+    <nav style="position: relative; z-index: 1;">
         <div class="nav-logo">LEADERBOARD</div>
         <a href="index.html" class="nav-link">BACK TO LIST</a>
     </nav>
@@ -217,19 +238,44 @@
             }
         ];
 
+        // Background Particle Effect
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
         let parts = [];
         function initCanvas() {
-            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-            parts = []; for(let i=0; i<100; i++) parts.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, s: Math.random()*2, sp: Math.random()*0.5+0.1});
+            canvas.width = window.innerWidth; 
+            canvas.height = window.innerHeight;
+            parts = []; 
+            for(let i=0; i<100; i++) {
+                parts.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, s: Math.random()*2, sp: Math.random()*0.5+0.1});
+            }
         }
         function anim() {
             ctx.clearRect(0,0,canvas.width,canvas.height);
-            parts.forEach(p => { ctx.fillStyle = "rgba(255,65,65,0.3)"; ctx.beginPath(); ctx.arc(p.x, p.y, p.s, 0, Math.PI*2); ctx.fill(); p.y -= p.sp; if(p.y<0) p.y=canvas.height; });
+            parts.forEach(p => { 
+                ctx.fillStyle = "rgba(255,65,65,0.3)"; 
+                ctx.beginPath(); 
+                ctx.arc(p.x, p.y, p.s, 0, Math.PI*2); 
+                ctx.fill(); 
+                p.y -= p.sp; 
+                if(p.y<0) p.y=canvas.height; 
+            });
             requestAnimationFrame(anim);
         }
         window.onresize = initCanvas; initCanvas(); anim();
+
+        // Tier Class Helper
+        function getTierClass(tier) {
+            if (!tier) return 'tier-default';
+            const t = tier.toLowerCase();
+            if (t.includes('ruby')) return 'tier-ruby';
+            if (t.includes('diamond')) return 'tier-diamond';
+            if (t.includes('platinum')) return 'tier-platinum';
+            if (t.includes('gold')) return 'tier-gold';
+            if (t.includes('silver')) return 'tier-silver';
+            if (t.includes('bronze')) return 'tier-bronze';
+            return 'tier-default';
+        }
 
         async function load() {
             const res = await fetch(`levels.json?v=${new Date().getTime()}`);
@@ -291,6 +337,7 @@
                 const hardest = playerHardest[name];
                 const bgThumb = hardest && hardest.thumbnail ? hardest.thumbnail : '';
                 const hardestName = hardest ? hardest.name : '-';
+                const hardestClass = hardest ? getTierClass(hardest.tier) : 'tier-default';
                 const compCount = playerLevels[name] ? playerLevels[name].size : 0;
                 const crown = rank === 1 ? '👑' : rank === 2 ? '🥈' : '🥉';
 
@@ -300,11 +347,10 @@
                         <div class="pod-content">
                             <span class="crown-icon">${crown}</span>
                             <a href="player.html?name=${encodeURIComponent(name)}" class="pod-name">${name}</a>
-                            <div class="pod-pts">${pts.toLocaleString()}</div>
+                            <div class="pod-pts">${pts.toLocaleString()} PTS</div>
                             <div class="pod-stats">
                                 <span><strong>${compCount}</strong> completed</span>
-                                <span>•</span>
-                                <span>Hardest: <strong>${hardestName}</strong></span>
+                                <span>Hardest: <strong class="${hardestClass}">${hardestName}</strong></span>
                             </div>
                         </div>
                     </div>
@@ -312,7 +358,7 @@
             });
             podiumContainer.innerHTML = podiumHTML;
 
-            // Render Leaderboard Rows starting from #4 onward
+            // Render Leaderboard Rows from #4 onward
             const table = document.getElementById('lb-data');
             const remaining = sorted.slice(3);
 
@@ -321,27 +367,24 @@
                 const hardest = playerHardest[name];
                 const bgThumb = hardest && hardest.thumbnail ? hardest.thumbnail : '';
                 const hardestName = hardest ? hardest.name : '-';
+                const hardestClass = hardest ? getTierClass(hardest.tier) : 'tier-default';
                 const compCount = playerLevels[name] ? playerLevels[name].size : 0;
 
                 table.innerHTML += `
                     <tr>
                         ${bgThumb ? `<div class="tr-bg" style="background-image: url('${bgThumb}');"></div>` : ''}
                         <td>#${r}</td>
-                        <td>
-                            <div class="player-cell">
-                                <div>
-                                    <a href="player.html?name=${encodeURIComponent(name)}" class="player-title">
-                                        ${name}
-                                    </a>
-                                    <div class="sub-stat">${compCount} completed</div>
-                                </div>
-                            </div>
+                        <td class="col-player">
+                            <a href="player.html?name=${encodeURIComponent(name)}" class="player-title">
+                                ${name}
+                            </a>
+                            <div class="sub-stat">${compCount} completed</div>
                         </td>
-                        <td class="hardest-cell">
+                        <td class="col-pts">${pts.toLocaleString()} PTS</td>
+                        <td class="col-hardest">
                             <span style="opacity:0.6;">Hardest:</span> 
-                            <strong>${hardestName}</strong>
+                            <strong class="${hardestClass}">${hardestName}</strong>
                         </td>
-                        <td>${pts.toLocaleString()} PTS</td>
                     </tr>
                 `;
             });
