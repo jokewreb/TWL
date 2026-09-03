@@ -328,7 +328,6 @@
             overflow-y: auto;
         }
 
-        /* Scaled 1.5x bigger */
         .video-box {
             position: relative;
             width: 100%;
@@ -336,7 +335,7 @@
             aspect-ratio: 16 / 9;
             max-height: 72vh;
             margin: 0 auto;
-            background: #000;
+            background: rgba(18, 22, 31, 0.85);
             border-radius: 14px;
             overflow: hidden;
             border: 1px solid var(--border);
@@ -704,26 +703,26 @@
 
                 if (rank === 1) {
                     const header = document.createElement('div');
-                    header.style.cssText = "font-weight: 800; font-size: 0.85rem; color: var(--accent); letter-spacing: 1.5px; text-transform: uppercase; padding: 8px 4px 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 4px;";
+                    header.style.cssText = "font-weight: 900; font-size: 1.15rem; color: #ffffff; letter-spacing: 1.5px; text-transform: uppercase; padding: 10px 4px 6px; border-bottom: 1px solid rgba(255,255,255,0.15); margin-bottom: 6px;";
                     header.innerText = "Main List";
                     side.appendChild(header);
                 } else if (rank === 76) {
                     const header = document.createElement('div');
-                    header.style.cssText = "font-weight: 800; font-size: 0.85rem; color: #aaa; letter-spacing: 1.5px; text-transform: uppercase; padding: 14px 4px 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 4px;";
+                    header.style.cssText = "font-weight: 900; font-size: 1.15rem; color: #ffffff; letter-spacing: 1.5px; text-transform: uppercase; padding: 18px 4px 6px; border-bottom: 1px solid rgba(255,255,255,0.15); margin-bottom: 6px;";
                     header.innerText = "Extended List";
                     side.appendChild(header);
                 } else if (rank === 151) {
                     const legacyContainer = document.createElement('div');
-                    legacyContainer.style.cssText = "display: flex; align-items: center; justify-content: space-between; padding: 14px 4px 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 4px;";
+                    legacyContainer.style.cssText = "display: flex; align-items: center; justify-content: space-between; padding: 18px 4px 6px; border-bottom: 1px solid rgba(255,255,255,0.15); margin-bottom: 6px;";
 
                     const header = document.createElement('div');
-                    header.style.cssText = "font-weight: 800; font-size: 0.85rem; color: #666; letter-spacing: 1.5px; text-transform: uppercase;";
+                    header.style.cssText = "font-weight: 900; font-size: 1.15rem; color: #ffffff; letter-spacing: 1.5px; text-transform: uppercase;";
                     header.innerText = "Legacy List";
 
                     const btn = document.createElement('a');
                     btn.href = "legacy.html";
                     btn.innerText = "VIEW ALL";
-                    btn.style.cssText = "font-size: 0.7rem; font-weight: 700; color: var(--accent); text-decoration: none; border: 1px solid var(--accent); padding: 3px 8px; border-radius: 4px; transition: all 0.2s ease;";
+                    btn.style.cssText = "font-size: 0.75rem; font-weight: 700; color: var(--accent); text-decoration: none; border: 1px solid var(--accent); padding: 4px 10px; border-radius: 4px; transition: all 0.2s ease;";
                     btn.onmouseover = () => { btn.style.background = 'var(--accent)'; btn.style.color = '#000'; };
                     btn.onmouseout = () => { btn.style.background = 'transparent'; btn.style.color = 'var(--accent)'; };
 
