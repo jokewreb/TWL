@@ -2,7 +2,7 @@
   {
     "name": "Wave Corridor Pack",
     "tier": "PLATINUM",
-    "points": 300,
+    "points": 100,
     "levels": [
       "Unnerfed Wave Corridor",
       "Silent Wave Corridor Infinity Unleashed XYZ",
@@ -14,7 +14,7 @@
   {
     "name": "Top 1 Pack I",
     "tier": "PLATINUM",
-    "points": 300,
+    "points": 100,
     "levels": [
       "Unnerfed Wave Corridor",
       "ULTIMATE DIHRUCTION",
@@ -24,7 +24,7 @@
   {
     "name": "Radioactive Trilogy",
     "tier": "PLATINUM",
-    "points": 300,
+    "points": 100,
     "levels": [
       "NEPTUNIUM",
       "URANIUM",
@@ -65,7 +65,7 @@
   {
     "name": "ChefLimeWaveBasic Pack",
     "tier": "SILVER",
-    "points": 100,
+    "points": 50,
     "levels": [
       "ChefLimeWaveBasic4",
       "ChefLimeWaveBasic3",
@@ -78,7 +78,7 @@
   {
     "name": "Bottom 1 Pack I",
     "tier": "BRONZE",
-    "points": 50,
+    "points": 25,
     "levels": [
       "Zoink WAVE",
       "Swag Clubstep",
