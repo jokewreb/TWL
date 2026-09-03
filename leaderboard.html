@@ -27,15 +27,16 @@
         .lb-container { 
             position: relative; 
             z-index: 1; 
-            max-width: 1000px; 
+            width: 92%;
+            max-width: 1350px; /* Extended container width */
             margin: 40px auto; 
-            padding: 0 20px; 
+            padding: 0 10px; 
         }
 
         /* Top 3 Podium Cards */
         .podium-container {
             display: flex;
-            gap: 20px;
+            gap: 24px;
             justify-content: center;
             align-items: flex-end;
             margin-bottom: 35px;
@@ -44,11 +45,11 @@
         .pod-card {
             position: relative;
             flex: 1;
-            max-width: 310px;
+            max-width: 400px; /* Extended pod size to match wide layout */
             background: rgba(20, 22, 30, 0.85);
             border: 1px solid var(--border, rgba(255, 255, 255, 0.1));
             border-radius: 12px;
-            padding: 20px 15px;
+            padding: 22px 18px;
             text-align: center;
             backdrop-filter: blur(12px);
             overflow: hidden;
@@ -61,7 +62,7 @@
             order: 2;
             border-color: #ffd700;
             box-shadow: 0 0 25px rgba(255, 215, 0, 0.25);
-            padding-top: 25px;
+            padding-top: 28px;
         }
         .pod-card.rank-2 { order: 1; border-color: #c0c0c0; }
         .pod-card.rank-3 { order: 3; border-color: #cd7f32; }
@@ -80,7 +81,7 @@
         .crown-icon { font-size: 1.8rem; margin-bottom: 5px; display: block; }
 
         .pod-name {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             font-weight: 800;
             color: #fff;
             margin-bottom: 4px;
@@ -89,14 +90,14 @@
         }
 
         .pod-pts {
-            font-size: 1.3rem;
+            font-size: 1.35rem;
             font-weight: 900;
             color: var(--accent, #ff4141);
             margin-bottom: 8px;
         }
 
         .pod-stats {
-            font-size: 0.78rem;
+            font-size: 0.8rem;
             color: #888;
             display: flex;
             flex-direction: column;
@@ -115,14 +116,14 @@
         tr { 
             background-color: rgba(20, 22, 30, 0.85); 
             backdrop-filter: blur(10px); 
-            transition: transform 0.2s ease, opacity 0.2s ease;
-            height: 60px;
+            transition: transform 0.2s ease;
+            height: 62px;
         }
-        tr:hover { transform: scale(1.008); }
+        tr:hover { transform: scale(1.005); }
 
         td { 
-            padding: 0 16px; 
-            height: 60px;
+            padding: 0 20px; 
+            height: 62px;
             vertical-align: middle;
             border-top: 1px solid var(--border, rgba(255,255,255,0.08)); 
             border-bottom: 1px solid var(--border, rgba(255,255,255,0.08)); 
@@ -132,13 +133,16 @@
             background: transparent;
         }
         
+        /* Rank Number Column */
         td:first-child { 
             border-radius: 8px 0 0 8px; 
             border-left: 1px solid var(--border, rgba(255,255,255,0.08)); 
-            width: 50px; 
+            width: 80px; 
+            padding: 0 10px;
             text-align: center; 
             font-weight: 800; 
-            color: #888;
+            font-size: 1rem;
+            color: #fff;
         }
 
         td.col-player { width: 35%; }
@@ -148,16 +152,16 @@
             text-align: center; 
             color: var(--accent, #ff4141); 
             font-weight: 800; 
-            font-size: 1rem;
+            font-size: 1.05rem;
         }
 
         td.col-hardest { 
             border-radius: 0 8px 8px 0; 
             border-right: 1px solid var(--border, rgba(255,255,255,0.08)); 
             text-align: right; 
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             color: #aaa;
-            width: 40%;
+            padding-right: 24px;
         }
 
         .player-wrapper {
@@ -169,13 +173,13 @@
         .player-title { 
             font-weight: 700; 
             color: #fff; 
-            font-size: 0.95rem; 
+            font-size: 1rem; 
             text-decoration: none; 
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
         }
-        .sub-stat { font-size: 0.72rem; color: #777; margin-top: 2px; }
+        .sub-stat { font-size: 0.75rem; color: #777; margin-top: 2px; }
 
         /* Dynamic Tier Colors */
         .tier-ruby { color: #ff3355 !important; }
@@ -283,7 +287,7 @@
         }
         window.onresize = initCanvas; initCanvas(); anim();
 
-        // Tier Color Class Helper
+        // Tier Color Helper
         function getTierClass(tier) {
             if (!tier) return 'tier-default';
             const t = tier.toLowerCase();
@@ -389,7 +393,6 @@
                 const hardestClass = hardest ? getTierClass(hardest.tier) : 'tier-default';
                 const compCount = playerLevels[name] ? playerLevels[name].size : 0;
 
-                // Applies dark-overlay background directly to TR element to prevent browser parsing bugs
                 const rowStyle = bgThumb 
                     ? `style="background: linear-gradient(90deg, rgba(20,22,30,0.92) 0%, rgba(20,22,30,0.8) 100%), url('${bgThumb}'); background-size: cover; background-position: center;"`
                     : '';
