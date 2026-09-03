@@ -4,30 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>THE WAVE LIST</title>
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" href="logo.ico">
     <link rel="stylesheet" href="style.css">
     <style>
+        :root {
+            --accent: #47e5bc;
+            --bg-dark: #0b0c10;
+            --card-bg: rgba(20, 24, 33, 0.85);
+            --border: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(255, 255, 255, 0.25);
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
 
-        html, body {
+        body {
             min-height: 100vh;
-            background-color: #0b0c10;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-dark);
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             color: #fff;
             overflow-x: hidden;
-        }
-
-        body {
             display: flex;
             flex-direction: column;
         }
 
-        /* Particle Canvas */
-        #canvas {
+        /* Ambient Background Canvas */
+        #bg-canvas {
             position: fixed;
             top: 0;
             left: 0;
@@ -39,15 +44,17 @@
 
         /* Header Navigation */
         nav {
-            position: relative;
-            z-index: 10;
-            padding: 18px 40px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 18px 45px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             background: rgba(11, 12, 16, 0.85);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
         }
 
         .nav-logo {
@@ -57,11 +64,13 @@
             color: #fff;
             text-transform: uppercase;
             cursor: pointer;
-            transition: color 0.2s ease;
+            transition: all 0.2s ease;
+            text-shadow: 0 0 12px rgba(71, 229, 188, 0.3);
         }
 
         .nav-logo:hover {
-            color: var(--accent, #47e5bc);
+            color: var(--accent);
+            text-shadow: 0 0 20px rgba(71, 229, 188, 0.7);
         }
 
         .nav-links {
@@ -74,68 +83,69 @@
             color: #aaa;
             text-decoration: none;
             font-weight: 700;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
-            transition: color 0.2s ease, transform 0.2s ease;
+            transition: all 0.2s ease;
+            padding: 6px 12px;
+            border-radius: 6px;
         }
 
         .nav-link:hover {
-            color: var(--accent, #47e5bc);
-            transform: translateY(-1px);
+            color: #fff;
+            background: rgba(255, 255, 255, 0.05);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
         }
 
-        /* Layout Structure */
+        /* Main Layout Grid */
         .main-layout {
             position: relative;
             z-index: 1;
-            display: flex;
+            display: grid;
+            grid-template-columns: 460px 1fr;
             gap: 30px;
-            padding: 25px 40px 50px 40px;
+            padding: 30px 45px;
             max-width: 1920px;
             margin: 0 auto;
             width: 100%;
-            align-items: flex-start;
         }
 
         /* Sidebar Column */
-        .sidebar-container {
-            width: 380px;
-            min-width: 380px;
+        .sidebar-column {
             display: flex;
             flex-direction: column;
             gap: 15px;
+            height: calc(100vh - 120px);
             position: sticky;
-            top: 25px;
-            max-height: calc(100vh - 50px);
+            top: 90px;
         }
 
-        .search-wrapper {
-            background: rgba(20, 22, 30, 0.92);
-            border: 1px solid rgba(255, 255, 255, 0.12);
+        .search-container {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
             border-radius: 14px;
             padding: 12px;
-            backdrop-filter: blur(16px);
+            backdrop-filter: blur(12px);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
         #level-search {
             width: 100%;
             padding: 12px 16px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border);
             border-radius: 10px;
             color: #fff;
             font-size: 0.9rem;
             outline: none;
-            transition: all 0.25 ease;
+            transition: all 0.25s ease;
             box-sizing: border-box;
         }
 
         #level-search:focus {
-            border-color: var(--accent, #47e5bc);
+            border-color: var(--accent);
             background: rgba(255, 255, 255, 0.08);
-            box-shadow: 0 0 15px rgba(71, 229, 188, 0.2);
+            box-shadow: 0 0 15px rgba(71, 229, 188, 0.25);
         }
 
         .sidebar {
@@ -143,97 +153,130 @@
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 10px;
             padding-right: 6px;
-            background: rgba(20, 22, 30, 0.85);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 16px;
-            backdrop-filter: blur(16px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
         }
 
-        /* Custom Scrollbars */
         .sidebar::-webkit-scrollbar {
             width: 6px;
         }
+
         .sidebar::-webkit-scrollbar-track {
             background: rgba(0, 0, 0, 0.2);
             border-radius: 8px;
         }
+
         .sidebar::-webkit-scrollbar-thumb {
             background: rgba(255, 255, 255, 0.15);
             border-radius: 8px;
         }
+
         .sidebar::-webkit-scrollbar-thumb:hover {
-            background: var(--accent, #47e5bc);
+            background: var(--accent);
         }
 
-        /* Sidebar Item Card */
+        /* Redesigned Wider Level Cards */
         .list-item {
+            position: relative;
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 10px 12px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 10px;
+            gap: 16px;
+            padding: 12px 16px;
+            min-height: 72px;
+            background: rgba(20, 24, 33, 0.7);
+            border: 1px solid var(--border);
+            border-radius: 12px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            overflow: hidden;
             user-select: none;
+            transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        /* Low Opacity Thumbnail Background */
+        .list-item-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.25;
+            filter: blur(1px);
+            transition: all 0.4s ease;
+            z-index: 0;
+        }
+
+        .list-item-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, rgba(15, 18, 25, 0.95) 0%, rgba(15, 18, 25, 0.75) 50%, rgba(15, 18, 25, 0.88) 100%);
+            z-index: 1;
+        }
+
+        .list-item-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            width: 100%;
         }
 
         .list-item:hover {
-            background: rgba(255, 255, 255, 0.09);
-            transform: translateX(4px);
-            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px) scale(1.01);
+            border-color: var(--border-hover);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.6), 0 0 15px var(--tier-glow, rgba(71, 229, 188, 0.15));
+        }
+
+        .list-item:hover .list-item-bg {
+            opacity: 0.45;
+            filter: blur(0px);
+            transform: scale(1.05);
         }
 
         .list-item.active {
-            background: rgba(71, 229, 188, 0.12);
-            border-color: var(--accent, #47e5bc);
-        }
-
-        .thumb-mini {
-            width: 80px;
-            height: 45px;
-            object-fit: cover;
-            flex-shrink: 0;
-            border-radius: 6px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-color: var(--accent);
+            box-shadow: 0 0 20px rgba(71, 229, 188, 0.3);
+            background: rgba(71, 229, 188, 0.1);
         }
 
         .rank {
-            font-weight: 800;
-            font-size: 0.95rem;
-            min-width: 38px;
+            font-weight: 900;
+            font-size: 1.1rem;
+            min-width: 42px;
             flex-shrink: 0;
             text-align: center;
+            letter-spacing: -0.5px;
         }
 
-        /* Main Content View */
+        .thumb-mini {
+            width: 76px;
+            height: 44px;
+            object-fit: cover;
+            flex-shrink: 0;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+
+        /* Content Area */
         .content {
-            flex: 1;
-            min-width: 0;
             display: flex;
             gap: 30px;
             align-items: flex-start;
         }
 
         .glass-card {
-            background: rgba(20, 22, 30, 0.90);
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            flex: 1;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
             border-radius: 20px;
             padding: 32px;
-            backdrop-filter: blur(18px);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7);
             display: flex;
             flex-direction: column;
             gap: 24px;
-            width: 100%;
         }
 
-        /* Video Showcase */
         .video-box {
             position: relative;
             width: 100%;
@@ -241,8 +284,8 @@
             background: #000;
             border-radius: 14px;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+            border: 1px solid var(--border);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
         }
 
         .video-box iframe {
@@ -261,7 +304,7 @@
             text-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
 
-        /* Stats Section */
+        /* Stats Display */
         .info-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
@@ -270,18 +313,19 @@
         }
 
         .stat-card {
-            background: rgba(0, 0, 0, 0.35);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border);
+            border-radius: 14px;
             padding: 16px 20px;
             display: flex;
             flex-direction: column;
             gap: 4px;
-            transition: border-color 0.2s ease;
+            transition: border-color 0.2s ease, transform 0.2s ease;
         }
 
         .stat-card:hover {
-            border-color: rgba(255, 255, 255, 0.18);
+            border-color: var(--border-hover);
+            transform: translateY(-2px);
         }
 
         .stat-label {
@@ -301,10 +345,10 @@
             white-space: nowrap;
         }
 
-        /* Victors Container */
+        /* Victors Tag Area */
         .victors-box {
-            background: rgba(0, 0, 0, 0.35);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border);
             border-radius: 14px;
             padding: 20px 24px;
             display: flex;
@@ -321,12 +365,13 @@
             font-size: 0.85rem;
             font-weight: 600;
             transition: all 0.2s ease;
+            text-decoration: none;
         }
 
         .tag:hover {
-            background: var(--accent, #47e5bc);
+            background: var(--accent);
             color: #0b0c10;
-            border-color: var(--accent, #47e5bc);
+            border-color: var(--accent);
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(71, 229, 188, 0.3);
         }
@@ -337,21 +382,21 @@
         }
 
         .player-link:hover {
-            color: var(--accent, #47e5bc);
+            color: var(--accent);
         }
 
-        /* Tier Legend Column */
+        /* Tier Legend Sidebar */
         #tier-legend-container {
             width: 320px;
             min-width: 320px;
-            background: rgba(20, 22, 30, 0.90);
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: var(--card-bg);
+            border: 1px solid var(--border);
             border-radius: 20px;
             padding: 26px;
-            backdrop-filter: blur(18px);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7);
             position: sticky;
-            top: 25px;
+            top: 90px;
         }
 
         /* Floating Action Buttons */
@@ -373,12 +418,12 @@
             bottom: 25px;
             right: 90px;
             background: rgba(30, 34, 45, 0.9);
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            border: 1px solid var(--border);
         }
 
         .rules-btn:hover {
             transform: scale(1.1);
-            border-color: var(--accent, #47e5bc);
+            border-color: var(--accent);
             background: rgba(40, 45, 60, 0.95);
         }
 
@@ -407,19 +452,17 @@
 
         @media (max-width: 1024px) {
             .main-layout {
-                flex-direction: column;
+                grid-template-columns: 1fr;
             }
-            .sidebar-container {
-                width: 100%;
-                min-width: 100%;
+            .sidebar-column {
+                height: 450px;
                 position: static;
-                max-height: 400px;
             }
         }
     </style>
 </head>
 <body>
-    <canvas id="canvas"></canvas>
+    <canvas id="bg-canvas"></canvas>
 
     <nav>
         <div class="nav-logo" onclick="window.location.href='index.html'">THE WAVE LIST</div>
@@ -432,22 +475,22 @@
 
     <div class="main-layout">
         <!-- Sidebar Navigation -->
-        <div class="sidebar-container">
-            <div class="search-wrapper">
+        <div class="sidebar-column">
+            <div class="search-container">
                 <input type="text" id="level-search" placeholder="Search levels..." oninput="filterLevels()">
             </div>
             <div class="sidebar" id="sidebar"></div>
         </div>
 
-        <!-- Main Display Panel -->
+        <!-- Main Display Content -->
         <div class="content">
             <div class="glass-card">
                 <div class="video-box">
                     <iframe id="main-vid" src="" frameborder="0" allowfullscreen></iframe>
                 </div>
-                
+
                 <h1 id="main-title" class="main-title-text">Loading...</h1>
-                
+
                 <div class="info-grid">
                     <div class="stat-card">
                         <div class="stat-label">Creator</div>
@@ -463,11 +506,11 @@
                     </div>
                     <div class="stat-card">
                         <div class="stat-label">Points</div>
-                        <div id="s-pts" style="color:var(--accent, #47e5bc)">-</div>
+                        <div id="s-pts" style="color:var(--accent);">-</div>
                     </div>
                     <div class="stat-card" id="fps-card" style="display: none;">
                         <div class="stat-label">FPS Cap</div>
-                        <div id="s-fps" style="color:#ffcf4b">-</div>
+                        <div id="s-fps" style="color:#ffcf4b;">-</div>
                     </div>
                 </div>
 
@@ -485,7 +528,7 @@
         </div>
     </div>
 
-    <!-- Floating Quick Actions -->
+    <!-- Floating Buttons -->
     <a href="rules.html" class="floating-btn rules-btn" title="Rules">
         <span style="font-size: 1.5rem; user-select: none;">📜</span>
     </a>
@@ -495,49 +538,47 @@
     </a>
 
     <script>
-        // Particle Background Canvas
-        const canvas = document.getElementById('canvas');
+        // Particle Ambient Canvas Animation
+        const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
-        let parts = [];
+        let particles = [];
 
         function initCanvas() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            parts = [];
-            for (let i = 0; i < 75; i++) {
-                parts.push({
+            particles = [];
+            for (let i = 0; i < 65; i++) {
+                particles.push({
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height,
-                    s: Math.random() * 2 + 0.5,
-                    sp: Math.random() * 0.35 + 0.1
+                    radius: Math.random() * 2 + 0.5,
+                    speed: Math.random() * 0.3 + 0.1
                 });
             }
         }
 
-        function animCanvas() {
+        function animateCanvas() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            parts.forEach(p => {
-                ctx.fillStyle = "rgba(71, 229, 188, 0.25)";
+            particles.forEach(p => {
+                ctx.fillStyle = "rgba(71, 229, 188, 0.2)";
                 ctx.beginPath();
-                ctx.arc(p.x, p.y, p.s, 0, Math.PI * 2);
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
                 ctx.fill();
-                p.y -= p.sp;
+                p.y -= p.speed;
                 if (p.y < 0) p.y = canvas.height;
             });
-            requestAnimationFrame(animCanvas);
+            requestAnimationFrame(animateCanvas);
         }
 
-        window.onresize = initCanvas;
+        window.addEventListener('resize', initCanvas);
         initCanvas();
-        animCanvas();
+        animateCanvas();
 
-        // --- LOGO CONFIGURATION ---
+        // Logo Configuration
         const TIER_LOGO_SIZE = "36px";
-        // ---------------------------
 
         let allLevels = [];
         let allTiers = [];
-        let selectedIndex = 0;
 
         async function init() {
             try {
@@ -591,17 +632,17 @@
 
                 if (rank === 1) {
                     const header = document.createElement('div');
-                    header.style.cssText = "font-weight: 800; font-size: 0.85rem; color: var(--accent, #47e5bc); letter-spacing: 1.5px; text-transform: uppercase; padding: 12px 10px 6px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 8px;";
+                    header.style.cssText = "font-weight: 800; font-size: 0.85rem; color: var(--accent); letter-spacing: 1.5px; text-transform: uppercase; padding: 10px 6px 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;";
                     header.innerText = "Main List";
                     side.appendChild(header);
                 } else if (rank === 76) {
                     const header = document.createElement('div');
-                    header.style.cssText = "font-weight: 800; font-size: 0.85rem; color: #aaa; letter-spacing: 1.5px; text-transform: uppercase; padding: 18px 10px 6px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 8px;";
+                    header.style.cssText = "font-weight: 800; font-size: 0.85rem; color: #aaa; letter-spacing: 1.5px; text-transform: uppercase; padding: 16px 6px 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;";
                     header.innerText = "Extended List";
                     side.appendChild(header);
                 } else if (rank === 151) {
                     const legacyContainer = document.createElement('div');
-                    legacyContainer.style.cssText = "display: flex; align-items: center; justify-content: space-between; padding: 18px 10px 6px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 8px;";
+                    legacyContainer.style.cssText = "display: flex; align-items: center; justify-content: space-between; padding: 16px 6px 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;";
 
                     const header = document.createElement('div');
                     header.style.cssText = "font-weight: 800; font-size: 0.85rem; color: #666; letter-spacing: 1.5px; text-transform: uppercase;";
@@ -610,9 +651,9 @@
                     const btn = document.createElement('a');
                     btn.href = "legacy.html";
                     btn.innerText = "VIEW ALL";
-                    btn.style.cssText = "font-size: 0.7rem; font-weight: 700; color: var(--accent, #47e5bc); text-decoration: none; border: 1px solid var(--accent, #47e5bc); padding: 3px 8px; border-radius: 4px; transition: all 0.2s ease;";
-                    btn.onmouseover = () => { btn.style.background = 'var(--accent, #47e5bc)'; btn.style.color = '#000'; };
-                    btn.onmouseout = () => { btn.style.background = 'transparent'; btn.style.color = 'var(--accent, #47e5bc)'; };
+                    btn.style.cssText = "font-size: 0.7rem; font-weight: 700; color: var(--accent); text-decoration: none; border: 1px solid var(--accent); padding: 3px 8px; border-radius: 4px; transition: all 0.2s ease;";
+                    btn.onmouseover = () => { btn.style.background = 'var(--accent)'; btn.style.color = '#000'; };
+                    btn.onmouseout = () => { btn.style.background = 'transparent'; btn.style.color = 'var(--accent)'; };
 
                     legacyContainer.appendChild(header);
                     legacyContainer.appendChild(btn);
@@ -622,25 +663,29 @@
                 const displayPts = rank > 150 ? "LEGACY" : `${lvl.points} PTS`;
                 const fpsBadge = lvl.fps ? `<span style="font-size:0.65rem; color:#ffcf4b; border: 1px solid rgba(255, 207, 75, 0.3); padding: 1px 4px; border-radius: 3px; margin-left: 6px; flex-shrink: 0;">${lvl.fps}</span>` : '';
 
-                const div = document.createElement('div');
-                div.className = `list-item ${rank <= 3 ? 'top-' + rank : ''}`;
-
                 const currentTier = allTiers.find(t => lvl.points >= t.minPoints && lvl.points <= t.maxPoints);
-                if (currentTier) {
-                    div.style.borderLeft = `4px solid ${currentTier.color}`;
-                }
-
                 const imgSource = lvl.thumbnail ? lvl.thumbnail : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=";
 
+                const div = document.createElement('div');
+                div.className = `list-item ${rank <= 3 ? 'top-' + rank : ''}`;
+                if (currentTier) {
+                    div.style.borderLeft = `5px solid ${currentTier.color}`;
+                    div.style.setProperty('--tier-glow', currentTier.color);
+                }
+
                 div.innerHTML = `
-                    <div class="rank" style="${currentTier ? 'color:' + currentTier.color : ''}">#${rank}</div>
-                    <img src="${imgSource}" class="thumb-mini">
-                    <div style="flex: 1; min-width: 0; overflow: hidden; text-align: left;">
-                        <div style="font-weight:700; font-size:0.85rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: flex; align-items: center;">
-                            <span style="overflow: hidden; text-overflow: ellipsis;">${lvl.name}</span>
-                            ${fpsBadge}
+                    <div class="list-item-bg" style="background-image: url('${imgSource}');"></div>
+                    <div class="list-item-overlay"></div>
+                    <div class="list-item-content">
+                        <div class="rank" style="${currentTier ? 'color:' + currentTier.color : ''}">#${rank}</div>
+                        <img src="${imgSource}" class="thumb-mini">
+                        <div style="flex: 1; min-width: 0; overflow: hidden; text-align: left;">
+                            <div style="font-weight:800; font-size:0.95rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: flex; align-items: center; color: #fff;">
+                                <span style="overflow: hidden; text-overflow: ellipsis;">${lvl.name}</span>
+                                ${fpsBadge}
+                            </div>
+                            <div style="font-size:0.75rem; color:#aaa; font-weight:700; margin-top:2px;">${displayPts}</div>
                         </div>
-                        <div style="font-size:0.72rem; color:#777; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 600; margin-top:2px;">${displayPts}</div>
                     </div>
                 `;
 
@@ -699,8 +744,8 @@
 
             const vCont = document.getElementById('v-cont');
             vCont.innerHTML = validVictors.length > 0
-                ? validVictors.map(v => `<a href="player.html?name=${encodeURIComponent(v)}" class="tag player-link" style="white-space: nowrap; display: inline-block;">${v}</a>`).join('')
-                : "<span style='color:#555; font-size:0.85rem'>No victors yet.</span>";
+                ? validVictors.map(v => `<a href="player.html?name=${encodeURIComponent(v)}" class="tag player-link">${v}</a>`).join('')
+                : "<span style='color:#666; font-size:0.85rem'>No victors yet.</span>";
         }
 
         init();
