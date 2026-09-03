@@ -28,7 +28,7 @@
             position: relative; 
             z-index: 1; 
             width: 92%;
-            max-width: 1350px; /* Extended container width */
+            max-width: 1350px; 
             margin: 40px auto; 
             padding: 0 10px; 
         }
@@ -45,7 +45,7 @@
         .pod-card {
             position: relative;
             flex: 1;
-            max-width: 400px; /* Extended pod size to match wide layout */
+            max-width: 400px;
             background: rgba(20, 22, 30, 0.85);
             border: 1px solid var(--border, rgba(255, 255, 255, 0.1));
             border-radius: 12px;
@@ -116,10 +116,14 @@
         tr { 
             background-color: rgba(20, 22, 30, 0.85); 
             backdrop-filter: blur(10px); 
-            transition: transform 0.2s ease;
+            transition: transform 0.2s ease, background-color 0.2s ease;
             height: 62px;
+            cursor: pointer; /* Pointer cursor for interactive row */
         }
-        tr:hover { transform: scale(1.005); }
+        tr:hover { 
+            transform: scale(1.005); 
+            filter: brightness(1.15);
+        }
 
         td { 
             padding: 0 20px; 
@@ -392,19 +396,18 @@
                 const hardestName = hardest ? hardest.name : '-';
                 const hardestClass = hardest ? getTierClass(hardest.tier) : 'tier-default';
                 const compCount = playerLevels[name] ? playerLevels[name].size : 0;
+                const profileUrl = `player.html?name=${encodeURIComponent(name)}`;
 
-                const rowStyle = bgThumb 
-                    ? `style="background: linear-gradient(90deg, rgba(20,22,30,0.92) 0%, rgba(20,22,30,0.8) 100%), url('${bgThumb}'); background-size: cover; background-position: center;"`
+                const bgStyle = bgThumb 
+                    ? `background: linear-gradient(90deg, rgba(20,22,30,0.92) 0%, rgba(20,22,30,0.8) 100%), url('${bgThumb}'); background-size: cover; background-position: center;`
                     : '';
 
                 table.innerHTML += `
-                    <tr ${rowStyle}>
+                    <tr style="${bgStyle}" onclick="window.location.href='${profileUrl}'">
                         <td>#${r}</td>
                         <td class="col-player">
                             <div class="player-wrapper">
-                                <a href="player.html?name=${encodeURIComponent(name)}" class="player-title">
-                                    ${name}
-                                </a>
+                                <span class="player-title">${name}</span>
                                 <div class="sub-stat">${compCount} completed</div>
                             </div>
                         </td>
