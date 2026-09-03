@@ -2,113 +2,270 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>THE WAVE LIST - PLAYER PROFILE</title>
     <link rel="icon" type="image/png" href="logo.ico">
-</head>
-    <link rel="stylesheet" href="style.css">
     <style>
-        body { overflow-y: auto !important; }
+        :root {
+            --accent: #47e5bc;
+            --gold: #ffcf4b;
+            --bg-dark: #0b0c10;
+            --card-bg: rgba(18, 22, 31, 0.88);
+            --border: rgba(255, 255, 255, 0.1);
+            --border-hover: rgba(255, 255, 255, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.15) #0b0c10;
+        }
+
+        html, body {
+            width: 100%;
+            min-height: 100vh;
+            background-color: var(--bg-dark);
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            color: #fff;
+            overflow-x: hidden;
+            overflow-y: auto !important;
+        }
+
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        nav {
+            position: relative;
+            z-index: 100;
+            padding: 14px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(11, 12, 16, 0.95);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            width: 100%;
+            height: 64px;
+        }
+
+        .nav-logo {
+            font-size: 1.35rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: #fff;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .nav-logo:hover {
+            color: var(--accent);
+        }
+
+        .nav-link {
+            color: #aaa;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+            padding: 6px 12px;
+            border-radius: 6px;
+        }
+
+        .nav-link:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.05);
+        }
 
         .profile-container {
-            max-width: 1200px;
+            position: relative;
+            z-index: 1;
+            max-width: 1300px;
             margin: 40px auto;
-            padding: 0 20px;
+            padding: 0 24px;
         }
+
         .profile-header {
             text-align: center;
             margin-bottom: 50px;
-            background: rgba(20, 22, 30, 0.6);
+            background: var(--card-bg);
             padding: 40px;
-            border-radius: 16px;
+            border-radius: 20px;
             border: 1px solid var(--border);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
         }
+
         .profile-name {
             font-size: 3rem;
-            font-weight: 800;
-            margin: 0 0 10px 0;
+            font-weight: 900;
+            margin: 0 0 16px 0;
             color: #fff;
             text-transform: uppercase;
+            letter-spacing: -0.5px;
         }
+
         .stats-badges-container {
             display: flex;
             justify-content: center;
             gap: 15px;
             flex-wrap: wrap;
         }
+
         .stats-badge {
             display: inline-block;
-            background: rgba(255, 65, 65, 0.1);
-            color: var(--accent);
-            padding: 6px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            padding: 8px 18px;
             border-radius: 20px;
             font-weight: 700;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            border: 1px solid rgba(255, 65, 65, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(8px);
         }
+
         .hardest-badge {
             background: rgba(255, 207, 75, 0.1);
             color: var(--gold);
-            border: 1px solid rgba(255, 207, 75, 0.2);
+            border-color: rgba(255, 207, 75, 0.25);
         }
+
         .points-badge {
             background: rgba(71, 229, 188, 0.1);
-            color: var(--accent, #47e5bc);
-            border: 1px solid rgba(71, 229, 188, 0.3);
+            color: var(--accent);
+            border-color: rgba(71, 229, 188, 0.3);
         }
+
         .section-title {
-            font-size: 1.5rem; 
-            font-weight: 700; 
-            margin: 40px 0 20px 0; 
+            font-size: 1.35rem; 
+            font-weight: 800; 
+            margin: 45px 0 20px 0; 
             text-transform: uppercase; 
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
+            color: #fff;
+            border-left: 4px solid var(--accent);
+            padding-left: 12px;
         }
+
         .completed-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 22px;
         }
+
+        /* Enhanced Level Card with Background Image */
         .level-card {
-            background: var(--card);
+            position: relative;
+            background: rgba(18, 22, 31, 0.85);
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: 14px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
-        .unbeaten-card {
-            opacity: 0.6;
-            border-style: dashed;
-            background: rgba(10, 11, 15, 0.4);
+
+        .level-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 255, 255, 0.35);
+            box-shadow: 0 16px 35px rgba(0,0,0,0.7);
         }
+
+        .level-card-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.4;
+            transition: all 0.4s ease;
+            z-index: 0;
+        }
+
+        .level-card:hover .level-card-bg {
+            opacity: 0.7;
+            transform: scale(1.05);
+        }
+
+        .level-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                135deg, 
+                rgba(11, 12, 16, 0.93) 0%, 
+                rgba(11, 12, 16, 0.75) 100%
+            );
+            z-index: 1;
+        }
+
         .level-info {
-            padding: 20px;
+            position: relative;
+            z-index: 2;
+            padding: 22px;
             display: flex;
             flex-direction: column;
             gap: 10px;
         }
+
         .level-title {
-            font-size: 1.4rem;
-            font-weight: 700;
+            font-size: 1.25rem;
+            font-weight: 800;
             margin: 0;
             color: #fff;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
+
         .level-meta {
-            font-size: 0.85rem;
-            color: #888;
+            font-size: 0.88rem;
+            color: #ccc;
+            font-weight: 500;
         }
+
+        .unbeaten-card {
+            opacity: 0.65;
+            border: 1px dashed rgba(255, 255, 255, 0.15);
+        }
+
+        .unbeaten-card .level-card-bg {
+            filter: grayscale(90%);
+            opacity: 0.2;
+        }
+
         .tier-PLATINUM { border-color: #e5e4e2 !important; color: #e5e4e2 !important; }
         .tier-DIAMOND { border-color: #b9f2ff !important; color: #b9f2ff !important; }
         .tier-SILVER { border-color: #c0c0c0 !important; color: #c0c0c0 !important; }
         .tier-BRONZE { border-color: #cd7f32 !important; color: #cd7f32 !important; }
+
+        @media (max-width: 768px) {
+            .profile-name {
+                font-size: 2.2rem;
+            }
+            .completed-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
+    <canvas id="bg-canvas"></canvas>
+
     <nav>
-        <div class="nav-logo" onclick="window.location.href='index.html'" style="cursor:pointer;">THE WAVE LIST</div>
+        <div class="nav-logo" onclick="window.location.href='index.html'">THE WAVE LIST</div>
         <div>
             <a href="index.html" class="nav-link">BACK TO LIST</a>
         </div>
@@ -133,11 +290,47 @@
         <h2 class="section-title">Created Levels</h2>
         <div id="createdGrid" class="completed-grid"></div>
 
-        <h2 class="section-title" style="color: #666;">Non-Completed Levels</h2>
+        <h2 class="section-title" style="border-color: #555;">Non-Completed Levels</h2>
         <div id="unbeatenGrid" class="completed-grid"></div>
     </div>
 
     <script>
+        // Particle Background Generator
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function initCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            particles = [];
+            for (let i = 0; i < 65; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: Math.random() * 2 + 0.5,
+                    speed: Math.random() * 0.3 + 0.1
+                });
+            }
+        }
+
+        function animateCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                ctx.fillStyle = "rgba(71, 229, 188, 0.2)";
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fill();
+                p.y -= p.speed;
+                if (p.y < 0) p.y = canvas.height;
+            });
+            requestAnimationFrame(animateCanvas);
+        }
+
+        window.addEventListener('resize', initCanvas);
+        initCanvas();
+        animateCanvas();
+
         const PACKS_DATA = [
             {
                 name: "Wave Corridor Pack",
@@ -266,12 +459,19 @@
                 creationsGrid.innerHTML = "";
                 unbeatenGrid.innerHTML = "";
 
+                // Helper map to find thumbnails easily for packs
+                const levelMap = {};
+                data.forEach((lvl, index) => {
+                    levelMap[lvl.name.toLowerCase()] = { ...lvl, rank: index + 1 };
+                });
+
                 data.forEach((level, index) => {
                     const rank = index + 1;
-                    
                     const hasBeaten = level.victors && level.victors.some(v => v.toLowerCase() === targetPlayer.toLowerCase());
                     const isVerifier = level.verifier && level.verifier.toLowerCase() === targetPlayer.toLowerCase();
                     const isCreator = level.creator && level.creator.toLowerCase() === targetPlayer.toLowerCase();
+
+                    const imgSource = level.thumbnail ? level.thumbnail : "";
 
                     // --- PROCESS COMPLETIONS / VERIFICATIONS ---
                     if (hasBeaten || isVerifier) {
@@ -290,12 +490,14 @@
                         const card = document.createElement('div');
                         card.className = 'level-card';
                         card.innerHTML = `
+                            <div class="level-card-bg" style="background-image: url('${imgSource}');"></div>
+                            <div class="level-card-overlay"></div>
                             <div class="level-info">
                                 <h3 class="level-title">#${rank} - ${level.name}</h3>
                                 <div class="level-meta">
-                                    <p style="margin: 4px 0;"><strong>Creator:</strong> ${level.creator}</p>
-                                    <p style="margin: 4px 0;"><strong>Value:</strong> ${rank > 150 ? 'LEGACY' : level.points + ' PTS'}</p>
-                                    <p style="margin: 4px 0; color: var(--accent);"><strong>Role:</strong> ${isVerifier ? 'Verifier' : 'Victor'}</p>
+                                    <p style="margin: 3px 0;"><strong>Creator:</strong> ${level.creator}</p>
+                                    <p style="margin: 3px 0;"><strong>Value:</strong> ${rank > 150 ? 'LEGACY' : level.points + ' PTS'}</p>
+                                    <p style="margin: 3px 0; color: var(--accent);"><strong>Role:</strong> ${isVerifier ? 'Verifier' : 'Victor'}</p>
                                 </div>
                             </div>
                         `;
@@ -309,12 +511,14 @@
                         const card = document.createElement('div');
                         card.className = 'level-card';
                         card.innerHTML = `
+                            <div class="level-card-bg" style="background-image: url('${imgSource}');"></div>
+                            <div class="level-card-overlay"></div>
                             <div class="level-info">
                                 <h3 class="level-title">#${rank} - ${level.name}</h3>
                                 <div class="level-meta">
-                                    <p style="margin: 4px 0;"><strong>Verifier:</strong> ${level.verifier || 'N/A'}</p>
-                                    <p style="margin: 4px 0;"><strong>Value:</strong> ${rank > 150 ? 'LEGACY' : level.points + ' PTS'}</p>
-                                    <p style="margin: 4px 0; color: var(--gold);"><strong>ID:</strong> ${level.id || 'Unknown'}</p>
+                                    <p style="margin: 3px 0;"><strong>Verifier:</strong> ${level.verifier || 'N/A'}</p>
+                                    <p style="margin: 3px 0;"><strong>Value:</strong> ${rank > 150 ? 'LEGACY' : level.points + ' PTS'}</p>
+                                    <p style="margin: 3px 0; color: var(--gold);"><strong>ID:</strong> ${level.id || 'Unknown'}</p>
                                 </div>
                             </div>
                         `;
@@ -328,13 +532,15 @@
                         const card = document.createElement('div');
                         card.className = 'level-card unbeaten-card';
                         card.innerHTML = `
+                            <div class="level-card-bg" style="background-image: url('${imgSource}');"></div>
+                            <div class="level-card-overlay"></div>
                             <div class="level-info">
                                 <h3 class="level-title" style="color: #aaa;">#${rank} - ${level.name}</h3>
                                 <div class="level-meta">
-                                    <p style="margin: 4px 0;"><strong>Creator:</strong> ${level.creator}</p>
-                                    <p style="margin: 4px 0;"><strong>Value:</strong> ${rank > 150 ? 'LEGACY' : level.points + ' PTS'}</p>
-                                    <p style="margin: 4px 0;"><strong>ID:</strong> ${level.id || 'Unknown'}</p>
-                                    <p style="margin: 4px 0; color: #555;"><strong>Status:</strong> Unbeaten</p>
+                                    <p style="margin: 3px 0;"><strong>Creator:</strong> ${level.creator}</p>
+                                    <p style="margin: 3px 0;"><strong>Value:</strong> ${rank > 150 ? 'LEGACY' : level.points + ' PTS'}</p>
+                                    <p style="margin: 3px 0;"><strong>ID:</strong> ${level.id || 'Unknown'}</p>
+                                    <p style="margin: 3px 0; color: #666;"><strong>Status:</strong> Unbeaten</p>
                                 </div>
                             </div>
                         `;
@@ -350,18 +556,23 @@
                         completedPacksCount++;
                         totalPoints += pack.points;
 
+                        // Use first level's thumbnail for pack background if available
+                        const firstLvlKey = pack.levels[0]?.toLowerCase();
+                        const packImgSource = (levelMap[firstLvlKey] && levelMap[firstLvlKey].thumbnail) ? levelMap[firstLvlKey].thumbnail : "";
+
                         const card = document.createElement('div');
                         card.className = 'level-card';
-                        card.style.border = "1px solid rgba(255, 255, 255, 0.2)";
                         card.innerHTML = `
+                            <div class="level-card-bg" style="background-image: url('${packImgSource}');"></div>
+                            <div class="level-card-overlay"></div>
                             <div class="level-info">
                                 <div style="display: flex; justify-content: space-between; align-items: center;">
-                                    <h3 class="level-title" style="font-size: 1.2rem;">${pack.name}</h3>
-                                    <span style="font-size: 0.75rem; font-weight: 800; padding: 2px 8px; border-radius: 4px; background: rgba(255,255,255,0.05); border: 1px solid currentColor;" class="tier-${pack.tier.replace('/', '-')}">${pack.tier}</span>
+                                    <h3 class="level-title" style="font-size: 1.15rem;">${pack.name}</h3>
+                                    <span style="font-size: 0.72rem; font-weight: 800; padding: 2px 8px; border-radius: 4px; background: rgba(255,255,255,0.05); border: 1px solid currentColor;" class="tier-${pack.tier}">${pack.tier}</span>
                                 </div>
-                                <div class="level-meta" style="margin-top: 6px;">
-                                    <p style="margin: 4px 0; color: var(--accent, #47e5bc);"><strong>Bonus:</strong> +${pack.points} PTS</p>
-                                    <p style="margin: 4px 0; color: #aaa; font-size: 0.8rem;"><strong>Levels:</strong> ${pack.levels.join(', ')}</p>
+                                <div class="level-meta" style="margin-top: 4px;">
+                                    <p style="margin: 3px 0; color: var(--accent);"><strong>Bonus:</strong> +${pack.points} PTS</p>
+                                    <p style="margin: 3px 0; color: #aaa; font-size: 0.8rem;"><strong>Levels:</strong> ${pack.levels.join(', ')}</p>
                                 </div>
                             </div>
                         `;
@@ -380,15 +591,15 @@
                 }
 
                 if (completedPacksCount === 0) {
-                    packsGrid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; color:#444; padding:20px;">No completed level packs found for this player.</div>`;
+                    packsGrid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; color:#555; padding:20px;">No completed level packs found for this player.</div>`;
                 }
 
                 if (completionCount === 0) {
-                    grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; color:#444; padding:40px;">No recorded list records found for this player.</div>`;
+                    grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; color:#555; padding:40px;">No recorded list records found for this player.</div>`;
                 }
                 
                 if (creationCount === 0) {
-                    creationsGrid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; color:#444; padding:40px;">No created levels found on the list for this player.</div>`;
+                    creationsGrid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; color:#555; padding:40px;">No created levels found on the list for this player.</div>`;
                 }
 
                 if (unbeatenCount === 0) {
