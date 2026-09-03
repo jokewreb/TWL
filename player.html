@@ -51,6 +51,11 @@
             color: var(--gold);
             border: 1px solid rgba(255, 207, 75, 0.2);
         }
+        .points-badge {
+            background: rgba(71, 229, 188, 0.1);
+            color: var(--accent, #47e5bc);
+            border: 1px solid rgba(71, 229, 188, 0.3);
+        }
         .section-title {
             font-size: 1.5rem; 
             font-weight: 700; 
@@ -93,6 +98,10 @@
             font-size: 0.85rem;
             color: #888;
         }
+        .tier-PLATINUM { border-color: #e5e4e2 !important; color: #e5e4e2 !important; }
+        .tier-DIAMOND { border-color: #b9f2ff !important; color: #b9f2ff !important; }
+        .tier-SILVER { border-color: #c0c0c0 !important; color: #c0c0c0 !important; }
+        .tier-BRONZE { border-color: #cd7f32 !important; color: #cd7f32 !important; }
     </style>
 </head>
 <body>
@@ -107,10 +116,14 @@
         <div class="profile-header">
             <h1 id="playerNameHeading" class="profile-name">LOADING...</h1>
             <div class="stats-badges-container">
+                <div id="totalPoints" class="stats-badge points-badge">0 PTS</div>
                 <div id="completionCount" class="stats-badge">0 COMPLETIONS</div>
                 <div id="hardestLevel" class="stats-badge hardest-badge" style="display: none;">HARDEST: NONE</div>
             </div>
         </div>
+
+        <h2 class="section-title">Completed Packs</h2>
+        <div id="packsGrid" class="completed-grid"></div>
 
         <h2 class="section-title">Completed Levels</h2>
         <div id="completedGrid" class="completed-grid"></div>
@@ -123,13 +136,104 @@
     </div>
 
     <script>
+        const PACKS_DATA = [
+            {
+                name: "Wave Corridor Pack",
+                tier: "PLATINUM",
+                points: 300,
+                levels: [
+                    "Unnerfed Wave Corridor",
+                    "Silent Wave Corridor Infinity Unleashed XYZ",
+                    "Old Wave Corridor",
+                    "Wave Corridor",
+                    "Nerfed Wave Corridor"
+                ]
+            },
+            {
+                name: "Top 1 Pack I",
+                tier: "PLATINUM",
+                points: 300,
+                levels: [
+                    "Unnerfed Wave Corridor",
+                    "ULTIMATE DIHRUCTION",
+                    "Tung After Tung"
+                ]
+            },
+            {
+                name: "Top 1 Pack II",
+                tier: "DIAMOND",
+                points: 200,
+                levels: [
+                    "Zirconium Shard",
+                    "SYMM NO SCLEARS",
+                    "Defeated Brajan"
+                ]
+            },
+            {
+                name: "Defeated Pack",
+                tier: "DIAMOND",
+                points: 200,
+                levels: [
+                    "Defeated Brajan",
+                    "The Brajan Dih",
+                    "defeated ez nerf",
+                    "Beefeated Brajan"
+                ]
+            },
+            {
+                name: "Radioactive Trilogy",
+                tier: "PLATINUM",
+                points: 300,
+                levels: [
+                    "NEPTUNIUM",
+                    "URANIUM",
+                    "PLUTONIUM"
+                ]
+            },
+            {
+                name: "Bottom 1 Pack I",
+                tier: "BRONZE",
+                points: 50,
+                levels: [
+                    "Zoink WAVE",
+                    "Swag Clubstep",
+                    "Sakupen Hellcles"
+                ]
+            },
+            {
+                name: "ChefLimeWaveBasic Pack",
+                tier: "BRONZE/SILVER",
+                points: 100,
+                levels: [
+                    "ChefLimeWaveBasic4",
+                    "ChefLimeWaveBasic3",
+                    "ChefLimeWaveBasic5",
+                    "ChefLimeWaveBasic1",
+                    "ChefLimeWaveBasic2",
+                    "ChefLimeWaveBasic FINALE"
+                ]
+            },
+            {
+                name: "TooSquared and Friends",
+                tier: "DIAMOND",
+                points: 200,
+                levels: [
+                    "TooCub3d",
+                    "TooSquared",
+                    "3Squared"
+                ]
+            }
+        ];
+
         const urlParams = new URLSearchParams(window.location.search);
         const targetPlayer = urlParams.get('name');
 
         async function loadPlayerProfile() {
             const nameHeading = document.getElementById('playerNameHeading');
+            const totalPointsBadge = document.getElementById('totalPoints');
             const countBadge = document.getElementById('completionCount');
             const hardestBadge = document.getElementById('hardestLevel');
+            const packsGrid = document.getElementById('packsGrid');
             const grid = document.getElementById('completedGrid');
             const creationsGrid = document.getElementById('createdGrid');
             const unbeatenGrid = document.getElementById('unbeatenGrid');
@@ -147,12 +251,15 @@
 
                 data.sort((a, b) => b.points - a.points);
 
+                let totalPoints = 0;
                 let completionCount = 0;
                 let creationCount = 0;
                 let unbeatenCount = 0;
                 let hardestLvl = null;
                 let hardestRank = 0;
+                const beatenLevelNames = [];
                 
+                packsGrid.innerHTML = "";
                 grid.innerHTML = "";
                 creationsGrid.innerHTML = "";
                 unbeatenGrid.innerHTML = "";
@@ -167,6 +274,11 @@
                     // --- PROCESS COMPLETIONS / VERIFICATIONS ---
                     if (hasBeaten || isVerifier) {
                         completionCount++;
+                        beatenLevelNames.push(level.name.toLowerCase());
+
+                        if (rank <= 150) {
+                            totalPoints += level.points;
+                        }
 
                         if (!hardestLvl || level.points > hardestLvl.points) {
                             hardestLvl = level;
@@ -180,7 +292,7 @@
                                 <h3 class="level-title">#${rank} - ${level.name}</h3>
                                 <div class="level-meta">
                                     <p style="margin: 4px 0;"><strong>Creator:</strong> ${level.creator}</p>
-                                    <p style="margin: 4px 0;"><strong>Value:</strong> ${level.points} PTS</p>
+                                    <p style="margin: 4px 0;"><strong>Value:</strong> ${rank > 150 ? 'LEGACY' : level.points + ' PTS'}</p>
                                     <p style="margin: 4px 0; color: var(--accent);"><strong>Role:</strong> ${isVerifier ? 'Verifier' : 'Victor'}</p>
                                 </div>
                             </div>
@@ -199,7 +311,7 @@
                                 <h3 class="level-title">#${rank} - ${level.name}</h3>
                                 <div class="level-meta">
                                     <p style="margin: 4px 0;"><strong>Verifier:</strong> ${level.verifier || 'N/A'}</p>
-                                    <p style="margin: 4px 0;"><strong>Value:</strong> ${level.points} PTS</p>
+                                    <p style="margin: 4px 0;"><strong>Value:</strong> ${rank > 150 ? 'LEGACY' : level.points + ' PTS'}</p>
                                     <p style="margin: 4px 0; color: var(--gold);"><strong>ID:</strong> ${level.id || 'Unknown'}</p>
                                 </div>
                             </div>
@@ -218,7 +330,7 @@
                                 <h3 class="level-title" style="color: #aaa;">#${rank} - ${level.name}</h3>
                                 <div class="level-meta">
                                     <p style="margin: 4px 0;"><strong>Creator:</strong> ${level.creator}</p>
-                                    <p style="margin: 4px 0;"><strong>Value:</strong> ${level.points} PTS</p>
+                                    <p style="margin: 4px 0;"><strong>Value:</strong> ${rank > 150 ? 'LEGACY' : level.points + ' PTS'}</p>
                                     <p style="margin: 4px 0;"><strong>ID:</strong> ${level.id || 'Unknown'}</p>
                                     <p style="margin: 4px 0; color: #555;"><strong>Status:</strong> Unbeaten</p>
                                 </div>
@@ -228,6 +340,34 @@
                     }
                 });
 
+                // --- PROCESS PACKS ---
+                let completedPacksCount = 0;
+                PACKS_DATA.forEach(pack => {
+                    const isCompleted = pack.levels.every(lvlName => beatenLevelNames.includes(lvlName.toLowerCase()));
+                    if (isCompleted) {
+                        completedPacksCount++;
+                        totalPoints += pack.points;
+
+                        const card = document.createElement('div');
+                        card.className = 'level-card';
+                        card.style.border = "1px solid rgba(255, 255, 255, 0.2)";
+                        card.innerHTML = `
+                            <div class="level-info">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <h3 class="level-title" style="font-size: 1.2rem;">${pack.name}</h3>
+                                    <span style="font-size: 0.75rem; font-weight: 800; padding: 2px 8px; border-radius: 4px; background: rgba(255,255,255,0.05); border: 1px solid currentColor;" class="tier-${pack.tier.replace('/', '-')}">${pack.tier}</span>
+                                </div>
+                                <div class="level-meta" style="margin-top: 6px;">
+                                    <p style="margin: 4px 0; color: var(--accent, #47e5bc);"><strong>Bonus:</strong> +${pack.points} PTS</p>
+                                    <p style="margin: 4px 0; color: #aaa; font-size: 0.8rem;"><strong>Levels:</strong> ${pack.levels.join(', ')}</p>
+                                </div>
+                            </div>
+                        `;
+                        packsGrid.appendChild(card);
+                    }
+                });
+
+                totalPointsBadge.innerText = `${totalPoints} PTS`;
                 countBadge.innerText = `${completionCount} ${completionCount === 1 ? 'COMPLETION' : 'COMPLETIONS'}`;
 
                 if (hardestLvl) {
@@ -235,6 +375,10 @@
                     hardestBadge.style.display = "inline-block";
                 } else {
                     hardestBadge.style.display = "none";
+                }
+
+                if (completedPacksCount === 0) {
+                    packsGrid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; color:#444; padding:20px;">No completed level packs found for this player.</div>`;
                 }
 
                 if (completionCount === 0) {
