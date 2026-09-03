@@ -171,16 +171,6 @@
             width: 100%;
         }
 
-        .item-particle-canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 2;
-            pointer-events: none;
-        }
-
         .list-item-bg {
             position: absolute;
             inset: 0;
@@ -205,7 +195,7 @@
 
         .list-item-content {
             position: relative;
-            z-index: 3;
+            z-index: 2;
             display: flex;
             align-items: center;
             gap: 16px;
@@ -348,10 +338,9 @@
             inset: 0;
             background-size: cover;
             background-position: center;
-            opacity: 0.45;
+            opacity: 0.55;
             z-index: 0;
             transition: background-image 0.35s ease;
-            filter: blur(2px);
         }
 
         .video-box-overlay {
@@ -359,8 +348,8 @@
             inset: 0;
             background: linear-gradient(
                 180deg, 
-                rgba(11, 12, 16, 0.3) 0%, 
-                rgba(11, 12, 16, 0.75) 100%
+                rgba(11, 12, 16, 0.2) 0%, 
+                rgba(11, 12, 16, 0.65) 100%
             );
             z-index: 0;
         }
@@ -617,63 +606,6 @@
         initCanvas();
         animateCanvas();
 
-        let barParticleSystems = [];
-
-        function initBarParticleCanvas(canvasEl, colorHex) {
-            const ctx = canvasEl.getContext('2d');
-            
-            let pList = [];
-            for (let i = 0; i < 18; i++) {
-                pList.push({
-                    x: Math.random() * 400,
-                    y: Math.random() * 96,
-                    radius: Math.random() * 1.8 + 0.6,
-                    speedX: (Math.random() - 0.5) * 0.5,
-                    speedY: -Math.random() * 0.5 - 0.15,
-                    alpha: Math.random() * 0.6 + 0.25
-                });
-            }
-
-            barParticleSystems.push({
-                canvas: canvasEl,
-                ctx: ctx,
-                particles: pList,
-                color: colorHex || "#ffffff"
-            });
-        }
-
-        function animateBarParticles() {
-            barParticleSystems.forEach(sys => {
-                if (sys.canvas.width !== sys.canvas.offsetWidth && sys.canvas.offsetWidth > 0) {
-                    sys.canvas.width = sys.canvas.offsetWidth;
-                    sys.canvas.height = sys.canvas.offsetHeight;
-                }
-
-                sys.ctx.clearRect(0, 0, sys.canvas.width, sys.canvas.height);
-                sys.particles.forEach(p => {
-                    sys.ctx.fillStyle = sys.color;
-                    sys.ctx.globalAlpha = p.alpha;
-                    sys.ctx.beginPath();
-                    sys.ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-                    sys.ctx.fill();
-
-                    p.x += p.speedX;
-                    p.y += p.speedY;
-
-                    if (p.y < 0) {
-                        p.y = sys.canvas.height || 96;
-                        p.x = Math.random() * (sys.canvas.width || 400);
-                    }
-                    if (p.x < 0 || p.x > (sys.canvas.width || 400)) {
-                        p.x = Math.random() * (sys.canvas.width || 400);
-                    }
-                });
-            });
-            requestAnimationFrame(animateBarParticles);
-        }
-
-        animateBarParticles();
-
         const TIER_LOGO_SIZE = "24px";
         let allLevels = [];
         let allTiers = [];
@@ -719,7 +651,6 @@
         function renderSidebar(levelsToRender) {
             const side = document.getElementById('sidebar');
             side.innerHTML = "";
-            barParticleSystems = [];
 
             if (levelsToRender.length === 0) {
                 side.innerHTML = `<div style="color: #666; font-size: 0.85rem; padding: 15px; text-align: center;">No levels found</div>`;
@@ -772,7 +703,6 @@
                 }
 
                 div.innerHTML = `
-                    <canvas class="item-particle-canvas"></canvas>
                     <div class="list-item-bg" style="background-image: url('${imgSource}');"></div>
                     <div class="list-item-overlay"></div>
                     <div class="list-item-content">
@@ -795,9 +725,6 @@
                 };
 
                 side.appendChild(div);
-
-                const itemCanvas = div.querySelector('.item-particle-canvas');
-                initBarParticleCanvas(itemCanvas, currentTier ? currentTier.color : '#ffffff');
             });
         }
 
