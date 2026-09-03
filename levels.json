@@ -61,7 +61,8 @@
   },
   { 
     "name": "ULTIMATE pants eater", 
-    "points": 343 , 
+    "points": 343,
+    "fps": "17 FPS",
     "creator": "newbite", 
     "verifier": "newbite", 
     "id": "143500994", 
@@ -262,6 +263,7 @@
   { 
     "name": "consistency god",
     "points": 276, 
+    "fps": "19 FPS",
     "creator": "newbite", 
     "verifier": "newbite", 
     "id": "141114193", 
@@ -1342,6 +1344,7 @@
   {
     "name": "pants eater nerf",
     "points": 347,
+    "fps": "30 FPS",
     "creator": "newbite",
     "verifier": "newbite",
     "id": "147531580",
