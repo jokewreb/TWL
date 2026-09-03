@@ -8,6 +8,7 @@
     <style>
         :root {
             --accent: #47e5bc;
+            --gold: #ffcf4b;
             --bg-dark: #0b0c10;
             --card-bg: rgba(18, 22, 31, 0.88);
             --border: rgba(255, 255, 255, 0.1);
@@ -121,15 +122,54 @@
             background: var(--card-bg);
             border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 10px 14px;
+            padding: 12px 14px;
             backdrop-filter: blur(12px);
             width: 100%;
             flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        /* Mode Switcher Tabs */
+        .mode-tabs {
+            display: flex;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 3px;
+            gap: 4px;
+        }
+
+        .mode-tab {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: #888;
+            font-weight: 800;
+            font-size: 0.78rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 7px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .mode-tab:hover {
+            color: #fff;
+        }
+
+        .mode-tab.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.4);
         }
 
         #level-search {
             width: 100%;
-            padding: 12px 16px;
+            padding: 11px 16px;
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid var(--border);
             border-radius: 8px;
@@ -320,7 +360,6 @@
             overflow-x: hidden;
         }
 
-        /* Entire Showcase Background Image */
         .showcase-bg-layer {
             position: absolute;
             inset: 0;
@@ -527,7 +566,11 @@
     <div class="main-layout">
         <div class="sidebar-column">
             <div class="search-container">
-                <input type="text" id="level-search" placeholder="Search levels..." oninput="filterLevels()">
+                <div class="mode-tabs">
+                    <button class="mode-tab active" id="tab-levels" onclick="switchMode('levels')">Levels</button>
+                    <button class="mode-tab" id="tab-players" onclick="switchMode('players')">Players</button>
+                </div>
+                <input type="text" id="level-search" placeholder="Search levels..." oninput="handleSearch()">
             </div>
             <div class="sidebar" id="sidebar"></div>
         </div>
@@ -587,6 +630,57 @@
     </a>
 
     <script>
+        const PACKS_DATA = [
+            {
+                name: "Wave Corridor Pack",
+                tier: "PLATINUM",
+                points: 100,
+                levels: ["Unnerfed Wave Corridor", "Silent Wave Corridor Infinity Unleashed XYZ", "Old Wave Corridor", "Wave Corridor", "Nerfed Wave Corridor"]
+            },
+            {
+                name: "Top 1 Pack I",
+                tier: "PLATINUM",
+                points: 100,
+                levels: ["Unnerfed Wave Corridor", "ULTIMATE DIHRUCTION", "Tung After Tung"]
+            },
+            {
+                name: "Top 1 Pack II",
+                tier: "DIAMOND",
+                points: 200,
+                levels: ["Zirconium Shard", "SYMM NO SCLEARS", "Defeated Brajan"]
+            },
+            {
+                name: "Defeated Pack",
+                tier: "DIAMOND",
+                points: 200,
+                levels: ["Defeated Brajan", "The Brajan Dih", "defeated ez nerf", "Beefeated Brajan"]
+            },
+            {
+                name: "Radioactive Trilogy",
+                tier: "PLATINUM",
+                points: 100,
+                levels: ["NEPTUNIUM", "URANIUM", "PLUTONIUM"]
+            },
+            {
+                name: "Bottom 1 Pack I",
+                tier: "BRONZE",
+                points: 25,
+                levels: ["Zoink WAVE", "Swag Clubstep", "Sakupen Hellcles"]
+            },
+            {
+                name: "ChefLimeWaveBasic Pack",
+                tier: "SILVER",
+                points: 50,
+                levels: ["ChefLimeWaveBasic4", "ChefLimeWaveBasic3", "ChefLimeWaveBasic5", "ChefLimeWaveBasic1", "ChefLimeWaveBasic2", "ChefLimeWaveBasic FINALE"]
+            },
+            {
+                name: "TooSquared and Friends",
+                tier: "DIAMOND",
+                points: 200,
+                levels: ["TooCub3d", "TooSquared", "3Squared"]
+            }
+        ];
+
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
@@ -625,6 +719,8 @@
         const TIER_LOGO_SIZE = "24px";
         let allLevels = [];
         let allTiers = [];
+        let allPlayers = [];
+        let currentMode = 'levels'; // 'levels' or 'players'
 
         async function init() {
             try {
@@ -633,8 +729,9 @@
 
                 const res = await fetch(`levels.json?v=${new Date().getTime()}`);
                 allLevels = await res.json();
-
                 allLevels.sort((a, b) => b.points - a.points);
+
+                buildPlayersData();
 
                 renderSidebar(allLevels);
 
@@ -661,6 +758,78 @@
             } catch (e) {
                 console.error("Error loading list:", e);
                 document.getElementById('main-title').innerText = "Error loading list records.";
+            }
+        }
+
+        function buildPlayersData() {
+            const playerMap = {};
+
+            allLevels.forEach((lvl, idx) => {
+                const rank = idx + 1;
+                const victors = lvl.victors ? lvl.victors.map(v => v.trim()).filter(Boolean) : [];
+                const verifier = lvl.verifier ? lvl.verifier.trim() : null;
+
+                const participants = new Set([...victors, ...(verifier ? [verifier] : [])]);
+
+                participants.forEach(pName => {
+                    if (!playerMap[pName]) {
+                        playerMap[pName] = {
+                            name: pName,
+                            completions: [],
+                            hardest: null,
+                            hardestRank: 9999
+                        };
+                    }
+                    playerMap[pName].completions.push({ level: lvl, rank: rank });
+                });
+            });
+
+            allPlayers = Object.values(playerMap).map(p => {
+                let pts = 0;
+                let hardestLvl = null;
+                let hardestRank = 9999;
+                const beatenNames = p.completions.map(c => c.level.name.toLowerCase());
+
+                p.completions.forEach(c => {
+                    if (c.rank <= 150) {
+                        pts += c.level.points;
+                    }
+                    if (c.rank < hardestRank) {
+                        hardestRank = c.rank;
+                        hardestLvl = c.level;
+                    }
+                });
+
+                PACKS_DATA.forEach(pack => {
+                    const isCompleted = pack.levels.every(lName => beatenNames.includes(lName.toLowerCase()));
+                    if (isCompleted) {
+                        pts += pack.points;
+                    }
+                });
+
+                return {
+                    name: p.name,
+                    points: pts,
+                    hardest: hardestLvl,
+                    hardestRank: hardestRank <= 150 ? hardestRank : hardestRank
+                };
+            });
+
+            // Sort players alphabetically from 0 to Z
+            allPlayers.sort((a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: 'accent', numeric: true }));
+        }
+
+        function switchMode(mode) {
+            currentMode = mode;
+            document.getElementById('tab-levels').classList.toggle('active', mode === 'levels');
+            document.getElementById('tab-players').classList.toggle('active', mode === 'players');
+            document.getElementById('level-search').placeholder = mode === 'levels' ? 'Search levels...' : 'Search players...';
+            document.getElementById('level-search').value = '';
+
+            if (mode === 'levels') {
+                renderSidebar(allLevels);
+            } else {
+                renderPlayerSidebar(allPlayers);
             }
         }
 
@@ -713,7 +882,7 @@
                 const imgSource = lvl.thumbnail ? lvl.thumbnail : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVOVERRIDES=";
 
                 const div = document.createElement('div');
-                div.className = `list-item ${idx === 0 ? 'active' : ''}`;
+                div.className = `list-item ${idx === 0 && currentMode === 'levels' ? 'active' : ''}`;
                 if (currentTier) {
                     div.style.borderLeft = `5px solid ${currentTier.color}`;
                 }
@@ -744,10 +913,55 @@
             });
         }
 
-        function filterLevels() {
+        function renderPlayerSidebar(playersToRender) {
+            const side = document.getElementById('sidebar');
+            side.innerHTML = "";
+
+            if (playersToRender.length === 0) {
+                side.innerHTML = `<div style="color: #666; font-size: 0.85rem; padding: 15px; text-align: center;">No players found</div>`;
+                return;
+            }
+
+            playersToRender.forEach((player, idx) => {
+                const imgSource = (player.hardest && player.hardest.thumbnail) ? player.hardest.thumbnail : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVOVERRIDES=";
+                const hardestText = player.hardest ? `#${player.hardestRank} ${player.hardest.name}` : "None";
+
+                const div = document.createElement('div');
+                div.className = `list-item`;
+
+                div.innerHTML = `
+                    <div class="list-item-bg" style="background-image: url('${imgSource}');"></div>
+                    <div class="list-item-overlay"></div>
+                    <div class="list-item-content">
+                        <div class="rank" style="color: var(--accent); font-size: 1.1rem; min-width: 36px;">#${idx + 1}</div>
+                        <img src="${imgSource}" class="thumb-mini">
+                        <div class="level-info-text">
+                            <div class="level-title-row">
+                                <span>${player.name}</span>
+                            </div>
+                            <div class="level-pts-row" style="color: var(--accent);">${player.points} PTS</div>
+                            <div style="font-size: 0.75rem; color: #aaa; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Hardest: ${hardestText}</div>
+                        </div>
+                    </div>
+                `;
+
+                div.onclick = () => {
+                    window.location.href = `player.html?name=${encodeURIComponent(player.name)}`;
+                };
+
+                side.appendChild(div);
+            });
+        }
+
+        function handleSearch() {
             const query = document.getElementById('level-search').value.toLowerCase().trim();
-            const filtered = allLevels.filter(lvl => lvl.name.toLowerCase().includes(query));
-            renderSidebar(filtered);
+            if (currentMode === 'levels') {
+                const filtered = allLevels.filter(lvl => lvl.name.toLowerCase().includes(query));
+                renderSidebar(filtered);
+            } else {
+                const filtered = allPlayers.filter(p => p.name.toLowerCase().includes(query));
+                renderPlayerSidebar(filtered);
+            }
         }
 
         function update(lvl, rank) {
