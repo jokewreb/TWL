@@ -23,17 +23,15 @@
             scrollbar-color: rgba(255, 255, 255, 0.15) #0b0c10;
         }
 
-        /* Prevent all horizontal scrolling completely */
         html, body {
             width: 100%;
             max-width: 100vw;
             overflow-x: hidden !important;
         }
 
-        /* Custom Dark Vertical Scrollbars */
         ::-webkit-scrollbar {
             width: 8px;
-            height: 0px; /* Hide horizontal scrollbar */
+            height: 0px;
         }
 
         ::-webkit-scrollbar-track {
@@ -59,7 +57,6 @@
             flex-direction: column;
         }
 
-        /* Ambient Background Canvas */
         #bg-canvas {
             position: fixed;
             top: 0;
@@ -70,12 +67,11 @@
             pointer-events: none;
         }
 
-        /* Header Navigation - Reaches full edges */
         nav {
             position: sticky;
             top: 0;
             z-index: 100;
-            padding: 18px 24px;
+            padding: 18px 32px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -125,27 +121,26 @@
             background: rgba(255, 255, 255, 0.05);
         }
 
-        /* Main Grid Layout - Extends completely from left to right edge */
+        /* 2x Wider Sidebar + Scaled Showcase Layout */
         .main-layout {
             position: relative;
             z-index: 1;
             display: grid;
-            grid-template-columns: minmax(420px, 32vw) 1fr;
-            gap: 24px;
-            padding: 20px 24px;
+            grid-template-columns: 520px 1fr;
+            gap: 28px;
+            padding: 24px 32px;
             width: 100%;
-            max-width: 100vw;
             box-sizing: border-box;
         }
 
-        /* Sidebar Column */
         .sidebar-column {
             display: flex;
             flex-direction: column;
             gap: 16px;
-            height: calc(100vh - 110px);
+            height: calc(100vh - 120px);
             position: sticky;
-            top: 85px;
+            top: 90px;
+            width: 100%;
         }
 
         .search-container {
@@ -187,13 +182,13 @@
             padding-right: 6px;
         }
 
-        /* Wide Level Item Cards - Fully readable title names */
+        /* Doubled Width Level Card Bars */
         .list-item {
             position: relative;
             display: flex;
             align-items: center;
-            padding: 14px 20px;
-            min-height: 90px;
+            padding: 14px 22px;
+            min-height: 95px;
             background: rgba(18, 22, 31, 0.85);
             border: 1px solid var(--border);
             border-radius: 14px;
@@ -209,7 +204,7 @@
             inset: 0;
             background-size: cover;
             background-position: center;
-            opacity: 0.6;
+            opacity: 0.55;
             transition: all 0.35s ease;
             z-index: 0;
         }
@@ -219,9 +214,9 @@
             inset: 0;
             background: linear-gradient(
                 90deg, 
-                rgba(11, 12, 16, 0.95) 0%, 
-                rgba(11, 12, 16, 0.75) 60%, 
-                rgba(11, 12, 16, 0.88) 100%
+                rgba(11, 12, 16, 0.96) 0%, 
+                rgba(11, 12, 16, 0.8) 60%, 
+                rgba(11, 12, 16, 0.92) 100%
             );
             z-index: 1;
         }
@@ -231,7 +226,7 @@
             z-index: 2;
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 20px;
             width: 100%;
         }
 
@@ -254,18 +249,18 @@
 
         .rank {
             font-weight: 900;
-            font-size: 1.3rem;
-            min-width: 45px;
+            font-size: 1.4rem;
+            min-width: 50px;
             flex-shrink: 0;
             text-align: center;
         }
 
         .thumb-mini {
-            width: 100px;
-            height: 58px;
+            width: 115px;
+            height: 66px;
             object-fit: cover;
             flex-shrink: 0;
-            border-radius: 8px;
+            border-radius: 10px;
             border: 1px solid rgba(255, 255, 255, 0.2);
             box-shadow: 0 4px 12px rgba(0,0,0,0.6);
         }
@@ -278,34 +273,33 @@
             justify-content: center;
         }
 
-        /* Fully display title without cutoff */
+        /* Displays full name without truncation cutoffs */
         .level-title-row {
             font-weight: 800;
-            font-size: 1.2rem;
-            white-space: normal;
-            word-break: break-word;
-            line-height: 1.25;
+            font-size: 1.3rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
             color: #fff;
             display: flex;
             align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
+            gap: 10px;
         }
 
         .level-pts-row {
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             color: #bbb;
             font-weight: 700;
-            margin-top: 5px;
+            margin-top: 4px;
         }
 
-        /* Expanded Main Showcase Area */
+        /* Expanded Showcase Area */
         .content {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 24px;
             width: 100%;
-            min-width: 0; /* Prevents flex children from breaking parent layout width */
+            min-width: 0;
         }
 
         .top-tier-bar {
@@ -318,7 +312,6 @@
             align-items: center;
             justify-content: space-between;
             gap: 12px;
-            overflow-x: auto;
             width: 100%;
         }
 
@@ -330,22 +323,22 @@
             font-weight: 700;
             white-space: nowrap;
             background: rgba(0,0,0,0.3);
-            padding: 6px 12px;
+            padding: 6px 14px;
             border-radius: 20px;
             border: 1px solid rgba(255,255,255,0.06);
         }
 
-        /* Level Showcase Main Card - Larger & Expand to edges */
+        /* Bigger Glass Card Showcase */
         .glass-card {
             background: var(--card-bg);
             border: 1px solid var(--border);
             border-radius: 20px;
-            padding: 32px;
+            padding: 36px;
             backdrop-filter: blur(20px);
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7);
             display: flex;
             flex-direction: column;
-            gap: 24px;
+            gap: 28px;
             width: 100%;
         }
 
@@ -354,7 +347,7 @@
             width: 100%;
             aspect-ratio: 16 / 9;
             background: #000;
-            border-radius: 14px;
+            border-radius: 16px;
             overflow: hidden;
             border: 1px solid var(--border);
             box-shadow: 0 20px 40px rgba(0,0,0,0.8);
@@ -367,7 +360,7 @@
         }
 
         .main-title-text {
-            font-size: 2.4rem;
+            font-size: 2.8rem;
             font-weight: 900;
             margin: 0;
             letter-spacing: -0.5px;
@@ -376,11 +369,10 @@
             text-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
 
-        /* Stats Grid */
         .info-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 16px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 18px;
             width: 100%;
         }
 
@@ -388,10 +380,10 @@
             background: rgba(0, 0, 0, 0.4);
             border: 1px solid var(--border);
             border-radius: 14px;
-            padding: 16px 20px;
+            padding: 18px 22px;
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 6px;
             transition: border-color 0.2s ease, transform 0.2s ease;
         }
 
@@ -409,7 +401,7 @@
         }
 
         .stat-card div:last-child {
-            font-size: 1.15rem;
+            font-size: 1.2rem;
             font-weight: 700;
             color: #fff;
             overflow: hidden;
@@ -421,19 +413,19 @@
             background: rgba(0, 0, 0, 0.4);
             border: 1px solid var(--border);
             border-radius: 14px;
-            padding: 20px 24px;
+            padding: 22px 26px;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 14px;
         }
 
         .tag {
             background: rgba(255, 255, 255, 0.06);
             border: 1px solid rgba(255, 255, 255, 0.12);
             color: #e0e0e0;
-            padding: 6px 14px;
+            padding: 8px 16px;
             border-radius: 20px;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             font-weight: 600;
             transition: all 0.2s ease;
             text-decoration: none;
@@ -456,7 +448,6 @@
             color: var(--accent);
         }
 
-        /* Floating Action Buttons */
         .floating-btn {
             position: fixed;
             width: 54px;
@@ -496,12 +487,12 @@
             background-color: #4752C4;
         }
 
-        @media (max-width: 1024px) {
+        @media (max-width: 1200px) {
             .main-layout {
                 grid-template-columns: 1fr;
             }
             .sidebar-column {
-                height: 480px;
+                height: 500px;
                 position: static;
             }
         }
@@ -520,7 +511,6 @@
     </nav>
 
     <div class="main-layout">
-        <!-- Sidebar Column -->
         <div class="sidebar-column">
             <div class="search-container">
                 <input type="text" id="level-search" placeholder="Search levels..." oninput="filterLevels()">
@@ -528,7 +518,6 @@
             <div class="sidebar" id="sidebar"></div>
         </div>
 
-        <!-- Right Main Content Area (Level Showcase) -->
         <div class="content">
             <div class="top-tier-bar" id="legend-list"></div>
 
@@ -570,7 +559,6 @@
         </div>
     </div>
 
-    <!-- Floating Quick Actions -->
     <a href="rules.html" class="floating-btn rules-btn" title="Rules">
         <span style="font-size: 1.5rem; user-select: none;">📜</span>
     </a>
@@ -580,7 +568,6 @@
     </a>
 
     <script>
-        // Ambient Particle Canvas Animation
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
