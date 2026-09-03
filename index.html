@@ -25,31 +25,8 @@
 
         html, body {
             width: 100%;
-            max-width: 100vw;
-            overflow-x: hidden !important;
-        }
-
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 0px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #0b0c10;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 6px;
-            border: 2px solid #0b0c10;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--accent);
-        }
-
-        body {
             min-height: 100vh;
+            overflow-x: hidden !important;
             background-color: var(--bg-dark);
             font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             color: #fff;
@@ -57,6 +34,7 @@
             flex-direction: column;
         }
 
+        /* Background Particle Canvas */
         #bg-canvas {
             position: fixed;
             top: 0;
@@ -67,11 +45,12 @@
             pointer-events: none;
         }
 
+        /* Top Header Navigation - Edge to Edge */
         nav {
             position: sticky;
             top: 0;
             z-index: 100;
-            padding: 18px 32px;
+            padding: 16px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -83,7 +62,7 @@
         }
 
         .nav-logo {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 900;
             letter-spacing: 2px;
             color: #fff;
@@ -100,7 +79,7 @@
 
         .nav-links {
             display: flex;
-            gap: 24px;
+            gap: 20px;
             align-items: center;
         }
 
@@ -108,7 +87,7 @@
             color: #aaa;
             text-decoration: none;
             font-weight: 700;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             letter-spacing: 1.5px;
             text-transform: uppercase;
             transition: all 0.2s ease;
@@ -121,46 +100,48 @@
             background: rgba(255, 255, 255, 0.05);
         }
 
-        /* 2x Wider Sidebar + Scaled Showcase Layout */
+        /* Main Full-Width Grid Layout - Removes Empty Screen Space */
         .main-layout {
             position: relative;
             z-index: 1;
             display: grid;
-            grid-template-columns: 520px 1fr;
-            gap: 28px;
-            padding: 24px 32px;
+            grid-template-columns: 420px 1fr; /* Left section taking fixed wide width, right section expanding to fill remaining viewport */
+            gap: 20px;
+            padding: 20px;
             width: 100%;
+            flex: 1;
             box-sizing: border-box;
         }
 
+        /* Left Column: Rows Container */
         .sidebar-column {
             display: flex;
             flex-direction: column;
-            gap: 16px;
-            height: calc(100vh - 120px);
+            gap: 14px;
+            height: calc(100vh - 110px);
             position: sticky;
-            top: 90px;
+            top: 85px;
             width: 100%;
         }
 
         .search-container {
             background: var(--card-bg);
             border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 12px 16px;
+            border-radius: 12px;
+            padding: 10px 14px;
             backdrop-filter: blur(12px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
             width: 100%;
         }
 
         #level-search {
             width: 100%;
-            padding: 14px 18px;
+            padding: 12px 16px;
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid var(--border);
-            border-radius: 10px;
+            border-radius: 8px;
             color: #fff;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             outline: none;
             transition: all 0.25s ease;
             box-sizing: border-box;
@@ -169,7 +150,7 @@
         #level-search:focus {
             border-color: var(--accent);
             background: rgba(255, 255, 255, 0.08);
-            box-shadow: 0 0 15px rgba(71, 229, 188, 0.25);
+            box-shadow: 0 0 12px rgba(71, 229, 188, 0.25);
         }
 
         .sidebar {
@@ -178,24 +159,24 @@
             overflow-x: hidden;
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            padding-right: 6px;
+            gap: 10px;
+            padding-right: 4px;
         }
 
-        /* Doubled Width Level Card Bars */
+        /* Wide Full-Fit Level Item Bars */
         .list-item {
             position: relative;
             display: flex;
             align-items: center;
-            padding: 14px 22px;
-            min-height: 95px;
+            padding: 12px 18px;
+            min-height: 85px;
             background: rgba(18, 22, 31, 0.85);
             border: 1px solid var(--border);
-            border-radius: 14px;
+            border-radius: 12px;
             cursor: pointer;
             overflow: hidden;
             user-select: none;
-            transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+            transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
             width: 100%;
         }
 
@@ -226,14 +207,14 @@
             z-index: 2;
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 16px;
             width: 100%;
         }
 
         .list-item:hover {
             transform: translateY(-2px);
             border-color: var(--border-hover);
-            box-shadow: 0 12px 30px -5px rgba(0, 0, 0, 0.7), 0 0 20px var(--tier-glow, rgba(71, 229, 188, 0.2));
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.7), 0 0 18px var(--tier-glow, rgba(71, 229, 188, 0.2));
         }
 
         .list-item:hover .list-item-bg {
@@ -243,26 +224,26 @@
 
         .list-item.active {
             border-color: var(--accent);
-            box-shadow: 0 0 25px rgba(71, 229, 188, 0.35);
+            box-shadow: 0 0 20px rgba(71, 229, 188, 0.35);
             background: rgba(71, 229, 188, 0.12);
         }
 
         .rank {
             font-weight: 900;
-            font-size: 1.4rem;
-            min-width: 50px;
+            font-size: 1.3rem;
+            min-width: 45px;
             flex-shrink: 0;
             text-align: center;
         }
 
         .thumb-mini {
-            width: 115px;
-            height: 66px;
+            width: 95px;
+            height: 55px;
             object-fit: cover;
             flex-shrink: 0;
-            border-radius: 10px;
+            border-radius: 8px;
             border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.6);
         }
 
         .level-info-text {
@@ -273,45 +254,45 @@
             justify-content: center;
         }
 
-        /* Displays full name without truncation cutoffs */
         .level-title-row {
             font-weight: 800;
-            font-size: 1.3rem;
+            font-size: 1.15rem;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
             color: #fff;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
         .level-pts-row {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: #bbb;
             font-weight: 700;
-            margin-top: 4px;
+            margin-top: 3px;
         }
 
-        /* Expanded Showcase Area */
+        /* Right Column: Expanded Full-Width Showcase Box */
         .content {
             display: flex;
             flex-direction: column;
-            gap: 24px;
+            gap: 20px;
             width: 100%;
-            min-width: 0;
+            min-width: 0; /* Ensures content stretches fully without pushing screen borders */
         }
 
+        /* Tier Legend Bar */
         .top-tier-bar {
             background: var(--card-bg);
             border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 16px 24px;
+            border-radius: 14px;
+            padding: 14px 20px;
             backdrop-filter: blur(16px);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 12px;
+            gap: 10px;
             width: 100%;
         }
 
@@ -319,26 +300,26 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 700;
             white-space: nowrap;
             background: rgba(0,0,0,0.3);
-            padding: 6px 14px;
+            padding: 6px 12px;
             border-radius: 20px;
             border: 1px solid rgba(255,255,255,0.06);
         }
 
-        /* Bigger Glass Card Showcase */
+        /* Showcase Card - Extends edge-to-edge across the right grid area */
         .glass-card {
             background: var(--card-bg);
             border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 36px;
+            border-radius: 18px;
+            padding: 28px;
             backdrop-filter: blur(20px);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
             display: flex;
             flex-direction: column;
-            gap: 28px;
+            gap: 24px;
             width: 100%;
         }
 
@@ -347,10 +328,10 @@
             width: 100%;
             aspect-ratio: 16 / 9;
             background: #000;
-            border-radius: 16px;
+            border-radius: 14px;
             overflow: hidden;
             border: 1px solid var(--border);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.8);
         }
 
         .video-box iframe {
@@ -360,7 +341,7 @@
         }
 
         .main-title-text {
-            font-size: 2.8rem;
+            font-size: 2.5rem;
             font-weight: 900;
             margin: 0;
             letter-spacing: -0.5px;
@@ -371,19 +352,19 @@
 
         .info-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 18px;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
             width: 100%;
         }
 
         .stat-card {
             background: rgba(0, 0, 0, 0.4);
             border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 18px 22px;
+            border-radius: 12px;
+            padding: 16px 20px;
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 4px;
             transition: border-color 0.2s ease, transform 0.2s ease;
         }
 
@@ -401,7 +382,7 @@
         }
 
         .stat-card div:last-child {
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             font-weight: 700;
             color: #fff;
             overflow: hidden;
@@ -412,20 +393,20 @@
         .victors-box {
             background: rgba(0, 0, 0, 0.4);
             border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 22px 26px;
+            border-radius: 12px;
+            padding: 20px 24px;
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 12px;
         }
 
         .tag {
             background: rgba(255, 255, 255, 0.06);
             border: 1px solid rgba(255, 255, 255, 0.12);
             color: #e0e0e0;
-            padding: 8px 16px;
+            padding: 6px 14px;
             border-radius: 20px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 600;
             transition: all 0.2s ease;
             text-decoration: none;
@@ -450,8 +431,8 @@
 
         .floating-btn {
             position: fixed;
-            width: 54px;
-            height: 54px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -463,8 +444,8 @@
         }
 
         .rules-btn {
-            bottom: 25px;
-            right: 90px;
+            bottom: 20px;
+            right: 80px;
             background: rgba(30, 34, 45, 0.9);
             border: 1px solid var(--border);
         }
@@ -476,8 +457,8 @@
         }
 
         .discord-btn {
-            bottom: 25px;
-            right: 25px;
+            bottom: 20px;
+            right: 20px;
             background: #5865F2;
             border: none;
         }
@@ -487,12 +468,12 @@
             background-color: #4752C4;
         }
 
-        @media (max-width: 1200px) {
+        @media (max-width: 1024px) {
             .main-layout {
                 grid-template-columns: 1fr;
             }
             .sidebar-column {
-                height: 500px;
+                height: 450px;
                 position: static;
             }
         }
@@ -511,6 +492,7 @@
     </nav>
 
     <div class="main-layout">
+        <!-- Left Side: Rows Section -->
         <div class="sidebar-column">
             <div class="search-container">
                 <input type="text" id="level-search" placeholder="Search levels..." oninput="filterLevels()">
@@ -518,6 +500,7 @@
             <div class="sidebar" id="sidebar"></div>
         </div>
 
+        <!-- Right Side: Full Showcase Section -->
         <div class="content">
             <div class="top-tier-bar" id="legend-list"></div>
 
@@ -560,11 +543,11 @@
     </div>
 
     <a href="rules.html" class="floating-btn rules-btn" title="Rules">
-        <span style="font-size: 1.5rem; user-select: none;">📜</span>
+        <span style="font-size: 1.4rem; user-select: none;">📜</span>
     </a>
 
     <a href="https://discord.com/invite/7SjKU8vy8x" target="_blank" class="floating-btn discord-btn" title="Discord Community">
-        <img src="discord.png" alt="Discord" style="width: 28px; height: 28px; object-fit: contain;" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'%23ffffff\'><path d=\'M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.094 13.094 0 0 1-1.873-.894.077.077 0 0 1-.008-.128c.126-.093.252-.19.372-.287a.075.075 0 0 1 .077-.011c3.92 1.793 8.18 1.793 12.061 0a.073.073 0 0 1 .078.009c.12.099.246.195.373.289a.077.077 0 0 1-.006.127 12.298 12.298 0 0 1-1.873.894.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.156-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.156 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.156-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.156 2.418z\'/></svg>';">
+        <img src="discord.png" alt="Discord" style="width: 26px; height: 26px; object-fit: contain;" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'%23ffffff\'><path d=\'M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.094 13.094 0 0 1-1.873-.894.077.077 0 0 1-.008-.128c.126-.093.252-.19.372-.287a.075.075 0 0 1 .077-.011c3.92 1.793 8.18 1.793 12.061 0a.073.073 0 0 1 .078.009c.12.099.246.195.373.289a.077.077 0 0 1-.006.127 12.298 12.298 0 0 1-1.873.894.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.156-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.156 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.156-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.156 2.418z\'/></svg>';">
     </a>
 
     <script>
