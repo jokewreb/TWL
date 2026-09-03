@@ -32,13 +32,13 @@
             padding: 0 20px; 
         }
 
-        /* Top 3 Pods */
+        /* Top 3 Podium Cards */
         .podium-container {
             display: flex;
             gap: 20px;
             justify-content: center;
             align-items: flex-end;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
         }
 
         .pod-card {
@@ -104,64 +104,44 @@
             align-items: center;
         }
 
-        /* Table Structure with Fixed Cell Heights & Clipping */
+        /* Leaderboard Table */
         table { 
             width: 100%; 
             border-collapse: separate; 
             border-spacing: 0 10px; 
-            table-layout: fixed; /* Guarantees strict column bounds */
+            table-layout: fixed;
         }
         
         tr { 
-            position: relative;
-            background: rgba(20, 22, 30, 0.85); 
+            background-color: rgba(20, 22, 30, 0.85); 
             backdrop-filter: blur(10px); 
-            transition: transform 0.2s ease;
-            height: 64px; /* Strict height lock prevents vertical overlapping */
+            transition: transform 0.2s ease, opacity 0.2s ease;
+            height: 60px;
         }
         tr:hover { transform: scale(1.008); }
 
-        /* Clipped Background Image Banner */
-        .tr-bg {
-            position: absolute;
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            opacity: 0.15;
-            z-index: 0;
-            pointer-events: none;
-            border-radius: 8px;
-            transition: opacity 0.3s ease;
-            overflow: hidden;
-        }
-        tr:hover .tr-bg { opacity: 0.28; }
-
         td { 
-            position: relative;
-            z-index: 1;
             padding: 0 16px; 
-            height: 64px;
+            height: 60px;
             vertical-align: middle;
             border-top: 1px solid var(--border, rgba(255,255,255,0.08)); 
             border-bottom: 1px solid var(--border, rgba(255,255,255,0.08)); 
             white-space: nowrap;
             overflow: hidden;
-            text-overflow: ellipsis; /* Truncates overflowing text safely */
+            text-overflow: ellipsis;
+            background: transparent;
         }
         
         td:first-child { 
             border-radius: 8px 0 0 8px; 
             border-left: 1px solid var(--border, rgba(255,255,255,0.08)); 
-            width: 60px; 
+            width: 50px; 
             text-align: center; 
             font-weight: 800; 
             color: #888;
         }
 
-        td.col-player { width: 30%; }
+        td.col-player { width: 35%; }
         
         td.col-pts { 
             width: 25%;
@@ -177,14 +157,13 @@
             text-align: right; 
             font-size: 0.85rem;
             color: #aaa;
-            width: 35%;
+            width: 40%;
         }
 
         .player-wrapper {
             display: flex;
             flex-direction: column;
             justify-content: center;
-            height: 100%;
         }
 
         .player-title { 
@@ -217,8 +196,10 @@
     </nav>
 
     <div class="lb-container">
+        <!-- Top 3 Podium Cards -->
         <div class="podium-container" id="podium-data"></div>
 
+        <!-- Remaining Leaderboard Ranks -->
         <table>
             <tbody id="lb-data"></tbody>
         </table>
@@ -276,7 +257,7 @@
             }
         ];
 
-        // Background Particles
+        // Background Particle Effect
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
         let parts = [];
@@ -302,7 +283,7 @@
         }
         window.onresize = initCanvas; initCanvas(); anim();
 
-        // Tier Class Helper
+        // Tier Color Class Helper
         function getTierClass(tier) {
             if (!tier) return 'tier-default';
             const t = tier.toLowerCase();
@@ -365,7 +346,7 @@
 
             const sorted = Object.entries(scores).sort((a,b) => b[1]-a[1]);
             
-            // Top 3 Podium
+            // Top 3 Podium Cards
             const podiumContainer = document.getElementById('podium-data');
             const top3 = sorted.slice(0, 3);
             let podiumHTML = "";
@@ -396,7 +377,7 @@
             });
             podiumContainer.innerHTML = podiumHTML;
 
-            // Ranks 4+
+            // Ranks #4+
             const table = document.getElementById('lb-data');
             const remaining = sorted.slice(3);
 
@@ -408,9 +389,13 @@
                 const hardestClass = hardest ? getTierClass(hardest.tier) : 'tier-default';
                 const compCount = playerLevels[name] ? playerLevels[name].size : 0;
 
+                // Applies dark-overlay background directly to TR element to prevent browser parsing bugs
+                const rowStyle = bgThumb 
+                    ? `style="background: linear-gradient(90deg, rgba(20,22,30,0.92) 0%, rgba(20,22,30,0.8) 100%), url('${bgThumb}'); background-size: cover; background-position: center;"`
+                    : '';
+
                 table.innerHTML += `
-                    <tr>
-                        ${bgThumb ? `<div class="tr-bg" style="background-image: url('${bgThumb}');"></div>` : ''}
+                    <tr ${rowStyle}>
                         <td>#${r}</td>
                         <td class="col-player">
                             <div class="player-wrapper">
