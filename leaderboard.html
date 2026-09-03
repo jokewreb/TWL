@@ -28,6 +28,95 @@
     </div>
 
     <script>
+        const PACKS_DATA = [
+            {
+                name: "Wave Corridor Pack",
+                tier: "PLATINUM",
+                points: 300,
+                levels: [
+                    "Unnerfed Wave Corridor",
+                    "Silent Wave Corridor Infinity Unleashed XYZ",
+                    "Old Wave Corridor",
+                    "Wave Corridor",
+                    "Nerfed Wave Corridor"
+                ]
+            },
+            {
+                name: "Top 1 Pack I",
+                tier: "PLATINUM",
+                points: 300,
+                levels: [
+                    "Unnerfed Wave Corridor",
+                    "ULTIMATE DIHRUCTION",
+                    "Tung After Tung"
+                ]
+            },
+            {
+                name: "Top 1 Pack II",
+                tier: "DIAMOND",
+                points: 200,
+                levels: [
+                    "Zirconium Shard",
+                    "SYMM NO SCLEARS",
+                    "Defeated Brajan"
+                ]
+            },
+            {
+                name: "Defeated Pack",
+                tier: "DIAMOND",
+                points: 200,
+                levels: [
+                    "Defeated Brajan",
+                    "The Brajan Dih",
+                    "defeated ez nerf",
+                    "Beefeated Brajan"
+                ]
+            },
+            {
+                name: "Radioactive Trilogy",
+                tier: "PLATINUM",
+                points: 300,
+                levels: [
+                    "NEPTUNIUM",
+                    "URANIUM",
+                    "PLUTONIUM"
+                ]
+            },
+            {
+                name: "Bottom 1 Pack I",
+                tier: "BRONZE",
+                points: 50,
+                levels: [
+                    "Zoink WAVE",
+                    "Swag Clubstep",
+                    "Sakupen Hellcles"
+                ]
+            },
+            {
+                name: "ChefLimeWaveBasic Pack",
+                tier: "BRONZE/SILVER",
+                points: 100,
+                levels: [
+                    "ChefLimeWaveBasic4",
+                    "ChefLimeWaveBasic3",
+                    "ChefLimeWaveBasic5",
+                    "ChefLimeWaveBasic1",
+                    "ChefLimeWaveBasic2",
+                    "ChefLimeWaveBasic FINALE"
+                ]
+            },
+            {
+                name: "TooSquared and Friends",
+                tier: "DIAMOND",
+                points: 200,
+                levels: [
+                    "TooCub3d",
+                    "TooSquared",
+                    "3Squared"
+                ]
+            }
+        ];
+
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
         let parts = [];
@@ -46,12 +135,43 @@
             const res = await fetch(`levels.json?v=${new Date().getTime()}`);
             const data = await res.json();
             const scores = {};
+            const playerLevels = {};
             const clean = (n) => n.replace(/\./g, '').trim();
 
-            data.forEach(l => {
-                const v = clean(l.verifier);
-                scores[v] = (scores[v] || 0) + l.points;
-                l.victors.forEach(vic => { const vn = clean(vic); scores[vn] = (scores[vn] || 0) + l.points; });
+            data.sort((a, b) => b.points - a.points);
+
+            data.forEach((l, index) => {
+                const rank = index + 1;
+                const pointsToAward = rank > 150 ? 0 : l.points;
+
+                const addPlayerLevel = (playerName, levelName) => {
+                    if (!playerLevels[playerName]) playerLevels[playerName] = new Set();
+                    playerLevels[playerName].add(levelName.toLowerCase());
+                };
+
+                if (l.verifier) {
+                    const v = clean(l.verifier);
+                    scores[v] = (scores[v] || 0) + pointsToAward;
+                    addPlayerLevel(v, l.name);
+                }
+
+                if (l.victors && Array.isArray(l.victors)) {
+                    l.victors.forEach(vic => { 
+                        const vn = clean(vic); 
+                        scores[vn] = (scores[vn] || 0) + pointsToAward; 
+                        addPlayerLevel(vn, l.name);
+                    });
+                }
+            });
+
+            Object.keys(playerLevels).forEach(player => {
+                const completed = playerLevels[player];
+                PACKS_DATA.forEach(pack => {
+                    const isCompleted = pack.levels.every(lvl => completed.has(lvl.toLowerCase()));
+                    if (isCompleted) {
+                        scores[player] = (scores[player] || 0) + pack.points;
+                    }
+                });
             });
 
             const sorted = Object.entries(scores).sort((a,b) => b[1]-a[1]);
@@ -60,7 +180,6 @@
                 const r = i+1;
                 const c = r==1?'gold':r==2?'silver':r==3?'bronze':'';
                 
-                // Wrapped the name inside an anchor link targeting player.html
                 table.innerHTML += `
                     <tr>
                         <td class="${c}">#${r}</td>
