@@ -303,6 +303,7 @@
         }
 
         .glass-card {
+            position: relative;
             background: var(--card-bg);
             border: 1px solid var(--border);
             border-radius: 18px;
@@ -316,6 +317,37 @@
             flex: 1;
             min-height: 0;
             overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        /* Entire Showcase Background Image */
+        .showcase-bg-layer {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.35;
+            z-index: 0;
+            transition: background-image 0.4s ease;
+            pointer-events: none;
+            filter: blur(6px);
+        }
+
+        .showcase-bg-overlay {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(11, 12, 16, 0.4) 0%, rgba(11, 12, 16, 0.85) 100%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .showcase-content-wrapper {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            width: 100%;
         }
 
         .video-box {
@@ -325,33 +357,12 @@
             aspect-ratio: 16 / 9;
             max-height: 72vh;
             margin: 0 auto;
-            background: rgba(18, 22, 31, 0.85);
+            background: rgba(0, 0, 0, 0.6);
             border-radius: 14px;
             overflow: hidden;
             border: 1px solid var(--border);
             box-shadow: 0 12px 30px rgba(0,0,0,0.8);
             flex-shrink: 0;
-        }
-
-        .video-box-bg {
-            position: absolute;
-            inset: 0;
-            background-size: cover;
-            background-position: center;
-            opacity: 0.55;
-            z-index: 0;
-            transition: background-image 0.35s ease;
-        }
-
-        .video-box-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(
-                180deg, 
-                rgba(11, 12, 16, 0.2) 0%, 
-                rgba(11, 12, 16, 0.65) 100%
-            );
-            z-index: 0;
         }
 
         .video-box iframe {
@@ -380,13 +391,14 @@
         }
 
         .stat-card {
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.55);
             border: 1px solid var(--border);
             border-radius: 12px;
             padding: 12px 18px;
             display: flex;
             flex-direction: column;
             gap: 4px;
+            backdrop-filter: blur(8px);
         }
 
         .stat-label {
@@ -407,7 +419,7 @@
         }
 
         .victors-box {
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.55);
             border: 1px solid var(--border);
             border-radius: 12px;
             padding: 14px 20px;
@@ -415,6 +427,7 @@
             flex-direction: column;
             gap: 10px;
             flex-shrink: 0;
+            backdrop-filter: blur(8px);
         }
 
         .tag {
@@ -523,40 +536,43 @@
             <div class="top-tier-bar" id="legend-list"></div>
 
             <div class="glass-card">
-                <div class="video-box">
-                    <div id="vid-bg" class="video-box-bg"></div>
-                    <div class="video-box-overlay"></div>
-                    <iframe id="main-vid" src="" frameborder="0" allowfullscreen></iframe>
-                </div>
+                <div id="showcase-bg" class="showcase-bg-layer"></div>
+                <div class="showcase-bg-overlay"></div>
 
-                <h1 id="main-title" class="main-title-text">Loading...</h1>
+                <div class="showcase-content-wrapper">
+                    <div class="video-box">
+                        <iframe id="main-vid" src="" frameborder="0" allowfullscreen></iframe>
+                    </div>
 
-                <div class="info-grid">
-                    <div class="stat-card">
-                        <div class="stat-label">Creator</div>
-                        <div id="s-creator">-</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-label">Verifier</div>
-                        <div id="s-verifier">-</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-label">ID</div>
-                        <div id="s-id">-</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-label">Points</div>
-                        <div id="s-pts" style="color:var(--accent);">-</div>
-                    </div>
-                    <div class="stat-card" id="fps-card" style="display: none;">
-                        <div class="stat-label">FPS Cap</div>
-                        <div id="s-fps" style="color:#ffcf4b;">-</div>
-                    </div>
-                </div>
+                    <h1 id="main-title" class="main-title-text">Loading...</h1>
 
-                <div class="victors-box">
-                    <div class="stat-label">List Victors</div>
-                    <div id="v-cont" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 2px;"></div>
+                    <div class="info-grid">
+                        <div class="stat-card">
+                            <div class="stat-label">Creator</div>
+                            <div id="s-creator">-</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Verifier</div>
+                            <div id="s-verifier">-</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">ID</div>
+                            <div id="s-id">-</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Points</div>
+                            <div id="s-pts" style="color:var(--accent);">-</div>
+                        </div>
+                        <div class="stat-card" id="fps-card" style="display: none;">
+                            <div class="stat-label">FPS Cap</div>
+                            <div id="s-fps" style="color:#ffcf4b;">-</div>
+                        </div>
+                    </div>
+
+                    <div class="victors-box">
+                        <div class="stat-label">List Victors</div>
+                        <div id="v-cont" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 2px;"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -746,7 +762,7 @@
             document.getElementById('s-pts').innerText = rank > 150 ? "LEGACY" : lvl.points;
 
             const imgSource = lvl.thumbnail ? lvl.thumbnail : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVOVERRIDES=";
-            document.getElementById('vid-bg').style.backgroundImage = `url('${imgSource}')`;
+            document.getElementById('showcase-bg').style.backgroundImage = `url('${imgSource}')`;
 
             const fpsCard = document.getElementById('fps-card');
             if (lvl.fps) {
