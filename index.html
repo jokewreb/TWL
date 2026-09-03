@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>THE WAVE LIST</title>
     <link rel="icon" type="image/png" href="logo.ico">
-    <link rel="stylesheet" href="style.css">
     <style>
         :root {
             --accent: #47e5bc;
@@ -34,7 +33,6 @@
             flex-direction: column;
         }
 
-        /* Background Particle Canvas */
         #bg-canvas {
             position: fixed;
             top: 0;
@@ -45,41 +43,37 @@
             pointer-events: none;
         }
 
-        /* Top Header Navigation - Edge to Edge */
         nav {
             position: sticky;
             top: 0;
             z-index: 100;
-            padding: 16px 24px;
+            padding: 16px 32px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             background: rgba(11, 12, 16, 0.95);
             backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--border);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
             width: 100%;
         }
 
         .nav-logo {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-weight: 900;
             letter-spacing: 2px;
             color: #fff;
             text-transform: uppercase;
             cursor: pointer;
             transition: all 0.2s ease;
-            text-shadow: 0 0 12px rgba(71, 229, 188, 0.3);
         }
 
         .nav-logo:hover {
             color: var(--accent);
-            text-shadow: 0 0 20px rgba(71, 229, 188, 0.7);
         }
 
         .nav-links {
             display: flex;
-            gap: 20px;
+            gap: 24px;
             align-items: center;
         }
 
@@ -87,7 +81,7 @@
             color: #aaa;
             text-decoration: none;
             font-weight: 700;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             letter-spacing: 1.5px;
             text-transform: uppercase;
             transition: all 0.2s ease;
@@ -100,14 +94,14 @@
             background: rgba(255, 255, 255, 0.05);
         }
 
-        /* Main Full-Width Grid Layout - Removes Empty Screen Space */
+        /* Responsive Full-Width Main Layout */
         .main-layout {
             position: relative;
             z-index: 1;
             display: grid;
-            grid-template-columns: 420px 1fr; /* Left section taking fixed wide width, right section expanding to fill remaining viewport */
-            gap: 20px;
-            padding: 20px;
+            grid-template-columns: clamp(380px, 28vw, 550px) 1fr; /* Dynamically scales row width */
+            gap: 24px;
+            padding: 24px;
             width: 100%;
             flex: 1;
             box-sizing: border-box;
@@ -117,10 +111,10 @@
         .sidebar-column {
             display: flex;
             flex-direction: column;
-            gap: 14px;
-            height: calc(100vh - 110px);
+            gap: 16px;
+            height: calc(100vh - 115px);
             position: sticky;
-            top: 85px;
+            top: 90px;
             width: 100%;
         }
 
@@ -128,9 +122,8 @@
             background: var(--card-bg);
             border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 10px 14px;
+            padding: 12px;
             backdrop-filter: blur(12px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
             width: 100%;
         }
 
@@ -141,7 +134,7 @@
             border: 1px solid var(--border);
             border-radius: 8px;
             color: #fff;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             outline: none;
             transition: all 0.25s ease;
             box-sizing: border-box;
@@ -150,7 +143,6 @@
         #level-search:focus {
             border-color: var(--accent);
             background: rgba(255, 255, 255, 0.08);
-            box-shadow: 0 0 12px rgba(71, 229, 188, 0.25);
         }
 
         .sidebar {
@@ -159,20 +151,20 @@
             overflow-x: hidden;
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            padding-right: 4px;
+            gap: 12px;
+            padding-right: 6px;
         }
 
-        /* Wide Full-Fit Level Item Bars */
+        /* Expanded Side Bar Items */
         .list-item {
             position: relative;
             display: flex;
             align-items: center;
-            padding: 12px 18px;
-            min-height: 85px;
+            padding: 16px 20px; /* Increased internal padding */
+            min-height: 100px;  /* Expanded bar height */
             background: rgba(18, 22, 31, 0.85);
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: 14px;
             cursor: pointer;
             overflow: hidden;
             user-select: none;
@@ -185,7 +177,7 @@
             inset: 0;
             background-size: cover;
             background-position: center;
-            opacity: 0.55;
+            opacity: 0.5;
             transition: all 0.35s ease;
             z-index: 0;
         }
@@ -196,8 +188,8 @@
             background: linear-gradient(
                 90deg, 
                 rgba(11, 12, 16, 0.96) 0%, 
-                rgba(11, 12, 16, 0.8) 60%, 
-                rgba(11, 12, 16, 0.92) 100%
+                rgba(11, 12, 16, 0.82) 65%, 
+                rgba(11, 12, 16, 0.95) 100%
             );
             z-index: 1;
         }
@@ -207,7 +199,7 @@
             z-index: 2;
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 18px;
             width: 100%;
         }
 
@@ -219,7 +211,7 @@
 
         .list-item:hover .list-item-bg {
             opacity: 0.85;
-            transform: scale(1.04);
+            transform: scale(1.05);
         }
 
         .list-item.active {
@@ -230,20 +222,20 @@
 
         .rank {
             font-weight: 900;
-            font-size: 1.3rem;
-            min-width: 45px;
+            font-size: 1.4rem; /* Larger rank indicator */
+            min-width: 50px;
             flex-shrink: 0;
             text-align: center;
         }
 
         .thumb-mini {
-            width: 95px;
-            height: 55px;
+            width: 110px;      /* Significantly larger thumbnails */
+            height: 65px;
             object-fit: cover;
             flex-shrink: 0;
             border-radius: 8px;
             border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.6);
         }
 
         .level-info-text {
@@ -256,7 +248,7 @@
 
         .level-title-row {
             font-weight: 800;
-            font-size: 1.15rem;
+            font-size: 1.25rem; /* Larger title text */
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -267,59 +259,58 @@
         }
 
         .level-pts-row {
-            font-size: 0.85rem;
-            color: #bbb;
+            font-size: 0.9rem;
+            color: #ccc;
             font-weight: 700;
-            margin-top: 3px;
+            margin-top: 4px;
         }
 
-        /* Right Column: Expanded Full-Width Showcase Box */
+        /* Right Column: Showcase Area */
         .content {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 24px;
             width: 100%;
-            min-width: 0; /* Ensures content stretches fully without pushing screen borders */
+            min-width: 0;
         }
 
-        /* Tier Legend Bar */
         .top-tier-bar {
             background: var(--card-bg);
             border: 1px solid var(--border);
             border-radius: 14px;
-            padding: 14px 20px;
+            padding: 16px 24px;
             backdrop-filter: blur(16px);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 10px;
+            gap: 12px;
             width: 100%;
+            overflow-x: auto;
         }
 
         .tier-pill {
             display: flex;
             align-items: center;
             gap: 8px;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             font-weight: 700;
             white-space: nowrap;
             background: rgba(0,0,0,0.3);
-            padding: 6px 12px;
+            padding: 8px 14px;
             border-radius: 20px;
             border: 1px solid rgba(255,255,255,0.06);
         }
 
-        /* Showcase Card - Extends edge-to-edge across the right grid area */
         .glass-card {
             background: var(--card-bg);
             border: 1px solid var(--border);
-            border-radius: 18px;
-            padding: 28px;
+            border-radius: 20px;
+            padding: 32px;
             backdrop-filter: blur(20px);
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
             display: flex;
             flex-direction: column;
-            gap: 24px;
+            gap: 28px;
             width: 100%;
         }
 
@@ -328,7 +319,7 @@
             width: 100%;
             aspect-ratio: 16 / 9;
             background: #000;
-            border-radius: 14px;
+            border-radius: 16px;
             overflow: hidden;
             border: 1px solid var(--border);
             box-shadow: 0 15px 35px rgba(0,0,0,0.8);
@@ -341,40 +332,33 @@
         }
 
         .main-title-text {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             font-weight: 900;
             margin: 0;
             letter-spacing: -0.5px;
             line-height: 1.2;
             word-break: break-word;
-            text-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
 
         .info-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 16px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
             width: 100%;
         }
 
         .stat-card {
             background: rgba(0, 0, 0, 0.4);
             border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 16px 20px;
+            border-radius: 14px;
+            padding: 18px 22px;
             display: flex;
             flex-direction: column;
-            gap: 4px;
-            transition: border-color 0.2s ease, transform 0.2s ease;
-        }
-
-        .stat-card:hover {
-            border-color: var(--border-hover);
-            transform: translateY(-2px);
+            gap: 6px;
         }
 
         .stat-label {
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             color: #888;
             text-transform: uppercase;
             font-weight: 800;
@@ -382,7 +366,7 @@
         }
 
         .stat-card div:last-child {
-            font-size: 1.15rem;
+            font-size: 1.25rem;
             font-weight: 700;
             color: #fff;
             overflow: hidden;
@@ -393,20 +377,20 @@
         .victors-box {
             background: rgba(0, 0, 0, 0.4);
             border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 20px 24px;
+            border-radius: 14px;
+            padding: 22px 26px;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 14px;
         }
 
         .tag {
             background: rgba(255, 255, 255, 0.06);
             border: 1px solid rgba(255, 255, 255, 0.12);
             color: #e0e0e0;
-            padding: 6px 14px;
+            padding: 8px 16px;
             border-radius: 20px;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             font-weight: 600;
             transition: all 0.2s ease;
             text-decoration: none;
@@ -417,7 +401,6 @@
             color: #0b0c10;
             border-color: var(--accent);
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(71, 229, 188, 0.3);
         }
 
         .player-link {
@@ -431,8 +414,8 @@
 
         .floating-btn {
             position: fixed;
-            width: 50px;
-            height: 50px;
+            width: 52px;
+            height: 52px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -444,8 +427,8 @@
         }
 
         .rules-btn {
-            bottom: 20px;
-            right: 80px;
+            bottom: 24px;
+            right: 88px;
             background: rgba(30, 34, 45, 0.9);
             border: 1px solid var(--border);
         }
@@ -453,12 +436,11 @@
         .rules-btn:hover {
             transform: scale(1.1);
             border-color: var(--accent);
-            background: rgba(40, 45, 60, 0.95);
         }
 
         .discord-btn {
-            bottom: 20px;
-            right: 20px;
+            bottom: 24px;
+            right: 24px;
             background: #5865F2;
             border: none;
         }
@@ -473,7 +455,7 @@
                 grid-template-columns: 1fr;
             }
             .sidebar-column {
-                height: 450px;
+                height: 500px;
                 position: static;
             }
         }
@@ -492,7 +474,6 @@
     </nav>
 
     <div class="main-layout">
-        <!-- Left Side: Rows Section -->
         <div class="sidebar-column">
             <div class="search-container">
                 <input type="text" id="level-search" placeholder="Search levels..." oninput="filterLevels()">
@@ -500,7 +481,6 @@
             <div class="sidebar" id="sidebar"></div>
         </div>
 
-        <!-- Right Side: Full Showcase Section -->
         <div class="content">
             <div class="top-tier-bar" id="legend-list"></div>
 
@@ -536,7 +516,7 @@
 
                 <div class="victors-box">
                     <div class="stat-label">List Victors</div>
-                    <div id="v-cont" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px;"></div>
+                    <div id="v-cont" style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px;"></div>
                 </div>
             </div>
         </div>
@@ -671,10 +651,10 @@
                 }
 
                 const displayPts = rank > 150 ? "LEGACY" : `${lvl.points} PTS`;
-                const fpsBadge = lvl.fps ? `<span style="font-size:0.65rem; color:#ffcf4b; border: 1px solid rgba(255, 207, 75, 0.3); padding: 1px 5px; border-radius: 4px; margin-left: 6px; flex-shrink: 0;">${lvl.fps}</span>` : '';
+                const fpsBadge = lvl.fps ? `<span style="font-size:0.7rem; color:#ffcf4b; border: 1px solid rgba(255, 207, 75, 0.3); padding: 2px 6px; border-radius: 4px; margin-left: 6px; flex-shrink: 0;">${lvl.fps}</span>` : '';
 
                 const currentTier = allTiers.find(t => lvl.points >= t.minPoints && lvl.points <= t.maxPoints);
-                const imgSource = lvl.thumbnail ? lvl.thumbnail : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORUS5CYII=";
+                const imgSource = lvl.thumbnail ? lvl.thumbnail : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVOVERRIDES=";
 
                 const div = document.createElement('div');
                 div.className = `list-item ${rank <= 3 ? 'top-' + rank : ''}`;
