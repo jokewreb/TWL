@@ -10,9 +10,10 @@
             overflow-y: auto; 
             background-color: #0b0c10; 
             margin: 0; 
-            padding-bottom: 50px; 
+            padding-bottom: 40px; 
             font-family: system-ui, -apple-system, sans-serif;
             color: #fff;
+            min-height: 100vh;
         }
 
         /* Particle Background Canvas */
@@ -26,28 +27,34 @@
             pointer-events: none; 
         }
 
-        /* Main Container */
+        /* Main Container - Extended for full screen fitting */
         .roulette-container {
             position: relative;
             z-index: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            width: 92%;
-            max-width: 800px;
-            margin: 30px auto;
+            width: 94%;
+            max-width: 1150px;
+            margin: 20px auto;
+        }
+
+        /* Compact Header Area */
+        #game-header {
+            margin-bottom: 20px;
+            width: 100%;
             text-align: center;
         }
 
-        /* Header Area */
-        #game-header {
-            margin-bottom: 25px;
-            width: 100%;
+        .header-top-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
         }
 
         .progress-banner {
-            font-size: 3rem;
+            font-size: 2.4rem;
             font-weight: 900;
             color: var(--accent, #ff4141);
             text-shadow: 0 0 25px rgba(255, 65, 65, 0.4);
@@ -56,21 +63,24 @@
         }
 
         .target-sub {
-            font-size: 0.85rem;
-            color: #888;
-            margin-top: 6px;
+            font-size: 0.9rem;
+            color: #aaa;
             text-transform: uppercase;
             letter-spacing: 2px;
-            font-weight: 700;
+            font-weight: 800;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 6px 16px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         /* Progress Bar */
         .progress-bar-bg {
             width: 100%;
-            height: 6px;
+            height: 8px;
             background: rgba(255, 255, 255, 0.08);
             border-radius: 10px;
-            margin-top: 15px;
+            margin-top: 10px;
             overflow: hidden;
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
@@ -84,111 +94,180 @@
             box-shadow: 0 0 12px rgba(255, 65, 65, 0.6);
         }
 
-        /* Glassmorphic Card */
+        /* Widescreen Glassmorphic Card Layout */
         .roulette-card {
             position: relative;
             width: 100%;
             background: rgba(20, 22, 30, 0.85);
             border: 1px solid var(--border, rgba(255, 255, 255, 0.08));
-            border-radius: 16px;
-            padding: 35px 25px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(12px);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            border-radius: 18px;
+            padding: 30px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(14px);
             box-sizing: border-box;
             overflow: hidden;
         }
 
-        /* Ambient Background Blur inside Card */
         .card-bg-blur {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             background-size: cover;
             background-position: center;
-            opacity: 0.15;
-            filter: blur(20px);
+            opacity: 0.12;
+            filter: blur(25px);
             z-index: 0;
             pointer-events: none;
             transition: background-image 0.4s ease;
         }
 
-        .card-inner {
+        /* Split Screen Grid for Content */
+        .card-grid {
             position: relative;
             z-index: 1;
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 30px;
+            align-items: center;
+        }
+
+        @media (max-width: 850px) {
+            .card-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+
+        /* Left Column: Visual Media */
+        .media-col {
             display: flex;
             flex-direction: column;
+            gap: 12px;
             align-items: center;
-            gap: 18px;
-            width: 100%;
         }
 
         .roulette-thumb {
             width: 100%;
-            max-width: 480px;
-            height: 250px;
+            height: 280px;
             object-fit: cover;
             border-radius: 12px;
             border: 1px solid rgba(255, 255, 255, 0.12);
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
-            transition: transform 0.3s ease;
         }
 
-        .roulette-thumb:hover {
-            transform: scale(1.02);
+        /* Right Column: Detailed Info */
+        .info-col {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+            gap: 16px;
+        }
+
+        .level-header {
+            width: 100%;
+        }
+
+        .level-rank-tag {
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: var(--accent, #ff4141);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 4px;
+            display: block;
         }
 
         .level-name {
-            font-size: 2.2rem;
-            font-weight: 800;
+            font-size: 2.4rem;
+            font-weight: 900;
             color: #fff;
-            margin: 5px 0 0 0;
+            margin: 0;
+            line-height: 1.1;
             letter-spacing: -0.5px;
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            word-break: break-word;
         }
 
-        .meta-line {
+        .badge-row {
             display: flex;
-            gap: 12px;
-            font-size: 0.95rem;
-            color: #aaa;
-            justify-content: center;
+            gap: 10px;
             align-items: center;
-        }
-
-        .meta-line span strong {
-            color: #fff;
+            flex-wrap: wrap;
         }
 
         .tier-badge {
-            padding: 6px 18px;
+            padding: 5px 14px;
             border-radius: 20px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 1.2px;
             background: rgba(0, 0, 0, 0.4);
             border: 1px solid currentColor;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
 
-        /* Buttons */
+        .points-badge {
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: #ffd700;
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        /* Structured Level Details Table/Grid */
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px 16px;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.25);
+            padding: 16px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-sizing: border-box;
+        }
+
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .detail-label {
+            font-size: 0.75rem;
+            color: #777;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .detail-value {
+            font-size: 0.95rem;
+            color: #fff;
+            font-weight: 700;
+            margin-top: 2px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* Action Buttons */
         .btn-group {
             display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: 10px;
+            gap: 12px;
             width: 100%;
+            margin-top: 5px;
         }
 
         .roulette-btn {
+            flex: 1;
             background: var(--accent, #ff4141);
             color: #fff;
             border: none;
-            padding: 14px 32px;
-            font-size: 0.95rem;
+            padding: 14px 20px;
+            font-size: 0.9rem;
             font-weight: 800;
             border-radius: 8px;
             cursor: pointer;
@@ -196,6 +275,8 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             box-shadow: 0 6px 20px rgba(255, 65, 65, 0.3);
+            text-align: center;
+            text-decoration: none;
         }
 
         .roulette-btn:hover {
@@ -209,6 +290,7 @@
         }
 
         .btn-secondary {
+            flex: 0.6;
             background: rgba(255, 255, 255, 0.06) !important;
             color: #ccc !important;
             border: 1px solid rgba(255, 255, 255, 0.12) !important;
@@ -218,7 +300,20 @@
         .btn-secondary:hover {
             background: rgba(255, 255, 255, 0.12) !important;
             color: #fff !important;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3) !important;
+        }
+
+        .btn-video {
+            background: rgba(255, 0, 0, 0.2) !important;
+            color: #ff5555 !important;
+            border: 1px solid rgba(255, 0, 0, 0.3) !important;
+            box-shadow: none !important;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            width: 100%;
+            padding: 10px;
+            font-size: 0.8rem;
         }
 
         /* Win Overlay */
@@ -226,9 +321,11 @@
             display: none;
             flex-direction: column;
             align-items: center;
+            text-align: center;
             gap: 20px;
             animation: fadeIn 0.5s ease forwards;
-            padding: 20px 0;
+            padding: 30px 0;
+            width: 100%;
         }
 
         @keyframes fadeIn {
@@ -260,8 +357,10 @@
     <div class="roulette-container">
         
         <div id="game-header">
-            <div class="progress-banner" id="target-percentage">Get 5%</div>
-            <div class="target-sub" id="level-counter">Level 1 of 20</div>
+            <div class="header-top-line">
+                <div class="progress-banner" id="target-percentage">Get 5%</div>
+                <div class="target-sub" id="level-counter">Level 1 of 20</div>
+            </div>
             <div class="progress-bar-bg">
                 <div class="progress-bar-fill" id="progress-fill"></div>
             </div>
@@ -270,38 +369,65 @@
         <div class="roulette-card" id="roulette-card">
             <div class="card-bg-blur" id="card-bg-blur"></div>
 
-            <div id="game-content" class="card-inner">
-                <img id="r-thumb" src="" class="roulette-thumb">
-                <h2 id="r-name" class="level-name">---</h2>
-                
-                <div class="meta-line">
-                    <span>Creator: <strong id="r-creator">-</strong></span>
-                    <span style="opacity:0.3;">•</span>
-                    <span>ID: <strong id="r-id">-</strong></span>
+            <div id="game-content" class="card-grid">
+                <div class="media-col">
+                    <img id="r-thumb" src="" class="roulette-thumb">
+                    <a id="r-video-btn" href="#" target="_blank" class="roulette-btn btn-video" style="display:none;">
+                        ▶ Watch Level Showcase
+                    </a>
                 </div>
 
-                <div id="r-tier" class="tier-badge">-</div>
-                
-                <div class="btn-group">
-                    <button class="roulette-btn" id="action-btn" onclick="advanceRoulette()">I Beat It! Next Level</button>
-                    <button class="roulette-btn btn-secondary" id="skip-btn" onclick="skipLevel()">Skip Level</button>
+                <div class="info-col">
+                    <div class="level-header">
+                        <span id="r-rank" class="level-rank-tag">List Rank #--</span>
+                        <h2 id="r-name" class="level-name">---</h2>
+                    </div>
+
+                    <div class="badge-row">
+                        <div id="r-tier" class="tier-badge">-</div>
+                        <div id="r-points" class="points-badge">0 PTS</div>
+                    </div>
+
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <span class="detail-label">Creator</span>
+                            <span id="r-creator" class="detail-value">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Verifier</span>
+                            <span id="r-verifier" class="detail-value">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Level ID</span>
+                            <span id="r-id" class="detail-value">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Victors Count</span>
+                            <span id="r-victors" class="detail-value">0</span>
+                        </div>
+                    </div>
+                    
+                    <div class="btn-group">
+                        <button class="roulette-btn" id="action-btn" onclick="advanceRoulette()">I Beat It! Next Level</button>
+                        <button class="roulette-btn btn-secondary" id="skip-btn" onclick="skipLevel()">Skip</button>
+                    </div>
                 </div>
             </div>
 
-            <div id="win-content" class="win-screen card-inner">
+            <div id="win-content" class="win-screen">
                 <div style="font-size: 5rem; filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.4));">👑</div>
                 <h2 class="level-name" style="color: var(--accent, #ff4141);">ROULETTE COMPLETED!</h2>
-                <p style="color: #aaa; max-width: 420px; margin: 0 auto 10px auto; line-height: 1.6; font-size: 0.95rem;">
-                    Incredible run! You successfully conquered 20 random levels from 5% all the way to 100%!
+                <p style="color: #aaa; max-width: 480px; margin: 0 auto 10px auto; line-height: 1.6; font-size: 0.95rem;">
+                    Unstoppable! You successfully conquered all 20 random levels ranging from 5% all the way to a 100% completion!
                 </p>
-                <button class="roulette-btn" onclick="resetGame()">Play Again</button>
+                <button class="roulette-btn" style="max-width:250px;" onclick="resetGame()">Play Again</button>
             </div>
         </div>
 
     </div>
 
     <script>
-        // Particle Background Animation
+        // Particle Background Canvas
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
         let parts = [];
@@ -360,7 +486,7 @@
             currentStep = 1;
             
             document.getElementById('game-header').style.display = 'block';
-            document.getElementById('game-content').style.display = 'flex';
+            document.getElementById('game-content').style.display = 'grid';
             document.getElementById('win-content').style.display = 'none';
 
             getNewRandomLevel();
@@ -373,19 +499,41 @@
             
             usedLevelIds.add(randomLevel.id);
 
+            // Compute Rank in the list based on array index
+            const listRank = allLevels.findIndex(l => l.id === randomLevel.id) + 1;
+
             const targetPercent = targets[currentStep - 1];
             document.getElementById('target-percentage').innerText = `Get ${targetPercent}%`;
             document.getElementById('level-counter').innerText = `Level ${currentStep} of 20`;
             
-            // Update Progress Bar Width
+            // Progress Fill Width
             const fillPercent = (currentStep / 20) * 100;
             document.getElementById('progress-fill').style.width = `${fillPercent}%`;
 
-            document.getElementById('r-name').innerText = randomLevel.name;
-            document.getElementById('r-creator').innerText = randomLevel.creator || '-';
+            // Populate Metadata Fields
+            document.getElementById('r-rank').innerText = listRank > 0 ? `List Rank #${listRank}` : `Unranked`;
+            document.getElementById('r-name').innerText = randomLevel.name || 'Unknown Level';
+            document.getElementById('r-creator').innerText = randomLevel.creator || 'Unknown';
+            document.getElementById('r-verifier').innerText = randomLevel.verifier || 'None';
             document.getElementById('r-id').innerText = randomLevel.id || '-';
+            document.getElementById('r-points').innerText = `${randomLevel.points || 0} PTS`;
             
-            const imgSource = randomLevel.thumbnail ? randomLevel.thumbnail : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=";
+            // Calculate Victors Count
+            const victorsArray = Array.isArray(randomLevel.victors) ? randomLevel.victors : [];
+            document.getElementById('r-victors').innerText = `${victorsArray.length} Victor${victorsArray.length === 1 ? '' : 's'}`;
+
+            // Video Link Integration
+            const videoBtn = document.getElementById('r-video-btn');
+            const videoUrl = randomLevel.video || randomLevel.verification || randomLevel.yt;
+            if (videoUrl) {
+                videoBtn.href = videoUrl;
+                videoBtn.style.display = 'inline-flex';
+            } else {
+                videoBtn.style.display = 'none';
+            }
+
+            // Thumbnail and Background Image
+            const imgSource = randomLevel.thumbnail ? randomLevel.thumbnail : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORUSCYII=";
             document.getElementById('r-thumb').src = imgSource;
             document.getElementById('card-bg-blur').style.backgroundImage = `url('${imgSource}')`;
 
