@@ -95,7 +95,6 @@
             background: rgba(255, 255, 255, 0.05);
         }
 
-        /* Balanced Main Layout */
         .main-layout {
             position: relative;
             z-index: 1;
@@ -156,7 +155,6 @@
             padding-right: 6px;
         }
 
-        /* Prominent Sidebar Items with Canvas Particles */
         .list-item {
             position: relative;
             display: flex;
@@ -225,7 +223,6 @@
             transform: scale(1.05);
         }
 
-        /* Active Outline: White */
         .list-item.active {
             border-color: #ffffff !important;
             box-shadow: 0 0 22px rgba(255, 255, 255, 0.6), inset 0 0 12px rgba(255, 255, 255, 0.2) !important;
@@ -277,7 +274,6 @@
             margin-top: 3px;
         }
 
-        /* Right Showcase Column */
         .content {
             display: flex;
             flex-direction: column;
@@ -332,12 +328,13 @@
             overflow-y: auto;
         }
 
+        /* Scaled 1.5x bigger */
         .video-box {
             position: relative;
             width: 100%;
-            max-width: 880px;
+            max-width: 1320px;
             aspect-ratio: 16 / 9;
-            max-height: 64vh;
+            max-height: 72vh;
             margin: 0 auto;
             background: #000;
             border-radius: 14px;
@@ -560,7 +557,6 @@
     </a>
 
     <script>
-        /* Main Canvas Particle Background */
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
@@ -596,7 +592,6 @@
         initCanvas();
         animateCanvas();
 
-        /* Animated Particles system for Sidebar Item Bars */
         let barParticleSystems = [];
 
         function initBarParticleCanvas(canvasEl, colorHex) {
