@@ -97,6 +97,7 @@
         }
 
         .profile-header {
+            position: relative;
             text-align: center;
             margin-bottom: 50px;
             background: var(--card-bg);
@@ -105,6 +106,32 @@
             border: 1px solid var(--border);
             backdrop-filter: blur(20px);
             box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
+            overflow: hidden;
+        }
+
+        .profile-bg-layer {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.35;
+            filter: blur(6px);
+            z-index: 0;
+            pointer-events: none;
+            transition: background-image 0.4s ease;
+        }
+
+        .profile-bg-overlay {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(11, 12, 16, 0.5) 0%, rgba(11, 12, 16, 0.85) 100%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .profile-header-content {
+            position: relative;
+            z-index: 1;
         }
 
         .profile-name {
@@ -166,7 +193,6 @@
             gap: 22px;
         }
 
-        /* Enhanced Level Card with Background Image */
         .level-card {
             position: relative;
             background: rgba(18, 22, 31, 0.85);
@@ -273,11 +299,15 @@
 
     <div class="profile-container">
         <div class="profile-header">
-            <h1 id="playerNameHeading" class="profile-name">LOADING...</h1>
-            <div class="stats-badges-container">
-                <div id="totalPoints" class="stats-badge points-badge">0 PTS</div>
-                <div id="completionCount" class="stats-badge">0 COMPLETIONS</div>
-                <div id="hardestLevel" class="stats-badge hardest-badge" style="display: none;">HARDEST: NONE</div>
+            <div id="profileBg" class="profile-bg-layer"></div>
+            <div class="profile-bg-overlay"></div>
+            <div class="profile-header-content">
+                <h1 id="playerNameHeading" class="profile-name">LOADING...</h1>
+                <div class="stats-badges-container">
+                    <div id="totalPoints" class="stats-badge points-badge">0 PTS</div>
+                    <div id="completionCount" class="stats-badge">0 COMPLETIONS</div>
+                    <div id="hardestLevel" class="stats-badge hardest-badge" style="display: none;">HARDEST: NONE</div>
+                </div>
             </div>
         </div>
 
@@ -428,6 +458,7 @@
             const totalPointsBadge = document.getElementById('totalPoints');
             const countBadge = document.getElementById('completionCount');
             const hardestBadge = document.getElementById('hardestLevel');
+            const profileBg = document.getElementById('profileBg');
             const packsGrid = document.getElementById('packsGrid');
             const grid = document.getElementById('completedGrid');
             const creationsGrid = document.getElementById('createdGrid');
@@ -556,7 +587,6 @@
                         completedPacksCount++;
                         totalPoints += pack.points;
 
-                        // Use first level's thumbnail for pack background if available
                         const firstLvlKey = pack.levels[0]?.toLowerCase();
                         const packImgSource = (levelMap[firstLvlKey] && levelMap[firstLvlKey].thumbnail) ? levelMap[firstLvlKey].thumbnail : "";
 
@@ -586,6 +616,9 @@
                 if (hardestLvl) {
                     hardestBadge.innerText = `HARDEST: #${hardestRank} ${hardestLvl.name.toUpperCase()} (${hardestLvl.points} PTS)`;
                     hardestBadge.style.display = "inline-block";
+                    if (hardestLvl.thumbnail) {
+                        profileBg.style.backgroundImage = `url('${hardestLvl.thumbnail}')`;
+                    }
                 } else {
                     hardestBadge.style.display = "none";
                 }
