@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>THE WAVE LIST</title>
     <link rel="icon" type="image/png" href="logo.ico">
+
     <style>
         :root {
             --accent: #47e5bc;
@@ -25,13 +26,16 @@
 
         html, body {
             width: 100%;
-            height: 100vh;
-            overflow: hidden;
+            min-height: 100%;
             background-color: var(--bg-dark);
             font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             color: #fff;
+        }
+
+        body {
             display: flex;
             flex-direction: column;
+            overflow: hidden;
         }
 
         #bg-canvas {
@@ -100,12 +104,11 @@
             position: relative;
             z-index: 1;
             display: grid;
-            grid-template-columns: clamp(380px, 27vw, 520px) 1fr;
+            grid-template-columns: clamp(320px, 27vw, 520px) minmax(0, 1fr);
             gap: 20px;
             padding: 20px 24px;
             width: 100%;
             height: calc(100vh - 64px);
-            box-sizing: border-box;
             overflow: hidden;
         }
 
@@ -116,6 +119,7 @@
             height: 100%;
             width: 100%;
             min-height: 0;
+            min-width: 0;
         }
 
         .search-container {
@@ -131,7 +135,6 @@
             gap: 10px;
         }
 
-        /* Mode Switcher Tabs */
         .mode-tabs {
             display: flex;
             background: rgba(0, 0, 0, 0.4);
@@ -177,7 +180,6 @@
             font-size: 0.92rem;
             outline: none;
             transition: all 0.25s ease;
-            box-sizing: border-box;
         }
 
         #level-search:focus {
@@ -187,6 +189,7 @@
 
         .sidebar {
             flex: 1;
+            min-height: 0;
             overflow-y: auto;
             overflow-x: hidden;
             display: flex;
@@ -209,6 +212,7 @@
             user-select: none;
             transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
             width: 100%;
+            flex-shrink: 0;
         }
 
         .list-item-bg {
@@ -225,9 +229,9 @@
             position: absolute;
             inset: 0;
             background: linear-gradient(
-                90deg, 
-                rgba(11, 12, 16, 0.96) 0%, 
-                rgba(11, 12, 16, 0.82) 65%, 
+                90deg,
+                rgba(11, 12, 16, 0.96) 0%,
+                rgba(11, 12, 16, 0.82) 65%,
                 rgba(11, 12, 16, 0.95) 100%
             );
             z-index: 1;
@@ -240,6 +244,7 @@
             align-items: center;
             gap: 16px;
             width: 100%;
+            min-width: 0;
         }
 
         .list-item:hover {
@@ -255,7 +260,8 @@
 
         .list-item.active {
             border-color: #ffffff !important;
-            box-shadow: 0 0 22px rgba(255, 255, 255, 0.6), inset 0 0 12px rgba(255, 255, 255, 0.2) !important;
+            box-shadow: 0 0 22px rgba(255, 255, 255, 0.6),
+                        inset 0 0 12px rgba(255, 255, 255, 0.2) !important;
             background: rgba(255, 255, 255, 0.12) !important;
         }
 
@@ -295,6 +301,12 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            min-width: 0;
+        }
+
+        .level-title-row span {
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .level-pts-row {
@@ -311,6 +323,7 @@
             width: 100%;
             height: 100%;
             min-width: 0;
+            min-height: 0;
             overflow: hidden;
         }
 
@@ -375,7 +388,11 @@
         .showcase-bg-overlay {
             position: absolute;
             inset: 0;
-            background: radial-gradient(circle at center, rgba(11, 12, 16, 0.4) 0%, rgba(11, 12, 16, 0.85) 100%);
+            background: radial-gradient(
+                circle at center,
+                rgba(11, 12, 16, 0.4) 0%,
+                rgba(11, 12, 16, 0.85) 100%
+            );
             z-index: 0;
             pointer-events: none;
         }
@@ -438,6 +455,7 @@
             flex-direction: column;
             gap: 4px;
             backdrop-filter: blur(8px);
+            min-width: 0;
         }
 
         .stat-label {
@@ -535,27 +553,247 @@
             background-color: #4752C4;
         }
 
+        /* TABLET */
         @media (max-width: 1024px) {
-            html, body {
-                height: auto;
+            body {
                 overflow: auto;
             }
+
             .main-layout {
                 grid-template-columns: 1fr;
                 height: auto;
+                min-height: calc(100vh - 64px);
                 overflow: visible;
             }
+
             .sidebar-column {
                 height: 480px;
+            }
+
+            .content {
+                height: auto;
+                min-height: 700px;
+                overflow: visible;
+            }
+
+            .glass-card {
+                overflow: visible;
+            }
+        }
+
+        /* PHONE */
+        @media (max-width: 600px) {
+            nav {
+                height: auto;
+                min-height: 60px;
+                padding: 12px 14px;
+                gap: 10px;
+            }
+
+            .nav-logo {
+                font-size: 0.95rem;
+                letter-spacing: 1.2px;
+                white-space: nowrap;
+            }
+
+            .nav-links {
+                gap: 3px;
+            }
+
+            .nav-link {
+                font-size: 0.62rem;
+                letter-spacing: 0.5px;
+                padding: 5px 4px;
+            }
+
+            .main-layout {
+                padding: 10px;
+                gap: 12px;
+                width: 100%;
+            }
+
+            .sidebar-column {
+                height: 430px;
+                gap: 10px;
+            }
+
+            .search-container {
+                padding: 10px;
+                border-radius: 10px;
+            }
+
+            .mode-tab {
+                font-size: 0.68rem;
+                padding: 7px 4px;
+            }
+
+            #level-search {
+                padding: 10px 12px;
+                font-size: 0.85rem;
+            }
+
+            .sidebar {
+                gap: 8px;
+                padding-right: 2px;
+            }
+
+            .list-item {
+                min-height: 78px;
+                padding: 10px;
+                border-radius: 11px;
+            }
+
+            .list-item-content {
+                gap: 9px;
+            }
+
+            .rank {
+                min-width: 34px;
+                font-size: 1rem;
+            }
+
+            .thumb-mini {
+                width: 76px;
+                height: 48px;
+                border-radius: 6px;
+            }
+
+            .level-title-row {
+                font-size: 0.92rem;
+                gap: 4px;
+            }
+
+            .level-pts-row {
+                font-size: 0.72rem;
+            }
+
+            .content {
+                min-height: 0;
+                gap: 10px;
+            }
+
+            .top-tier-bar {
+                padding: 8px 10px;
+                border-radius: 10px;
+                justify-content: flex-start;
+            }
+
+            .tier-pill {
+                font-size: 0.68rem;
+                padding: 5px 8px;
+                gap: 5px;
+            }
+
+            .glass-card {
+                padding: 12px;
+                border-radius: 12px;
+                gap: 12px;
+            }
+
+            .video-box {
+                border-radius: 9px;
+            }
+
+            .main-title-text {
+                font-size: 1.45rem;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+            }
+
+            .stat-card {
+                padding: 10px 11px;
+                border-radius: 9px;
+            }
+
+            .stat-label {
+                font-size: 0.62rem;
+                letter-spacing: 0.8px;
+            }
+
+            .stat-card div:last-child {
+                font-size: 0.9rem;
+            }
+
+            .victors-box {
+                padding: 11px;
+                border-radius: 9px;
+            }
+
+            .tag {
+                font-size: 0.72rem;
+                padding: 5px 9px;
+            }
+
+            .floating-btn {
+                width: 42px;
+                height: 42px;
+            }
+
+            .rules-btn {
+                bottom: 12px;
+                right: 64px;
+            }
+
+            .discord-btn {
+                bottom: 12px;
+                right: 12px;
+            }
+        }
+
+        /* VERY SMALL PHONES */
+        @media (max-width: 380px) {
+            .nav-logo {
+                font-size: 0.8rem;
+            }
+
+            .nav-link {
+                font-size: 0.55rem;
+            }
+
+            .main-layout {
+                padding: 7px;
+            }
+
+            .rank {
+                min-width: 28px;
+                font-size: 0.9rem;
+            }
+
+            .thumb-mini {
+                width: 65px;
+                height: 42px;
+            }
+
+            .level-title-row {
+                font-size: 0.82rem;
+            }
+
+            .level-pts-row {
+                font-size: 0.67rem;
+            }
+
+            .main-title-text {
+                font-size: 1.25rem;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
+
 <body>
     <canvas id="bg-canvas"></canvas>
 
     <nav>
-        <div class="nav-logo" onclick="window.location.href='index.html'">THE WAVE LIST</div>
+        <div class="nav-logo" onclick="window.location.href='index.html'">
+            THE WAVE LIST
+        </div>
+
         <div class="nav-links">
             <a href="submit.html" class="nav-link">SUBMIT</a>
             <a href="roulette.html" class="nav-link">ROULETTE</a>
@@ -564,58 +802,98 @@
     </nav>
 
     <div class="main-layout">
+
         <div class="sidebar-column">
+
             <div class="search-container">
                 <div class="mode-tabs">
-                    <button class="mode-tab active" id="tab-levels" onclick="switchMode('levels')">Levels</button>
-                    <button class="mode-tab" id="tab-players" onclick="switchMode('players')">Players</button>
+                    <button class="mode-tab active" id="tab-levels" onclick="switchMode('levels')">
+                        Levels
+                    </button>
+
+                    <button class="mode-tab" id="tab-players" onclick="switchMode('players')">
+                        Players
+                    </button>
                 </div>
-                <input type="text" id="level-search" placeholder="Search levels..." oninput="handleSearch()">
+
+                <input
+                    type="text"
+                    id="level-search"
+                    placeholder="Search levels..."
+                    oninput="handleSearch()"
+                >
             </div>
+
             <div class="sidebar" id="sidebar"></div>
+
         </div>
 
         <div class="content">
+
             <div class="top-tier-bar" id="legend-list"></div>
 
             <div class="glass-card">
+
                 <div id="showcase-bg" class="showcase-bg-layer"></div>
                 <div class="showcase-bg-overlay"></div>
 
                 <div class="showcase-content-wrapper">
+
                     <div class="video-box">
-                        <iframe id="main-vid" src="" frameborder="0" allowfullscreen></iframe>
+                        <iframe
+                            id="main-vid"
+                            src=""
+                            frameborder="0"
+                            allowfullscreen>
+                        </iframe>
                     </div>
 
-                    <h1 id="main-title" class="main-title-text">Loading...</h1>
+                    <h1 id="main-title" class="main-title-text">
+                        Loading...
+                    </h1>
 
                     <div class="info-grid">
+
                         <div class="stat-card">
                             <div class="stat-label">Creator</div>
                             <div id="s-creator">-</div>
                         </div>
+
                         <div class="stat-card">
                             <div class="stat-label">Verifier</div>
                             <div id="s-verifier">-</div>
                         </div>
+
                         <div class="stat-card">
                             <div class="stat-label">ID</div>
                             <div id="s-id">-</div>
                         </div>
+
                         <div class="stat-card">
                             <div class="stat-label">Points</div>
                             <div id="s-pts" style="color:var(--accent);">-</div>
                         </div>
+
                         <div class="stat-card" id="fps-card" style="display: none;">
                             <div class="stat-label">FPS Cap</div>
                             <div id="s-fps" style="color:#ffcf4b;">-</div>
                         </div>
+
                     </div>
 
                     <div class="victors-box">
-                        <div class="stat-label">List Victors</div>
-                        <div id="v-cont" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 2px;"></div>
+
+                        <div class="stat-label">
+                            List Victors
+                        </div>
+
+                        <div
+                            id="v-cont"
+                            style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 2px;">
+                        </div>
+
                     </div>
+
                 </div>
             </div>
         </div>
@@ -625,70 +903,121 @@
         <span style="font-size: 1.3rem; user-select: none;">📜</span>
     </a>
 
-    <a href="https://discord.com/invite/7SjKU8vy8x" target="_blank" class="floating-btn discord-btn" title="Discord Community">
-        <img src="discord.png" alt="Discord" style="width: 24px; height: 24px; object-fit: contain;" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'%23ffffff\'><path d=\'M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.094 13.094 0 0 1-1.873-.894.077.077 0 0 1-.008-.128c.126-.093.252-.19.372-.287a.075.075 0 0 1 .077-.011c3.92 1.793 8.18 1.793 12.061 0a.073.073 0 0 1 .078.009c.12.099.246.195.373.289a.077.077 0 0 1-.006.127 12.298 12.298 0 0 1-1.873.894.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.156-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.156 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.156-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.156 2.418z\'/></svg>';">
+    <a
+        href="https://discord.com/invite/7SjKU8vy8x"
+        target="_blank"
+        class="floating-btn discord-btn"
+        title="Discord Community">
+
+        <img
+            src="discord.png"
+            alt="Discord"
+            style="width: 24px; height: 24px; object-fit: contain;"
+            onerror="this.style.display='none'; this.parentElement.innerHTML='💬';">
     </a>
 
     <script>
+
         const PACKS_DATA = [
             {
                 name: "Wave Corridor Pack",
                 tier: "PLATINUM",
                 points: 100,
-                levels: ["Unnerfed Wave Corridor", "Silent Wave Corridor Infinity Unleashed XYZ", "Old Wave Corridor", "Wave Corridor", "Nerfed Wave Corridor"]
+                levels: [
+                    "Unnerfed Wave Corridor",
+                    "Silent Wave Corridor Infinity Unleashed XYZ",
+                    "Old Wave Corridor",
+                    "Wave Corridor",
+                    "Nerfed Wave Corridor"
+                ]
             },
             {
                 name: "Top 1 Pack I",
                 tier: "PLATINUM",
                 points: 100,
-                levels: ["Unnerfed Wave Corridor", "ULTIMATE DIHRUCTION", "Tung After Tung"]
+                levels: [
+                    "Unnerfed Wave Corridor",
+                    "ULTIMATE DIHRUCTION",
+                    "Tung After Tung"
+                ]
             },
             {
                 name: "Top 1 Pack II",
                 tier: "DIAMOND",
                 points: 200,
-                levels: ["Zirconium Shard", "SYMM NO SCLEARS", "Defeated Brajan"]
+                levels: [
+                    "Zirconium Shard",
+                    "SYMM NO SCLEARS",
+                    "Defeated Brajan"
+                ]
             },
             {
                 name: "Defeated Pack",
                 tier: "DIAMOND",
                 points: 200,
-                levels: ["Defeated Brajan", "The Brajan Dih", "defeated ez nerf", "Beefeated Brajan"]
+                levels: [
+                    "Defeated Brajan",
+                    "The Brajan Dih",
+                    "defeated ez nerf",
+                    "Beefeated Brajan"
+                ]
             },
             {
                 name: "Radioactive Trilogy",
                 tier: "PLATINUM",
                 points: 100,
-                levels: ["NEPTUNIUM", "URANIUM", "PLUTONIUM"]
+                levels: [
+                    "NEPTUNIUM",
+                    "URANIUM",
+                    "PLUTONIUM"
+                ]
             },
             {
                 name: "Bottom 1 Pack I",
                 tier: "BRONZE",
                 points: 25,
-                levels: ["Zoink WAVE", "Swag Clubstep", "Sakupen Hellcles"]
+                levels: [
+                    "Zoink WAVE",
+                    "Swag Clubstep",
+                    "Sakupen Hellcles"
+                ]
             },
             {
                 name: "ChefLimeWaveBasic Pack",
                 tier: "SILVER",
                 points: 50,
-                levels: ["ChefLimeWaveBasic4", "ChefLimeWaveBasic3", "ChefLimeWaveBasic5", "ChefLimeWaveBasic1", "ChefLimeWaveBasic2", "ChefLimeWaveBasic FINALE"]
+                levels: [
+                    "ChefLimeWaveBasic4",
+                    "ChefLimeWaveBasic3",
+                    "ChefLimeWaveBasic5",
+                    "ChefLimeWaveBasic1",
+                    "ChefLimeWaveBasic2",
+                    "ChefLimeWaveBasic FINALE"
+                ]
             },
             {
                 name: "TooSquared and Friends",
                 tier: "DIAMOND",
                 points: 200,
-                levels: ["TooCub3d", "TooSquared", "3Squared"]
+                levels: [
+                    "TooCub3d",
+                    "TooSquared",
+                    "3Squared"
+                ]
             }
         ];
 
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
+
         let particles = [];
 
         function initCanvas() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
+
             particles = [];
+
             for (let i = 0; i < 65; i++) {
                 particles.push({
                     x: Math.random() * canvas.width,
@@ -701,34 +1030,47 @@
 
         function animateCanvas() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
+
             particles.forEach(p => {
                 ctx.fillStyle = "rgba(71, 229, 188, 0.2)";
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
                 ctx.fill();
+
                 p.y -= p.speed;
-                if (p.y < 0) p.y = canvas.height;
+
+                if (p.y < 0) {
+                    p.y = canvas.height;
+                }
             });
+
             requestAnimationFrame(animateCanvas);
         }
 
         window.addEventListener('resize', initCanvas);
+
         initCanvas();
         animateCanvas();
 
         const TIER_LOGO_SIZE = "24px";
+
         let allLevels = [];
         let allTiers = [];
         let allPlayers = [];
-        let currentMode = 'levels'; // 'levels' or 'players'
+        let currentMode = 'levels';
+
 
         async function init() {
+
             try {
+
                 const resTiers = await fetch(`tiers.json?v=${new Date().getTime()}`);
                 allTiers = await resTiers.json();
 
                 const res = await fetch(`levels.json?v=${new Date().getTime()}`);
                 allLevels = await res.json();
+
+                // Levels remain sorted by points
                 allLevels.sort((a, b) => b.points - a.points);
 
                 buildPlayersData();
@@ -736,43 +1078,90 @@
                 renderSidebar(allLevels);
 
                 const legendList = document.getElementById('legend-list');
+
                 let legendHTML = "";
 
                 [...allTiers].reverse().forEach(t => {
+
                     const logoSrc = t.image ? t.image : '';
                     const manualScale = t.size ? t.size : "100%";
 
                     legendHTML += `
                         <div class="tier-pill">
-                            <div style="width: ${TIER_LOGO_SIZE}; height: ${TIER_LOGO_SIZE}; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                                <img src="${logoSrc}" style="width: ${manualScale}; height: ${manualScale}; object-fit: contain;" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%23333\' stroke-width=\'1.5\'><rect width=\'18\' height=\'18\' x=\'3\' y=\'3\' rx=\'2\'/></svg>';">
+                            <div style="
+                                width: ${TIER_LOGO_SIZE};
+                                height: ${TIER_LOGO_SIZE};
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                flex-shrink: 0;
+                            ">
+                                <img
+                                    src="${logoSrc}"
+                                    style="
+                                        width: ${manualScale};
+                                        height: ${manualScale};
+                                        object-fit: contain;
+                                    "
+                                    onerror="this.style.display='none';"
+                                >
                             </div>
-                            <span style="color: ${t.color}">${t.name}</span>
-                            <span style="color: #777; font-size: 0.75rem;">${t.minPoints}${t.maxPoints > 9000 ? '+' : '-' + t.maxPoints}</span>
+
+                            <span style="color: ${t.color}">
+                                ${t.name}
+                            </span>
+
+                            <span style="
+                                color: #777;
+                                font-size: 0.75rem;
+                            ">
+                                ${t.minPoints}${t.maxPoints > 9000 ? '+' : '-' + t.maxPoints}
+                            </span>
                         </div>
                     `;
                 });
+
                 legendList.innerHTML = legendHTML;
 
-                if (allLevels.length > 0) update(allLevels[0], 1);
+                if (allLevels.length > 0) {
+                    update(allLevels[0], 1);
+                }
+
             } catch (e) {
+
                 console.error("Error loading list:", e);
-                document.getElementById('main-title').innerText = "Error loading list records.";
+
+                document.getElementById('main-title').innerText =
+                    "Error loading list records.";
             }
         }
 
+
         function buildPlayersData() {
+
             const playerMap = {};
 
             allLevels.forEach((lvl, idx) => {
-                const rank = idx + 1;
-                const victors = lvl.victors ? lvl.victors.map(v => v.trim()).filter(Boolean) : [];
-                const verifier = lvl.verifier ? lvl.verifier.trim() : null;
 
-                const participants = new Set([...victors, ...(verifier ? [verifier] : [])]);
+                const rank = idx + 1;
+
+                const victors = lvl.victors
+                    ? lvl.victors.map(v => v.trim()).filter(Boolean)
+                    : [];
+
+                const verifier = lvl.verifier
+                    ? lvl.verifier.trim()
+                    : null;
+
+                const participants = new Set([
+                    ...victors,
+                    ...(verifier ? [verifier] : [])
+                ]);
 
                 participants.forEach(pName => {
+
                     if (!playerMap[pName]) {
+
                         playerMap[pName] = {
                             name: pName,
                             completions: [],
@@ -780,51 +1169,104 @@
                             hardestRank: 9999
                         };
                     }
-                    playerMap[pName].completions.push({ level: lvl, rank: rank });
+
+                    playerMap[pName].completions.push({
+                        level: lvl,
+                        rank: rank
+                    });
                 });
             });
 
+
             allPlayers = Object.values(playerMap).map(p => {
+
                 let pts = 0;
                 let hardestLvl = null;
                 let hardestRank = 9999;
-                const beatenNames = p.completions.map(c => c.level.name.toLowerCase());
+
+                const beatenNames = p.completions.map(
+                    c => c.level.name.toLowerCase()
+                );
+
 
                 p.completions.forEach(c => {
+
+                    // Only ranked levels award normal points.
                     if (c.rank <= 150) {
                         pts += c.level.points;
                     }
+
                     if (c.rank < hardestRank) {
                         hardestRank = c.rank;
                         hardestLvl = c.level;
                     }
                 });
 
+
                 PACKS_DATA.forEach(pack => {
-                    const isCompleted = pack.levels.every(lName => beatenNames.includes(lName.toLowerCase()));
+
+                    const isCompleted = pack.levels.every(
+                        lName => beatenNames.includes(lName.toLowerCase())
+                    );
+
                     if (isCompleted) {
                         pts += pack.points;
                     }
                 });
 
+
                 return {
                     name: p.name,
                     points: pts,
                     hardest: hardestLvl,
-                    hardestRank: hardestRank <= 150 ? hardestRank : hardestRank
+                    hardestRank: hardestRank
                 };
             });
 
-            // Sort players alphabetically from 0 to Z
-            allPlayers.sort((a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: 'accent', numeric: true }));
+
+            /*
+             * PLAYER ORDER
+             *
+             * Players are now sorted by points, highest to lowest.
+             * If two players have the same amount of points,
+             * their names are used as a secondary sort.
+             */
+
+            allPlayers.sort((a, b) => {
+
+                if (b.points !== a.points) {
+                    return b.points - a.points;
+                }
+
+                return a.name.localeCompare(
+                    b.name,
+                    undefined,
+                    {
+                        sensitivity: 'accent',
+                        numeric: true
+                    }
+                );
+            });
         }
 
+
         function switchMode(mode) {
+
             currentMode = mode;
-            document.getElementById('tab-levels').classList.toggle('active', mode === 'levels');
-            document.getElementById('tab-players').classList.toggle('active', mode === 'players');
-            document.getElementById('level-search').placeholder = mode === 'levels' ? 'Search levels...' : 'Search players...';
+
+            document.getElementById('tab-levels')
+                .classList.toggle('active', mode === 'levels');
+
+            document.getElementById('tab-players')
+                .classList.toggle('active', mode === 'players');
+
+            document.getElementById('level-search').placeholder =
+                mode === 'levels'
+                    ? 'Search levels...'
+                    : 'Search players...';
+
             document.getElementById('level-search').value = '';
+
 
             if (mode === 'levels') {
                 renderSidebar(allLevels);
@@ -833,182 +1275,567 @@
             }
         }
 
+
         function renderSidebar(levelsToRender) {
+
             const side = document.getElementById('sidebar');
+
             side.innerHTML = "";
 
+
             if (levelsToRender.length === 0) {
-                side.innerHTML = `<div style="color: #666; font-size: 0.85rem; padding: 15px; text-align: center;">No levels found</div>`;
+
+                side.innerHTML = `
+                    <div style="
+                        color: #666;
+                        font-size: 0.85rem;
+                        padding: 15px;
+                        text-align: center;
+                    ">
+                        No levels found
+                    </div>
+                `;
+
                 return;
             }
 
+
             levelsToRender.forEach((lvl, idx) => {
+
                 const rank = allLevels.indexOf(lvl) + 1;
 
+                /*
+                 * SECTION HEADERS
+                 */
+
                 if (rank === 1) {
-                    const header = document.createElement('div');
-                    header.style.cssText = "font-weight: 900; font-size: 1.15rem; color: #ffffff; letter-spacing: 1.5px; text-transform: uppercase; padding: 10px 4px 6px; border-bottom: 1px solid rgba(255,255,255,0.15); margin-bottom: 6px;";
-                    header.innerText = "Main List";
-                    side.appendChild(header);
-                } else if (rank === 76) {
-                    const header = document.createElement('div');
-                    header.style.cssText = "font-weight: 900; font-size: 1.15rem; color: #ffffff; letter-spacing: 1.5px; text-transform: uppercase; padding: 18px 4px 6px; border-bottom: 1px solid rgba(255,255,255,0.15); margin-bottom: 6px;";
-                    header.innerText = "Extended List";
-                    side.appendChild(header);
-                } else if (rank === 151) {
-                    const legacyContainer = document.createElement('div');
-                    legacyContainer.style.cssText = "display: flex; align-items: center; justify-content: space-between; padding: 18px 4px 6px; border-bottom: 1px solid rgba(255,255,255,0.15); margin-bottom: 6px;";
 
                     const header = document.createElement('div');
-                    header.style.cssText = "font-weight: 900; font-size: 1.15rem; color: #ffffff; letter-spacing: 1.5px; text-transform: uppercase;";
+
+                    header.style.cssText = `
+                        font-weight: 900;
+                        font-size: 1.15rem;
+                        color: #ffffff;
+                        letter-spacing: 1.5px;
+                        text-transform: uppercase;
+                        padding: 10px 4px 6px;
+                        border-bottom: 1px solid rgba(255,255,255,0.15);
+                        margin-bottom: 6px;
+                    `;
+
+                    header.innerText = "Main List";
+
+                    side.appendChild(header);
+
+                } else if (rank === 76) {
+
+                    const header = document.createElement('div');
+
+                    header.style.cssText = `
+                        font-weight: 900;
+                        font-size: 1.15rem;
+                        color: #ffffff;
+                        letter-spacing: 1.5px;
+                        text-transform: uppercase;
+                        padding: 18px 4px 6px;
+                        border-bottom: 1px solid rgba(255,255,255,0.15);
+                        margin-bottom: 6px;
+                    `;
+
+                    header.innerText = "Extended List";
+
+                    side.appendChild(header);
+
+                } else if (rank === 151) {
+
+                    const legacyContainer = document.createElement('div');
+
+                    legacyContainer.style.cssText = `
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        padding: 18px 4px 6px;
+                        border-bottom: 1px solid rgba(255,255,255,0.15);
+                        margin-bottom: 6px;
+                    `;
+
+                    const header = document.createElement('div');
+
+                    header.style.cssText = `
+                        font-weight: 900;
+                        font-size: 1.15rem;
+                        color: #ffffff;
+                        letter-spacing: 1.5px;
+                        text-transform: uppercase;
+                    `;
+
                     header.innerText = "Legacy List";
 
+
                     const btn = document.createElement('a');
+
                     btn.href = "legacy.html";
                     btn.innerText = "VIEW ALL";
-                    btn.style.cssText = "font-size: 0.75rem; font-weight: 700; color: var(--accent); text-decoration: none; border: 1px solid var(--accent); padding: 4px 10px; border-radius: 4px; transition: all 0.2s ease;";
-                    btn.onmouseover = () => { btn.style.background = 'var(--accent)'; btn.style.color = '#000'; };
-                    btn.onmouseout = () => { btn.style.background = 'transparent'; btn.style.color = 'var(--accent)'; };
+
+                    btn.style.cssText = `
+                        font-size: 0.75rem;
+                        font-weight: 700;
+                        color: var(--accent);
+                        text-decoration: none;
+                        border: 1px solid var(--accent);
+                        padding: 4px 10px;
+                        border-radius: 4px;
+                        transition: all 0.2s ease;
+                    `;
+
+                    btn.onmouseover = () => {
+                        btn.style.background = 'var(--accent)';
+                        btn.style.color = '#000';
+                    };
+
+                    btn.onmouseout = () => {
+                        btn.style.background = 'transparent';
+                        btn.style.color = 'var(--accent)';
+                    };
+
 
                     legacyContainer.appendChild(header);
                     legacyContainer.appendChild(btn);
+
                     side.appendChild(legacyContainer);
                 }
 
-                const displayPts = rank > 150 ? "LEGACY" : `${lvl.points} PTS`;
-                const fpsBadge = lvl.fps ? `<span style="font-size:0.7rem; color:#ffcf4b; border: 1px solid rgba(255, 207, 75, 0.3); padding: 2px 6px; border-radius: 4px; margin-left: 6px; flex-shrink: 0;">${lvl.fps}</span>` : '';
 
-                const currentTier = allTiers.find(t => lvl.points >= t.minPoints && lvl.points <= t.maxPoints);
-                const imgSource = lvl.thumbnail ? lvl.thumbnail : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVOVERRIDES=";
+                /*
+                 * LEGACY LEVEL DISPLAY
+                 *
+                 * Legacy levels have NO numbered position.
+                 * They simply display "LEGACY".
+                 */
+
+                const isLegacy = rank > 150;
+
+                const displayPts = isLegacy
+                    ? "LEGACY"
+                    : `${lvl.points} PTS`;
+
+
+                const fpsBadge = lvl.fps
+                    ? `
+                        <span style="
+                            font-size:0.7rem;
+                            color:#ffcf4b;
+                            border:1px solid rgba(255, 207, 75, 0.3);
+                            padding:2px 6px;
+                            border-radius:4px;
+                            margin-left:6px;
+                            flex-shrink:0;
+                        ">
+                            ${lvl.fps}
+                        </span>
+                    `
+                    : '';
+
+
+                const currentTier = allTiers.find(
+                    t =>
+                        lvl.points >= t.minPoints &&
+                        lvl.points <= t.maxPoints
+                );
+
+
+                const imgSource = lvl.thumbnail
+                    ? lvl.thumbnail
+                    : "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
+
 
                 const div = document.createElement('div');
-                div.className = `list-item ${idx === 0 && currentMode === 'levels' ? 'active' : ''}`;
-                if (currentTier) {
-                    div.style.borderLeft = `5px solid ${currentTier.color}`;
+
+                div.className =
+                    `list-item ${idx === 0 && currentMode === 'levels' ? 'active' : ''}`;
+
+
+                if (currentTier && !isLegacy) {
+                    div.style.borderLeft =
+                        `5px solid ${currentTier.color}`;
                 }
 
+
                 div.innerHTML = `
-                    <div class="list-item-bg" style="background-image: url('${imgSource}');"></div>
+
+                    <div
+                        class="list-item-bg"
+                        style="background-image: url('${imgSource}');">
+                    </div>
+
                     <div class="list-item-overlay"></div>
+
                     <div class="list-item-content">
-                        <div class="rank" style="${currentTier ? 'color:' + currentTier.color : ''}">#${rank}</div>
-                        <img src="${imgSource}" class="thumb-mini">
+
+                        ${
+                            isLegacy
+                                ? `
+                                    <div
+                                        class="rank"
+                                        style="font-size:0.85rem; min-width:58px; color:#888;">
+                                        LEGACY
+                                    </div>
+                                  `
+                                : `
+                                    <div
+                                        class="rank"
+                                        style="${currentTier ? 'color:' + currentTier.color : ''}">
+                                        #${rank}
+                                    </div>
+                                  `
+                        }
+
+                        <img
+                            src="${imgSource}"
+                            class="thumb-mini"
+                            alt=""
+                        >
+
                         <div class="level-info-text">
+
                             <div class="level-title-row">
+
                                 <span>${lvl.name}</span>
+
                                 ${fpsBadge}
+
                             </div>
-                            <div class="level-pts-row">${displayPts}</div>
+
+                            <div class="level-pts-row">
+                                ${displayPts}
+                            </div>
+
                         </div>
+
                     </div>
                 `;
 
+
                 div.onclick = () => {
-                    document.querySelectorAll('.list-item').forEach(el => el.classList.remove('active'));
+
+                    document
+                        .querySelectorAll('.list-item')
+                        .forEach(el => el.classList.remove('active'));
+
                     div.classList.add('active');
+
                     update(lvl, rank);
                 };
 
+
                 side.appendChild(div);
             });
         }
 
+
         function renderPlayerSidebar(playersToRender) {
+
             const side = document.getElementById('sidebar');
+
             side.innerHTML = "";
 
+
             if (playersToRender.length === 0) {
-                side.innerHTML = `<div style="color: #666; font-size: 0.85rem; padding: 15px; text-align: center;">No players found</div>`;
-                return;
-            }
 
-            playersToRender.forEach((player, idx) => {
-                const imgSource = (player.hardest && player.hardest.thumbnail) ? player.hardest.thumbnail : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVOVERRIDES=";
-                const hardestText = player.hardest ? `#${player.hardestRank} ${player.hardest.name}` : "None";
-
-                const div = document.createElement('div');
-                div.className = `list-item`;
-
-                div.innerHTML = `
-                    <div class="list-item-bg" style="background-image: url('${imgSource}');"></div>
-                    <div class="list-item-overlay"></div>
-                    <div class="list-item-content">
-                        <div class="level-info-text">
-                            <div class="level-title-row">
-                                <span>${player.name}</span>
-                            </div>
-                            <div class="level-pts-row" style="color: var(--accent);">${player.points} PTS</div>
-                            <div style="font-size: 0.75rem; color: #aaa; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Hardest: ${hardestText}</div>
-                        </div>
+                side.innerHTML = `
+                    <div style="
+                        color: #666;
+                        font-size: 0.85rem;
+                        padding: 15px;
+                        text-align: center;
+                    ">
+                        No players found
                     </div>
                 `;
 
+                return;
+            }
+
+
+            playersToRender.forEach((player, idx) => {
+
+                /*
+                 * PLAYER POSITION
+                 *
+                 * Because allPlayers is sorted by points,
+                 * idx + 1 is their leaderboard position.
+                 */
+
+                const playerRank = idx + 1;
+
+
+                const imgSource =
+                    player.hardest && player.hardest.thumbnail
+                        ? player.hardest.thumbnail
+                        : "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
+
+
+                const hardestText = player.hardest
+                    ? `#${player.hardestRank} ${player.hardest.name}`
+                    : "None";
+
+
+                const div = document.createElement('div');
+
+                div.className = "list-item";
+
+
+                div.innerHTML = `
+
+                    <div
+                        class="list-item-bg"
+                        style="background-image: url('${imgSource}');">
+                    </div>
+
+                    <div class="list-item-overlay"></div>
+
+                    <div class="list-item-content">
+
+                        <!-- PLAYER LEADERBOARD POSITION -->
+
+                        <div
+                            class="rank"
+                            style="color: var(--accent);">
+                            #${playerRank}
+                        </div>
+
+
+                        <div class="level-info-text">
+
+                            <div class="level-title-row">
+                                <span>${player.name}</span>
+                            </div>
+
+                            <div
+                                class="level-pts-row"
+                                style="color: var(--accent);">
+                                ${player.points} PTS
+                            </div>
+
+                            <div style="
+                                font-size: 0.75rem;
+                                color: #aaa;
+                                margin-top: 2px;
+                                white-space: nowrap;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                            ">
+                                Hardest: ${hardestText}
+                            </div>
+
+                        </div>
+
+                    </div>
+                `;
+
+
                 div.onclick = () => {
-                    window.location.href = `player.html?name=${encodeURIComponent(player.name)}`;
+
+                    window.location.href =
+                        `player.html?name=${encodeURIComponent(player.name)}`;
+
                 };
+
 
                 side.appendChild(div);
             });
         }
 
+
         function handleSearch() {
-            const query = document.getElementById('level-search').value.toLowerCase().trim();
+
+            const query =
+                document
+                    .getElementById('level-search')
+                    .value
+                    .toLowerCase()
+                    .trim();
+
+
             if (currentMode === 'levels') {
-                const filtered = allLevels.filter(lvl => lvl.name.toLowerCase().includes(query));
+
+                const filtered = allLevels.filter(
+                    lvl => lvl.name.toLowerCase().includes(query)
+                );
+
                 renderSidebar(filtered);
+
             } else {
-                const filtered = allPlayers.filter(p => p.name.toLowerCase().includes(query));
+
+                /*
+                 * Filtering preserves the points order because
+                 * allPlayers is already sorted by points.
+                 */
+
+                const filtered = allPlayers.filter(
+                    p => p.name.toLowerCase().includes(query)
+                );
+
                 renderPlayerSidebar(filtered);
             }
         }
 
+
         function update(lvl, rank) {
-            document.getElementById('main-title').innerText = `#${rank} - ${lvl.name}`;
-            document.getElementById('s-creator').innerText = lvl.creator || 'Unknown';
 
-            document.getElementById('s-verifier').innerHTML = lvl.verifier 
-                ? `<a href="player.html?name=${encodeURIComponent(lvl.verifier)}" class="player-link">${lvl.verifier}</a>` 
-                : '-';
+            const isLegacy = rank > 150;
 
-            document.getElementById('s-id').innerText = lvl.id || '-';
-            document.getElementById('s-pts').innerText = rank > 150 ? "LEGACY" : lvl.points;
 
-            const imgSource = lvl.thumbnail ? lvl.thumbnail : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVOVERRIDES=";
-            document.getElementById('showcase-bg').style.backgroundImage = `url('${imgSource}')`;
+            /*
+             * Legacy levels don't show their numerical position.
+             */
 
-            const fpsCard = document.getElementById('fps-card');
+            document.getElementById('main-title').innerText =
+                isLegacy
+                    ? `LEGACY - ${lvl.name}`
+                    : `#${rank} - ${lvl.name}`;
+
+
+            document.getElementById('s-creator').innerText =
+                lvl.creator || 'Unknown';
+
+
+            document.getElementById('s-verifier').innerHTML =
+                lvl.verifier
+                    ? `
+                        <a
+                            href="player.html?name=${encodeURIComponent(lvl.verifier)}"
+                            class="player-link">
+                            ${lvl.verifier}
+                        </a>
+                    `
+                    : '-';
+
+
+            document.getElementById('s-id').innerText =
+                lvl.id || '-';
+
+
+            document.getElementById('s-pts').innerText =
+                isLegacy
+                    ? "LEGACY"
+                    : lvl.points;
+
+
+            const imgSource = lvl.thumbnail
+                ? lvl.thumbnail
+                : "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
+
+
+            document.getElementById('showcase-bg').style.backgroundImage =
+                `url('${imgSource}')`;
+
+
+            const fpsCard =
+                document.getElementById('fps-card');
+
+
             if (lvl.fps) {
-                document.getElementById('s-fps').innerText = lvl.fps;
+
+                document.getElementById('s-fps').innerText =
+                    lvl.fps;
+
                 fpsCard.style.display = "flex";
+
             } else {
+
                 fpsCard.style.display = "none";
             }
 
-            const vid = document.getElementById('main-vid');
+
+            /*
+             * VIDEO
+             */
+
+            const vid =
+                document.getElementById('main-vid');
+
+
             if (lvl.video) {
+
                 if (lvl.video.includes('medal')) {
-                    vid.src = `https://medal.tv/clip/${lvl.video.split('/').pop()}`;
-                } else if (lvl.video.includes('youtube.com/watch?v=')) {
-                    const urlParams = new URLSearchParams(lvl.video.split('?')[1]);
-                    vid.src = `https://www.youtube.com/embed/${urlParams.get('v')}`;
-                } else if (lvl.video.includes('youtu.be/')) {
-                    vid.src = `https://www.youtube.com/embed/${lvl.video.split('/').pop()}`;
+
+                    vid.src =
+                        `https://medal.tv/clip/${lvl.video.split('/').pop()}`;
+
+                } else if (
+                    lvl.video.includes('youtube.com/watch')
+                ) {
+
+                    const urlParams =
+                        new URLSearchParams(
+                            lvl.video.split('?')[1]
+                        );
+
+                    const videoId =
+                        urlParams.get('v');
+
+                    vid.src =
+                        `https://www.youtube.com/embed/${videoId}`;
+
+                } else if (
+                    lvl.video.includes('youtu.be/')
+                ) {
+
+                    vid.src =
+                        `https://www.youtube.com/embed/${lvl.video.split('/').pop()}`;
+
                 } else {
-                    vid.src = `https://www.youtube.com/embed/${lvl.video}`;
+
+                    vid.src =
+                        `https://www.youtube.com/embed/${lvl.video}`;
                 }
+
             } else {
+
                 vid.src = '';
             }
 
-            const validVictors = lvl.victors ? lvl.victors.filter(v => v.trim() !== "") : [];
 
-            const vCont = document.getElementById('v-cont');
-            vCont.innerHTML = validVictors.length > 0
-                ? validVictors.map(v => `<a href="player.html?name=${encodeURIComponent(v)}" class="tag player-link">${v}</a>`).join('')
-                : "<span style='color:#666; font-size:0.85rem'>No victors yet.</span>";
+            /*
+             * VICTORS
+             */
+
+            const validVictors =
+                lvl.victors
+                    ? lvl.victors.filter(v => v.trim() !== "")
+                    : [];
+
+
+            const vCont =
+                document.getElementById('v-cont');
+
+
+            vCont.innerHTML =
+                validVictors.length > 0
+
+                    ? validVictors
+                        .map(v => `
+                            <a
+                                href="player.html?name=${encodeURIComponent(v)}"
+                                class="tag player-link">
+                                ${v}
+                            </a>
+                        `)
+                        .join('')
+
+                    : `
+                        <span style="
+                            color:#666;
+                            font-size:0.85rem;">
+                            No victors yet.
+                        </span>
+                    `;
         }
 
+
         init();
+
     </script>
 </body>
 </html>
