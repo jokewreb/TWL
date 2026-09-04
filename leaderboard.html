@@ -346,8 +346,12 @@
         try {
 
             const [levelsResponse, packsResponse] = await Promise.all([
-                fetch(`levels.json?v=${Date.now()}`),
-                fetch(`packs.json?v=${Date.now()}`)
+                fetch(`levels.json?v=${Date.now()}`, {
+                    cache: "no-store"
+                }),
+                fetch(`packs.json?v=${Date.now()}`, {
+                    cache: "no-store"
+                })
             ]);
 
             const data = await levelsResponse.json();
