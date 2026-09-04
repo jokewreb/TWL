@@ -131,6 +131,26 @@
     "victors": []
   },
   { 
+    "name": "Deep Dive", 
+    "points": 337, 
+    "creator": "puffiballGD", 
+    "verifier": "puffiballGD", 
+    "id": "148172908", 
+    "video": "qFKuSZrqH6g", 
+    "thumbnail": "Thumbnail/deep.png", 
+    "victors": []
+  },
+  { 
+    "name": "Denoumend Nerf", 
+    "points": 190, 
+    "creator": "sevehweveh", 
+    "verifier": "sevehweveh", 
+    "id": "148251887", 
+    "video": "esqnRPsfP5g", 
+    "thumbnail": "Thumbnail/denom.png", 
+    "victors": []
+  },
+  { 
     "name": "avrg sleep experience", 
     "points": 228, 
     "creator": "puffiballgd", 
@@ -1396,7 +1416,7 @@
     "creator": "sevehweveh", 
     "verifier": "ChillTipTop", 
     "id": "147448660", 
-    "video": "IXV49zzoRg", 
+    "video": "nGwK5tubMtM", 
     "thumbnail": "Thumbnail/sh1awase.png", 
     "victors": ["Karen","sevehweveh","MrBazooka"]
   },
