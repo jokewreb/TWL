@@ -279,34 +279,57 @@
 </div>
 
 <script>
+
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
 
     let parts = [];
 
     function initCanvas() {
+
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
         parts = [];
 
         for (let i = 0; i < 80; i++) {
+
             parts.push({
                 x: Math.random() * canvas.width,
                 y: Math.random() * canvas.height,
                 s: Math.random() * 2,
                 sp: Math.random() * 0.4 + 0.1
             });
+
         }
+
     }
 
+
     function anim() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        ctx.clearRect(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
 
         parts.forEach(p => {
-            ctx.fillStyle = "rgba(255,65,65,0.25)";
+
+            ctx.fillStyle =
+                "rgba(255,65,65,0.25)";
+
             ctx.beginPath();
-            ctx.arc(p.x, p.y, p.s, 0, Math.PI * 2);
+
+            ctx.arc(
+                p.x,
+                p.y,
+                p.s,
+                0,
+                Math.PI * 2
+            );
+
             ctx.fill();
 
             p.y -= p.sp;
@@ -314,30 +337,58 @@
             if (p.y < 0) {
                 p.y = canvas.height;
             }
+
         });
 
         requestAnimationFrame(anim);
+
     }
 
-    window.addEventListener('resize', initCanvas);
+
+    window.addEventListener(
+        'resize',
+        initCanvas
+    );
 
     initCanvas();
     anim();
 
 
     function getTierClass(tier) {
-        if (!tier) return 'tier-default';
 
-        const t = tier.toLowerCase();
+        if (!tier) {
+            return 'tier-default';
+        }
 
-        if (t.includes('ruby')) return 'tier-ruby';
-        if (t.includes('diamond')) return 'tier-diamond';
-        if (t.includes('platinum')) return 'tier-platinum';
-        if (t.includes('gold')) return 'tier-gold';
-        if (t.includes('silver')) return 'tier-silver';
-        if (t.includes('bronze')) return 'tier-bronze';
+        const t =
+            String(tier).toLowerCase();
+
+        if (t.includes('ruby')) {
+            return 'tier-ruby';
+        }
+
+        if (t.includes('diamond')) {
+            return 'tier-diamond';
+        }
+
+        if (t.includes('platinum')) {
+            return 'tier-platinum';
+        }
+
+        if (t.includes('gold')) {
+            return 'tier-gold';
+        }
+
+        if (t.includes('silver')) {
+            return 'tier-silver';
+        }
+
+        if (t.includes('bronze')) {
+            return 'tier-bronze';
+        }
 
         return 'tier-default';
+
     }
 
 
@@ -345,381 +396,723 @@
 
         try {
 
-            const [levelsResponse, packsResponse] = await Promise.all([
-                fetch(`levels.json?v=${Date.now()}`, {
-                    cache: "no-store"
-                }),
-                fetch(`packs.json?v=${Date.now()}`, {
-                    cache: "no-store"
-                })
+            const [
+                levelsResponse,
+                packsResponse
+            ] = await Promise.all([
+
+                fetch(
+                    `levels.json?v=${Date.now()}`,
+                    {
+                        cache: "no-store"
+                    }
+                ),
+
+                fetch(
+                    `packs.json?v=${Date.now()}`,
+                    {
+                        cache: "no-store"
+                    }
+                )
+
             ]);
 
-            const data = await levelsResponse.json();
-            const packs = await packsResponse.json();
+
+            const data =
+                await levelsResponse.json();
+
+            const packs =
+                await packsResponse.json();
+
+
+            // ==========================================
+            // SORT LEVELS
+            // ==========================================
+
+            data.sort(
+                (a, b) =>
+                    Number(b.points || 0) -
+                    Number(a.points || 0)
+            );
+
+
+            // ==========================================
+            // PLAYER DATA
+            // ==========================================
 
             const scores = {};
             const playerLevels = {};
             const playerHardest = {};
-
-            const clean = (n) => n.replace(/\./g, '').trim();
-
-
-            // Sort levels exactly like player.html
-            data.sort((a, b) =>
-                Number(b.points || 0) - Number(a.points || 0)
-            );
+            const displayNames = {};
 
 
             /*
-             * CALCULATE PLAYER POINTS
+             * IMPORTANT:
              *
-             * This follows the same logic as player.html:
+             * Player.html compares names
+             * case-insensitively.
              *
-             * A player gets a level's points if they are either
-             * a victor OR the verifier.
-             *
-             * If they are both, the level is only counted ONCE.
-             *
-             * Legacy levels (rank > 150) give zero points.
+             * The leaderboard now does the
+             * exact same thing.
              */
 
-            data.forEach((level, index) => {
+            function normalizeName(name) {
 
-                const rank = index + 1;
+                return String(name || '')
+                    .replace(/\./g, '')
+                    .trim()
+                    .toLowerCase();
 
-                const pointsToAward =
+            }
+
+
+            function registerPlayer(name) {
+
+                const key =
+                    normalizeName(name);
+
+                if (!key) {
+                    return null;
+                }
+
+
+                if (!displayNames[key]) {
+
+                    displayNames[key] =
+                        String(name)
+                            .replace(/\./g, '')
+                            .trim();
+
+                }
+
+
+                if (!playerLevels[key]) {
+
+                    playerLevels[key] =
+                        new Set();
+
+                }
+
+
+                return key;
+
+            }
+
+
+            function addCompletedLevel(
+                playerName,
+                level
+            ) {
+
+                const key =
+                    registerPlayer(playerName);
+
+                if (!key) {
+                    return;
+                }
+
+
+                /*
+                 * Record the completed level
+                 * exactly once.
+                 */
+
+                playerLevels[key].add(
+                    String(level.name)
+                        .toLowerCase()
+                );
+
+
+                /*
+                 * Only the top 150 levels
+                 * award points.
+                 */
+
+                const rank =
+                    data.indexOf(level) + 1;
+
+
+                const points =
                     rank <= 150
                         ? Number(level.points || 0)
                         : 0;
 
 
-                const verifier =
-                    level.verifier
-                        ? clean(level.verifier)
-                        : null;
-
-
-                const victors =
-                    Array.isArray(level.victors)
-                        ? level.victors.map(v => clean(v))
-                        : [];
-
-
-                const players = new Set();
-
-
-                // Add verifier
-                if (verifier) {
-                    players.add(verifier);
-                }
-
-
-                // Add all victors
-                victors.forEach(victor => {
-                    players.add(victor);
-                });
+                scores[key] =
+                    (scores[key] || 0) +
+                    points;
 
 
                 /*
-                 * Every player who completed/verified this level
-                 * receives the points exactly once.
+                 * Hardest level
                  */
 
-                players.forEach(player => {
+                if (
+                    !playerHardest[key] ||
+                    Number(level.points || 0) >
+                    Number(
+                        playerHardest[key].points || 0
+                    )
+                ) {
 
-                    if (!playerLevels[player]) {
-                        playerLevels[player] = new Set();
+                    playerHardest[key] =
+                        level;
+
+                }
+
+            }
+
+
+            // ==========================================
+            // PROCESS EVERY LEVEL
+            // ==========================================
+
+            data.forEach(level => {
+
+                /*
+                 * Create ONE set of players who
+                 * completed/verified this level.
+                 *
+                 * This is the same:
+                 *
+                 * hasBeaten || isVerifier
+                 *
+                 * logic used by player.html.
+                 */
+
+                const completedBy =
+                    new Set();
+
+
+                // --------------------------
+                // VERIFIER
+                // --------------------------
+
+                if (level.verifier) {
+
+                    const verifierKey =
+                        normalizeName(
+                            level.verifier
+                        );
+
+                    if (verifierKey) {
+
+                        completedBy.add(
+                            verifierKey
+                        );
+
+                        registerPlayer(
+                            level.verifier
+                        );
+
                     }
 
+                }
 
-                    playerLevels[player].add(
-                        level.name.toLowerCase()
+
+                // --------------------------
+                // VICTORS
+                // --------------------------
+
+                if (
+                    Array.isArray(
+                        level.victors
+                    )
+                ) {
+
+                    level.victors.forEach(
+                        victor => {
+
+                            const victorKey =
+                                normalizeName(
+                                    victor
+                                );
+
+                            if (!victorKey) {
+                                return;
+                            }
+
+
+                            completedBy.add(
+                                victorKey
+                            );
+
+
+                            registerPlayer(
+                                victor
+                            );
+
+                        }
                     );
 
-
-                    if (
-                        !playerHardest[player] ||
-                        Number(level.points || 0) >
-                        Number(playerHardest[player].points || 0)
-                    ) {
-                        playerHardest[player] = level;
-                    }
+                }
 
 
-                    scores[player] =
-                        (scores[player] || 0) + pointsToAward;
+                /*
+                 * Now award the level ONCE
+                 * to every player who is either
+                 * verifier or victor.
+                 */
 
-                });
+                completedBy.forEach(
+                    playerKey => {
 
-            });
+                        if (
+                            !playerLevels[playerKey]
+                        ) {
+
+                            playerLevels[playerKey] =
+                                new Set();
+
+                        }
 
 
-            /*
-             * PACK POINTS
-             *
-             * Exactly the same pack system as player.html.
-             */
-
-            Object.keys(playerLevels).forEach(player => {
-
-                const completedLevels = playerLevels[player];
-
-                packs.forEach(pack => {
-
-                    const completed =
-                        pack.levels.every(levelName =>
-                            completedLevels.has(
-                                levelName.toLowerCase()
-                            )
+                        playerLevels[playerKey].add(
+                            String(level.name)
+                                .toLowerCase()
                         );
 
 
-                    if (completed) {
+                        const rank =
+                            data.indexOf(level) + 1;
 
-                        scores[player] =
-                            (scores[player] || 0) +
-                            Number(pack.points || 0);
+
+                        const points =
+                            rank <= 150
+                                ? Number(
+                                    level.points || 0
+                                )
+                                : 0;
+
+
+                        scores[playerKey] =
+                            (
+                                scores[playerKey] ||
+                                0
+                            ) + points;
+
+
+                        if (
+                            !playerHardest[playerKey] ||
+                            Number(level.points || 0) >
+                            Number(
+                                playerHardest[playerKey]
+                                    .points || 0
+                            )
+                        ) {
+
+                            playerHardest[playerKey] =
+                                level;
+
+                        }
 
                     }
-
-                });
+                );
 
             });
 
 
-            /*
-             * SORT
-             */
+            // ==========================================
+            // PROCESS PACKS
+            // ==========================================
+
+            Object.keys(playerLevels).forEach(
+                playerKey => {
+
+                    const completedLevels =
+                        playerLevels[playerKey];
+
+
+                    packs.forEach(pack => {
+
+                        if (
+                            !Array.isArray(
+                                pack.levels
+                            )
+                        ) {
+
+                            return;
+
+                        }
+
+
+                        const completed =
+                            pack.levels.every(
+                                levelName =>
+                                    completedLevels.has(
+                                        String(
+                                            levelName
+                                        ).toLowerCase()
+                                    )
+                            );
+
+
+                        if (completed) {
+
+                            scores[playerKey] =
+                                (
+                                    scores[playerKey] ||
+                                    0
+                                ) +
+                                Number(
+                                    pack.points || 0
+                                );
+
+                        }
+
+                    });
+
+                }
+            );
+
+
+            // ==========================================
+            // CONVERT TO DISPLAY NAMES
+            // ==========================================
 
             const sorted =
-                Object.entries(scores).sort((a, b) => {
+                Object.keys(scores)
+                    .map(key => ({
 
-                    if (b[1] !== a[1]) {
-                        return b[1] - a[1];
-                    }
+                        key: key,
 
-                    return a[0].localeCompare(b[0]);
+                        name:
+                            displayNames[key] ||
+                            key,
 
-                });
+                        points:
+                            scores[key]
+
+                    }))
+                    .sort((a, b) => {
+
+                        if (
+                            b.points !==
+                            a.points
+                        ) {
+
+                            return (
+                                b.points -
+                                a.points
+                            );
+
+                        }
+
+                        return a.name.localeCompare(
+                            b.name
+                        );
+
+                    });
 
 
-            /*
-             * TOP 3
-             */
+            // ==========================================
+            // TOP 3
+            // ==========================================
 
             const podiumContainer =
-                document.getElementById('podium-data');
+                document.getElementById(
+                    'podium-data'
+                );
+
 
             const top3 =
                 sorted.slice(0, 3);
 
+
             let podiumHTML = "";
 
 
-            top3.forEach(([name, pts], index) => {
+            top3.forEach(
+                (player, index) => {
 
-                const rank = index + 1;
-
-                const hardest =
-                    playerHardest[name];
-
-
-                const bgThumb =
-                    hardest && hardest.thumbnail
-                        ? hardest.thumbnail
-                        : '';
+                    const rank =
+                        index + 1;
 
 
-                const hardestName =
-                    hardest
-                        ? hardest.name
-                        : '-';
+                    const hardest =
+                        playerHardest[
+                            player.key
+                        ];
 
 
-                const hardestClass =
-                    hardest
-                        ? getTierClass(hardest.tier)
-                        : 'tier-default';
+                    const bgThumb =
+                        hardest &&
+                        hardest.thumbnail
+                            ? hardest.thumbnail
+                            : '';
 
 
-                const compCount =
-                    playerLevels[name]
-                        ? playerLevels[name].size
-                        : 0;
+                    const hardestName =
+                        hardest
+                            ? hardest.name
+                            : '-';
 
 
-                const crown =
-                    rank === 1
-                        ? '👑'
-                        : rank === 2
-                            ? '🥈'
-                            : '🥉';
+                    const hardestClass =
+                        hardest
+                            ? getTierClass(
+                                hardest.tier
+                            )
+                            : 'tier-default';
 
 
-                podiumHTML += `
-                    <div class="pod-card rank-${rank}">
+                    const compCount =
+                        playerLevels[
+                            player.key
+                        ]
+                            ? playerLevels[
+                                player.key
+                            ].size
+                            : 0;
 
-                        ${
-                            bgThumb
-                                ? `<div class="pod-bg" style="background-image:url('${bgThumb}');"></div>`
-                                : ''
-                        }
 
-                        <div class="pod-content">
+                    const crown =
+                        rank === 1
+                            ? '👑'
+                            : rank === 2
+                                ? '🥈'
+                                : '🥉';
 
-                            <span class="crown-icon">${crown}</span>
 
-                            <a
-                                href="player.html?name=${encodeURIComponent(name)}"
-                                class="pod-name"
+                    podiumHTML += `
+
+                        <div
+                            class="pod-card rank-${rank}"
+                        >
+
+                            ${
+                                bgThumb
+                                    ? `
+                                        <div
+                                            class="pod-bg"
+                                            style="
+                                                background-image:url('${bgThumb}');
+                                            "
+                                        ></div>
+                                    `
+                                    : ''
+                            }
+
+                            <div
+                                class="pod-content"
                             >
-                                ${name}
-                            </a>
 
-                            <div class="pod-pts">
-                                ${pts.toLocaleString()} PTS
-                            </div>
-
-                            <div class="pod-stats">
-
-                                <span>
-                                    <strong>${compCount}</strong> completed
+                                <span
+                                    class="crown-icon"
+                                >
+                                    ${crown}
                                 </span>
 
-                                <span>
-                                    Hardest:
-                                    <strong class="${hardestClass}">
-                                        ${hardestName}
-                                    </strong>
-                                </span>
+
+                                <a
+                                    href="player.html?name=${encodeURIComponent(player.name)}"
+                                    class="pod-name"
+                                >
+                                    ${player.name}
+                                </a>
+
+
+                                <div
+                                    class="pod-pts"
+                                >
+                                    ${player.points.toLocaleString()}
+                                    PTS
+                                </div>
+
+
+                                <div
+                                    class="pod-stats"
+                                >
+
+                                    <span>
+                                        <strong>
+                                            ${compCount}
+                                        </strong>
+                                        completed
+                                    </span>
+
+
+                                    <span>
+                                        Hardest:
+
+                                        <strong
+                                            class="${hardestClass}"
+                                        >
+                                            ${hardestName}
+                                        </strong>
+                                    </span>
+
+                                </div>
 
                             </div>
 
                         </div>
 
-                    </div>
-                `;
+                    `;
 
-            });
+                }
+            );
 
 
             podiumContainer.innerHTML =
                 podiumHTML;
 
 
-            /*
-             * REMAINING PLAYERS
-             */
+            // ==========================================
+            // REMAINING PLAYERS
+            // ==========================================
 
             const table =
-                document.getElementById('lb-data');
+                document.getElementById(
+                    'lb-data'
+                );
+
+
+            table.innerHTML = "";
 
 
             const remaining =
                 sorted.slice(3);
 
 
-            remaining.forEach(([name, pts], i) => {
+            remaining.forEach(
+                (player, i) => {
 
-                const rank =
-                    i + 4;
-
-
-                const hardest =
-                    playerHardest[name];
+                    const rank =
+                        i + 4;
 
 
-                const bgThumb =
-                    hardest && hardest.thumbnail
-                        ? hardest.thumbnail
-                        : '';
+                    const hardest =
+                        playerHardest[
+                            player.key
+                        ];
 
 
-                const hardestName =
-                    hardest
-                        ? hardest.name
-                        : '-';
+                    const bgThumb =
+                        hardest &&
+                        hardest.thumbnail
+                            ? hardest.thumbnail
+                            : '';
 
 
-                const hardestClass =
-                    hardest
-                        ? getTierClass(hardest.tier)
-                        : 'tier-default';
+                    const hardestName =
+                        hardest
+                            ? hardest.name
+                            : '-';
 
 
-                const compCount =
-                    playerLevels[name]
-                        ? playerLevels[name].size
-                        : 0;
+                    const hardestClass =
+                        hardest
+                            ? getTierClass(
+                                hardest.tier
+                            )
+                            : 'tier-default';
 
 
-                const profileUrl =
-                    `player.html?name=${encodeURIComponent(name)}`;
+                    const compCount =
+                        playerLevels[
+                            player.key
+                        ]
+                            ? playerLevels[
+                                player.key
+                            ].size
+                            : 0;
 
 
-                const bgStyle =
-                    bgThumb
-                        ? `
-                            background:
-                            linear-gradient(
-                                90deg,
-                                rgba(20,22,30,0.92) 0%,
-                                rgba(20,22,30,0.8) 100%
-                            ),
-                            url('${bgThumb}');
-
-                            background-size:cover;
-                            background-position:center;
-                        `
-                        : '';
+                    const profileUrl =
+                        `player.html?name=${encodeURIComponent(player.name)}`;
 
 
-                table.innerHTML += `
+                    const bgStyle =
+                        bgThumb
+                            ? `
+                                background:
+                                linear-gradient(
+                                    90deg,
+                                    rgba(20,22,30,0.92) 0%,
+                                    rgba(20,22,30,0.8) 100%
+                                ),
+                                url('${bgThumb}');
 
-                    <tr
-                        style="${bgStyle}"
-                        onclick="window.location.href='${profileUrl}'"
-                    >
+                                background-size:cover;
+                                background-position:center;
+                            `
+                            : '';
 
-                        <td>#${rank}</td>
 
-                        <td class="col-player">
+                    table.innerHTML += `
 
-                            <div class="player-wrapper">
+                        <tr
+                            style="${bgStyle}"
+                            onclick="window.location.href='${profileUrl}'"
+                        >
 
-                                <span class="player-title">
-                                    ${name}
-                                </span>
+                            <td>
+                                #${rank}
+                            </td>
 
-                                <div class="sub-stat">
-                                    ${compCount} completed
+
+                            <td
+                                class="col-player"
+                            >
+
+                                <div
+                                    class="player-wrapper"
+                                >
+
+                                    <span
+                                        class="player-title"
+                                    >
+                                        ${player.name}
+                                    </span>
+
+
+                                    <div
+                                        class="sub-stat"
+                                    >
+                                        ${compCount}
+                                        completed
+                                    </div>
+
                                 </div>
 
-                            </div>
+                            </td>
 
-                        </td>
 
-                        <td class="col-pts">
-                            ${pts.toLocaleString()} PTS
-                        </td>
+                            <td
+                                class="col-pts"
+                            >
+                                ${player.points.toLocaleString()}
+                                PTS
+                            </td>
 
-                        <td class="col-hardest">
 
-                            <span style="opacity:0.5;">
-                                Hardest:
-                            </span>
+                            <td
+                                class="col-hardest"
+                            >
 
-                            <strong class="${hardestClass}">
-                                ${hardestName}
-                            </strong>
+                                <span
+                                    style="opacity:0.5;"
+                                >
+                                    Hardest:
+                                </span>
 
-                        </td>
 
-                    </tr>
+                                <strong
+                                    class="${hardestClass}"
+                                >
+                                    ${hardestName}
+                                </strong>
 
-                `;
+                            </td>
 
-            });
+                        </tr>
+
+                    `;
+
+                }
+            );
+
 
         } catch (error) {
 
@@ -728,18 +1121,33 @@
                 error
             );
 
-            document.getElementById('lb-data').innerHTML = `
+
+            document.getElementById(
+                'lb-data'
+            ).innerHTML = `
+
                 <tr>
-                    <td colspan="4"
-                        style="text-align:center;color:#ff4141;padding:30px;">
-                        ERROR LOADING LEADERBOARD DATA
+
+                    <td
+                        colspan="4"
+                        style="
+                            text-align:center;
+                            color:#ff4141;
+                            padding:30px;
+                        "
+                    >
+                        ERROR LOADING
+                        LEADERBOARD DATA
                     </td>
+
                 </tr>
+
             `;
 
         }
 
     }
+
 
     load();
 
