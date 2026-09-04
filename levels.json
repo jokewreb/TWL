@@ -141,6 +141,16 @@
     "victors": []
   },
   { 
+    "name": "ChefLimeWaveBasic FINALE", 
+    "points": 53, 
+    "creator": "ChefLime", 
+    "verifier": "ChefLime", 
+    "id": "148287274", 
+    "video": "https://youtu.be/fAe6xB6gnN8", 
+    "thumbnail": "Thumbnail/clwbf.png", 
+    "victors": []
+  },
+  { 
     "name": "Deep Dive", 
     "points": 337, 
     "creator": "puffiballGD", 
@@ -1262,7 +1272,7 @@
   },
   { 
     "name": "Dihmountain Is Heck", 
-    "points": 53, 
+    "points": 54, 
     "creator": "ChefLime", 
     "verifier": "ChefLime", 
     "id": "141052107", 
