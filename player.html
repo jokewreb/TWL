@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>THE WAVE LIST - PLAYER PROFILE</title>
     <link rel="icon" type="image/png" href="logo.ico">
+
     <style>
         :root {
             --accent: #47e5bc;
@@ -23,11 +24,13 @@
             scrollbar-color: rgba(255, 255, 255, 0.15) #0b0c10;
         }
 
-        html, body {
+        html,
+        body {
             width: 100%;
             min-height: 100vh;
             background-color: var(--bg-dark);
-            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: 'Inter', system-ui, -apple-system,
+                BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             color: #fff;
             overflow-x: hidden;
             overflow-y: auto !important;
@@ -124,7 +127,11 @@
         .profile-bg-overlay {
             position: absolute;
             inset: 0;
-            background: radial-gradient(circle at center, rgba(11, 12, 16, 0.5) 0%, rgba(11, 12, 16, 0.85) 100%);
+            background: radial-gradient(
+                circle at center,
+                rgba(11, 12, 16, 0.5) 0%,
+                rgba(11, 12, 16, 0.85) 100%
+            );
             z-index: 0;
             pointer-events: none;
         }
@@ -177,10 +184,10 @@
         }
 
         .section-title {
-            font-size: 1.35rem; 
-            font-weight: 800; 
-            margin: 45px 0 20px 0; 
-            text-transform: uppercase; 
+            font-size: 1.35rem;
+            font-weight: 800;
+            margin: 45px 0 20px 0;
+            text-transform: uppercase;
             letter-spacing: 1.5px;
             color: #fff;
             border-left: 4px solid var(--accent);
@@ -230,8 +237,8 @@
             position: absolute;
             inset: 0;
             background: linear-gradient(
-                135deg, 
-                rgba(11, 12, 16, 0.93) 0%, 
+                135deg,
+                rgba(11, 12, 16, 0.93) 0%,
                 rgba(11, 12, 16, 0.75) 100%
             );
             z-index: 1;
@@ -272,380 +279,1174 @@
             opacity: 0.2;
         }
 
-        .tier-PLATINUM { border-color: #e5e4e2 !important; color: #e5e4e2 !important; }
-        .tier-DIAMOND { border-color: #b9f2ff !important; color: #b9f2ff !important; }
-        .tier-SILVER { border-color: #c0c0c0 !important; color: #c0c0c0 !important; }
-        .tier-BRONZE { border-color: #cd7f32 !important; color: #cd7f32 !important; }
+        .tier-PLATINUM {
+            border-color: #e5e4e2 !important;
+            color: #e5e4e2 !important;
+        }
+
+        .tier-DIAMOND {
+            border-color: #b9f2ff !important;
+            color: #b9f2ff !important;
+        }
+
+        .tier-SILVER {
+            border-color: #c0c0c0 !important;
+            color: #c0c0c0 !important;
+        }
+
+        .tier-BRONZE {
+            border-color: #cd7f32 !important;
+            color: #cd7f32 !important;
+        }
 
         @media (max-width: 768px) {
+
+            nav {
+                padding: 14px 18px;
+            }
+
+            .nav-logo {
+                font-size: 1.05rem;
+            }
+
+            .nav-link {
+                font-size: 0.72rem;
+                padding: 6px 8px;
+            }
+
+            .profile-container {
+                margin: 25px auto;
+                padding: 0 14px;
+            }
+
+            .profile-header {
+                padding: 30px 18px;
+                margin-bottom: 35px;
+            }
+
             .profile-name {
                 font-size: 2.2rem;
             }
+
             .completed-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 1.15rem;
             }
         }
     </style>
 </head>
+
 <body>
+
     <canvas id="bg-canvas"></canvas>
 
     <nav>
-        <div class="nav-logo" onclick="window.location.href='index.html'">THE WAVE LIST</div>
+        <div
+            class="nav-logo"
+            onclick="window.location.href='index.html'"
+        >
+            THE WAVE LIST
+        </div>
+
         <div>
-            <a href="index.html" class="nav-link">BACK TO LIST</a>
+            <a
+                href="index.html"
+                class="nav-link"
+            >
+                BACK TO LIST
+            </a>
         </div>
     </nav>
 
+
     <div class="profile-container">
+
         <div class="profile-header">
-            <div id="profileBg" class="profile-bg-layer"></div>
+
+            <div
+                id="profileBg"
+                class="profile-bg-layer"
+            ></div>
+
             <div class="profile-bg-overlay"></div>
+
             <div class="profile-header-content">
-                <h1 id="playerNameHeading" class="profile-name">LOADING...</h1>
+
+                <h1
+                    id="playerNameHeading"
+                    class="profile-name"
+                >
+                    LOADING...
+                </h1>
+
                 <div class="stats-badges-container">
-                    <div id="totalPoints" class="stats-badge points-badge">0 PTS</div>
-                    <div id="completionCount" class="stats-badge">0 COMPLETIONS</div>
-                    <div id="hardestLevel" class="stats-badge hardest-badge" style="display: none;">HARDEST: NONE</div>
+
+                    <div
+                        id="totalPoints"
+                        class="stats-badge points-badge"
+                    >
+                        0 PTS
+                    </div>
+
+                    <div
+                        id="completionCount"
+                        class="stats-badge"
+                    >
+                        0 COMPLETIONS
+                    </div>
+
+                    <div
+                        id="hardestLevel"
+                        class="stats-badge hardest-badge"
+                        style="display:none;"
+                    >
+                        HARDEST: NONE
+                    </div>
+
                 </div>
+
             </div>
+
         </div>
 
-        <h2 class="section-title">Completed Packs</h2>
-        <div id="packsGrid" class="completed-grid"></div>
 
-        <h2 class="section-title">Completed Levels</h2>
-        <div id="completedGrid" class="completed-grid"></div>
+        <h2 class="section-title">
+            Completed Packs
+        </h2>
 
-        <h2 class="section-title">Created Levels</h2>
-        <div id="createdGrid" class="completed-grid"></div>
+        <div
+            id="packsGrid"
+            class="completed-grid"
+        ></div>
 
-        <h2 class="section-title" style="border-color: #555;">Non-Completed Levels</h2>
-        <div id="unbeatenGrid" class="completed-grid"></div>
+
+        <h2 class="section-title">
+            Completed Levels
+        </h2>
+
+        <div
+            id="completedGrid"
+            class="completed-grid"
+        ></div>
+
+
+        <h2 class="section-title">
+            Created Levels
+        </h2>
+
+        <div
+            id="createdGrid"
+            class="completed-grid"
+        ></div>
+
+
+        <h2
+            class="section-title"
+            style="border-color:#555;"
+        >
+            Non-Completed Levels
+        </h2>
+
+        <div
+            id="unbeatenGrid"
+            class="completed-grid"
+        ></div>
+
     </div>
 
+
     <script>
-        // Particle Background Generator
-        const canvas = document.getElementById('bg-canvas');
-        const ctx = canvas.getContext('2d');
+
+        // ==========================================
+        // PARTICLE BACKGROUND
+        // ==========================================
+
+        const canvas =
+            document.getElementById('bg-canvas');
+
+        const ctx =
+            canvas.getContext('2d');
+
         let particles = [];
 
+
         function initCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+
+            canvas.width =
+                window.innerWidth;
+
+            canvas.height =
+                window.innerHeight;
+
             particles = [];
+
+
             for (let i = 0; i < 65; i++) {
+
                 particles.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    radius: Math.random() * 2 + 0.5,
-                    speed: Math.random() * 0.3 + 0.1
+
+                    x:
+                        Math.random() *
+                        canvas.width,
+
+                    y:
+                        Math.random() *
+                        canvas.height,
+
+                    radius:
+                        Math.random() * 2 + 0.5,
+
+                    speed:
+                        Math.random() * 0.3 + 0.1
+
                 });
+
             }
+
         }
+
 
         function animateCanvas() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            ctx.clearRect(
+                0,
+                0,
+                canvas.width,
+                canvas.height
+            );
+
+
             particles.forEach(p => {
-                ctx.fillStyle = "rgba(71, 229, 188, 0.2)";
+
+                ctx.fillStyle =
+                    "rgba(71, 229, 188, 0.2)";
+
                 ctx.beginPath();
-                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+
+                ctx.arc(
+                    p.x,
+                    p.y,
+                    p.radius,
+                    0,
+                    Math.PI * 2
+                );
+
                 ctx.fill();
+
+
                 p.y -= p.speed;
-                if (p.y < 0) p.y = canvas.height;
+
+
+                if (p.y < 0) {
+
+                    p.y =
+                        canvas.height;
+
+                }
+
             });
-            requestAnimationFrame(animateCanvas);
+
+
+            requestAnimationFrame(
+                animateCanvas
+            );
+
         }
 
-        window.addEventListener('resize', initCanvas);
+
+        window.addEventListener(
+            'resize',
+            initCanvas
+        );
+
         initCanvas();
         animateCanvas();
 
-        const PACKS_DATA = [
-            {
-                name: "Wave Corridor Pack",
-                tier: "PLATINUM",
-                points: 100,
-                levels: [
-                    "Unnerfed Wave Corridor",
-                    "Silent Wave Corridor Infinity Unleashed XYZ",
-                    "Old Wave Corridor",
-                    "Wave Corridor",
-                    "Nerfed Wave Corridor"
-                ]
-            },
-            {
-                name: "Top 1 Pack I",
-                tier: "PLATINUM",
-                points: 100,
-                levels: [
-                    "Unnerfed Wave Corridor",
-                    "ULTIMATE DIHRUCTION",
-                    "Tung After Tung"
-                ]
-            },
-            {
-                name: "Top 1 Pack II",
-                tier: "DIAMOND",
-                points: 200,
-                levels: [
-                    "Zirconium Shard",
-                    "SYMM NO SCLEARS",
-                    "Defeated Brajan"
-                ]
-            },
-            {
-                name: "Defeated Pack",
-                tier: "DIAMOND",
-                points: 200,
-                levels: [
-                    "Defeated Brajan",
-                    "The Brajan Dih",
-                    "defeated ez nerf",
-                    "Beefeated Brajan"
-                ]
-            },
-            {
-                name: "Radioactive Trilogy",
-                tier: "PLATINUM",
-                points: 100,
-                levels: [
-                    "NEPTUNIUM",
-                    "URANIUM",
-                    "PLUTONIUM"
-                ]
-            },
-            {
-                name: "Bottom 1 Pack I",
-                tier: "BRONZE",
-                points: 25,
-                levels: [
-                    "Zoink WAVE",
-                    "Swag Clubstep",
-                    "Sakupen Hellcles"
-                ]
-            },
-            {
-                name: "ChefLimeWaveBasic Pack",
-                tier: "SILVER",
-                points: 50,
-                levels: [
-                    "ChefLimeWaveBasic4",
-                    "ChefLimeWaveBasic3",
-                    "ChefLimeWaveBasic5",
-                    "ChefLimeWaveBasic1",
-                    "ChefLimeWaveBasic2",
-                    "ChefLimeWaveBasic FINALE"
-                ]
-            },
-            {
-                name: "TooSquared and Friends",
-                tier: "DIAMOND",
-                points: 200,
-                levels: [
-                    "TooCub3d",
-                    "TooSquared",
-                    "3Squared"
-                ]
-            }
-        ];
 
-        const urlParams = new URLSearchParams(window.location.search);
-        const targetPlayer = urlParams.get('name');
+        // ==========================================
+        // PLAYER
+        // ==========================================
+
+        const urlParams =
+            new URLSearchParams(
+                window.location.search
+            );
+
+        const targetPlayer =
+            urlParams.get('name');
+
+
+        // ==========================================
+        // LOAD PLAYER PROFILE
+        // ==========================================
 
         async function loadPlayerProfile() {
-            const nameHeading = document.getElementById('playerNameHeading');
-            const totalPointsBadge = document.getElementById('totalPoints');
-            const countBadge = document.getElementById('completionCount');
-            const hardestBadge = document.getElementById('hardestLevel');
-            const profileBg = document.getElementById('profileBg');
-            const packsGrid = document.getElementById('packsGrid');
-            const grid = document.getElementById('completedGrid');
-            const creationsGrid = document.getElementById('createdGrid');
-            const unbeatenGrid = document.getElementById('unbeatenGrid');
+
+            const nameHeading =
+                document.getElementById(
+                    'playerNameHeading'
+                );
+
+            const totalPointsBadge =
+                document.getElementById(
+                    'totalPoints'
+                );
+
+            const countBadge =
+                document.getElementById(
+                    'completionCount'
+                );
+
+            const hardestBadge =
+                document.getElementById(
+                    'hardestLevel'
+                );
+
+            const profileBg =
+                document.getElementById(
+                    'profileBg'
+                );
+
+            const packsGrid =
+                document.getElementById(
+                    'packsGrid'
+                );
+
+            const grid =
+                document.getElementById(
+                    'completedGrid'
+                );
+
+            const creationsGrid =
+                document.getElementById(
+                    'createdGrid'
+                );
+
+            const unbeatenGrid =
+                document.getElementById(
+                    'unbeatenGrid'
+                );
+
 
             if (!targetPlayer) {
-                nameHeading.innerText = "PLAYER NOT FOUND";
+
+                nameHeading.innerText =
+                    "PLAYER NOT FOUND";
+
                 return;
+
             }
 
-            nameHeading.innerText = targetPlayer;
+
+            nameHeading.innerText =
+                targetPlayer;
+
 
             try {
-                const response = await fetch(`levels.json?v=${new Date().getTime()}`); 
-                const data = await response.json();
 
-                data.sort((a, b) => b.points - a.points);
+                // ==========================================
+                // LOAD LEVELS + PACKS
+                // ==========================================
+
+                const [
+                    levelsResponse,
+                    packsResponse
+                ] = await Promise.all([
+
+                    fetch(
+                        `levels.json?v=${Date.now()}`
+                    ),
+
+                    fetch(
+                        `packs.json?v=${Date.now()}`
+                    )
+
+                ]);
+
+
+                const data =
+                    await levelsResponse.json();
+
+                const packs =
+                    await packsResponse.json();
+
+
+                // ==========================================
+                // SORT LEVELS
+                // ==========================================
+
+                data.sort(
+                    (a, b) =>
+                        Number(b.points || 0) -
+                        Number(a.points || 0)
+                );
+
 
                 let totalPoints = 0;
                 let completionCount = 0;
                 let creationCount = 0;
                 let unbeatenCount = 0;
+
                 let hardestLvl = null;
                 let hardestRank = 0;
+
                 const beatenLevelNames = [];
-                
+
+
                 packsGrid.innerHTML = "";
                 grid.innerHTML = "";
                 creationsGrid.innerHTML = "";
                 unbeatenGrid.innerHTML = "";
 
-                // Helper map to find thumbnails easily for packs
+
+                // ==========================================
+                // LEVEL MAP
+                // ==========================================
+
                 const levelMap = {};
-                data.forEach((lvl, index) => {
-                    levelMap[lvl.name.toLowerCase()] = { ...lvl, rank: index + 1 };
-                });
+
 
                 data.forEach((level, index) => {
-                    const rank = index + 1;
-                    const hasBeaten = level.victors && level.victors.some(v => v.toLowerCase() === targetPlayer.toLowerCase());
-                    const isVerifier = level.verifier && level.verifier.toLowerCase() === targetPlayer.toLowerCase();
-                    const isCreator = level.creator && level.creator.toLowerCase() === targetPlayer.toLowerCase();
 
-                    const imgSource = level.thumbnail ? level.thumbnail : "";
+                    levelMap[
+                        level.name.toLowerCase()
+                    ] = {
 
-                    // --- PROCESS COMPLETIONS / VERIFICATIONS ---
-                    if (hasBeaten || isVerifier) {
+                        ...level,
+
+                        rank: index + 1
+
+                    };
+
+                });
+
+
+                // ==========================================
+                // PROCESS EVERY LEVEL
+                // ==========================================
+
+                data.forEach((level, index) => {
+
+                    const rank =
+                        index + 1;
+
+
+                    const hasBeaten =
+                        Array.isArray(level.victors) &&
+                        level.victors.some(
+                            v =>
+                                v.toLowerCase() ===
+                                targetPlayer.toLowerCase()
+                        );
+
+
+                    const isVerifier =
+                        level.verifier &&
+                        level.verifier.toLowerCase() ===
+                        targetPlayer.toLowerCase();
+
+
+                    const isCreator =
+                        level.creator &&
+                        level.creator.toLowerCase() ===
+                        targetPlayer.toLowerCase();
+
+
+                    const imgSource =
+                        level.thumbnail || "";
+
+
+                    // ==========================================
+                    // COMPLETED / VERIFIED LEVELS
+                    // ==========================================
+
+                    if (
+                        hasBeaten ||
+                        isVerifier
+                    ) {
+
                         completionCount++;
-                        beatenLevelNames.push(level.name.toLowerCase());
+
+
+                        beatenLevelNames.push(
+                            level.name.toLowerCase()
+                        );
+
+
+                        /*
+                         * ONLY TOP 150 LEVELS
+                         * GIVE POINTS.
+                         *
+                         * Legacy levels = 0 points.
+                         */
 
                         if (rank <= 150) {
-                            totalPoints += level.points;
+
+                            totalPoints +=
+                                Number(
+                                    level.points || 0
+                                );
+
                         }
 
-                        if (!hardestLvl || level.points > hardestLvl.points) {
-                            hardestLvl = level;
-                            hardestRank = rank;
+
+                        // Hardest level
+                        if (
+                            !hardestLvl ||
+                            Number(level.points || 0) >
+                            Number(hardestLvl.points || 0)
+                        ) {
+
+                            hardestLvl =
+                                level;
+
+                            hardestRank =
+                                rank;
+
                         }
 
-                        const card = document.createElement('div');
-                        card.className = 'level-card';
+
+                        const card =
+                            document.createElement(
+                                'div'
+                            );
+
+                        card.className =
+                            'level-card';
+
+
                         card.innerHTML = `
-                            <div class="level-card-bg" style="background-image: url('${imgSource}');"></div>
-                            <div class="level-card-overlay"></div>
-                            <div class="level-info">
-                                <h3 class="level-title">#${rank} - ${level.name}</h3>
-                                <div class="level-meta">
-                                    <p style="margin: 3px 0;"><strong>Creator:</strong> ${level.creator}</p>
-                                    <p style="margin: 3px 0;"><strong>Value:</strong> ${rank > 150 ? 'LEGACY' : level.points + ' PTS'}</p>
-                                    <p style="margin: 3px 0; color: var(--accent);"><strong>Role:</strong> ${isVerifier ? 'Verifier' : 'Victor'}</p>
+
+                            <div
+                                class="level-card-bg"
+                                style="
+                                    background-image:url('${imgSource}');
+                                "
+                            ></div>
+
+                            <div
+                                class="level-card-overlay"
+                            ></div>
+
+                            <div
+                                class="level-info"
+                            >
+
+                                <h3
+                                    class="level-title"
+                                >
+                                    #${rank} -
+                                    ${level.name}
+                                </h3>
+
+                                <div
+                                    class="level-meta"
+                                >
+
+                                    <p style="margin:3px 0;">
+                                        <strong>
+                                            Creator:
+                                        </strong>
+                                        ${level.creator || 'N/A'}
+                                    </p>
+
+                                    <p style="margin:3px 0;">
+                                        <strong>
+                                            Value:
+                                        </strong>
+
+                                        ${
+                                            rank > 150
+                                                ? 'LEGACY'
+                                                : `${Number(level.points || 0)} PTS`
+                                        }
+                                    </p>
+
+                                    <p
+                                        style="
+                                            margin:3px 0;
+                                            color:var(--accent);
+                                        "
+                                    >
+                                        <strong>
+                                            Role:
+                                        </strong>
+
+                                        ${
+                                            isVerifier
+                                                ? 'Verifier'
+                                                : 'Victor'
+                                        }
+                                    </p>
+
                                 </div>
+
                             </div>
+
                         `;
+
+
                         grid.appendChild(card);
+
                     }
 
-                    // --- PROCESS CREATIONS ---
+
+                    // ==========================================
+                    // CREATED LEVELS
+                    // ==========================================
+
                     if (isCreator) {
+
                         creationCount++;
-                        
-                        const card = document.createElement('div');
-                        card.className = 'level-card';
+
+
+                        const card =
+                            document.createElement(
+                                'div'
+                            );
+
+                        card.className =
+                            'level-card';
+
+
                         card.innerHTML = `
-                            <div class="level-card-bg" style="background-image: url('${imgSource}');"></div>
-                            <div class="level-card-overlay"></div>
-                            <div class="level-info">
-                                <h3 class="level-title">#${rank} - ${level.name}</h3>
-                                <div class="level-meta">
-                                    <p style="margin: 3px 0;"><strong>Verifier:</strong> ${level.verifier || 'N/A'}</p>
-                                    <p style="margin: 3px 0;"><strong>Value:</strong> ${rank > 150 ? 'LEGACY' : level.points + ' PTS'}</p>
-                                    <p style="margin: 3px 0; color: var(--gold);"><strong>ID:</strong> ${level.id || 'Unknown'}</p>
+
+                            <div
+                                class="level-card-bg"
+                                style="
+                                    background-image:url('${imgSource}');
+                                "
+                            ></div>
+
+                            <div
+                                class="level-card-overlay"
+                            ></div>
+
+                            <div
+                                class="level-info"
+                            >
+
+                                <h3
+                                    class="level-title"
+                                >
+                                    #${rank} -
+                                    ${level.name}
+                                </h3>
+
+                                <div
+                                    class="level-meta"
+                                >
+
+                                    <p style="margin:3px 0;">
+                                        <strong>
+                                            Verifier:
+                                        </strong>
+                                        ${level.verifier || 'N/A'}
+                                    </p>
+
+                                    <p style="margin:3px 0;">
+                                        <strong>
+                                            Value:
+                                        </strong>
+
+                                        ${
+                                            rank > 150
+                                                ? 'LEGACY'
+                                                : `${Number(level.points || 0)} PTS`
+                                        }
+                                    </p>
+
+                                    <p
+                                        style="
+                                            margin:3px 0;
+                                            color:var(--gold);
+                                        "
+                                    >
+                                        <strong>
+                                            ID:
+                                        </strong>
+                                        ${level.id || 'Unknown'}
+                                    </p>
+
                                 </div>
+
                             </div>
+
                         `;
-                        creationsGrid.appendChild(card);
+
+
+                        creationsGrid.appendChild(
+                            card
+                        );
+
                     }
 
-                    // --- PROCESS NON-COMPLETIONS ---
-                    if (!hasBeaten && !isVerifier) {
+
+                    // ==========================================
+                    // NON-COMPLETED LEVELS
+                    // ==========================================
+
+                    if (
+                        !hasBeaten &&
+                        !isVerifier
+                    ) {
+
                         unbeatenCount++;
 
-                        const card = document.createElement('div');
-                        card.className = 'level-card unbeaten-card';
+
+                        const card =
+                            document.createElement(
+                                'div'
+                            );
+
+                        card.className =
+                            'level-card unbeaten-card';
+
+
                         card.innerHTML = `
-                            <div class="level-card-bg" style="background-image: url('${imgSource}');"></div>
-                            <div class="level-card-overlay"></div>
-                            <div class="level-info">
-                                <h3 class="level-title" style="color: #aaa;">#${rank} - ${level.name}</h3>
-                                <div class="level-meta">
-                                    <p style="margin: 3px 0;"><strong>Creator:</strong> ${level.creator}</p>
-                                    <p style="margin: 3px 0;"><strong>Value:</strong> ${rank > 150 ? 'LEGACY' : level.points + ' PTS'}</p>
-                                    <p style="margin: 3px 0;"><strong>ID:</strong> ${level.id || 'Unknown'}</p>
-                                    <p style="margin: 3px 0; color: #666;"><strong>Status:</strong> Unbeaten</p>
+
+                            <div
+                                class="level-card-bg"
+                                style="
+                                    background-image:url('${imgSource}');
+                                "
+                            ></div>
+
+                            <div
+                                class="level-card-overlay"
+                            ></div>
+
+                            <div
+                                class="level-info"
+                            >
+
+                                <h3
+                                    class="level-title"
+                                    style="color:#aaa;"
+                                >
+                                    #${rank} -
+                                    ${level.name}
+                                </h3>
+
+                                <div
+                                    class="level-meta"
+                                >
+
+                                    <p style="margin:3px 0;">
+                                        <strong>
+                                            Creator:
+                                        </strong>
+                                        ${level.creator || 'N/A'}
+                                    </p>
+
+                                    <p style="margin:3px 0;">
+                                        <strong>
+                                            Value:
+                                        </strong>
+
+                                        ${
+                                            rank > 150
+                                                ? 'LEGACY'
+                                                : `${Number(level.points || 0)} PTS`
+                                        }
+                                    </p>
+
+                                    <p style="margin:3px 0;">
+                                        <strong>
+                                            ID:
+                                        </strong>
+                                        ${level.id || 'Unknown'}
+                                    </p>
+
+                                    <p
+                                        style="
+                                            margin:3px 0;
+                                            color:#666;
+                                        "
+                                    >
+                                        <strong>
+                                            Status:
+                                        </strong>
+                                        Unbeaten
+                                    </p>
+
                                 </div>
+
                             </div>
+
                         `;
-                        unbeatenGrid.appendChild(card);
+
+
+                        unbeatenGrid.appendChild(
+                            card
+                        );
+
                     }
+
                 });
 
-                // --- PROCESS PACKS ---
+
+                // ==========================================
+                // PROCESS PACKS FROM packs.json
+                // ==========================================
+
                 let completedPacksCount = 0;
-                PACKS_DATA.forEach(pack => {
-                    const isCompleted = pack.levels.every(lvlName => beatenLevelNames.includes(lvlName.toLowerCase()));
-                    if (isCompleted) {
-                        completedPacksCount++;
-                        totalPoints += pack.points;
 
-                        const firstLvlKey = pack.levels[0]?.toLowerCase();
-                        const packImgSource = (levelMap[firstLvlKey] && levelMap[firstLvlKey].thumbnail) ? levelMap[firstLvlKey].thumbnail : "";
 
-                        const card = document.createElement('div');
-                        card.className = 'level-card';
-                        card.innerHTML = `
-                            <div class="level-card-bg" style="background-image: url('${packImgSource}');"></div>
-                            <div class="level-card-overlay"></div>
-                            <div class="level-info">
-                                <div style="display: flex; justify-content: space-between; align-items: center;">
-                                    <h3 class="level-title" style="font-size: 1.15rem;">${pack.name}</h3>
-                                    <span style="font-size: 0.72rem; font-weight: 800; padding: 2px 8px; border-radius: 4px; background: rgba(255,255,255,0.05); border: 1px solid currentColor;" class="tier-${pack.tier}">${pack.tier}</span>
-                                </div>
-                                <div class="level-meta" style="margin-top: 4px;">
-                                    <p style="margin: 3px 0; color: var(--accent);"><strong>Bonus:</strong> +${pack.points} PTS</p>
-                                    <p style="margin: 3px 0; color: #aaa; font-size: 0.8rem;"><strong>Levels:</strong> ${pack.levels.join(', ')}</p>
-                                </div>
-                            </div>
-                        `;
-                        packsGrid.appendChild(card);
+                packs.forEach(pack => {
+
+                    /*
+                     * A player completes a pack only when
+                     * EVERY level listed in packs.json
+                     * has been beaten/verified.
+                     */
+
+                    const isCompleted =
+                        Array.isArray(pack.levels) &&
+                        pack.levels.every(
+                            levelName =>
+                                beatenLevelNames.includes(
+                                    levelName.toLowerCase()
+                                )
+                        );
+
+
+                    if (!isCompleted) {
+                        return;
                     }
+
+
+                    completedPacksCount++;
+
+
+                    /*
+                     * Add the pack bonus.
+                     *
+                     * This is now exactly the same
+                     * source used by leaderboard.html.
+                     */
+
+                    totalPoints +=
+                        Number(pack.points || 0);
+
+
+                    // ==========================================
+                    // PACK THUMBNAIL
+                    // ==========================================
+
+                    const firstLvlKey =
+                        pack.levels &&
+                        pack.levels.length > 0
+                            ? pack.levels[0].toLowerCase()
+                            : "";
+
+
+                    const firstLevel =
+                        levelMap[firstLvlKey];
+
+
+                    const packImgSource =
+                        firstLevel &&
+                        firstLevel.thumbnail
+                            ? firstLevel.thumbnail
+                            : "";
+
+
+                    // ==========================================
+                    // PACK CARD
+                    // ==========================================
+
+                    const card =
+                        document.createElement(
+                            'div'
+                        );
+
+                    card.className =
+                        'level-card';
+
+
+                    card.innerHTML = `
+
+                        <div
+                            class="level-card-bg"
+                            style="
+                                background-image:url('${packImgSource}');
+                            "
+                        ></div>
+
+                        <div
+                            class="level-card-overlay"
+                        ></div>
+
+                        <div
+                            class="level-info"
+                        >
+
+                            <div
+                                style="
+                                    display:flex;
+                                    justify-content:space-between;
+                                    align-items:center;
+                                    gap:10px;
+                                "
+                            >
+
+                                <h3
+                                    class="level-title"
+                                    style="font-size:1.15rem;"
+                                >
+                                    ${pack.name}
+                                </h3>
+
+                                <span
+                                    style="
+                                        font-size:0.72rem;
+                                        font-weight:800;
+                                        padding:2px 8px;
+                                        border-radius:4px;
+                                        background:rgba(255,255,255,0.05);
+                                        border:1px solid currentColor;
+                                    "
+                                    class="tier-${pack.tier}"
+                                >
+                                    ${pack.tier}
+                                </span>
+
+                            </div>
+
+
+                            <div
+                                class="level-meta"
+                                style="margin-top:4px;"
+                            >
+
+                                <p
+                                    style="
+                                        margin:3px 0;
+                                        color:var(--accent);
+                                    "
+                                >
+                                    <strong>
+                                        Bonus:
+                                    </strong>
+
+                                    +${Number(pack.points || 0)}
+                                    PTS
+                                </p>
+
+
+                                <p
+                                    style="
+                                        margin:3px 0;
+                                        color:#aaa;
+                                        font-size:0.8rem;
+                                    "
+                                >
+                                    <strong>
+                                        Levels:
+                                    </strong>
+
+                                    ${
+                                        Array.isArray(pack.levels)
+                                            ? pack.levels.join(', ')
+                                            : ''
+                                    }
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    `;
+
+
+                    packsGrid.appendChild(
+                        card
+                    );
+
                 });
 
-                totalPointsBadge.innerText = `${totalPoints} PTS`;
-                countBadge.innerText = `${completionCount} ${completionCount === 1 ? 'COMPLETION' : 'COMPLETIONS'}`;
+
+                // ==========================================
+                // FINAL PLAYER STATS
+                // ==========================================
+
+                totalPointsBadge.innerText =
+                    `${totalPoints.toLocaleString()} PTS`;
+
+
+                countBadge.innerText =
+                    `${completionCount} ${
+                        completionCount === 1
+                            ? 'COMPLETION'
+                            : 'COMPLETIONS'
+                    }`;
+
+
+                // ==========================================
+                // HARDEST LEVEL
+                // ==========================================
 
                 if (hardestLvl) {
-                    hardestBadge.innerText = `HARDEST: #${hardestRank} ${hardestLvl.name.toUpperCase()} (${hardestLvl.points} PTS)`;
-                    hardestBadge.style.display = "inline-block";
+
+                    hardestBadge.innerText =
+                        `HARDEST: #${hardestRank} ` +
+                        `${hardestLvl.name.toUpperCase()} ` +
+                        `(${Number(hardestLvl.points || 0)} PTS)`;
+
+
+                    hardestBadge.style.display =
+                        "inline-block";
+
+
                     if (hardestLvl.thumbnail) {
-                        profileBg.style.backgroundImage = `url('${hardestLvl.thumbnail}')`;
+
+                        profileBg.style.backgroundImage =
+                            `url('${hardestLvl.thumbnail}')`;
+
                     }
+
                 } else {
-                    hardestBadge.style.display = "none";
+
+                    hardestBadge.style.display =
+                        "none";
+
                 }
 
-                if (completedPacksCount === 0) {
-                    packsGrid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; color:#555; padding:20px;">No completed level packs found for this player.</div>`;
+
+                // ==========================================
+                // EMPTY STATES
+                // ==========================================
+
+                if (
+                    completedPacksCount === 0
+                ) {
+
+                    packsGrid.innerHTML = `
+
+                        <div
+                            style="
+                                grid-column:1/-1;
+                                text-align:center;
+                                color:#555;
+                                padding:20px;
+                            "
+                        >
+                            No completed level packs
+                            found for this player.
+                        </div>
+
+                    `;
+
                 }
 
-                if (completionCount === 0) {
-                    grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; color:#555; padding:40px;">No recorded list records found for this player.</div>`;
-                }
-                
-                if (creationCount === 0) {
-                    creationsGrid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; color:#555; padding:40px;">No created levels found on the list for this player.</div>`;
+
+                if (
+                    completionCount === 0
+                ) {
+
+                    grid.innerHTML = `
+
+                        <div
+                            style="
+                                grid-column:1/-1;
+                                text-align:center;
+                                color:#555;
+                                padding:40px;
+                            "
+                        >
+                            No recorded list records
+                            found for this player.
+                        </div>
+
+                    `;
+
                 }
 
-                if (unbeatenCount === 0) {
-                    unbeatenGrid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; color:var(--gold); padding:40px; font-weight:700;">100% LIST CLEAR! This player has beaten every level!</div>`;
+
+                if (
+                    creationCount === 0
+                ) {
+
+                    creationsGrid.innerHTML = `
+
+                        <div
+                            style="
+                                grid-column:1/-1;
+                                text-align:center;
+                                color:#555;
+                                padding:40px;
+                            "
+                        >
+                            No created levels found
+                            on the list for this player.
+                        </div>
+
+                    `;
+
                 }
+
+
+                if (
+                    unbeatenCount === 0
+                ) {
+
+                    unbeatenGrid.innerHTML = `
+
+                        <div
+                            style="
+                                grid-column:1/-1;
+                                text-align:center;
+                                color:var(--gold);
+                                padding:40px;
+                                font-weight:700;
+                            "
+                        >
+                            100% LIST CLEAR!
+                            This player has beaten
+                            every level!
+                        </div>
+
+                    `;
+
+                }
+
 
             } catch (error) {
-                console.error(error);
-                grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; color:var(--accent); padding:40px;">Error loading player profile layout data.</div>`;
+
+                console.error(
+                    "Player profile loading error:",
+                    error
+                );
+
+
+                grid.innerHTML = `
+
+                    <div
+                        style="
+                            grid-column:1/-1;
+                            text-align:center;
+                            color:var(--accent);
+                            padding:40px;
+                        "
+                    >
+                        Error loading player
+                        profile layout data.
+                    </div>
+
+                `;
+
             }
+
         }
 
+
         loadPlayerProfile();
+
     </script>
+
 </body>
 </html>
