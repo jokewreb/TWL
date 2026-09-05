@@ -95,7 +95,7 @@
     "division": 1,
     "minPoints": 9000,
     "maxPoints": 9999,
-    "color": "#E5E4E2",
+    "color": "#EDF9FF",
     "effect": "platinum",
     "image": "thumbnail/levels/platinum-1.png"
   },
@@ -105,7 +105,7 @@
     "division": 2,
     "minPoints": 10000,
     "maxPoints": 10999,
-    "color": "#E5E4E2",
+    "color": "#EDF9FF",
     "effect": "platinum",
     "image": "thumbnail/levels/platinum-2.png"
   },
@@ -115,7 +115,7 @@
     "division": 3,
     "minPoints": 11000,
     "maxPoints": 11999,
-    "color": "#E5E4E2",
+    "color": "#EDF9FF",
     "effect": "platinum",
     "image": "thumbnail/levels/platinum-3.png"
   },
