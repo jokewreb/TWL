@@ -97,7 +97,6 @@
         .pod-name {
             font-size: 1.25rem;
             font-weight: 800;
-            color: #fff;
             margin-bottom: 4px;
             text-decoration: none;
             display: block;
@@ -189,7 +188,6 @@
 
         .player-title { 
             font-weight: 700; 
-            color: #fff; 
             font-size: 1rem; 
             text-decoration: none; 
             overflow: hidden;
@@ -203,13 +201,139 @@
             margin-top: 2px;
         }
 
-        .tier-ruby { color: #ff3355 !important; }
-        .tier-diamond { color: #00d2ff !important; }
-        .tier-platinum { color: #e5e4e2 !important; }
-        .tier-gold { color: #ffd700 !important; }
-        .tier-silver { color: #c0c0c0 !important; }
-        .tier-bronze { color: #cd7f32 !important; }
-        .tier-default { color: #ffffff !important; }
+
+        /* ==========================================
+           TIER TITLE EFFECTS
+           ========================================== */
+
+        .tier-default {
+            color: #ffffff !important;
+        }
+
+        .tier-bronze {
+            color: #cd7f32 !important;
+        }
+
+        .tier-silver {
+            color: #c0c0c0 !important;
+        }
+
+
+        /* GOLD */
+
+        .tier-gold {
+            background: linear-gradient(
+                90deg,
+                #ffd700,
+                #fff2a6,
+                #ffd700,
+                #fff2a6,
+                #ffd700
+            );
+            background-size: 300% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: goldMove 3s linear infinite;
+        }
+
+        @keyframes goldMove {
+            0% {
+                background-position: 0% center;
+            }
+
+            100% {
+                background-position: 300% center;
+            }
+        }
+
+
+        /* PLATINUM */
+
+        .tier-platinum {
+            background: linear-gradient(
+                90deg,
+                #e5e4e2,
+                #ffffff,
+                #bfc1c2,
+                #ffffff,
+                #e5e4e2
+            );
+            background-size: 300% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: platinumMove 3s linear infinite;
+        }
+
+        @keyframes platinumMove {
+            0% {
+                background-position: 0% center;
+            }
+
+            100% {
+                background-position: 300% center;
+            }
+        }
+
+
+        /* DIAMOND */
+
+        .tier-diamond {
+            background: linear-gradient(
+                90deg,
+                #b9f2ff,
+                #ffffff,
+                #00d2ff,
+                #ffffff,
+                #b9f2ff
+            );
+            background-size: 300% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: diamondMove 3s linear infinite;
+        }
+
+        @keyframes diamondMove {
+            0% {
+                background-position: 0% center;
+            }
+
+            100% {
+                background-position: 300% center;
+            }
+        }
+
+
+        /* WAVE MASTER */
+
+        .tier-wave-master {
+            background: linear-gradient(
+                90deg,
+                #ff4141,
+                #9b1cff,
+                #ff4141,
+                #9b1cff,
+                #ff4141
+            );
+            background-size: 300% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: waveMasterMove 2.5s linear infinite;
+        }
+
+        @keyframes waveMasterMove {
+            0% {
+                background-position: 0% center;
+            }
+
+            100% {
+                background-position: 300% center;
+            }
+        }
+
 
         @media (max-width: 768px) {
             .lb-container {
@@ -354,40 +478,166 @@
     anim();
 
 
-    function getTierClass(tier) {
+    // ==========================================
+    // TIER SYSTEM
+    // ==========================================
+
+    let tierData = [];
+
+
+    async function loadTierData() {
+
+        try {
+
+            const response =
+                await fetch(
+                    `player-tiers.json?v=${Date.now()}`,
+                    {
+                        cache: "no-store"
+                    }
+                );
+
+
+            if (!response.ok) {
+                throw new Error(
+                    `Tier data HTTP ${response.status}`
+                );
+            }
+
+
+            tierData =
+                await response.json();
+
+
+            if (!Array.isArray(tierData)) {
+                throw new Error(
+                    "Tier data is not an array"
+                );
+            }
+
+        } catch (error) {
+
+            console.error(
+                "Tier data loading error:",
+                error
+            );
+
+            tierData = [];
+
+        }
+
+    }
+
+
+    function getPlayerTier(points) {
+
+        if (!tierData.length) {
+            return null;
+        }
+
+
+        const totalPoints =
+            Number(points || 0);
+
+
+        /*
+         * Wave Master has no maximum,
+         * so check the minimum point
+         * requirement normally.
+         */
+
+        for (const tier of tierData) {
+
+            const min =
+                Number(
+                    tier.minPoints || 0
+                );
+
+
+            const max =
+                tier.maxPoints === null ||
+                tier.maxPoints === undefined
+                    ? Infinity
+                    : Number(
+                        tier.maxPoints
+                    );
+
+
+            if (
+                totalPoints >= min &&
+                totalPoints <= max
+            ) {
+
+                return tier;
+
+            }
+
+        }
+
+
+        return null;
+
+    }
+
+
+    function getTierClassFromTier(tier) {
 
         if (!tier) {
             return 'tier-default';
         }
 
-        const t =
-            String(tier).toLowerCase();
 
-        if (t.includes('ruby')) {
-            return 'tier-ruby';
+        const effect =
+            String(
+                tier.effect || ''
+            ).toLowerCase();
+
+
+        if (
+            effect ===
+            'wave-master-gradient'
+        ) {
+
+            return 'tier-wave-master';
+
         }
 
-        if (t.includes('diamond')) {
+
+        if (effect === 'diamond') {
             return 'tier-diamond';
         }
 
-        if (t.includes('platinum')) {
+
+        if (effect === 'platinum') {
             return 'tier-platinum';
         }
 
-        if (t.includes('gold')) {
+
+        if (effect === 'gold') {
             return 'tier-gold';
         }
 
-        if (t.includes('silver')) {
+
+        if (effect === 'silver') {
             return 'tier-silver';
         }
 
-        if (t.includes('bronze')) {
+
+        if (effect === 'bronze') {
             return 'tier-bronze';
         }
 
+
         return 'tier-default';
+
+    }
+
+
+    function getTierClass(points) {
+
+        return getTierClassFromTier(
+            getPlayerTier(points)
+        );
 
     }
 
@@ -395,6 +645,14 @@
     async function load() {
 
         try {
+
+            /*
+             * Load the tier data separately so
+             * it cannot break the leaderboard.
+             */
+
+            await loadTierData();
+
 
             const [
                 levelsResponse,
@@ -425,10 +683,6 @@
                 await packsResponse.json();
 
 
-            // ==========================================
-            // SORT LEVELS
-            // ==========================================
-
             data.sort(
                 (a, b) =>
                     Number(b.points || 0) -
@@ -445,16 +699,6 @@
             const playerHardest = {};
             const displayNames = {};
 
-
-            /*
-             * IMPORTANT:
-             *
-             * Player.html compares names
-             * case-insensitively.
-             *
-             * The leaderboard now does the
-             * exact same thing.
-             */
 
             function normalizeName(name) {
 
@@ -512,21 +756,11 @@
                 }
 
 
-                /*
-                 * Record the completed level
-                 * exactly once.
-                 */
-
                 playerLevels[key].add(
                     String(level.name)
                         .toLowerCase()
                 );
 
-
-                /*
-                 * Only the top 150 levels
-                 * award points.
-                 */
 
                 const rank =
                     data.indexOf(level) + 1;
@@ -542,10 +776,6 @@
                     (scores[key] || 0) +
                     points;
 
-
-                /*
-                 * Hardest level
-                 */
 
                 if (
                     !playerHardest[key] ||
@@ -564,29 +794,14 @@
 
 
             // ==========================================
-            // PROCESS EVERY LEVEL
+            // PROCESS LEVELS
             // ==========================================
 
             data.forEach(level => {
 
-                /*
-                 * Create ONE set of players who
-                 * completed/verified this level.
-                 *
-                 * This is the same:
-                 *
-                 * hasBeaten || isVerifier
-                 *
-                 * logic used by player.html.
-                 */
-
                 const completedBy =
                     new Set();
 
-
-                // --------------------------
-                // VERIFIER
-                // --------------------------
 
                 if (level.verifier) {
 
@@ -609,10 +824,6 @@
 
                 }
 
-
-                // --------------------------
-                // VICTORS
-                // --------------------------
 
                 if (
                     Array.isArray(
@@ -647,12 +858,6 @@
 
                 }
 
-
-                /*
-                 * Now award the level ONCE
-                 * to every player who is either
-                 * verifier or victor.
-                 */
 
                 completedBy.forEach(
                     playerKey => {
@@ -767,7 +972,7 @@
 
 
             // ==========================================
-            // CONVERT TO DISPLAY NAMES
+            // SORT PLAYERS
             // ==========================================
 
             const sorted =
@@ -866,6 +1071,18 @@
                             : 0;
 
 
+                    const playerTier =
+                        getPlayerTier(
+                            player.points
+                        );
+
+
+                    const playerTierClass =
+                        getTierClassFromTier(
+                            playerTier
+                        );
+
+
                     const crown =
                         rank === 1
                             ? '👑'
@@ -906,7 +1123,7 @@
 
                                 <a
                                     href="player.html?name=${encodeURIComponent(player.name)}"
-                                    class="pod-name"
+                                    class="pod-name ${playerTierClass}"
                                 >
                                     ${player.name}
                                 </a>
@@ -1019,6 +1236,18 @@
                             : 0;
 
 
+                    const playerTier =
+                        getPlayerTier(
+                            player.points
+                        );
+
+
+                    const playerTierClass =
+                        getTierClassFromTier(
+                            playerTier
+                        );
+
+
                     const profileUrl =
                         `player.html?name=${encodeURIComponent(player.name)}`;
 
@@ -1061,7 +1290,7 @@
                                 >
 
                                     <span
-                                        class="player-title"
+                                        class="player-title ${playerTierClass}"
                                     >
                                         ${player.name}
                                     </span>
