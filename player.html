@@ -141,111 +141,173 @@
             z-index: 1;
         }
 
+        /* ==========================================
+           PLAYER NAME + TIER
+           ========================================== */
+
+        .player-main-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 28px;
+            margin-bottom: 22px;
+        }
+
         .profile-name {
             font-size: 3rem;
             font-weight: 900;
-            margin: 0 0 16px 0;
+            margin: 0;
             color: #fff;
             text-transform: uppercase;
             letter-spacing: -0.5px;
+            transition: all 0.3s ease;
         }
 
         /* ==========================================
-           PLAYER TIER SYSTEM
+           TIER CARD
            ========================================== */
 
-        .player-tier-container {
+        .player-tier-card {
+            position: relative;
+            width: 270px;
+            min-height: 92px;
+            padding: 10px 14px;
             display: flex;
-            flex-direction: column;
             align-items: center;
-            width: 100%;
-            max-width: 430px;
-            margin: 0 auto 22px auto;
+            gap: 12px;
+            text-align: left;
+            border-radius: 14px;
+            background: rgba(10, 12, 17, 0.72);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow:
+                0 10px 25px rgba(0, 0, 0, 0.45),
+                inset 0 0 25px rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(12px);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .player-tier-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                135deg,
+                rgba(255,255,255,0.06),
+                transparent 45%,
+                rgba(255,255,255,0.025)
+            );
+            pointer-events: none;
+        }
+
+        .player-tier-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.25);
+            box-shadow:
+                0 14px 32px rgba(0, 0, 0, 0.55),
+                inset 0 0 30px rgba(255, 255, 255, 0.03);
         }
 
         .player-tier-image {
-            width: 90px;
-            height: 90px;
+            width: 62px;
+            height: 62px;
             object-fit: contain;
-            display: block;
-            margin-bottom: 8px;
-            filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.5));
+            flex-shrink: 0;
+            position: relative;
+            z-index: 2;
+            filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.6));
+        }
+
+        .player-tier-details {
+            min-width: 0;
+            flex: 1;
+            position: relative;
+            z-index: 2;
+        }
+
+        .player-tier-label {
+            font-size: 0.58rem;
+            font-weight: 800;
+            color: #777;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 2px;
         }
 
         .player-tier-name {
-            font-size: 1rem;
+            font-size: 1.05rem;
             font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-        }
-
-        .tier-progress-container {
-            width: 100%;
+            letter-spacing: 1px;
+            white-space: nowrap;
+            margin-bottom: 7px;
         }
 
         .tier-progress-track {
             width: 100%;
-            height: 10px;
+            height: 6px;
             background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.4);
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.6);
         }
 
         .tier-progress-fill {
             height: 100%;
             width: 0%;
             border-radius: 20px;
-            transition: width 0.8s ease;
-            box-shadow: 0 0 12px currentColor;
+            transition: width 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+            box-shadow: 0 0 10px currentColor;
         }
 
         .tier-progress-text {
-            margin-top: 7px;
             display: flex;
             justify-content: space-between;
-            gap: 10px;
-            font-size: 0.72rem;
-            font-weight: 700;
-            color: #aaa;
+            gap: 5px;
+            margin-top: 5px;
+            font-size: 0.57rem;
+            font-weight: 800;
+            color: #777;
             text-transform: uppercase;
-            letter-spacing: 0.8px;
+            letter-spacing: 0.5px;
         }
 
         /* ==========================================
-           TIER NAME EFFECTS
+           TIER COLOURS
            ========================================== */
 
         .tier-bronze {
             color: #cd7f32 !important;
-            text-shadow: 0 0 12px rgba(205, 127, 50, 0.45);
+            text-shadow: 0 0 14px rgba(205, 127, 50, 0.45);
         }
 
         .tier-silver {
             color: #c0c0c0 !important;
-            text-shadow: 0 0 12px rgba(192, 192, 192, 0.45);
+            text-shadow: 0 0 14px rgba(192, 192, 192, 0.45);
         }
 
         .tier-gold {
             color: #ffd700 !important;
-            text-shadow: 0 0 15px rgba(255, 215, 0, 0.55);
+            text-shadow: 0 0 16px rgba(255, 215, 0, 0.55);
         }
 
         .tier-platinum {
             color: #e5e4e2 !important;
             text-shadow:
-                0 0 10px rgba(229, 228, 226, 0.6),
-                0 0 25px rgba(229, 228, 226, 0.25);
+                0 0 12px rgba(229, 228, 226, 0.65),
+                0 0 28px rgba(229, 228, 226, 0.3);
         }
 
         .tier-diamond {
             color: #b9f2ff !important;
             text-shadow:
-                0 0 12px rgba(185, 242, 255, 0.7),
-                0 0 28px rgba(185, 242, 255, 0.35);
+                0 0 14px rgba(185, 242, 255, 0.75),
+                0 0 30px rgba(185, 242, 255, 0.35);
         }
+
+        /* ==========================================
+           WAVE MASTER
+           ========================================== */
 
         .tier-wave-master {
             background: linear-gradient(
@@ -266,6 +328,29 @@
             text-shadow: none;
         }
 
+        .wave-master-card {
+            border-color: rgba(255, 65, 65, 0.4);
+            box-shadow:
+                0 0 25px rgba(255, 65, 65, 0.12),
+                0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .wave-master-card::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 70%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255,255,255,0.08),
+                transparent
+            );
+            animation: waveMasterShine 3.5s infinite;
+        }
+
         @keyframes waveMasterGradient {
             0% {
                 background-position: 0% 50%;
@@ -279,6 +364,21 @@
                 background-position: 0% 50%;
             }
         }
+
+        @keyframes waveMasterShine {
+            0% {
+                left: -100%;
+            }
+
+            55%,
+            100% {
+                left: 150%;
+            }
+        }
+
+        /* ==========================================
+           EXISTING STYLES
+           ========================================== */
 
         .stats-badges-container {
             display: flex;
@@ -429,6 +529,19 @@
             color: #cd7f32 !important;
         }
 
+        @media (max-width: 900px) {
+
+            .player-main-row {
+                flex-direction: column;
+                gap: 18px;
+            }
+
+            .player-tier-card {
+                width: 300px;
+            }
+
+        }
+
         @media (max-width: 768px) {
 
             nav {
@@ -458,13 +571,9 @@
                 font-size: 2.2rem;
             }
 
-            .player-tier-image {
-                width: 75px;
-                height: 75px;
-            }
-
-            .player-tier-name {
-                font-size: 0.85rem;
+            .player-tier-card {
+                width: 100%;
+                max-width: 320px;
             }
 
             .completed-grid {
@@ -514,62 +623,69 @@
 
             <div class="profile-header-content">
 
-                <h1
-                    id="playerNameHeading"
-                    class="profile-name"
-                >
-                    LOADING...
-                </h1>
+                <div class="player-main-row">
 
-                <!-- ==========================================
-                     PLAYER TIER
-                     ========================================== -->
-
-                <div
-                    id="playerTierContainer"
-                    class="player-tier-container"
-                >
-
-                    <img
-                        id="playerTierImage"
-                        class="player-tier-image"
-                        src=""
-                        alt="Player Tier"
+                    <h1
+                        id="playerNameHeading"
+                        class="profile-name"
                     >
+                        LOADING...
+                    </h1>
+
+                    <!-- PLAYER TIER -->
 
                     <div
-                        id="playerTierName"
-                        class="player-tier-name"
+                        id="playerTierCard"
+                        class="player-tier-card"
                     >
-                        LOADING TIER...
-                    </div>
 
-                    <div class="tier-progress-container">
+                        <img
+                            id="playerTierImage"
+                            class="player-tier-image"
+                            src=""
+                            alt="Player Tier"
+                        >
 
-                        <div class="tier-progress-track">
+                        <div class="player-tier-details">
+
+                            <div class="player-tier-label">
+                                PLAYER TIER
+                            </div>
 
                             <div
-                                id="tierProgressFill"
-                                class="tier-progress-fill"
-                            ></div>
+                                id="playerTierName"
+                                class="player-tier-name"
+                            >
+                                LOADING...
+                            </div>
 
-                        </div>
+                            <div class="tier-progress-track">
 
-                        <div class="tier-progress-text">
+                                <div
+                                    id="tierProgressFill"
+                                    class="tier-progress-fill"
+                                ></div>
 
-                            <span id="tierProgressCurrent">
-                                0 PTS
-                            </span>
+                            </div>
 
-                            <span id="tierProgressNext">
-                                NEXT TIER
-                            </span>
+                            <div class="tier-progress-text">
+
+                                <span id="tierProgressCurrent">
+                                    0 PTS
+                                </span>
+
+                                <span id="tierProgressNext">
+                                    NEXT TIER
+                                </span>
+
+                            </div>
 
                         </div>
 
                     </div>
 
                 </div>
+
 
                 <div class="stats-badges-container">
 
@@ -837,13 +953,12 @@
             try {
 
                 // ==========================================
-                // LOAD LEVELS + PACKS + PLAYER TIERS
+                // LOAD LEVELS + PACKS
                 // ==========================================
 
                 const [
                     levelsResponse,
-                    packsResponse,
-                    tiersResponse
+                    packsResponse
                 ] = await Promise.all([
 
                     fetch(
@@ -852,10 +967,6 @@
 
                     fetch(
                         `packs.json?v=${Date.now()}`
-                    ),
-
-                    fetch(
-                        `player-tiers.json?v=${Date.now()}`
                     )
 
                 ]);
@@ -867,8 +978,38 @@
                 const packs =
                     await packsResponse.json();
 
-                const playerTiers =
-                    await tiersResponse.json();
+
+                // ==========================================
+                // LOAD TIERS SEPARATELY
+                //
+                // If the tier JSON isn't found, the
+                // rest of the player page still works.
+                // ==========================================
+
+                let playerTiers = [];
+
+                try {
+
+                    const tiersResponse =
+                        await fetch(
+                            `player-tiers.json?v=${Date.now()}`
+                        );
+
+                    if (tiersResponse.ok) {
+
+                        playerTiers =
+                            await tiersResponse.json();
+
+                    }
+
+                } catch (tierError) {
+
+                    console.warn(
+                        "Player tier data could not be loaded:",
+                        tierError
+                    );
+
+                }
 
 
                 // ==========================================
@@ -972,13 +1113,6 @@
                             level.name.toLowerCase()
                         );
 
-
-                        /*
-                         * ONLY TOP 150 LEVELS
-                         * GIVE POINTS.
-                         *
-                         * Legacy levels = 0 points.
-                         */
 
                         if (rank <= 150) {
 
@@ -1295,12 +1429,6 @@
 
                 packs.forEach(pack => {
 
-                    /*
-                     * A player completes a pack only when
-                     * EVERY level listed in packs.json
-                     * has been beaten/verified.
-                     */
-
                     const isCompleted =
                         Array.isArray(pack.levels) &&
                         pack.levels.every(
@@ -1318,13 +1446,6 @@
 
                     completedPacksCount++;
 
-
-                    /*
-                     * Add the pack bonus.
-                     *
-                     * This is now exactly the same
-                     * source used by leaderboard.html.
-                     */
 
                     totalPoints +=
                         Number(pack.points || 0);
@@ -1487,6 +1608,11 @@
                 // PLAYER TIER
                 // ==========================================
 
+                const tierCard =
+                    document.getElementById(
+                        'playerTierCard'
+                    );
+
                 const tierImage =
                     document.getElementById(
                         'playerTierImage'
@@ -1514,229 +1640,258 @@
 
 
                 /*
-                 * Find the tier whose point range
-                 * contains the player's total points.
+                 * Only calculate the tier if the
+                 * JSON successfully loaded.
                  */
 
-                let currentTier =
-                    playerTiers.find(
-                        tier =>
-                            totalPoints >=
-                            Number(tier.minPoints || 0) &&
-                            (
-                                tier.maxPoints === null ||
-                                totalPoints <=
-                                Number(tier.maxPoints)
-                            )
+                if (
+                    Array.isArray(playerTiers) &&
+                    playerTiers.length > 0
+                ) {
+
+                    let currentTier =
+                        playerTiers.find(
+                            tier =>
+                                totalPoints >=
+                                Number(
+                                    tier.minPoints || 0
+                                ) &&
+                                (
+                                    tier.maxPoints === null ||
+                                    totalPoints <=
+                                    Number(
+                                        tier.maxPoints
+                                    )
+                                )
+                        );
+
+
+                    if (!currentTier) {
+
+                        currentTier =
+                            playerTiers[0];
+
+                    }
+
+
+                    // ==========================================
+                    // REMOVE OLD EFFECTS
+                    // ==========================================
+
+                    nameHeading.classList.remove(
+                        'tier-bronze',
+                        'tier-silver',
+                        'tier-gold',
+                        'tier-platinum',
+                        'tier-diamond',
+                        'tier-wave-master'
                     );
 
 
-                /*
-                 * Safety fallback.
-                 */
-
-                if (!currentTier) {
-
-                    currentTier =
-                        playerTiers[0];
-
-                }
-
-
-                // ==========================================
-                // PLAYER NAME EFFECT
-                // ==========================================
-
-                nameHeading.classList.remove(
-                    'tier-bronze',
-                    'tier-silver',
-                    'tier-gold',
-                    'tier-platinum',
-                    'tier-diamond',
-                    'tier-wave-master'
-                );
-
-
-                const effectClassMap = {
-
-                    "bronze":
-                        "tier-bronze",
-
-                    "silver":
-                        "tier-silver",
-
-                    "gold":
-                        "tier-gold",
-
-                    "platinum":
-                        "tier-platinum",
-
-                    "diamond":
-                        "tier-diamond",
-
-                    "wave-master-gradient":
-                        "tier-wave-master"
-
-                };
-
-
-                const nameEffect =
-                    effectClassMap[
-                        currentTier.effect
-                    ];
-
-
-                if (nameEffect) {
-
-                    nameHeading.classList.add(
-                        nameEffect
-                    );
-
-                } else if (currentTier.color) {
-
-                    nameHeading.style.color =
-                        currentTier.color;
-
-                }
-
-
-                // ==========================================
-                // TIER IMAGE
-                // ==========================================
-
-                if (currentTier.image) {
-
-                    tierImage.src =
-                        currentTier.image;
-
-                }
-
-
-                tierImage.alt =
-                    currentTier.name;
-
-
-                // ==========================================
-                // TIER NAME
-                // ==========================================
-
-                tierName.innerText =
-                    currentTier.name;
-
-
-                if (currentTier.color) {
-
-                    tierName.style.color =
-                        currentTier.color;
-
-                    tierProgressFill.style.color =
-                        currentTier.color;
-
-                    tierProgressFill.style.background =
-                        currentTier.color;
-
-                }
-
-
-                // ==========================================
-                // TIER PROGRESSION
-                // ==========================================
-
-                const currentMin =
-                    Number(
-                        currentTier.minPoints || 0
+                    tierCard.classList.remove(
+                        'wave-master-card'
                     );
 
 
-                const isMaxTier =
-                    currentTier.maxPoints === null;
+                    // ==========================================
+                    // APPLY NAME EFFECT
+                    // ==========================================
+
+                    const effectClassMap = {
+
+                        "bronze":
+                            "tier-bronze",
+
+                        "silver":
+                            "tier-silver",
+
+                        "gold":
+                            "tier-gold",
+
+                        "platinum":
+                            "tier-platinum",
+
+                        "diamond":
+                            "tier-diamond",
+
+                        "wave-master-gradient":
+                            "tier-wave-master"
+
+                    };
 
 
-                if (isMaxTier) {
-
-                    /*
-                     * Wave Master is the maximum tier.
-                     */
-
-                    tierProgressFill.style.width =
-                        "100%";
+                    const nameEffect =
+                        effectClassMap[
+                            currentTier.effect
+                        ];
 
 
-                    tierProgressCurrent.innerText =
-                        `${totalPoints.toLocaleString()} PTS`;
+                    if (nameEffect) {
+
+                        nameHeading.classList.add(
+                            nameEffect
+                        );
+
+                    }
 
 
-                    tierProgressNext.innerText =
-                        "MAX TIER • 15,000+ PTS";
+                    // ==========================================
+                    // WAVE MASTER CARD
+                    // ==========================================
+
+                    if (
+                        currentTier.effect ===
+                        "wave-master-gradient"
+                    ) {
+
+                        tierCard.classList.add(
+                            'wave-master-card'
+                        );
+
+                    }
+
+
+                    // ==========================================
+                    // TIER IMAGE
+                    // ==========================================
+
+                    if (currentTier.image) {
+
+                        tierImage.src =
+                            currentTier.image;
+
+                    }
+
+
+                    tierImage.alt =
+                        currentTier.name;
+
+
+                    // ==========================================
+                    // TIER NAME
+                    // ==========================================
+
+                    tierName.innerText =
+                        currentTier.name;
+
+
+                    if (currentTier.color) {
+
+                        tierName.style.color =
+                            currentTier.color;
+
+                        tierProgressFill.style.color =
+                            currentTier.color;
+
+                        tierProgressFill.style.background =
+                            currentTier.color;
+
+                    }
+
+
+                    // ==========================================
+                    // PROGRESSION
+                    // ==========================================
+
+                    const currentMin =
+                        Number(
+                            currentTier.minPoints || 0
+                        );
+
+
+                    const isMaxTier =
+                        currentTier.maxPoints === null;
+
+
+                    if (isMaxTier) {
+
+                        tierProgressFill.style.width =
+                            "100%";
+
+
+                        tierProgressCurrent.innerText =
+                            `${totalPoints.toLocaleString()} PTS`;
+
+
+                        tierProgressNext.innerText =
+                            "MAX TIER";
+
+                    } else {
+
+                        const nextTier =
+                            playerTiers.find(
+                                tier =>
+                                    Number(
+                                        tier.minPoints || 0
+                                    ) >
+                                    currentMin
+                            );
+
+
+                        const nextMin =
+                            nextTier
+                                ? Number(
+                                    nextTier.minPoints
+                                )
+                                : Number(
+                                    currentTier.maxPoints
+                                ) + 1;
+
+
+                        const pointsIntoTier =
+                            Math.max(
+                                0,
+                                totalPoints -
+                                currentMin
+                            );
+
+
+                        const pointsNeeded =
+                            Math.max(
+                                1,
+                                nextMin -
+                                currentMin
+                            );
+
+
+                        const progress =
+                            Math.min(
+                                100,
+                                Math.max(
+                                    0,
+                                    (
+                                        pointsIntoTier /
+                                        pointsNeeded
+                                    ) * 100
+                                )
+                            );
+
+
+                        tierProgressFill.style.width =
+                            `${progress}%`;
+
+
+                        tierProgressCurrent.innerText =
+                            `${totalPoints.toLocaleString()} / ${nextMin.toLocaleString()} PTS`;
+
+
+                        tierProgressNext.innerText =
+                            nextTier
+                                ? `NEXT: ${nextTier.name}`
+                                : "MAX TIER";
+
+                    }
 
                 } else {
 
                     /*
-                     * The next tier starts immediately
-                     * after the current tier's maximum.
+                     * If player-tiers.json isn't available,
+                     * hide only the tier card instead of
+                     * breaking the entire profile.
                      */
 
-                    const nextTier =
-                        playerTiers.find(
-                            tier =>
-                                Number(
-                                    tier.minPoints || 0
-                                ) >
-                                currentMin
-                        );
-
-
-                    const nextMin =
-                        nextTier
-                            ? Number(
-                                nextTier.minPoints
-                            )
-                            : Number(
-                                currentTier.maxPoints
-                            ) + 1;
-
-
-                    const pointsIntoTier =
-                        Math.max(
-                            0,
-                            totalPoints -
-                            currentMin
-                        );
-
-
-                    const pointsNeeded =
-                        Math.max(
-                            1,
-                            nextMin -
-                            currentMin
-                        );
-
-
-                    const progress =
-                        Math.min(
-                            100,
-                            Math.max(
-                                0,
-                                (
-                                    pointsIntoTier /
-                                    pointsNeeded
-                                ) * 100
-                            )
-                        );
-
-
-                    tierProgressFill.style.width =
-                        `${progress}%`;
-
-
-                    tierProgressCurrent.innerText =
-                        `${totalPoints.toLocaleString()} / ${nextMin.toLocaleString()} PTS`;
-
-
-                    tierProgressNext.innerText =
-                        nextTier
-                            ? `NEXT: ${nextTier.name}`
-                            : "MAX TIER";
+                    tierCard.style.display =
+                        "none";
 
                 }
 
