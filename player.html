@@ -150,6 +150,136 @@
             letter-spacing: -0.5px;
         }
 
+        /* ==========================================
+           PLAYER TIER SYSTEM
+           ========================================== */
+
+        .player-tier-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 430px;
+            margin: 0 auto 22px auto;
+        }
+
+        .player-tier-image {
+            width: 90px;
+            height: 90px;
+            object-fit: contain;
+            display: block;
+            margin-bottom: 8px;
+            filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.5));
+        }
+
+        .player-tier-name {
+            font-size: 1rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .tier-progress-container {
+            width: 100%;
+        }
+
+        .tier-progress-track {
+            width: 100%;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.4);
+        }
+
+        .tier-progress-fill {
+            height: 100%;
+            width: 0%;
+            border-radius: 20px;
+            transition: width 0.8s ease;
+            box-shadow: 0 0 12px currentColor;
+        }
+
+        .tier-progress-text {
+            margin-top: 7px;
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: #aaa;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        /* ==========================================
+           TIER NAME EFFECTS
+           ========================================== */
+
+        .tier-bronze {
+            color: #cd7f32 !important;
+            text-shadow: 0 0 12px rgba(205, 127, 50, 0.45);
+        }
+
+        .tier-silver {
+            color: #c0c0c0 !important;
+            text-shadow: 0 0 12px rgba(192, 192, 192, 0.45);
+        }
+
+        .tier-gold {
+            color: #ffd700 !important;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.55);
+        }
+
+        .tier-platinum {
+            color: #e5e4e2 !important;
+            text-shadow:
+                0 0 10px rgba(229, 228, 226, 0.6),
+                0 0 25px rgba(229, 228, 226, 0.25);
+        }
+
+        .tier-diamond {
+            color: #b9f2ff !important;
+            text-shadow:
+                0 0 12px rgba(185, 242, 255, 0.7),
+                0 0 28px rgba(185, 242, 255, 0.35);
+        }
+
+        .tier-wave-master {
+            background: linear-gradient(
+                90deg,
+                #ff4141,
+                #ff8a00,
+                #ffe600,
+                #47e5bc,
+                #4aa3ff,
+                #b86cff,
+                #ff4141
+            );
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: waveMasterGradient 4s ease-in-out infinite;
+            text-shadow: none;
+        }
+
+        @keyframes waveMasterGradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
         .stats-badges-container {
             display: flex;
             justify-content: center;
@@ -328,6 +458,15 @@
                 font-size: 2.2rem;
             }
 
+            .player-tier-image {
+                width: 75px;
+                height: 75px;
+            }
+
+            .player-tier-name {
+                font-size: 0.85rem;
+            }
+
             .completed-grid {
                 grid-template-columns: 1fr;
             }
@@ -381,6 +520,56 @@
                 >
                     LOADING...
                 </h1>
+
+                <!-- ==========================================
+                     PLAYER TIER
+                     ========================================== -->
+
+                <div
+                    id="playerTierContainer"
+                    class="player-tier-container"
+                >
+
+                    <img
+                        id="playerTierImage"
+                        class="player-tier-image"
+                        src=""
+                        alt="Player Tier"
+                    >
+
+                    <div
+                        id="playerTierName"
+                        class="player-tier-name"
+                    >
+                        LOADING TIER...
+                    </div>
+
+                    <div class="tier-progress-container">
+
+                        <div class="tier-progress-track">
+
+                            <div
+                                id="tierProgressFill"
+                                class="tier-progress-fill"
+                            ></div>
+
+                        </div>
+
+                        <div class="tier-progress-text">
+
+                            <span id="tierProgressCurrent">
+                                0 PTS
+                            </span>
+
+                            <span id="tierProgressNext">
+                                NEXT TIER
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
 
                 <div class="stats-badges-container">
 
@@ -648,12 +837,13 @@
             try {
 
                 // ==========================================
-                // LOAD LEVELS + PACKS
+                // LOAD LEVELS + PACKS + PLAYER TIERS
                 // ==========================================
 
                 const [
                     levelsResponse,
-                    packsResponse
+                    packsResponse,
+                    tiersResponse
                 ] = await Promise.all([
 
                     fetch(
@@ -662,6 +852,10 @@
 
                     fetch(
                         `packs.json?v=${Date.now()}`
+                    ),
+
+                    fetch(
+                        `player-tiers.json?v=${Date.now()}`
                     )
 
                 ]);
@@ -672,6 +866,9 @@
 
                 const packs =
                     await packsResponse.json();
+
+                const playerTiers =
+                    await tiersResponse.json();
 
 
                 // ==========================================
@@ -1284,6 +1481,264 @@
                             ? 'COMPLETION'
                             : 'COMPLETIONS'
                     }`;
+
+
+                // ==========================================
+                // PLAYER TIER
+                // ==========================================
+
+                const tierImage =
+                    document.getElementById(
+                        'playerTierImage'
+                    );
+
+                const tierName =
+                    document.getElementById(
+                        'playerTierName'
+                    );
+
+                const tierProgressFill =
+                    document.getElementById(
+                        'tierProgressFill'
+                    );
+
+                const tierProgressCurrent =
+                    document.getElementById(
+                        'tierProgressCurrent'
+                    );
+
+                const tierProgressNext =
+                    document.getElementById(
+                        'tierProgressNext'
+                    );
+
+
+                /*
+                 * Find the tier whose point range
+                 * contains the player's total points.
+                 */
+
+                let currentTier =
+                    playerTiers.find(
+                        tier =>
+                            totalPoints >=
+                            Number(tier.minPoints || 0) &&
+                            (
+                                tier.maxPoints === null ||
+                                totalPoints <=
+                                Number(tier.maxPoints)
+                            )
+                    );
+
+
+                /*
+                 * Safety fallback.
+                 */
+
+                if (!currentTier) {
+
+                    currentTier =
+                        playerTiers[0];
+
+                }
+
+
+                // ==========================================
+                // PLAYER NAME EFFECT
+                // ==========================================
+
+                nameHeading.classList.remove(
+                    'tier-bronze',
+                    'tier-silver',
+                    'tier-gold',
+                    'tier-platinum',
+                    'tier-diamond',
+                    'tier-wave-master'
+                );
+
+
+                const effectClassMap = {
+
+                    "bronze":
+                        "tier-bronze",
+
+                    "silver":
+                        "tier-silver",
+
+                    "gold":
+                        "tier-gold",
+
+                    "platinum":
+                        "tier-platinum",
+
+                    "diamond":
+                        "tier-diamond",
+
+                    "wave-master-gradient":
+                        "tier-wave-master"
+
+                };
+
+
+                const nameEffect =
+                    effectClassMap[
+                        currentTier.effect
+                    ];
+
+
+                if (nameEffect) {
+
+                    nameHeading.classList.add(
+                        nameEffect
+                    );
+
+                } else if (currentTier.color) {
+
+                    nameHeading.style.color =
+                        currentTier.color;
+
+                }
+
+
+                // ==========================================
+                // TIER IMAGE
+                // ==========================================
+
+                if (currentTier.image) {
+
+                    tierImage.src =
+                        currentTier.image;
+
+                }
+
+
+                tierImage.alt =
+                    currentTier.name;
+
+
+                // ==========================================
+                // TIER NAME
+                // ==========================================
+
+                tierName.innerText =
+                    currentTier.name;
+
+
+                if (currentTier.color) {
+
+                    tierName.style.color =
+                        currentTier.color;
+
+                    tierProgressFill.style.color =
+                        currentTier.color;
+
+                    tierProgressFill.style.background =
+                        currentTier.color;
+
+                }
+
+
+                // ==========================================
+                // TIER PROGRESSION
+                // ==========================================
+
+                const currentMin =
+                    Number(
+                        currentTier.minPoints || 0
+                    );
+
+
+                const isMaxTier =
+                    currentTier.maxPoints === null;
+
+
+                if (isMaxTier) {
+
+                    /*
+                     * Wave Master is the maximum tier.
+                     */
+
+                    tierProgressFill.style.width =
+                        "100%";
+
+
+                    tierProgressCurrent.innerText =
+                        `${totalPoints.toLocaleString()} PTS`;
+
+
+                    tierProgressNext.innerText =
+                        "MAX TIER • 15,000+ PTS";
+
+                } else {
+
+                    /*
+                     * The next tier starts immediately
+                     * after the current tier's maximum.
+                     */
+
+                    const nextTier =
+                        playerTiers.find(
+                            tier =>
+                                Number(
+                                    tier.minPoints || 0
+                                ) >
+                                currentMin
+                        );
+
+
+                    const nextMin =
+                        nextTier
+                            ? Number(
+                                nextTier.minPoints
+                            )
+                            : Number(
+                                currentTier.maxPoints
+                            ) + 1;
+
+
+                    const pointsIntoTier =
+                        Math.max(
+                            0,
+                            totalPoints -
+                            currentMin
+                        );
+
+
+                    const pointsNeeded =
+                        Math.max(
+                            1,
+                            nextMin -
+                            currentMin
+                        );
+
+
+                    const progress =
+                        Math.min(
+                            100,
+                            Math.max(
+                                0,
+                                (
+                                    pointsIntoTier /
+                                    pointsNeeded
+                                ) * 100
+                            )
+                        );
+
+
+                    tierProgressFill.style.width =
+                        `${progress}%`;
+
+
+                    tierProgressCurrent.innerText =
+                        `${totalPoints.toLocaleString()} / ${nextMin.toLocaleString()} PTS`;
+
+
+                    tierProgressNext.innerText =
+                        nextTier
+                            ? `NEXT: ${nextTier.name}`
+                            : "MAX TIER";
+
+                }
 
 
                 // ==========================================
