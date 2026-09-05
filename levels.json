@@ -1382,7 +1382,7 @@
   },
   { 
     "name": "ChefLimeWaveBasic2", 
-    "points": 0, 
+    "points": -9999, 
     "creator": "ChefLime", 
     "verifier": "ChefLime", 
     "id": "141384914", 
@@ -1412,7 +1412,7 @@
   },
   { 
     "name": "Sakupen Hellcles", 
-    "points": 0, 
+    "points": -9998, 
     "creator": "ZizoGMD", 
     "verifier": "ZizoGMD", 
     "id": "140086188", 
@@ -1503,7 +1503,7 @@
   },
   {
     "name": "metronome",
-    "points": 0,
+    "points": -10000,
     "creator": "sevehweveh",
     "verifier": "sevehweveh",
     "id": "147697069",
