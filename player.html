@@ -21,7 +21,7 @@
             margin: 0;
             padding: 0;
             scrollbar-width: thin;
-            scrollbar-color: rgba(255, 255, 255, 0.15) #0b0c10;
+            scrollbar-color: rgba(255,255,255,0.15) #0b0c10;
         }
 
         html,
@@ -88,7 +88,7 @@
 
         .nav-link:hover {
             color: #fff;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255,255,255,0.05);
         }
 
         .profile-container {
@@ -108,7 +108,7 @@
             border-radius: 20px;
             border: 1px solid var(--border);
             backdrop-filter: blur(20px);
-            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 20px 45px rgba(0,0,0,0.6);
             overflow: hidden;
         }
 
@@ -119,9 +119,9 @@
             background-position: center;
             opacity: 0.35;
             filter: blur(6px);
+            transform: scale(1.06);
             z-index: 0;
             pointer-events: none;
-            transition: background-image 0.4s ease;
         }
 
         .profile-bg-overlay {
@@ -129,8 +129,8 @@
             inset: 0;
             background: radial-gradient(
                 circle at center,
-                rgba(11, 12, 16, 0.5) 0%,
-                rgba(11, 12, 16, 0.85) 100%
+                rgba(11,12,16,0.45) 0%,
+                rgba(11,12,16,0.9) 100%
             );
             z-index: 0;
             pointer-events: none;
@@ -169,19 +169,19 @@
 
         .player-tier-card {
             position: relative;
-            width: 270px;
-            min-height: 92px;
+            width: 300px;
+            min-height: 96px;
             padding: 10px 14px;
             display: flex;
             align-items: center;
             gap: 12px;
             text-align: left;
             border-radius: 14px;
-            background: rgba(10, 12, 17, 0.72);
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(10,12,17,0.78);
+            border: 1px solid rgba(255,255,255,0.12);
             box-shadow:
-                0 10px 25px rgba(0, 0, 0, 0.45),
-                inset 0 0 25px rgba(255, 255, 255, 0.02);
+                0 10px 25px rgba(0,0,0,0.45),
+                inset 0 0 25px rgba(255,255,255,0.02);
             backdrop-filter: blur(12px);
             overflow: hidden;
             transition: all 0.3s ease;
@@ -193,7 +193,7 @@
             inset: 0;
             background: linear-gradient(
                 135deg,
-                rgba(255,255,255,0.06),
+                rgba(255,255,255,0.07),
                 transparent 45%,
                 rgba(255,255,255,0.025)
             );
@@ -202,20 +202,20 @@
 
         .player-tier-card:hover {
             transform: translateY(-2px);
-            border-color: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255,255,255,0.25);
             box-shadow:
-                0 14px 32px rgba(0, 0, 0, 0.55),
-                inset 0 0 30px rgba(255, 255, 255, 0.03);
+                0 14px 32px rgba(0,0,0,0.55),
+                inset 0 0 30px rgba(255,255,255,0.03);
         }
 
         .player-tier-image {
-            width: 62px;
-            height: 62px;
+            width: 68px;
+            height: 68px;
             object-fit: contain;
             flex-shrink: 0;
             position: relative;
             z-index: 2;
-            filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.6));
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.7));
         }
 
         .player-tier-details {
@@ -245,19 +245,18 @@
 
         .tier-progress-track {
             width: 100%;
-            height: 6px;
-            background: rgba(255, 255, 255, 0.08);
+            height: 7px;
+            background: rgba(255,255,255,0.08);
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.6);
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.6);
         }
 
         .tier-progress-fill {
             height: 100%;
             width: 0%;
             border-radius: 20px;
-            transition: width 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-            box-shadow: 0 0 10px currentColor;
+            transition: width 0.8s cubic-bezier(0.2,0.8,0.2,1);
         }
 
         .tier-progress-text {
@@ -273,66 +272,189 @@
         }
 
         /* ==========================================
-           TIER COLOURS
+           BRONZE — SOLID
            ========================================== */
 
         .tier-bronze {
             color: #cd7f32 !important;
-            text-shadow: 0 0 14px rgba(205, 127, 50, 0.45);
-        }
-
-        .tier-silver {
-            color: #c0c0c0 !important;
-            text-shadow: 0 0 14px rgba(192, 192, 192, 0.45);
-        }
-
-        .tier-gold {
-            color: #ffd700 !important;
-            text-shadow: 0 0 16px rgba(255, 215, 0, 0.55);
-        }
-
-        .tier-platinum {
-            color: #e5e4e2 !important;
             text-shadow:
-                0 0 12px rgba(229, 228, 226, 0.65),
-                0 0 28px rgba(229, 228, 226, 0.3);
+                0 0 14px rgba(205,127,50,0.5);
         }
 
-        .tier-diamond {
-            color: #b9f2ff !important;
-            text-shadow:
-                0 0 14px rgba(185, 242, 255, 0.75),
-                0 0 30px rgba(185, 242, 255, 0.35);
+        .tier-progress-fill.tier-bronze {
+            background: #cd7f32 !important;
+            box-shadow:
+                0 0 10px rgba(205,127,50,0.65);
         }
 
         /* ==========================================
-           WAVE MASTER
+           SILVER — SOLID
            ========================================== */
 
-        .tier-wave-master {
+        .tier-silver {
+            color: #c0c0c0 !important;
+            text-shadow:
+                0 0 14px rgba(192,192,192,0.5);
+        }
+
+        .tier-progress-fill.tier-silver {
+            background: #c0c0c0 !important;
+            box-shadow:
+                0 0 10px rgba(192,192,192,0.65);
+        }
+
+        /* ==========================================
+           GOLD — MOVING GRADIENT
+           ========================================== */
+
+        .tier-gold {
             background: linear-gradient(
                 90deg,
-                #ff4141,
-                #ff8a00,
-                #ffe600,
-                #47e5bc,
-                #4aa3ff,
-                #b86cff,
-                #ff4141
+                #ffd700,
+                #fff3a1,
+                #ff9d00,
+                #ffd700,
+                #fff3a1,
+                #ffd700
             );
             background-size: 300% 100%;
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: waveMasterGradient 4s ease-in-out infinite;
-            text-shadow: none;
+            animation: goldGradient 3s linear infinite;
+            text-shadow: none !important;
+        }
+
+        .tier-progress-fill.tier-gold {
+            background: linear-gradient(
+                90deg,
+                #ffd700,
+                #fff3a1,
+                #ff9d00,
+                #ffd700
+            ) !important;
+            background-size: 300% 100% !important;
+            animation: goldGradient 3s linear infinite;
+            box-shadow: 0 0 12px rgba(255,215,0,0.7);
+        }
+
+        /* ==========================================
+           PLATINUM — MOVING GRADIENT
+           ========================================== */
+
+        .tier-platinum {
+            background: linear-gradient(
+                90deg,
+                #d9d9d9,
+                #ffffff,
+                #9edcff,
+                #ffffff,
+                #d9d9d9
+            );
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: platinumGradient 3.5s linear infinite;
+            text-shadow: none !important;
+        }
+
+        .tier-progress-fill.tier-platinum {
+            background: linear-gradient(
+                90deg,
+                #d9d9d9,
+                #ffffff,
+                #9edcff,
+                #ffffff,
+                #d9d9d9
+            ) !important;
+            background-size: 300% 100% !important;
+            animation: platinumGradient 3.5s linear infinite;
+            box-shadow: 0 0 12px rgba(220,245,255,0.75);
+        }
+
+        /* ==========================================
+           DIAMOND — MOVING GRADIENT
+           ========================================== */
+
+        .tier-diamond {
+            background: linear-gradient(
+                90deg,
+                #b9f2ff,
+                #43dcff,
+                #8b6cff,
+                #e4fbff,
+                #43dcff,
+                #b9f2ff
+            );
+            background-size: 350% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: diamondGradient 3s linear infinite;
+            text-shadow: none !important;
+        }
+
+        .tier-progress-fill.tier-diamond {
+            background: linear-gradient(
+                90deg,
+                #b9f2ff,
+                #43dcff,
+                #8b6cff,
+                #e4fbff,
+                #43dcff
+            ) !important;
+            background-size: 350% 100% !important;
+            animation: diamondGradient 3s linear infinite;
+            box-shadow: 0 0 14px rgba(90,220,255,0.8);
+        }
+
+        /* ==========================================
+           WAVE MASTER — PURPLE + RED ONLY
+           ========================================== */
+
+        .tier-wave-master {
+            background: linear-gradient(
+                90deg,
+                #ff3030,
+                #ff4141,
+                #b52cff,
+                #7020d9,
+                #b52cff,
+                #ff4141,
+                #ff3030
+            );
+            background-size: 350% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: waveMasterGradient 2.8s linear infinite;
+            text-shadow: none !important;
+        }
+
+        .tier-progress-fill.tier-wave-master {
+            background: linear-gradient(
+                90deg,
+                #ff3030,
+                #ff4141,
+                #b52cff,
+                #7020d9,
+                #b52cff,
+                #ff4141
+            ) !important;
+            background-size: 350% 100% !important;
+            animation: waveMasterGradient 2.8s linear infinite;
+            box-shadow:
+                0 0 16px rgba(255,65,65,0.75),
+                0 0 25px rgba(150,45,255,0.35);
         }
 
         .wave-master-card {
-            border-color: rgba(255, 65, 65, 0.4);
+            border-color: rgba(181,44,255,0.5);
             box-shadow:
-                0 0 25px rgba(255, 65, 65, 0.12),
-                0 10px 30px rgba(0, 0, 0, 0.5);
+                0 0 25px rgba(181,44,255,0.15),
+                0 0 45px rgba(255,65,65,0.08),
+                0 10px 30px rgba(0,0,0,0.5);
         }
 
         .wave-master-card::after {
@@ -345,23 +467,50 @@
             background: linear-gradient(
                 90deg,
                 transparent,
-                rgba(255,255,255,0.08),
+                rgba(255,255,255,0.1),
                 transparent
             );
-            animation: waveMasterShine 3.5s infinite;
+            animation: waveMasterShine 3.2s infinite;
+            pointer-events: none;
+        }
+
+        /* ==========================================
+           ANIMATIONS
+           ========================================== */
+
+        @keyframes goldGradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 300% 50%;
+            }
+        }
+
+        @keyframes platinumGradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 300% 50%;
+            }
+        }
+
+        @keyframes diamondGradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 350% 50%;
+            }
         }
 
         @keyframes waveMasterGradient {
             0% {
                 background-position: 0% 50%;
             }
-
-            50% {
-                background-position: 100% 50%;
-            }
-
             100% {
-                background-position: 0% 50%;
+                background-position: 350% 50%;
             }
         }
 
@@ -369,7 +518,6 @@
             0% {
                 left: -100%;
             }
-
             55%,
             100% {
                 left: 150%;
@@ -377,7 +525,7 @@
         }
 
         /* ==========================================
-           EXISTING STYLES
+           STATS
            ========================================== */
 
         .stats-badges-container {
@@ -389,7 +537,7 @@
 
         .stats-badge {
             display: inline-block;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255,255,255,0.05);
             color: #fff;
             padding: 8px 18px;
             border-radius: 20px;
@@ -397,21 +545,25 @@
             font-size: 0.88rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255,255,255,0.12);
             backdrop-filter: blur(8px);
         }
 
         .hardest-badge {
-            background: rgba(255, 207, 75, 0.1);
+            background: rgba(255,207,75,0.1);
             color: var(--gold);
-            border-color: rgba(255, 207, 75, 0.25);
+            border-color: rgba(255,207,75,0.25);
         }
 
         .points-badge {
-            background: rgba(71, 229, 188, 0.1);
+            background: rgba(71,229,188,0.1);
             color: var(--accent);
-            border-color: rgba(71, 229, 188, 0.3);
+            border-color: rgba(71,229,188,0.3);
         }
+
+        /* ==========================================
+           LEVELS
+           ========================================== */
 
         .section-title {
             font-size: 1.35rem;
@@ -426,25 +578,25 @@
 
         .completed-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            grid-template-columns: repeat(auto-fill,minmax(340px,1fr));
             gap: 22px;
         }
 
         .level-card {
             position: relative;
-            background: rgba(18, 22, 31, 0.85);
+            background: rgba(18,22,31,0.85);
             border: 1px solid var(--border);
             border-radius: 14px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+            transition: all 0.25s cubic-bezier(0.2,0.8,0.2,1);
         }
 
         .level-card:hover {
             transform: translateY(-4px);
-            border-color: rgba(255, 255, 255, 0.35);
+            border-color: rgba(255,255,255,0.35);
             box-shadow: 0 16px 35px rgba(0,0,0,0.7);
         }
 
@@ -468,8 +620,8 @@
             inset: 0;
             background: linear-gradient(
                 135deg,
-                rgba(11, 12, 16, 0.93) 0%,
-                rgba(11, 12, 16, 0.75) 100%
+                rgba(11,12,16,0.93) 0%,
+                rgba(11,12,16,0.75) 100%
             );
             z-index: 1;
         }
@@ -501,7 +653,7 @@
 
         .unbeaten-card {
             opacity: 0.65;
-            border: 1px dashed rgba(255, 255, 255, 0.15);
+            border: 1px dashed rgba(255,255,255,0.15);
         }
 
         .unbeaten-card .level-card-bg {
@@ -529,21 +681,23 @@
             color: #cd7f32 !important;
         }
 
-        @media (max-width: 900px) {
+        /* ==========================================
+           RESPONSIVE
+           ========================================== */
 
+        @media (max-width: 900px) {
             .player-main-row {
                 flex-direction: column;
                 gap: 18px;
             }
 
             .player-tier-card {
-                width: 300px;
+                width: 100%;
+                max-width: 320px;
             }
-
         }
 
         @media (max-width: 768px) {
-
             nav {
                 padding: 14px 18px;
             }
@@ -571,11 +725,6 @@
                 font-size: 2.2rem;
             }
 
-            .player-tier-card {
-                width: 100%;
-                max-width: 320px;
-            }
-
             .completed-grid {
                 grid-template-columns: 1fr;
             }
@@ -589,1474 +738,1356 @@
 
 <body>
 
-    <canvas id="bg-canvas"></canvas>
+<canvas id="bg-canvas"></canvas>
 
-    <nav>
-        <div
-            class="nav-logo"
-            onclick="window.location.href='index.html'"
-        >
-            THE WAVE LIST
-        </div>
+<nav>
+    <div
+        class="nav-logo"
+        onclick="window.location.href='index.html'"
+    >
+        THE WAVE LIST
+    </div>
 
-        <div>
-            <a
-                href="index.html"
-                class="nav-link"
-            >
-                BACK TO LIST
-            </a>
-        </div>
-    </nav>
+    <div>
+        <a href="index.html" class="nav-link">
+            BACK TO LIST
+        </a>
+    </div>
+</nav>
 
+<div class="profile-container">
 
-    <div class="profile-container">
+    <div class="profile-header">
 
-        <div class="profile-header">
+        <div id="profileBg" class="profile-bg-layer"></div>
+        <div class="profile-bg-overlay"></div>
 
-            <div
-                id="profileBg"
-                class="profile-bg-layer"
-            ></div>
+        <div class="profile-header-content">
 
-            <div class="profile-bg-overlay"></div>
+            <div class="player-main-row">
 
-            <div class="profile-header-content">
+                <h1
+                    id="playerNameHeading"
+                    class="profile-name"
+                >
+                    LOADING...
+                </h1>
 
-                <div class="player-main-row">
+                <div
+                    id="playerTierCard"
+                    class="player-tier-card"
+                >
 
-                    <h1
-                        id="playerNameHeading"
-                        class="profile-name"
-                    >
-                        LOADING...
-                    </h1>
-
-                    <!-- PLAYER TIER -->
-
-                    <div
-                        id="playerTierCard"
-                        class="player-tier-card"
+                    <img
+                        id="playerTierImage"
+                        class="player-tier-image"
+                        src=""
+                        alt="Player Tier"
+                        onerror="this.style.display='none';"
                     >
 
-                        <img
-                            id="playerTierImage"
-                            class="player-tier-image"
-                            src=""
-                            alt="Player Tier"
+                    <div class="player-tier-details">
+
+                        <div class="player-tier-label">
+                            PLAYER TIER
+                        </div>
+
+                        <div
+                            id="playerTierName"
+                            class="player-tier-name"
                         >
+                            LOADING...
+                        </div>
 
-                        <div class="player-tier-details">
-
-                            <div class="player-tier-label">
-                                PLAYER TIER
-                            </div>
-
+                        <div class="tier-progress-track">
                             <div
-                                id="playerTierName"
-                                class="player-tier-name"
-                            >
-                                LOADING...
-                            </div>
+                                id="tierProgressFill"
+                                class="tier-progress-fill"
+                            ></div>
+                        </div>
 
-                            <div class="tier-progress-track">
+                        <div class="tier-progress-text">
 
-                                <div
-                                    id="tierProgressFill"
-                                    class="tier-progress-fill"
-                                ></div>
+                            <span id="tierProgressCurrent">
+                                0 PTS
+                            </span>
 
-                            </div>
-
-                            <div class="tier-progress-text">
-
-                                <span id="tierProgressCurrent">
-                                    0 PTS
-                                </span>
-
-                                <span id="tierProgressNext">
-                                    NEXT TIER
-                                </span>
-
-                            </div>
+                            <span id="tierProgressNext">
+                                NEXT TIER
+                            </span>
 
                         </div>
 
                     </div>
-
                 </div>
 
+            </div>
 
-                <div class="stats-badges-container">
+            <div class="stats-badges-container">
 
-                    <div
-                        id="totalPoints"
-                        class="stats-badge points-badge"
-                    >
-                        0 PTS
-                    </div>
+                <div
+                    id="totalPoints"
+                    class="stats-badge points-badge"
+                >
+                    0 PTS
+                </div>
 
-                    <div
-                        id="completionCount"
-                        class="stats-badge"
-                    >
-                        0 COMPLETIONS
-                    </div>
+                <div
+                    id="completionCount"
+                    class="stats-badge"
+                >
+                    0 COMPLETIONS
+                </div>
 
-                    <div
-                        id="hardestLevel"
-                        class="stats-badge hardest-badge"
-                        style="display:none;"
-                    >
-                        HARDEST: NONE
-                    </div>
-
+                <div
+                    id="hardestLevel"
+                    class="stats-badge hardest-badge"
+                    style="display:none;"
+                >
+                    HARDEST: NONE
                 </div>
 
             </div>
 
         </div>
-
-
-        <h2 class="section-title">
-            Completed Packs
-        </h2>
-
-        <div
-            id="packsGrid"
-            class="completed-grid"
-        ></div>
-
-
-        <h2 class="section-title">
-            Completed Levels
-        </h2>
-
-        <div
-            id="completedGrid"
-            class="completed-grid"
-        ></div>
-
-
-        <h2 class="section-title">
-            Created Levels
-        </h2>
-
-        <div
-            id="createdGrid"
-            class="completed-grid"
-        ></div>
-
-
-        <h2
-            class="section-title"
-            style="border-color:#555;"
-        >
-            Non-Completed Levels
-        </h2>
-
-        <div
-            id="unbeatenGrid"
-            class="completed-grid"
-        ></div>
-
     </div>
 
+    <h2 class="section-title">
+        Completed Packs
+    </h2>
 
-    <script>
+    <div id="packsGrid" class="completed-grid"></div>
 
-        // ==========================================
-        // PARTICLE BACKGROUND
-        // ==========================================
+    <h2 class="section-title">
+        Completed Levels
+    </h2>
 
-        const canvas =
-            document.getElementById('bg-canvas');
+    <div id="completedGrid" class="completed-grid"></div>
 
-        const ctx =
-            canvas.getContext('2d');
+    <h2 class="section-title">
+        Created Levels
+    </h2>
 
-        let particles = [];
+    <div id="createdGrid" class="completed-grid"></div>
 
+    <h2
+        class="section-title"
+        style="border-color:#555;"
+    >
+        Non-Completed Levels
+    </h2>
 
-        function initCanvas() {
+    <div id="unbeatenGrid" class="completed-grid"></div>
 
-            canvas.width =
-                window.innerWidth;
+</div>
 
-            canvas.height =
-                window.innerHeight;
+<script>
 
-            particles = [];
+/* ==========================================
+   PARTICLE BACKGROUND
+   ========================================== */
 
+const canvas =
+    document.getElementById('bg-canvas');
 
-            for (let i = 0; i < 65; i++) {
+const ctx =
+    canvas.getContext('2d');
 
-                particles.push({
+let particles = [];
 
-                    x:
-                        Math.random() *
-                        canvas.width,
+function initCanvas() {
 
-                    y:
-                        Math.random() *
-                        canvas.height,
+    canvas.width =
+        window.innerWidth;
 
-                    radius:
-                        Math.random() * 2 + 0.5,
+    canvas.height =
+        window.innerHeight;
 
-                    speed:
-                        Math.random() * 0.3 + 0.1
+    particles = [];
 
-                });
+    for (let i = 0; i < 65; i++) {
 
-            }
+        particles.push({
 
-        }
-
-
-        function animateCanvas() {
-
-            ctx.clearRect(
-                0,
-                0,
+            x:
+                Math.random() *
                 canvas.width,
-                canvas.height
-            );
 
+            y:
+                Math.random() *
+                canvas.height,
 
-            particles.forEach(p => {
+            radius:
+                Math.random() * 2 + 0.5,
 
-                ctx.fillStyle =
-                    "rgba(71, 229, 188, 0.2)";
+            speed:
+                Math.random() * 0.3 + 0.1
 
-                ctx.beginPath();
+        });
 
-                ctx.arc(
-                    p.x,
-                    p.y,
-                    p.radius,
-                    0,
-                    Math.PI * 2
-                );
+    }
+}
 
-                ctx.fill();
+function animateCanvas() {
 
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
 
-                p.y -= p.speed;
+    particles.forEach(p => {
 
+        ctx.fillStyle =
+            "rgba(71,229,188,0.2)";
 
-                if (p.y < 0) {
+        ctx.beginPath();
 
-                    p.y =
-                        canvas.height;
-
-                }
-
-            });
-
-
-            requestAnimationFrame(
-                animateCanvas
-            );
-
-        }
-
-
-        window.addEventListener(
-            'resize',
-            initCanvas
+        ctx.arc(
+            p.x,
+            p.y,
+            p.radius,
+            0,
+            Math.PI * 2
         );
 
-        initCanvas();
-        animateCanvas();
+        ctx.fill();
+
+        p.y -= p.speed;
+
+        if (p.y < 0) {
+            p.y = canvas.height;
+        }
+
+    });
+
+    requestAnimationFrame(
+        animateCanvas
+    );
+}
+
+window.addEventListener(
+    'resize',
+    initCanvas
+);
+
+initCanvas();
+animateCanvas();
 
 
-        // ==========================================
-        // PLAYER
-        // ==========================================
+/* ==========================================
+   PLAYER
+   ========================================== */
 
-        const urlParams =
-            new URLSearchParams(
-                window.location.search
+const urlParams =
+    new URLSearchParams(
+        window.location.search
+    );
+
+const targetPlayer =
+    urlParams.get('name');
+
+
+/* ==========================================
+   LOAD PLAYER PROFILE
+   ========================================== */
+
+async function loadPlayerProfile() {
+
+    const nameHeading =
+        document.getElementById(
+            'playerNameHeading'
+        );
+
+    const totalPointsBadge =
+        document.getElementById(
+            'totalPoints'
+        );
+
+    const countBadge =
+        document.getElementById(
+            'completionCount'
+        );
+
+    const hardestBadge =
+        document.getElementById(
+            'hardestLevel'
+        );
+
+    const profileBg =
+        document.getElementById(
+            'profileBg'
+        );
+
+    const packsGrid =
+        document.getElementById(
+            'packsGrid'
+        );
+
+    const grid =
+        document.getElementById(
+            'completedGrid'
+        );
+
+    const creationsGrid =
+        document.getElementById(
+            'createdGrid'
+        );
+
+    const unbeatenGrid =
+        document.getElementById(
+            'unbeatenGrid'
+        );
+
+    const tierCard =
+        document.getElementById(
+            'playerTierCard'
+        );
+
+    const tierImage =
+        document.getElementById(
+            'playerTierImage'
+        );
+
+    const tierName =
+        document.getElementById(
+            'playerTierName'
+        );
+
+    const tierProgressFill =
+        document.getElementById(
+            'tierProgressFill'
+        );
+
+    const tierProgressCurrent =
+        document.getElementById(
+            'tierProgressCurrent'
+        );
+
+    const tierProgressNext =
+        document.getElementById(
+            'tierProgressNext'
+        );
+
+
+    if (!targetPlayer) {
+
+        nameHeading.innerText =
+            "PLAYER NOT FOUND";
+
+        tierCard.style.display =
+            "none";
+
+        return;
+
+    }
+
+
+    nameHeading.innerText =
+        targetPlayer;
+
+
+    /* ==========================================
+       LOAD TIERS FIRST
+       ========================================== */
+
+    let playerTiers = [];
+
+    try {
+
+        const tiersResponse =
+            await fetch(
+                './player-tiers.json?v=' +
+                Date.now(),
+                {
+                    cache: 'no-store'
+                }
             );
 
-        const targetPlayer =
-            urlParams.get('name');
+        if (!tiersResponse.ok) {
+
+            throw new Error(
+                `player-tiers.json returned ${tiersResponse.status}`
+            );
+
+        }
+
+        playerTiers =
+            await tiersResponse.json();
+
+        console.log(
+            "Player tiers loaded:",
+            playerTiers
+        );
+
+    } catch (tierError) {
+
+        console.error(
+            "Could not load player-tiers.json:",
+            tierError
+        );
+
+        tierCard.style.display =
+            "none";
+
+    }
 
 
-        // ==========================================
-        // LOAD PLAYER PROFILE
-        // ==========================================
+    try {
 
-        async function loadPlayerProfile() {
+        /* ==========================================
+           LOAD LEVELS + PACKS
+           ========================================== */
 
-            const nameHeading =
-                document.getElementById(
-                    'playerNameHeading'
+        const [
+            levelsResponse,
+            packsResponse
+        ] = await Promise.all([
+
+            fetch(
+                `levels.json?v=${Date.now()}`
+            ),
+
+            fetch(
+                `packs.json?v=${Date.now()}`
+            )
+
+        ]);
+
+
+        if (!levelsResponse.ok) {
+            throw new Error(
+                "levels.json failed to load"
+            );
+        }
+
+        if (!packsResponse.ok) {
+            throw new Error(
+                "packs.json failed to load"
+            );
+        }
+
+
+        const data =
+            await levelsResponse.json();
+
+        const packs =
+            await packsResponse.json();
+
+
+        /* ==========================================
+           SORT LEVELS
+           ========================================== */
+
+        data.sort(
+            (a,b) =>
+                Number(b.points || 0) -
+                Number(a.points || 0)
+        );
+
+
+        let totalPoints = 0;
+        let completionCount = 0;
+        let creationCount = 0;
+        let unbeatenCount = 0;
+
+        let hardestLvl = null;
+        let hardestRank = 0;
+
+        const beatenLevelNames = [];
+
+
+        packsGrid.innerHTML = "";
+        grid.innerHTML = "";
+        creationsGrid.innerHTML = "";
+        unbeatenGrid.innerHTML = "";
+
+
+        /* ==========================================
+           LEVEL MAP
+           ========================================== */
+
+        const levelMap = {};
+
+        data.forEach((level,index) => {
+
+            levelMap[
+                String(level.name).toLowerCase()
+            ] = {
+
+                ...level,
+
+                rank: index + 1
+
+            };
+
+        });
+
+
+        /* ==========================================
+           PROCESS LEVELS
+           ========================================== */
+
+        data.forEach((level,index) => {
+
+            const rank =
+                index + 1;
+
+
+            const playerName =
+                String(targetPlayer).toLowerCase();
+
+
+            const hasBeaten =
+                Array.isArray(level.victors) &&
+                level.victors.some(
+                    v =>
+                        String(v).toLowerCase() ===
+                        playerName
                 );
 
-            const totalPointsBadge =
-                document.getElementById(
-                    'totalPoints'
-                );
 
-            const countBadge =
-                document.getElementById(
-                    'completionCount'
-                );
+            const isVerifier =
+                level.verifier &&
+                String(level.verifier).toLowerCase() ===
+                playerName;
 
-            const hardestBadge =
-                document.getElementById(
-                    'hardestLevel'
-                );
 
-            const profileBg =
-                document.getElementById(
-                    'profileBg'
-                );
+            const isCreator =
+                level.creator &&
+                String(level.creator).toLowerCase() ===
+                playerName;
 
-            const packsGrid =
-                document.getElementById(
-                    'packsGrid'
-                );
 
-            const grid =
-                document.getElementById(
-                    'completedGrid'
-                );
+            const imgSource =
+                level.thumbnail || "";
 
-            const creationsGrid =
-                document.getElementById(
-                    'createdGrid'
-                );
 
-            const unbeatenGrid =
-                document.getElementById(
-                    'unbeatenGrid'
+            /* ==========================================
+               COMPLETED
+               ========================================== */
+
+            if (
+                hasBeaten ||
+                isVerifier
+            ) {
+
+                completionCount++;
+
+                beatenLevelNames.push(
+                    String(level.name).toLowerCase()
                 );
 
 
-            if (!targetPlayer) {
+                if (rank <= 150) {
 
-                nameHeading.innerText =
-                    "PLAYER NOT FOUND";
+                    totalPoints +=
+                        Number(
+                            level.points || 0
+                        );
 
-                return;
+                }
+
+
+                if (
+                    !hardestLvl ||
+                    Number(level.points || 0) >
+                    Number(hardestLvl.points || 0)
+                ) {
+
+                    hardestLvl =
+                        level;
+
+                    hardestRank =
+                        rank;
+
+                }
+
+
+                const card =
+                    document.createElement(
+                        'div'
+                    );
+
+                card.className =
+                    'level-card';
+
+
+                card.innerHTML = `
+
+                    <div
+                        class="level-card-bg"
+                        style="background-image:url('${imgSource}');"
+                    ></div>
+
+                    <div class="level-card-overlay"></div>
+
+                    <div class="level-info">
+
+                        <h3 class="level-title">
+                            #${rank} - ${level.name}
+                        </h3>
+
+                        <div class="level-meta">
+
+                            <p style="margin:3px 0;">
+                                <strong>Creator:</strong>
+                                ${level.creator || 'N/A'}
+                            </p>
+
+                            <p style="margin:3px 0;">
+                                <strong>Value:</strong>
+                                ${
+                                    rank > 150
+                                        ? 'LEGACY'
+                                        : `${Number(level.points || 0)} PTS`
+                                }
+                            </p>
+
+                            <p
+                                style="
+                                    margin:3px 0;
+                                    color:var(--accent);
+                                "
+                            >
+                                <strong>Role:</strong>
+                                ${
+                                    isVerifier
+                                        ? 'Verifier'
+                                        : 'Victor'
+                                }
+                            </p>
+
+                        </div>
+
+                    </div>
+                `;
+
+                grid.appendChild(card);
 
             }
 
 
-            nameHeading.innerText =
-                targetPlayer;
+            /* ==========================================
+               CREATED
+               ========================================== */
 
+            if (isCreator) {
 
-            try {
+                creationCount++;
 
-                // ==========================================
-                // LOAD LEVELS + PACKS
-                // ==========================================
-
-                const [
-                    levelsResponse,
-                    packsResponse
-                ] = await Promise.all([
-
-                    fetch(
-                        `levels.json?v=${Date.now()}`
-                    ),
-
-                    fetch(
-                        `packs.json?v=${Date.now()}`
-                    )
-
-                ]);
-
-
-                const data =
-                    await levelsResponse.json();
-
-                const packs =
-                    await packsResponse.json();
-
-
-                // ==========================================
-                // LOAD TIERS SEPARATELY
-                //
-                // If the tier JSON isn't found, the
-                // rest of the player page still works.
-                // ==========================================
-
-                let playerTiers = [];
-
-                try {
-
-                    const tiersResponse =
-                        await fetch(
-                            `player-tiers.json?v=${Date.now()}`
-                        );
-
-                    if (tiersResponse.ok) {
-
-                        playerTiers =
-                            await tiersResponse.json();
-
-                    }
-
-                } catch (tierError) {
-
-                    console.warn(
-                        "Player tier data could not be loaded:",
-                        tierError
+                const card =
+                    document.createElement(
+                        'div'
                     );
 
-                }
+                card.className =
+                    'level-card';
 
 
-                // ==========================================
-                // SORT LEVELS
-                // ==========================================
+                card.innerHTML = `
 
-                data.sort(
-                    (a, b) =>
-                        Number(b.points || 0) -
-                        Number(a.points || 0)
+                    <div
+                        class="level-card-bg"
+                        style="background-image:url('${imgSource}');"
+                    ></div>
+
+                    <div class="level-card-overlay"></div>
+
+                    <div class="level-info">
+
+                        <h3 class="level-title">
+                            #${rank} - ${level.name}
+                        </h3>
+
+                        <div class="level-meta">
+
+                            <p style="margin:3px 0;">
+                                <strong>Verifier:</strong>
+                                ${level.verifier || 'N/A'}
+                            </p>
+
+                            <p style="margin:3px 0;">
+                                <strong>Value:</strong>
+                                ${
+                                    rank > 150
+                                        ? 'LEGACY'
+                                        : `${Number(level.points || 0)} PTS`
+                                }
+                            </p>
+
+                            <p
+                                style="
+                                    margin:3px 0;
+                                    color:var(--gold);
+                                "
+                            >
+                                <strong>ID:</strong>
+                                ${level.id || 'Unknown'}
+                            </p>
+
+                        </div>
+
+                    </div>
+                `;
+
+                creationsGrid.appendChild(card);
+
+            }
+
+
+            /* ==========================================
+               UNBEATEN
+               ========================================== */
+
+            if (
+                !hasBeaten &&
+                !isVerifier
+            ) {
+
+                unbeatenCount++;
+
+                const card =
+                    document.createElement(
+                        'div'
+                    );
+
+                card.className =
+                    'level-card unbeaten-card';
+
+
+                card.innerHTML = `
+
+                    <div
+                        class="level-card-bg"
+                        style="background-image:url('${imgSource}');"
+                    ></div>
+
+                    <div class="level-card-overlay"></div>
+
+                    <div class="level-info">
+
+                        <h3
+                            class="level-title"
+                            style="color:#aaa;"
+                        >
+                            #${rank} - ${level.name}
+                        </h3>
+
+                        <div class="level-meta">
+
+                            <p style="margin:3px 0;">
+                                <strong>Creator:</strong>
+                                ${level.creator || 'N/A'}
+                            </p>
+
+                            <p style="margin:3px 0;">
+                                <strong>Value:</strong>
+                                ${
+                                    rank > 150
+                                        ? 'LEGACY'
+                                        : `${Number(level.points || 0)} PTS`
+                                }
+                            </p>
+
+                            <p style="margin:3px 0;">
+                                <strong>ID:</strong>
+                                ${level.id || 'Unknown'}
+                            </p>
+
+                            <p
+                                style="
+                                    margin:3px 0;
+                                    color:#666;
+                                "
+                            >
+                                <strong>Status:</strong>
+                                Unbeaten
+                            </p>
+
+                        </div>
+
+                    </div>
+                `;
+
+                unbeatenGrid.appendChild(card);
+
+            }
+
+        });
+
+
+        /* ==========================================
+           PACKS
+           ========================================== */
+
+        let completedPacksCount = 0;
+
+        packs.forEach(pack => {
+
+            const isCompleted =
+                Array.isArray(pack.levels) &&
+                pack.levels.every(
+                    levelName =>
+                        beatenLevelNames.includes(
+                            String(levelName).toLowerCase()
+                        )
                 );
 
 
-                let totalPoints = 0;
-                let completionCount = 0;
-                let creationCount = 0;
-                let unbeatenCount = 0;
+            if (!isCompleted) {
+                return;
+            }
 
-                let hardestLvl = null;
-                let hardestRank = 0;
 
-                const beatenLevelNames = [];
+            completedPacksCount++;
 
 
-                packsGrid.innerHTML = "";
-                grid.innerHTML = "";
-                creationsGrid.innerHTML = "";
-                unbeatenGrid.innerHTML = "";
+            totalPoints +=
+                Number(pack.points || 0);
 
 
-                // ==========================================
-                // LEVEL MAP
-                // ==========================================
+            const firstLvlKey =
+                pack.levels &&
+                pack.levels.length > 0
+                    ? String(
+                        pack.levels[0]
+                    ).toLowerCase()
+                    : "";
 
-                const levelMap = {};
 
+            const firstLevel =
+                levelMap[firstLvlKey];
 
-                data.forEach((level, index) => {
 
-                    levelMap[
-                        level.name.toLowerCase()
-                    ] = {
+            const packImgSource =
+                firstLevel &&
+                firstLevel.thumbnail
+                    ? firstLevel.thumbnail
+                    : "";
 
-                        ...level,
 
-                        rank: index + 1
-
-                    };
-
-                });
-
-
-                // ==========================================
-                // PROCESS EVERY LEVEL
-                // ==========================================
-
-                data.forEach((level, index) => {
-
-                    const rank =
-                        index + 1;
-
-
-                    const hasBeaten =
-                        Array.isArray(level.victors) &&
-                        level.victors.some(
-                            v =>
-                                v.toLowerCase() ===
-                                targetPlayer.toLowerCase()
-                        );
-
-
-                    const isVerifier =
-                        level.verifier &&
-                        level.verifier.toLowerCase() ===
-                        targetPlayer.toLowerCase();
-
-
-                    const isCreator =
-                        level.creator &&
-                        level.creator.toLowerCase() ===
-                        targetPlayer.toLowerCase();
-
-
-                    const imgSource =
-                        level.thumbnail || "";
-
-
-                    // ==========================================
-                    // COMPLETED / VERIFIED LEVELS
-                    // ==========================================
-
-                    if (
-                        hasBeaten ||
-                        isVerifier
-                    ) {
-
-                        completionCount++;
-
-
-                        beatenLevelNames.push(
-                            level.name.toLowerCase()
-                        );
-
-
-                        if (rank <= 150) {
-
-                            totalPoints +=
-                                Number(
-                                    level.points || 0
-                                );
-
-                        }
-
-
-                        // Hardest level
-                        if (
-                            !hardestLvl ||
-                            Number(level.points || 0) >
-                            Number(hardestLvl.points || 0)
-                        ) {
-
-                            hardestLvl =
-                                level;
-
-                            hardestRank =
-                                rank;
-
-                        }
-
-
-                        const card =
-                            document.createElement(
-                                'div'
-                            );
-
-                        card.className =
-                            'level-card';
-
-
-                        card.innerHTML = `
-
-                            <div
-                                class="level-card-bg"
-                                style="
-                                    background-image:url('${imgSource}');
-                                "
-                            ></div>
-
-                            <div
-                                class="level-card-overlay"
-                            ></div>
-
-                            <div
-                                class="level-info"
-                            >
-
-                                <h3
-                                    class="level-title"
-                                >
-                                    #${rank} -
-                                    ${level.name}
-                                </h3>
-
-                                <div
-                                    class="level-meta"
-                                >
-
-                                    <p style="margin:3px 0;">
-                                        <strong>
-                                            Creator:
-                                        </strong>
-                                        ${level.creator || 'N/A'}
-                                    </p>
-
-                                    <p style="margin:3px 0;">
-                                        <strong>
-                                            Value:
-                                        </strong>
-
-                                        ${
-                                            rank > 150
-                                                ? 'LEGACY'
-                                                : `${Number(level.points || 0)} PTS`
-                                        }
-                                    </p>
-
-                                    <p
-                                        style="
-                                            margin:3px 0;
-                                            color:var(--accent);
-                                        "
-                                    >
-                                        <strong>
-                                            Role:
-                                        </strong>
-
-                                        ${
-                                            isVerifier
-                                                ? 'Verifier'
-                                                : 'Victor'
-                                        }
-                                    </p>
-
-                                </div>
-
-                            </div>
-
-                        `;
-
-
-                        grid.appendChild(card);
-
-                    }
-
-
-                    // ==========================================
-                    // CREATED LEVELS
-                    // ==========================================
-
-                    if (isCreator) {
-
-                        creationCount++;
-
-
-                        const card =
-                            document.createElement(
-                                'div'
-                            );
-
-                        card.className =
-                            'level-card';
-
-
-                        card.innerHTML = `
-
-                            <div
-                                class="level-card-bg"
-                                style="
-                                    background-image:url('${imgSource}');
-                                "
-                            ></div>
-
-                            <div
-                                class="level-card-overlay"
-                            ></div>
-
-                            <div
-                                class="level-info"
-                            >
-
-                                <h3
-                                    class="level-title"
-                                >
-                                    #${rank} -
-                                    ${level.name}
-                                </h3>
-
-                                <div
-                                    class="level-meta"
-                                >
-
-                                    <p style="margin:3px 0;">
-                                        <strong>
-                                            Verifier:
-                                        </strong>
-                                        ${level.verifier || 'N/A'}
-                                    </p>
-
-                                    <p style="margin:3px 0;">
-                                        <strong>
-                                            Value:
-                                        </strong>
-
-                                        ${
-                                            rank > 150
-                                                ? 'LEGACY'
-                                                : `${Number(level.points || 0)} PTS`
-                                        }
-                                    </p>
-
-                                    <p
-                                        style="
-                                            margin:3px 0;
-                                            color:var(--gold);
-                                        "
-                                    >
-                                        <strong>
-                                            ID:
-                                        </strong>
-                                        ${level.id || 'Unknown'}
-                                    </p>
-
-                                </div>
-
-                            </div>
-
-                        `;
-
-
-                        creationsGrid.appendChild(
-                            card
-                        );
-
-                    }
-
-
-                    // ==========================================
-                    // NON-COMPLETED LEVELS
-                    // ==========================================
-
-                    if (
-                        !hasBeaten &&
-                        !isVerifier
-                    ) {
-
-                        unbeatenCount++;
-
-
-                        const card =
-                            document.createElement(
-                                'div'
-                            );
-
-                        card.className =
-                            'level-card unbeaten-card';
-
-
-                        card.innerHTML = `
-
-                            <div
-                                class="level-card-bg"
-                                style="
-                                    background-image:url('${imgSource}');
-                                "
-                            ></div>
-
-                            <div
-                                class="level-card-overlay"
-                            ></div>
-
-                            <div
-                                class="level-info"
-                            >
-
-                                <h3
-                                    class="level-title"
-                                    style="color:#aaa;"
-                                >
-                                    #${rank} -
-                                    ${level.name}
-                                </h3>
-
-                                <div
-                                    class="level-meta"
-                                >
-
-                                    <p style="margin:3px 0;">
-                                        <strong>
-                                            Creator:
-                                        </strong>
-                                        ${level.creator || 'N/A'}
-                                    </p>
-
-                                    <p style="margin:3px 0;">
-                                        <strong>
-                                            Value:
-                                        </strong>
-
-                                        ${
-                                            rank > 150
-                                                ? 'LEGACY'
-                                                : `${Number(level.points || 0)} PTS`
-                                        }
-                                    </p>
-
-                                    <p style="margin:3px 0;">
-                                        <strong>
-                                            ID:
-                                        </strong>
-                                        ${level.id || 'Unknown'}
-                                    </p>
-
-                                    <p
-                                        style="
-                                            margin:3px 0;
-                                            color:#666;
-                                        "
-                                    >
-                                        <strong>
-                                            Status:
-                                        </strong>
-                                        Unbeaten
-                                    </p>
-
-                                </div>
-
-                            </div>
-
-                        `;
-
-
-                        unbeatenGrid.appendChild(
-                            card
-                        );
-
-                    }
-
-                });
-
-
-                // ==========================================
-                // PROCESS PACKS FROM packs.json
-                // ==========================================
-
-                let completedPacksCount = 0;
-
-
-                packs.forEach(pack => {
-
-                    const isCompleted =
-                        Array.isArray(pack.levels) &&
-                        pack.levels.every(
-                            levelName =>
-                                beatenLevelNames.includes(
-                                    levelName.toLowerCase()
-                                )
-                        );
-
-
-                    if (!isCompleted) {
-                        return;
-                    }
-
-
-                    completedPacksCount++;
-
-
-                    totalPoints +=
-                        Number(pack.points || 0);
-
-
-                    // ==========================================
-                    // PACK THUMBNAIL
-                    // ==========================================
-
-                    const firstLvlKey =
-                        pack.levels &&
-                        pack.levels.length > 0
-                            ? pack.levels[0].toLowerCase()
-                            : "";
-
-
-                    const firstLevel =
-                        levelMap[firstLvlKey];
-
-
-                    const packImgSource =
-                        firstLevel &&
-                        firstLevel.thumbnail
-                            ? firstLevel.thumbnail
-                            : "";
-
-
-                    // ==========================================
-                    // PACK CARD
-                    // ==========================================
-
-                    const card =
-                        document.createElement(
-                            'div'
-                        );
-
-                    card.className =
-                        'level-card';
-
-
-                    card.innerHTML = `
-
-                        <div
-                            class="level-card-bg"
-                            style="
-                                background-image:url('${packImgSource}');
-                            "
-                        ></div>
-
-                        <div
-                            class="level-card-overlay"
-                        ></div>
-
-                        <div
-                            class="level-info"
-                        >
-
-                            <div
-                                style="
-                                    display:flex;
-                                    justify-content:space-between;
-                                    align-items:center;
-                                    gap:10px;
-                                "
-                            >
-
-                                <h3
-                                    class="level-title"
-                                    style="font-size:1.15rem;"
-                                >
-                                    ${pack.name}
-                                </h3>
-
-                                <span
-                                    style="
-                                        font-size:0.72rem;
-                                        font-weight:800;
-                                        padding:2px 8px;
-                                        border-radius:4px;
-                                        background:rgba(255,255,255,0.05);
-                                        border:1px solid currentColor;
-                                    "
-                                    class="tier-${pack.tier}"
-                                >
-                                    ${pack.tier}
-                                </span>
-
-                            </div>
-
-
-                            <div
-                                class="level-meta"
-                                style="margin-top:4px;"
-                            >
-
-                                <p
-                                    style="
-                                        margin:3px 0;
-                                        color:var(--accent);
-                                    "
-                                >
-                                    <strong>
-                                        Bonus:
-                                    </strong>
-
-                                    +${Number(pack.points || 0)}
-                                    PTS
-                                </p>
-
-
-                                <p
-                                    style="
-                                        margin:3px 0;
-                                        color:#aaa;
-                                        font-size:0.8rem;
-                                    "
-                                >
-                                    <strong>
-                                        Levels:
-                                    </strong>
-
-                                    ${
-                                        Array.isArray(pack.levels)
-                                            ? pack.levels.join(', ')
-                                            : ''
-                                    }
-                                </p>
-
-                            </div>
-
-                        </div>
-
-                    `;
-
-
-                    packsGrid.appendChild(
-                        card
-                    );
-
-                });
-
-
-                // ==========================================
-                // FINAL PLAYER STATS
-                // ==========================================
-
-                totalPointsBadge.innerText =
-                    `${totalPoints.toLocaleString()} PTS`;
-
-
-                countBadge.innerText =
-                    `${completionCount} ${
-                        completionCount === 1
-                            ? 'COMPLETION'
-                            : 'COMPLETIONS'
-                    }`;
-
-
-                // ==========================================
-                // PLAYER TIER
-                // ==========================================
-
-                const tierCard =
-                    document.getElementById(
-                        'playerTierCard'
-                    );
-
-                const tierImage =
-                    document.getElementById(
-                        'playerTierImage'
-                    );
-
-                const tierName =
-                    document.getElementById(
-                        'playerTierName'
-                    );
-
-                const tierProgressFill =
-                    document.getElementById(
-                        'tierProgressFill'
-                    );
-
-                const tierProgressCurrent =
-                    document.getElementById(
-                        'tierProgressCurrent'
-                    );
-
-                const tierProgressNext =
-                    document.getElementById(
-                        'tierProgressNext'
-                    );
-
-
-                /*
-                 * Only calculate the tier if the
-                 * JSON successfully loaded.
-                 */
-
-                if (
-                    Array.isArray(playerTiers) &&
-                    playerTiers.length > 0
-                ) {
-
-                    let currentTier =
-                        playerTiers.find(
-                            tier =>
-                                totalPoints >=
-                                Number(
-                                    tier.minPoints || 0
-                                ) &&
-                                (
-                                    tier.maxPoints === null ||
-                                    totalPoints <=
-                                    Number(
-                                        tier.maxPoints
-                                    )
-                                )
-                        );
-
-
-                    if (!currentTier) {
-
-                        currentTier =
-                            playerTiers[0];
-
-                    }
-
-
-                    // ==========================================
-                    // REMOVE OLD EFFECTS
-                    // ==========================================
-
-                    nameHeading.classList.remove(
-                        'tier-bronze',
-                        'tier-silver',
-                        'tier-gold',
-                        'tier-platinum',
-                        'tier-diamond',
-                        'tier-wave-master'
-                    );
-
-
-                    tierCard.classList.remove(
-                        'wave-master-card'
-                    );
-
-
-                    // ==========================================
-                    // APPLY NAME EFFECT
-                    // ==========================================
-
-                    const effectClassMap = {
-
-                        "bronze":
-                            "tier-bronze",
-
-                        "silver":
-                            "tier-silver",
-
-                        "gold":
-                            "tier-gold",
-
-                        "platinum":
-                            "tier-platinum",
-
-                        "diamond":
-                            "tier-diamond",
-
-                        "wave-master-gradient":
-                            "tier-wave-master"
-
-                    };
-
-
-                    const nameEffect =
-                        effectClassMap[
-                            currentTier.effect
-                        ];
-
-
-                    if (nameEffect) {
-
-                        nameHeading.classList.add(
-                            nameEffect
-                        );
-
-                    }
-
-
-                    // ==========================================
-                    // WAVE MASTER CARD
-                    // ==========================================
-
-                    if (
-                        currentTier.effect ===
-                        "wave-master-gradient"
-                    ) {
-
-                        tierCard.classList.add(
-                            'wave-master-card'
-                        );
-
-                    }
-
-
-                    // ==========================================
-                    // TIER IMAGE
-                    // ==========================================
-
-                    if (currentTier.image) {
-
-                        tierImage.src =
-                            currentTier.image;
-
-                    }
-
-
-                    tierImage.alt =
-                        currentTier.name;
-
-
-                    // ==========================================
-                    // TIER NAME
-                    // ==========================================
-
-                    tierName.innerText =
-                        currentTier.name;
-
-
-                    if (currentTier.color) {
-
-                        tierName.style.color =
-                            currentTier.color;
-
-                        tierProgressFill.style.color =
-                            currentTier.color;
-
-                        tierProgressFill.style.background =
-                            currentTier.color;
-
-                    }
-
-
-                    // ==========================================
-                    // PROGRESSION
-                    // ==========================================
-
-                    const currentMin =
-                        Number(
-                            currentTier.minPoints || 0
-                        );
-
-
-                    const isMaxTier =
-                        currentTier.maxPoints === null;
-
-
-                    if (isMaxTier) {
-
-                        tierProgressFill.style.width =
-                            "100%";
-
-
-                        tierProgressCurrent.innerText =
-                            `${totalPoints.toLocaleString()} PTS`;
-
-
-                        tierProgressNext.innerText =
-                            "MAX TIER";
-
-                    } else {
-
-                        const nextTier =
-                            playerTiers.find(
-                                tier =>
-                                    Number(
-                                        tier.minPoints || 0
-                                    ) >
-                                    currentMin
-                            );
-
-
-                        const nextMin =
-                            nextTier
-                                ? Number(
-                                    nextTier.minPoints
-                                )
-                                : Number(
-                                    currentTier.maxPoints
-                                ) + 1;
-
-
-                        const pointsIntoTier =
-                            Math.max(
-                                0,
-                                totalPoints -
-                                currentMin
-                            );
-
-
-                        const pointsNeeded =
-                            Math.max(
-                                1,
-                                nextMin -
-                                currentMin
-                            );
-
-
-                        const progress =
-                            Math.min(
-                                100,
-                                Math.max(
-                                    0,
-                                    (
-                                        pointsIntoTier /
-                                        pointsNeeded
-                                    ) * 100
-                                )
-                            );
-
-
-                        tierProgressFill.style.width =
-                            `${progress}%`;
-
-
-                        tierProgressCurrent.innerText =
-                            `${totalPoints.toLocaleString()} / ${nextMin.toLocaleString()} PTS`;
-
-
-                        tierProgressNext.innerText =
-                            nextTier
-                                ? `NEXT: ${nextTier.name}`
-                                : "MAX TIER";
-
-                    }
-
-                } else {
-
-                    /*
-                     * If player-tiers.json isn't available,
-                     * hide only the tier card instead of
-                     * breaking the entire profile.
-                     */
-
-                    tierCard.style.display =
-                        "none";
-
-                }
-
-
-                // ==========================================
-                // HARDEST LEVEL
-                // ==========================================
-
-                if (hardestLvl) {
-
-                    hardestBadge.innerText =
-                        `HARDEST: #${hardestRank} ` +
-                        `${hardestLvl.name.toUpperCase()} ` +
-                        `(${Number(hardestLvl.points || 0)} PTS)`;
-
-
-                    hardestBadge.style.display =
-                        "inline-block";
-
-
-                    if (hardestLvl.thumbnail) {
-
-                        profileBg.style.backgroundImage =
-                            `url('${hardestLvl.thumbnail}')`;
-
-                    }
-
-                } else {
-
-                    hardestBadge.style.display =
-                        "none";
-
-                }
-
-
-                // ==========================================
-                // EMPTY STATES
-                // ==========================================
-
-                if (
-                    completedPacksCount === 0
-                ) {
-
-                    packsGrid.innerHTML = `
-
-                        <div
-                            style="
-                                grid-column:1/-1;
-                                text-align:center;
-                                color:#555;
-                                padding:20px;
-                            "
-                        >
-                            No completed level packs
-                            found for this player.
-                        </div>
-
-                    `;
-
-                }
-
-
-                if (
-                    completionCount === 0
-                ) {
-
-                    grid.innerHTML = `
-
-                        <div
-                            style="
-                                grid-column:1/-1;
-                                text-align:center;
-                                color:#555;
-                                padding:40px;
-                            "
-                        >
-                            No recorded list records
-                            found for this player.
-                        </div>
-
-                    `;
-
-                }
-
-
-                if (
-                    creationCount === 0
-                ) {
-
-                    creationsGrid.innerHTML = `
-
-                        <div
-                            style="
-                                grid-column:1/-1;
-                                text-align:center;
-                                color:#555;
-                                padding:40px;
-                            "
-                        >
-                            No created levels found
-                            on the list for this player.
-                        </div>
-
-                    `;
-
-                }
-
-
-                if (
-                    unbeatenCount === 0
-                ) {
-
-                    unbeatenGrid.innerHTML = `
-
-                        <div
-                            style="
-                                grid-column:1/-1;
-                                text-align:center;
-                                color:var(--gold);
-                                padding:40px;
-                                font-weight:700;
-                            "
-                        >
-                            100% LIST CLEAR!
-                            This player has beaten
-                            every level!
-                        </div>
-
-                    `;
-
-                }
-
-
-            } catch (error) {
-
-                console.error(
-                    "Player profile loading error:",
-                    error
+            const card =
+                document.createElement(
+                    'div'
                 );
 
+            card.className =
+                'level-card';
 
-                grid.innerHTML = `
+
+            card.innerHTML = `
+
+                <div
+                    class="level-card-bg"
+                    style="background-image:url('${packImgSource}');"
+                ></div>
+
+                <div class="level-card-overlay"></div>
+
+                <div class="level-info">
 
                     <div
                         style="
-                            grid-column:1/-1;
-                            text-align:center;
-                            color:var(--accent);
-                            padding:40px;
+                            display:flex;
+                            justify-content:space-between;
+                            align-items:center;
+                            gap:10px;
                         "
                     >
-                        Error loading player
-                        profile layout data.
+
+                        <h3
+                            class="level-title"
+                            style="font-size:1.15rem;"
+                        >
+                            ${pack.name}
+                        </h3>
+
+                        <span
+                            style="
+                                font-size:0.72rem;
+                                font-weight:800;
+                                padding:2px 8px;
+                                border-radius:4px;
+                                background:rgba(255,255,255,0.05);
+                                border:1px solid currentColor;
+                            "
+                            class="tier-${pack.tier}"
+                        >
+                            ${pack.tier}
+                        </span>
+
                     </div>
 
-                `;
+                    <div
+                        class="level-meta"
+                        style="margin-top:4px;"
+                    >
+
+                        <p
+                            style="
+                                margin:3px 0;
+                                color:var(--accent);
+                            "
+                        >
+                            <strong>Bonus:</strong>
+                            +${Number(pack.points || 0)} PTS
+                        </p>
+
+                        <p
+                            style="
+                                margin:3px 0;
+                                color:#aaa;
+                                font-size:0.8rem;
+                            "
+                        >
+                            <strong>Levels:</strong>
+                            ${
+                                Array.isArray(pack.levels)
+                                    ? pack.levels.join(', ')
+                                    : ''
+                            }
+                        </p>
+
+                    </div>
+
+                </div>
+            `;
+
+            packsGrid.appendChild(card);
+
+        });
+
+
+        /* ==========================================
+           PLAYER STATS
+           ========================================== */
+
+        totalPointsBadge.innerText =
+            `${totalPoints.toLocaleString()} PTS`;
+
+
+        countBadge.innerText =
+            `${completionCount} ${
+                completionCount === 1
+                    ? 'COMPLETION'
+                    : 'COMPLETIONS'
+            }`;
+
+
+        /* ==========================================
+           PLAYER TIER
+           ========================================== */
+
+        if (
+            Array.isArray(playerTiers) &&
+            playerTiers.length > 0
+        ) {
+
+            let currentTier =
+                playerTiers.find(tier => {
+
+                    const min =
+                        Number(
+                            tier.minPoints || 0
+                        );
+
+                    const max =
+                        tier.maxPoints === null
+                            ? Infinity
+                            : Number(
+                                tier.maxPoints
+                            );
+
+                    return (
+                        totalPoints >= min &&
+                        totalPoints <= max
+                    );
+
+                });
+
+
+            if (!currentTier) {
+                currentTier =
+                    playerTiers[0];
+            }
+
+
+            /* REMOVE ALL OLD CLASSES */
+
+            const tierClasses = [
+                'tier-bronze',
+                'tier-silver',
+                'tier-gold',
+                'tier-platinum',
+                'tier-diamond',
+                'tier-wave-master'
+            ];
+
+
+            nameHeading.classList.remove(
+                ...tierClasses
+            );
+
+            tierName.classList.remove(
+                ...tierClasses
+            );
+
+            tierProgressFill.classList.remove(
+                ...tierClasses
+            );
+
+
+            /* APPLY CORRECT EFFECT */
+
+            const effectClassMap = {
+
+                bronze:
+                    'tier-bronze',
+
+                silver:
+                    'tier-silver',
+
+                gold:
+                    'tier-gold',
+
+                platinum:
+                    'tier-platinum',
+
+                diamond:
+                    'tier-diamond',
+
+                'wave-master-gradient':
+                    'tier-wave-master'
+
+            };
+
+
+            const effectClass =
+                effectClassMap[
+                    currentTier.effect
+                ];
+
+
+            if (effectClass) {
+
+                nameHeading.classList.add(
+                    effectClass
+                );
+
+                tierName.classList.add(
+                    effectClass
+                );
+
+                tierProgressFill.classList.add(
+                    effectClass
+                );
+
+            }
+
+
+            if (
+                currentTier.effect ===
+                'wave-master-gradient'
+            ) {
+
+                tierCard.classList.add(
+                    'wave-master-card'
+                );
+
+            } else {
+
+                tierCard.classList.remove(
+                    'wave-master-card'
+                );
+
+            }
+
+
+            /* TIER IMAGE */
+
+            if (currentTier.image) {
+
+                tierImage.src =
+                    currentTier.image;
+
+                tierImage.style.display =
+                    'block';
+
+            }
+
+
+            tierImage.alt =
+                currentTier.name;
+
+
+            /* TIER NAME */
+
+            tierName.innerText =
+                currentTier.name;
+
+
+            /* PROGRESS */
+
+            const currentMin =
+                Number(
+                    currentTier.minPoints || 0
+                );
+
+
+            const isMaxTier =
+                currentTier.maxPoints === null;
+
+
+            if (isMaxTier) {
+
+                tierProgressFill.style.width =
+                    '100%';
+
+                tierProgressCurrent.innerText =
+                    `${totalPoints.toLocaleString()} PTS`;
+
+                tierProgressNext.innerText =
+                    'MAX TIER';
+
+            } else {
+
+                const nextTier =
+                    playerTiers.find(
+                        tier =>
+                            Number(
+                                tier.minPoints || 0
+                            ) > currentMin
+                    );
+
+
+                const nextMin =
+                    nextTier
+                        ? Number(
+                            nextTier.minPoints
+                        )
+                        : Number(
+                            currentTier.maxPoints
+                        ) + 1;
+
+
+                const pointsIntoTier =
+                    Math.max(
+                        0,
+                        totalPoints -
+                        currentMin
+                    );
+
+
+                const pointsNeeded =
+                    Math.max(
+                        1,
+                        nextMin -
+                        currentMin
+                    );
+
+
+                const progress =
+                    Math.min(
+                        100,
+                        Math.max(
+                            0,
+                            (
+                                pointsIntoTier /
+                                pointsNeeded
+                            ) * 100
+                        )
+                    );
+
+
+                tierProgressFill.style.width =
+                    `${progress}%`;
+
+
+                tierProgressCurrent.innerText =
+                    `${totalPoints.toLocaleString()} / ${nextMin.toLocaleString()} PTS`;
+
+
+                tierProgressNext.innerText =
+                    nextTier
+                        ? `NEXT: ${nextTier.name}`
+                        : 'MAX TIER';
 
             }
 
         }
 
 
-        loadPlayerProfile();
+        /* ==========================================
+           PROFILE COVER
+           ========================================== */
 
-    </script>
+        if (hardestLvl && hardestLvl.thumbnail) {
+
+            profileBg.style.backgroundImage =
+                `url("${hardestLvl.thumbnail}")`;
+
+        }
+
+
+        /* ==========================================
+           HARDEST LEVEL
+           ========================================== */
+
+        if (hardestLvl) {
+
+            hardestBadge.innerText =
+                `HARDEST: #${hardestRank} ` +
+                `${String(
+                    hardestLvl.name
+                ).toUpperCase()} ` +
+                `(${Number(
+                    hardestLvl.points || 0
+                )} PTS)`;
+
+
+            hardestBadge.style.display =
+                "inline-block";
+
+        } else {
+
+            hardestBadge.style.display =
+                "none";
+
+        }
+
+
+        /* ==========================================
+           EMPTY STATES
+           ========================================== */
+
+        if (
+            completedPacksCount === 0
+        ) {
+
+            packsGrid.innerHTML = `
+
+                <div
+                    style="
+                        grid-column:1/-1;
+                        text-align:center;
+                        color:#555;
+                        padding:20px;
+                    "
+                >
+                    No completed level packs
+                    found for this player.
+                </div>
+
+            `;
+
+        }
+
+
+        if (
+            completionCount === 0
+        ) {
+
+            grid.innerHTML = `
+
+                <div
+                    style="
+                        grid-column:1/-1;
+                        text-align:center;
+                        color:#555;
+                        padding:40px;
+                    "
+                >
+                    No recorded list records
+                    found for this player.
+                </div>
+
+            `;
+
+        }
+
+
+        if (
+            creationCount === 0
+        ) {
+
+            creationsGrid.innerHTML = `
+
+                <div
+                    style="
+                        grid-column:1/-1;
+                        text-align:center;
+                        color:#555;
+                        padding:40px;
+                    "
+                >
+                    No created levels found
+                    on the list for this player.
+                </div>
+
+            `;
+
+        }
+
+
+        if (
+            unbeatenCount === 0
+        ) {
+
+            unbeatenGrid.innerHTML = `
+
+                <div
+                    style="
+                        grid-column:1/-1;
+                        text-align:center;
+                        color:var(--gold);
+                        padding:40px;
+                        font-weight:700;
+                    "
+                >
+                    100% LIST CLEAR!
+                    This player has beaten
+                    every level!
+                </div>
+
+            `;
+
+        }
+
+
+    } catch (error) {
+
+        console.error(
+            "Player profile loading error:",
+            error
+        );
+
+
+        grid.innerHTML = `
+
+            <div
+                style="
+                    grid-column:1/-1;
+                    text-align:center;
+                    color:var(--accent);
+                    padding:40px;
+                "
+            >
+                Error loading player
+                profile data.
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+loadPlayerProfile();
+
+</script>
 
 </body>
 </html>
