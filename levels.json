@@ -12,7 +12,7 @@
   { 
     "name": "The Aquarium",
     "points": 475, 
-    "creator": "lunikay", 
+    "creator": "lunikay",
     "verifier": "lunikay", 
     "id": "144369660", 
     "video": "wzks1jRunhw",
@@ -158,7 +158,7 @@
     "id": "148287274", 
     "video": "https://youtu.be/fAe6xB6gnN8", 
     "thumbnail": "Thumbnail/clwbf.png", 
-    "victors": ["sevehweveh","Jack Is A Nice Guy"]
+    "victors": ["sevehweveh","Jack Is A Nice Guy","puffiballgd"]
   },
   { 
     "name": "cat level", 
@@ -168,7 +168,7 @@
     "id": "148445720", 
     "video": "https://medal.tv/games/geometry-dash/clips/ntoUMkYpFc9TJfTFA?invite=cr-MSxKWGgsNzA3MTczOTkw", 
     "thumbnail": "Thumbnail/catlvl.png", 
-    "victors": []
+    "victors": ["puffiballgd"]
   },
   { 
     "name": "Deep Dive", 
@@ -208,7 +208,7 @@
     "id": "145160199", 
     "video": "https://medal.tv/games/geometry-dash/clips/n8TeS2YY4XAJn2LYq?invite=cr-MSxPU2QsNjI5OTQ2MTIx", 
     "thumbnail": "Thumbnail/WEAKLING.JPG", 
-    "victors": ["lunikay","Symm","ItsJellyGD"] 
+    "victors": ["lunikay","Symm","ItsJellyGD","puffiballgd"] 
   },
   { 
     "name": "OZAWT Swag", 
@@ -718,7 +718,7 @@
     "id": "145625141", 
     "video": "https://medal.tv/games/geometry-dash/clips/nbGoKAB1fq1koblmF?invite=cr-MSxYMWEsNjI5OTQ2MTIx", 
     "thumbnail": "Thumbnail/unknownquestion.png", 
-    "victors": ["FJKR","Symm","ashyy"] 
+    "victors": ["FJKR","Symm","ashyy","puffiballgd"] 
   },
   { 
     "name": "VSC unnerfed", 
@@ -1058,7 +1058,7 @@
     "id": "148429512", 
     "video": "POymyt5JCM4", 
     "thumbnail": "Thumbnail/CowboysLair.png", 
-    "victors": ["Jack Is A Nice Guy"] 
+    "victors": ["Jack Is A Nice Guy","puffiballgd"] 
   },
   { 
     "name": "TWL VSC", 
@@ -1458,7 +1458,7 @@
     "id": "147477033", 
     "video": "gY5GkjlYxTc", 
     "thumbnail": "Thumbnail/quoi.png", 
-    "victors": []
+    "victors": ["puffiballgd"]
   },
   {
     "name": "sh1awase", 
@@ -1468,7 +1468,7 @@
     "id": "147448660", 
     "video": "nGwK5tubMtM", 
     "thumbnail": "Thumbnail/sh1awase.png", 
-    "victors": ["Karen","sevehweveh","Jack Is A Nice Guy"]
+    "victors": ["Karen","sevehweveh","Jack Is A Nice Guy","puffiballgd"]
   },
   {
     "name": "sonic dih", 
