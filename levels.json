@@ -168,7 +168,7 @@
     "id": "148445720", 
     "video": "https://medal.tv/games/geometry-dash/clips/ntoUMkYpFc9TJfTFA?invite=cr-MSxKWGgsNzA3MTczOTkw", 
     "thumbnail": "Thumbnail/catlvl.png", 
-    "victors": ["puffiballgd"]
+    "victors": ["puffiballgd","Sushi"]
   },
   { 
     "name": "Deep Dive", 
@@ -398,7 +398,7 @@
     "id": "143885815", 
     "video": "oq3BHsUGRrU", 
     "thumbnail": "Thumbnail/dual!.png", 
-    "victors": ["Symm","ashyy"] 
+    "victors": ["Symm","ashyy","Sushi"] 
   },
   { 
     "name": "PLUTONIUM", 
@@ -1238,7 +1238,7 @@
     "id": "143842742", 
     "video": "Bm4R0HBRWsE", 
     "thumbnail": "Thumbnail/catcity.png", 
-    "victors": ["ashyy","FJKR","Okrun","ChillTipTop"] 
+    "victors": ["ashyy","FJKR","Okrun","ChillTipTop","Sushi"] 
   },
   { 
     "name": "Temple Of Doom", 
@@ -1529,7 +1529,7 @@
     "id": "147685252",
     "video": "5VFzaFjxPvs",
     "thumbnail": "Thumbnail/SONkupenEnd.png",
-    "victors": ["Jack Is An Ungrateful Guy","puffiballgd","HurryingJackM"]
+    "victors": ["Jack Is An Ungrateful Guy","puffiballgd","HurryingJackM","Sushi"]
   },
   {
     "name": "metronome",
@@ -1569,6 +1569,6 @@
     "id": "148541782",
     "video": "https://medal.tv/games/screen-capture/clips/nucnXEo5VdvigRP_H?invite=cr-MSxvaUEsMzc5MDEwMTE2",
     "thumbnail": "Thumbnail/isthisallowed.png",
-    "victors": []
+    "victors": ["ashyy"]
   }
 ]
