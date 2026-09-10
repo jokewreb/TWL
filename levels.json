@@ -1291,6 +1291,16 @@
     "victors": ["xpealox","ARandomBall","newbite","ZizoGMD","Symm","puffiballgd","Jack Is An Ungrateful Guy","OneShot786","Karen","Flibbertwiggins","boiledbacon","bleepboopbop","lunikay","FJKR","fearflora","Okrun"] 
   },
   { 
+    "name": "4Cubed", 
+    "points": 71, 
+    "creator": "ChefLime", 
+    "verifier": "ChefLime", 
+    "id": "148619420", 
+    "video": "T7vuBeOsqXk", 
+    "thumbnail": "Thumbnail/4Cubed.png", 
+    "victors": [] 
+  },
+  { 
     "name": "Dihmountain", 
     "points": 20, 
     "creator": "ChefLime", 
@@ -1342,7 +1352,7 @@
   },
   { 
     "name": "ChefLimeWaveBasic1", 
-    "points": 3, 
+    "points": -9993, 
     "creator": "ChefLime", 
     "verifier": "ChefLime", 
     "id": "140719114", 
