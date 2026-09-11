@@ -10,6 +10,16 @@
     "victors": ["melhorando"] 
   },
   { 
+    "name": "Scribbles", 
+    "points": 490, 
+    "creator": "puufy and Symm", 
+    "verifier": "puffiballgd", 
+    "id": "148628257", 
+    "video": "OpiFV7MmDLE", 
+    "thumbnail": "Thumbnail/Scribbles.jpg", 
+    "victors": [] 
+  },
+  { 
     "name": "The Aquarium",
     "points": 475, 
     "creator": "lunikay",
@@ -632,7 +642,7 @@
   },
   { 
     "name": "B", 
-    "points": 217, 
+    "points": 218, 
     "creator": "Symm", 
     "verifier": "Symm", 
     "id": "145486335", 
@@ -689,6 +699,16 @@
     "video": "dhzi9xji99s", 
     "thumbnail": "Thumbnail/carinsura.png", 
     "victors": ["puffiballgd","ashyy","[HJM] MrBazooka"] 
+  },
+  { 
+    "name": "avg day in australia", 
+    "points": 217, 
+    "creator": "ChillTipTop", 
+    "verifier": "ChillTipTop", 
+    "id": "148661371", 
+    "video": "63xNZtRzRfA", 
+    "thumbnail": "Thumbnail/avgdayinaus.png", 
+    "victors": [] 
   },
   { 
     "name": "SUPERDUALLEVEL", 
