@@ -201,6 +201,16 @@
     "victors": ["puffiballgd","ashyy","[HJM] MrBazooka","Okrun"]
   },
   { 
+    "name": "Gas Chamber", 
+    "points": 347, 
+    "creator": "newbite", 
+    "verifier": "newbite", 
+    "id": "148251887", 
+    "video": "0F0cfpgrMuM", 
+    "thumbnail": "Thumbnail/gaschamber.png", 
+    "victors": []
+  },
+  { 
     "name": "avrg sleep experience", 
     "points": 228, 
     "creator": "puffiballgd", 
@@ -1512,7 +1522,7 @@
   },
   {
     "name": "pants eater nerf",
-    "points": 347,
+    "points": 344,
     "fps": "30 FPS",
     "creator": "newbite",
     "verifier": "newbite",
@@ -1523,7 +1533,7 @@
   },
   {
     "name": "Jiggy Wave",
-    "points": 348,
+    "points": 345,
     "creator": "Justgdboi",  
     "verifier": "Karen",
     "id": "147457047",
