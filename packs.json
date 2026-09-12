@@ -59,6 +59,7 @@
     "levels": [
       "TooCub3d",
       "TooSquared",
+      "4Cubed",
       "3Squared"
     ]
   },
@@ -81,8 +82,18 @@
     "points": 25,
     "levels": [
       "Zoink WAVE",
-      "Swag Clubstep",
-      "Sakupen Hellcles"
+      "arbys dih burger",
+      "Swag Clubstep"
+    ]
+  },
+  {
+    "name": "Bottom 1 Pack I",
+    "tier": "BRONZE",
+    "points": 5,
+    "levels": [
+      "Sakupen Hellcles",
+      "ChefLimeWaveBasic2",
+      "metronome"
     ]
   },
   {
