@@ -1,13 +1,24 @@
 [
   { 
     "name": "EmErAlD", 
-    "points": 500, 
+    "points": 490, 
     "creator": "ashyy", 
     "verifier": "ashyy", 
     "id": "145763031", 
     "video": "d2xh3Ivz5tc", 
     "thumbnail": "Thumbnail/EmErAlD.jpg", 
     "victors": ["melhorando"] 
+  },
+  [
+  { 
+    "name": "WiStErIa", 
+    "points": 500, 
+    "creator": "ashyy", 
+    "verifier": "ashyy", 
+    "id": "148786178", 
+    "video": "ZXJ-_m_m_Ns", 
+    "thumbnail": "Thumbnail/wister.png", 
+    "victors": [] 
   },
   { 
     "name": "The Aquarium",
