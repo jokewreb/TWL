@@ -11,7 +11,7 @@
   },
   { 
     "name": "WiStErIa", 
-    "points": 510, 
+    "points": 510,
     "creator": "ashyy", 
     "verifier": "ashyy", 
     "id": "148786178", 
@@ -158,7 +158,7 @@
     "id": "145731601", 
     "video": "https://medal.tv/games/geometry-dash/clips/ncjz3ywqRVDdRccKC?invite=cr-MSxMbmcsNDM2Nzg5MDc5", 
     "thumbnail": "Thumbnail/freeera.png", 
-    "victors": ["Symm","puffiballgd"] 
+    "victors": ["Symm","puffiballgd","Okarun"] 
   },
   { 
     "name": "Hypersonic Wave", 
@@ -188,7 +188,7 @@
     "id": "148445720", 
     "video": "https://medal.tv/games/geometry-dash/clips/ntoUMkYpFc9TJfTFA?invite=cr-MSxKWGgsNzA3MTczOTkw", 
     "thumbnail": "Thumbnail/catlvl.png", 
-    "victors": ["puffiballgd","Sushi"]
+    "victors": ["puffiballgd","Sushi","Okarun"]
   },
   { 
     "name": "Deep Dive", 
@@ -268,7 +268,7 @@
     "id": "144152641", 
     "video": "https://medal.tv/games/geometry-dash/clips/n325RZX1AZT64lJGd?invite=cr-MSxuODgsNjI5OTQ2MTIx", 
     "thumbnail": "Thumbnail/polargeisted.JPG", 
-    "victors": ["newbite","[HJM] MrBazooka","lunikay","Symm","puffiballgd","FJKR","Sushi"] 
+    "victors": ["newbite","[HJM] MrBazooka","lunikay","Symm","puffiballgd","FJKR","Sushi","Okarun"] 
   },
   { 
     "name": "Bazooka Wave Basic 1", 
@@ -308,7 +308,7 @@
     "id": "148886298", 
     "video": "D8YUX0TnFhc", 
     "thumbnail": "Thumbnail/Gecko.jpg", 
-    "victors": [] 
+    "victors": ["Okarun"] 
   },
   { 
     "name": "GGGGGGGGGGGGGGGGGGGG", 
@@ -508,7 +508,7 @@
     "id": "146210800", 
     "video": "https://medal.tv/games/geometry-dash/clips/nf6NekxA4p3fUjJm7?invite=cr-MSx1bmYsNjI5OTQ2MTIx", 
     "thumbnail": "Thumbnail/4wide.JPG", 
-    "victors": ["[HJM] MrBazooka","FJKR","puffiballgd"] 
+    "victors": ["[HJM] MrBazooka","FJKR","puffiballgd","Okarun"] 
   },
   { 
     "name": "tle wave buffed", 
@@ -548,7 +548,7 @@
     "id": "144376318", 
     "video": "https://medal.tv/games/geometry-dash/clips/n4iW1raCNiBDR1c9G?invite=cr-MSx1ZmgsMzc5MDEwMTE2", 
     "thumbnail": "Thumbnail/broed.jpg", 
-    "victors": ["lunikay","puffiballgd","FJKR","ashyy","Symm","Flibbertwiggins"] 
+    "victors": ["lunikay","puffiballgd","FJKR","ashyy","Symm","Flibbertwiggins","Okarun"] 
   },
   { 
     "name": "baeefef", 
@@ -658,7 +658,7 @@
     "id": "148191225", 
     "video": "https://youtu.be/VZ6xZqb3Eck?si=dpxsqXh3oqBLpb9G", 
     "thumbnail": "Thumbnail/SBTWC.png", 
-    "victors": ["puffiballgd","[HJM] MrBazooka","Okarun","FJKR"] 
+    "victors": ["puffiballgd","[HJM] MrBazooka","Okarun","FJKR","Karen","Sushi"] 
   },
   { 
     "name": "real hapenis", 
@@ -828,7 +828,7 @@
     "id": "143793875", 
     "video": "https://medal.tv/games/geometry-dash/clips/n0XgclXyCJOECdvIB?invite=cr-MSxwOUwsMTg4NDY3MDM3&v=20", 
     "thumbnail": "Thumbnail/hellspam.jpg", 
-    "victors": ["[HJM] MrBazooka","lunikay","FJKR","ConfusedIThink"] 
+    "victors": ["[HJM] MrBazooka","lunikay","FJKR","ConfusedIThink","Karen"] 
   },
   { 
     "name": "ULTIMATE DIHRUCTION", 
@@ -948,7 +948,7 @@
     "id": "142083239", 
     "video": "sPO2KJZi3kY", 
     "thumbnail": "Thumbnail/Bloodier.png", 
-    "victors": ["puffiballgd","Symm","FJKR","[HJM] MrBazooka"] 
+    "victors": ["puffiballgd","Symm","FJKR","[HJM] MrBazooka","Okarun"] 
   },
   { 
     "name": "wave nation", 
@@ -1128,7 +1128,7 @@
     "id": "148429512", 
     "video": "POymyt5JCM4", 
     "thumbnail": "Thumbnail/CowboysLair.png", 
-    "victors": ["[HJM] MrBazooka","puffiballgd","Okarun","Karen","Symm","FJKR"] 
+    "victors": ["[HJM] MrBazooka","puffiballgd","Okarun","Karen","Symm","FJKR","CopperBandit"] 
   },
   { 
     "name": "TWL VSC", 
@@ -1168,7 +1168,7 @@
     "id": "143658426", 
     "video": "https://medal.tv/games/geometry-dash/clips/n0bVTMoH198-m-YG-?invite=cr-MSw3ZjMsMzc5MDEwMTE2", 
     "thumbnail": "Thumbnail/KingKong.png", 
-    "victors": ["puffiballgd","Symm","FJKR"] 
+    "victors": ["puffiballgd","Symm","FJKR","Okarun"] 
   },
   { 
     "name": "Spam Practice", 
@@ -1308,7 +1308,7 @@
     "id": "148883144", 
     "video": "9_Ojl9R-MrU", 
     "thumbnail": "Thumbnail/NU11W4V3.png", 
-    "victors": ["[HJM] MrBazooka","puffiballgd","CopperBandit","bleepboopbop","Okarun"] 
+    "victors": ["[HJM] MrBazooka","puffiballgd","CopperBandit","bleepboopbop","Okarun","Karen","Sushi"] 
   },
   { 
     "name": "Cat City", 
@@ -1378,7 +1378,7 @@
     "id": "148619420", 
     "video": "T7vuBeOsqXk", 
     "thumbnail": "Thumbnail/4Cubed.png", 
-    "victors": ["[HJM] MrBazooka","puffiballgd","Okarun","Symm","CopperBandit","FJKR"]
+    "victors": ["[HJM] MrBazooka","puffiballgd","Okarun","Symm","CopperBandit","FJKR","Karen","Sushi"]
   },
   { 
     "name": "Dihmountain", 
@@ -1428,7 +1428,7 @@
     "id": "141824810", 
     "video": "YxB9E0Qao0E", 
     "thumbnail": "Thumbnail/10.jpg", 
-    "victors": ["puffiballgd","FJKR","[HJM] MrBazooka"] 
+    "victors": ["puffiballgd","FJKR","[HJM] MrBazooka","Okarun"] 
   },
   { 
     "name": "ChefLimeWaveBasic1", 
@@ -1558,7 +1558,7 @@
     "id": "147448660", 
     "video": "nGwK5tubMtM", 
     "thumbnail": "Thumbnail/sh1awase.png", 
-    "victors": ["Karen","sevehweveh","[HJM] MrBazooka","puffiballgd"]
+    "victors": ["Karen","sevehweveh","[HJM] MrBazooka","puffiballgd","Okarun"]
   },
   {
     "name": "sonic dih", 
@@ -1679,7 +1679,7 @@
     "id": "148813652", 
     "video": "Ig3dDgxB7hA", 
     "thumbnail": "Thumbnail/TipTopAlwaysC.png", 
-    "victors": ["[HJM] MrBazooka","puffiballgd","Okarun","ashyy","FJKR"] 
+    "victors": ["[HJM] MrBazooka","puffiballgd","Okarun","ashyy","FJKR","Sushi"] 
   },
   { 
     "name": "Corrupted Cavern", 
