@@ -302,7 +302,7 @@
   },
   { 
     "name": "Gecko", 
-    "points": 352, 
+    "points": 353, 
     "creator": "ashyy", 
     "verifier": "Sushi", 
     "id": "148886298", 
@@ -802,7 +802,7 @@
   },
   { 
     "name": "VSC unnerfed", 
-    "points": 351, 
+    "points": 352, 
     "creator": "puffiballgd", 
     "verifier": "puffiballgd", 
     "id": "145551425", 
@@ -1049,6 +1049,16 @@
     "video": "8ELYwPl1sBY", 
     "thumbnail": "Thumbnail/WaveCorridor.png", 
     "victors": ["xpealox","ARandomBall","ZizoGMD","newbite","[HJM] MrBazooka","Symm","puffiballgd","OneShot786","Karen","HurryingJackM","Flibbertwiggins","Nova_Remnant","lunikay","FJKR","Okarun"] 
+  },
+  { 
+    "name": "When the poop shivers", 
+    "points": 351, 
+    "creator": "ruwaq", 
+    "verifier": "ruwaq", 
+    "id": "148999347", 
+    "video": "bIYVb3nWcaI&t=9s", 
+    "thumbnail": "Thumbnail/WhenThePoop.jpg", 
+    "victors": [] 
   },
   { 
     "name": "ChefLime Circles", 
@@ -1673,7 +1683,7 @@
   },
   { 
     "name": "Cheflime's Farts",
-    "points": 353, 
+    "points": 354, 
     "creator": "newbite",
     "verifier": "newbite", 
     "id": "148767666 ",  
