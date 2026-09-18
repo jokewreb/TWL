@@ -190,6 +190,16 @@
     "thumbnail": "Thumbnail/catlvl.png", 
     "victors": ["puffiballgd","Sushi","Okarun"]
   },
+    { 
+    "name": "Sayodevice O3C", 
+    "points": 258, 
+    "creator": "puffiballGD", 
+    "verifier": "puffiballGD", 
+    "id": "149069378", 
+    "video": "T9PJ8QLjpSg", 
+    "thumbnail": "Thumbnail/sayodevice03c.png", 
+    "victors": []
+  },
   { 
     "name": "Deep Dive", 
     "points": 248, 
