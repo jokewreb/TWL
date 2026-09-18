@@ -1470,6 +1470,16 @@
     "thumbnail": "Thumbnail/yes.jpg", 
     "victors": ["[HJM] MrBazooka","[PLUH] ChefLime","newbite","puffiballgd","lunikay","Symm","FJKR","fearflora","Karen","ConfusedIThink","Okarun"] 
   },
+ { 
+    "name": "Yesn't", 
+    "points": 234, 
+    "creator": "[HJM] MrBazooka", 
+    "verifier": "[HJM] MrBazooka", 
+    "id": "149067931", 
+    "video": "https://medal.tv/games/geometry-dash/clips/nykxS7tViqCxfWftp?invite=cr-MSxLeHcsMzc5MDEwMTE2", 
+    "thumbnail": "Thumbnail/yesnt.png", 
+    "victors": [] 
+  },
   { 
     "name": "no", 
     "points": 160, 
