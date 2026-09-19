@@ -9,6 +9,16 @@
     "thumbnail": "Thumbnail/EmErAlD.jpg", 
     "victors": ["melhorando"] 
   },
+    { 
+    "name": "Hotrod", 
+    "points": 337, 
+    "creator": "FJKR", 
+    "verifier": "FJKR", 
+    "id": "129139622", 
+    "video": "A9KiPio2-n4", 
+    "thumbnail": "Thumbnail/poopgod.png", 
+    "victors": [] 
+  },
   { 
     "name": "WiStErIa", 
     "points": 510,
