@@ -30,6 +30,16 @@
     "victors": ["melhorando"]
   },
   { 
+    "name": "MaRiNe", 
+    "points": 357,
+    "creator": "ashyy", 
+    "verifier": "ashyy", 
+    "id": "149203551", 
+    "video": "LkbuKkQuQ_A", 
+    "thumbnail": "Thumbnail/MaRiNe.png", 
+    "victors": []
+  },
+  { 
     "name": "The Aquarium",
     "points": 450, 
     "creator": "lunikay",
@@ -1049,6 +1059,16 @@
     "video": "q9YDZzS8Ow", 
     "thumbnail": "Thumbnail/OldWaveCorridor.png", 
     "victors": ["xpealox","Symm","[HJM] MrBazooka","OneShot786","Karen","HurryingJackM","puffiballgd","lunikay","FJKR","Sushi","Okarun"] 
+  },
+  { 
+    "name": "h y d r a", 
+    "points": 209, 
+    "creator": "Flibbertwiggins", 
+    "verifier": "Flibbertwiggins", 
+    "id": "149196451", 
+    "video": "https://medal.tv/games/geometry-dash/clips/nyKWqiQSmyCzJIbhB?invite=cr-MSxtUzcsNjQxNDk4Nzkz", 
+    "thumbnail": "Thumbnail/Hydra.png", 
+    "victors": [] 
   },
   { 
     "name": "Lost Signal", 
