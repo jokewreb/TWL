@@ -108,7 +108,7 @@
     "id": "149101878", 
     "video": "kDBZQUelLn0", 
     "thumbnail": "Thumbnail/HyperBaiter.png", 
-    "victors": [] 
+    "victors": ["Sushi","ashyy","Okarun"] 
   },
   { 
     "name": "seveh never clear", 
@@ -158,7 +158,7 @@
     "id": "148241632", 
     "video": "https://medal.tv/games/geometry-dash/clips/nscpCcRfckPlV-T5K?invite=cr-MSx4eWssNjQxNDk4Nzkz", 
     "thumbnail": "Thumbnail/waves.jpg", 
-    "victors": ["puffiballgd","ashyy","[HJM] MrBazooka","FJKR","Symm"] 
+    "victors": ["puffiballgd","ashyy","[HJM] MrBazooka","FJKR","Symm","Okarun"] 
   },
   { 
     "name": "Defeated Brajan", 
@@ -318,7 +318,7 @@
     "id": "145160456", 
     "video": "https://medal.tv/games/geometry-dash/clips/n8Tngr7ZohogDQkKo?invite=cr-MSxNemYsMzc5MDEwMTE2", 
     "thumbnail": "Thumbnail/LoudHexagon.png", 
-    "victors": ["puffiballgd","Symm","FJKR"] 
+    "victors": ["puffiballgd","Symm","FJKR","Okarun"] 
   },
   { 
     "name": "Angelica", 
@@ -378,17 +378,17 @@
     "id": "145168175", 
     "video": "https://medal.tv/games/geometry-dash/clips/n95iShIUWosDWbgPZ?invite=cr-MSxrSkYsMzc5MDEwMTE2", 
     "thumbnail": "Thumbnail/Belief.jpg", 
-    "victors": ["puffiballgd","HurryingJackM","ashyy","Symm","FJKR","catloveralex"] 
+    "victors": ["puffiballgd","HurryingJackM","ashyy","Symm","FJKR","catloveralex","Okarun"] 
   },
   { 
-    "name": "Autism          Wave", 
+    "name": "Autism Wave", 
       "points": 221, 
     "creator": "[HJM] MrBazooka", 
     "verifier": "[HJM] MrBazooka", 
     "id": "145262719", 
     "video": "https://medal.tv/games/geometry-dash/clips/n9x9Teh5QYP15y5Y6?invite=cr-MSxheEgsMzc5MDEwMTE2", 
     "thumbnail": "Thumbnail/autism.png", 
-    "victors": ["puffiballgd","lunikay","Symm","FJKR"] 
+    "victors": ["puffiballgd","lunikay","Symm","FJKR","Okarun"] 
   },
   { 
     "name": "2 watt power supply", 
@@ -398,7 +398,7 @@
     "id": "148846551", 
     "video": "HdqA4xLfuqM", 
     "thumbnail": "Thumbnail/2wat.png", 
-    "victors": ["Okarun"] 
+    "victors": ["Okarun","puffiballgd"] 
   },
   { 
     "name": "Alienation",
@@ -418,7 +418,7 @@
     "id": "148239345", 
     "video": "https://medal.tv/games/geometry-dash/clips/nsb1fBJy9PcXnnJjr?invite=cr-MSxHTFosNjQxNDk4Nzkz", 
     "thumbnail": "Thumbnail/Life.png", 
-    "victors": ["puffiballgd","FJKR","Symm"] 
+    "victors": ["puffiballgd","FJKR","Symm","Okarun"] 
   },
   { 
     "name": "Weon",
@@ -648,7 +648,7 @@
     "id": "140123255", 
     "video": "6uuNYt6SBGI", 
     "thumbnail": "Thumbnail/SilentAkbarII.png", 
-    "victors": ["puffiballgd","xpealox","OneShot786","Karen","newbite","lunikay","FJKR","Symm","[HJM] MrBazooka","Sushi","Krato"] 
+    "victors": ["puffiballgd","xpealox","OneShot786","Karen","newbite","lunikay","FJKR","Symm","[HJM] MrBazooka","Sushi","Krato","Okarun"] 
   },
   { 
     "name": "crazy dave", 
@@ -738,7 +738,7 @@
     "id": "145486335", 
     "video": "jnwtLzsgSfY", 
     "thumbnail": "Thumbnail/Asymm.png", 
-    "victors": ["FJKR","puffiballgd","Sushi","[HJM] MrBazooka"] 
+    "victors": ["FJKR","puffiballgd","Sushi","[HJM] MrBazooka","Okarun"] 
   },
   { 
     "name": "D", 
@@ -808,7 +808,7 @@
     "id": "148071555", 
     "video": "l_cw_i8kvl8s", 
     "thumbnail": "Thumbnail/SUPERDUALLEVEL.png", 
-    "victors": ["puffiballgd","[HJM] MrBazooka","Karen","Symm","FJKR"] 
+    "victors": ["puffiballgd","[HJM] MrBazooka","Karen","Symm","FJKR","Okarun"] 
   },
   { 
     "name": "linba", 
@@ -818,7 +818,7 @@
     "id": "145485471", 
     "video": "https://medal.tv/games/geometry-dash/clips/naRQhCLQaoJZ45wV5?invite=cr-MSxNNmMsNjI5OTQ2MTIx", 
     "thumbnail": "Thumbnail/linba.JPG", 
-    "victors": ["Symm","FJKR","[HJM] MrBazooka","puffiballgd"] 
+    "victors": ["Symm","FJKR","[HJM] MrBazooka","puffiballgd","Okarun"] 
   },
   { 
     "name": "Unknown Question", 
@@ -918,7 +918,7 @@
     "id": "140163784", 
     "video": "https://medal.tv/games/geometry-dash/clips/mGMcLSLJjwDn_aLiI?invite=cr-MSxveTksNjI5OTQ2MTIx", 
     "thumbnail": "Thumbnail/MoodySigma.png", 
-    "victors": ["puffiballgd","xpealox","Symm","OneShot786","Karen","[HJM] MrBazooka","newbite","lunikay","FJKR"] 
+    "victors": ["puffiballgd","xpealox","Symm","OneShot786","Karen","[HJM] MrBazooka","newbite","lunikay","FJKR","Okarun"] 
   },
   { 
     "name": "TWL Level", 
@@ -1048,7 +1048,7 @@
     "id": "139974918", 
     "video": "q9YDZzS8Ow", 
     "thumbnail": "Thumbnail/OldWaveCorridor.png", 
-    "victors": ["xpealox","Symm","[HJM] MrBazooka","OneShot786","Karen","HurryingJackM","puffiballgd","lunikay","FJKR","Sushi"] 
+    "victors": ["xpealox","Symm","[HJM] MrBazooka","OneShot786","Karen","HurryingJackM","puffiballgd","lunikay","FJKR","Sushi","Okarun"] 
   },
   { 
     "name": "Lost Signal", 
@@ -1188,7 +1188,7 @@
     "id": "145172634", 
     "video": "WP7rvZCDUGY", 
     "thumbnail": "Thumbnail/TWLVSC.png", 
-    "victors": ["[HJM] MrBazooka","puffiballgd","lunikay","Symm","FJKR","CopperBandit"] 
+    "victors": ["[HJM] MrBazooka","puffiballgd","lunikay","Symm","FJKR","CopperBandit","Okarun"] 
   },
   { 
     "name": "TWL always clear", 
@@ -1198,7 +1198,7 @@
     "id": "144745144", 
     "video": "u-eN27eL5go", 
     "thumbnail": "Thumbnail/twlALWAYS.png", 
-    "victors": ["[HJM] MrBazooka","puffiballgd","HurryingJackM","lunikay","Symm","FJKR","[PLUH] ChefLime","CopperBandit"] 
+    "victors": ["[HJM] MrBazooka","puffiballgd","HurryingJackM","lunikay","Symm","FJKR","[PLUH] ChefLime","CopperBandit","Okarun"] 
   },
   { 
     "name": "Loonboon Wave", 
@@ -1208,7 +1208,7 @@
     "id": "145240941", 
     "video": "Q_dxkdfvs5Q", 
     "thumbnail": "Thumbnail/Loonboon.png", 
-    "victors": ["[HJM] MrBazooka","puffiballgd","HurryingJackM","lunikay","Symm","FJKR"] 
+    "victors": ["[HJM] MrBazooka","puffiballgd","HurryingJackM","lunikay","Symm","FJKR","Okarun"] 
   },
   {
     "name": "King Kong", 
@@ -1508,7 +1508,7 @@
     "id": "149067931", 
     "video": "https://medal.tv/games/geometry-dash/clips/nykxS7tViqCxfWftp?invite=cr-MSxLeHcsMzc5MDEwMTE2", 
     "thumbnail": "Thumbnail/yesnt.png", 
-    "victors": ["puffiballgd","FJKR"] 
+    "victors": ["puffiballgd","FJKR","Okarun"] 
   },
   { 
     "name": "no", 
