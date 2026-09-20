@@ -107,6 +107,16 @@
     ]
   },
   {
+    "name": "Injury Trilogy",
+    "tier": "RUBY",
+    "points": 525,
+    "levels": [
+      "WiStErIa",
+      "EmErAlD",
+      "MaRiNe"
+    ]
+  },
+  {
     "name": "Happiest Trilogy",
     "tier": "PLATINUM",
     "points": 100,
