@@ -41,6 +41,20 @@
       "Defeated Brajan"
     ]
   },
+    },
+  {
+    "name": "Alphabet Pack",
+    "tier": "DIAMOND",
+    "points": 200,
+    "levels": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F"
+    ]
+  },
   {
     "name": "Top 1 Pack III",
     "tier": "RUBY",
