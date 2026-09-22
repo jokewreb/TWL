@@ -9,7 +9,7 @@
     "thumbnail": "Thumbnail/EmErAlD.jpg", 
     "victors": ["melhorando"] 
   },
-      { 
+  { 
     "name": "Betrayal", 
     "points": 72, 
     "creator": "boiledbacon", 
@@ -19,7 +19,7 @@
     "thumbnail": "Thumbnail/griefbad.png", 
     "victors": ["[PLUH] ChefLime","Symm","[KYS] MrBazooka"] 
   },
-    { 
+  { 
     "name": "Hotrod", 
     "points": 337, 
     "creator": "FJKR", 
@@ -1115,7 +1115,7 @@
     "points": 269, 
     "creator": "[KYS] MrBazooka, Symm",
     "verifier": "Symm",
-     "id": "144159084", 
+     "id": "149267758", 
     "video": "-oD83GYAMTY", 
     "thumbnail": "Thumbnail/HotGarbage.png", 
     "victors": [] 
