@@ -1093,12 +1093,32 @@
   { 
     "name": "Lost Signal", 
     "points": 66, 
-    "creator":"[PLUH] ChefLime",
-    "verifier":"[PLUH] ChefLime",
+    "creator": "[PLUH] ChefLime",
+    "verifier": "[PLUH] ChefLime",
      "id": "140217050", 
     "video": "SPJuTwbBSeo", 
     "thumbnail": "Thumbnail/LostSignal.png", 
     "victors": ["puffiballgd","[HJM] MrBazooka","ZizoGMD","OneShot786","HurryingJackM","Karen","Flibbertwiggins","lunikay","Symm","FJKR","bleepboopbop","Okarun"] 
+  },
+  { 
+    "name": "Get Ready", 
+    "points": 243, 
+    "creator": "Symm",
+    "verifier": "Symm",
+     "id": "144159084", 
+    "video": "tOTHrKwQpRc", 
+    "thumbnail": "Thumbnail/GetReady.jpg", 
+    "victors": [] 
+  },
+  { 
+    "name": "Hot Garbage", 
+    "points": 269, 
+    "creator": "[HJM] MrBazooka, Symm",
+    "verifier": "Symm",
+     "id": "144159084", 
+    "video": "-oD83GYAMTY", 
+    "thumbnail": "Thumbnail/HotGarbage.png", 
+    "victors": [] 
   },
   { 
     "name": "Crying Heart", 
