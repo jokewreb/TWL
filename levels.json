@@ -298,7 +298,7 @@
     "id": "148684744", 
     "video": "0F0cfpgrMuM", 
     "thumbnail": "Thumbnail/gaschamber.png", 
-    "victors": ["FJKR"]
+    "victors": ["FJKR","Fent"]
   },
   { 
     "name": "avrg sleep experience", 
@@ -538,7 +538,7 @@
     "id": "140031712", 
     "video": "bo6HXMN_8LE", 
     "thumbnail": "Thumbnail/SolarWave.png", 
-    "victors": ["puffiballgd","Symm","OneShot786","Blendro","lunikay","ashyy","Sushi","Krato"] 
+    "victors": ["puffiballgd","Symm","OneShot786","Blendro","lunikay","ashyy","Sushi","Krato","Fent"] 
   },
   { 
     "name": "DUAL !", 
@@ -1248,7 +1248,7 @@
     "id": "149387253", 
     "video": "mNe_24i236E", 
     "thumbnail": "Thumbnail/BLASTSPAMREBIRTH.png", 
-    "victors": [] 
+    "victors": ["Fent"] 
   },
   { 
     "name": "ChefLime Circles", 
@@ -1268,7 +1268,7 @@
     "id": "149425443", 
     "video": "M5tGobfKVM4", 
     "thumbnail": "Thumbnail/UltronCircles.png", 
-    "victors": [] 
+    "victors": ["puffiballgd"] 
   },
   { 
     "name": "Figo Likes Wave", 
