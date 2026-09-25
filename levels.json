@@ -17,7 +17,7 @@
     "id": "149279049", 
     "video": "IDLx33JaAso", 
     "thumbnail": "Thumbnail/griefbad.png", 
-    "victors": ["[PLUH] ChefLime","Symm","[KYS] MrBazooka"] 
+    "victors": ["[PLUH] ChefLime","Symm","[KYS] MrBazooka","puffiballgd"] 
   },
   { 
     "name": "Hotrod", 
@@ -57,7 +57,7 @@
     "id": "149372942", 
     "video": "CBkLIAGCf6g", 
     "thumbnail": "Thumbnail/hypothermia.png", 
-    "victors": []
+    "victors": ["puffiballgd"]
   },
   { 
     "name": "violent", 
@@ -928,7 +928,7 @@
     "id": "149310446", 
     "video": "BqHX15YmLZk", 
     "thumbnail": "Thumbnail/Astropolix.png", 
-    "victors": ["[KYS] MrBazooka"] 
+    "victors": ["[KYS] MrBazooka","puffiballgd","FJKR"] 
   },
   { 
     "name": "Unknown Question", 
@@ -1168,7 +1168,7 @@
     "id": "149196451", 
     "video": "https://medal.tv/games/geometry-dash/clips/nyKWqiQSmyCzJIbhB?invite=cr-MSxtUzcsNjQxNDk4Nzkz", 
     "thumbnail": "Thumbnail/Hydra.jpg", 
-    "victors": ["[KYS] MrBazooka","Okarun","Symm"] 
+    "victors": ["[KYS] MrBazooka","Okarun","Symm","puffiballgd"] 
   },
   { 
     "name": "Lost Signal", 
