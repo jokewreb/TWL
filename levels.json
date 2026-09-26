@@ -338,7 +338,7 @@
     "id": "147817036", 
     "video": "https://medal.tv/games/geometry-dash/clips/n09rsRf5xo1ZdBpko?invite=cr-MSx0NWssMzc5MDEwMTE2", 
     "thumbnail": "Thumbnail/FurryCircles.png", 
-    "victors": ["puffiballgd","newbite","Nova_Remnant","lunikay","Symm","[W4] FJKR","fearflora","Okarun","ashyy","ConfusedIThink","ruwaq"] 
+    "victors": ["puffiballgd","newbite","Nova_Remnant","lunikay","Symm","[W4] FJKR","fearflora","Okarun","ashyy","ConfusedIThink","[GLAZE] ruwaq"] 
   },
   { 
     "name": "polargeisted", 
@@ -448,7 +448,7 @@
     "id": "148846551", 
     "video": "HdqA4xLfuqM", 
     "thumbnail": "Thumbnail/2wat.png", 
-    "victors": ["Okarun","puffiballgd","[W4] FJKR","ruwaq"] 
+    "victors": ["Okarun","puffiballgd","[W4] FJKR","[GLAZE] ruwaq"] 
   },
   { 
     "name": "Alienation",
@@ -618,7 +618,7 @@
     "id": "147784919", 
     "video": "https://medal.tv/games/geometry-dash/clips/np1fJl2pMhb48HC3r?invite=cr-MSxxam0sNTM3NDc4MTA1", 
     "thumbnail": "Thumbnail/tlewavebuffed.png", 
-    "victors": ["puffiballgd","ashyy","[KYS] MrBazooka","ruwaq","[W4] FJKR"] 
+    "victors": ["puffiballgd","ashyy","[KYS] MrBazooka","[GLAZE] ruwaq","[W4] FJKR"] 
   },
   { 
     "name": "Dumbfound Cosmos II", 
@@ -678,7 +678,7 @@
     "id": "139994700", 
     "video": "D4ovfowsg7s", 
     "thumbnail": "Thumbnail/UnnerfedWaveCorridor.png", 
-    "victors": ["puffiballgd","OneShot786","Nova_Remnant","[KYS] MrBazooka","lunikay","Sushi","ruwaq"] 
+    "victors": ["puffiballgd","OneShot786","Nova_Remnant","[KYS] MrBazooka","lunikay","Sushi","[GLAZE] ruwaq"] 
   },
   { 
     "name": "WAVERHOUSE", 
@@ -1234,8 +1234,8 @@
     "name": "When the poop shivers", 
     "points": 351, 
     "fps": "30 FPS",
-    "creator": "ruwaq", 
-    "verifier": "ruwaq", 
+    "creator": "[GLAZE] ruwaq", 
+    "verifier": "[GLAZE] ruwaq", 
     "id": "148999347", 
     "video": "bIYVb3nWcaI&t=9s", 
     "thumbnail": "Thumbnail/WhenThePoop.jpg", 
@@ -1245,8 +1245,8 @@
     "name": "PEEPEE IS SHIVERING", 
     "points": 369, 
     "fps": "30 FPS",
-    "creator": "ruwaq", 
-    "verifier": "ruwaq", 
+    "creator": "[GLAZE] ruwaq", 
+    "verifier": "[GLAZE] ruwaq", 
     "id": "149046174", 
     "video": "fuOHoSUWKok", 
     "thumbnail": "Thumbnail/PEEPEEISSHIVERING.png", 
@@ -1255,8 +1255,8 @@
   { 
     "name": "BLAST SPAM REBIRTH", 
     "points": 375, 
-    "creator": "ruwaq", 
-    "verifier": "ruwaq", 
+    "creator": "[GLAZE] ruwaq", 
+    "verifier": "[GLAZE] ruwaq", 
     "id": "149387253", 
     "video": "mNe_24i236E", 
     "thumbnail": "Thumbnail/BLASTSPAMREBIRTH.png", 
@@ -1550,7 +1550,7 @@
     "id": "143842742", 
     "video": "Bm4R0HBRWsE", 
     "thumbnail": "Thumbnail/catcity.png", 
-    "victors": ["ashyy","[W4] FJKR","Okarun","ChillTipTop","Sushi","ruwaq"] 
+    "victors": ["ashyy","[W4] FJKR","Okarun","ChillTipTop","Sushi","[GLAZE] ruwaq"] 
   },
   { 
     "name": "Temple Of Doom", 
@@ -1861,7 +1861,7 @@
     "id": "147685252",
     "video": "5VFzaFjxPvs",
     "thumbnail": "Thumbnail/SONkupenEnd.png",
-    "victors": ["[KYS] MrBazooka","puffiballgd","HurryingJackM","Sushi","Okarun","ruwaq","Symm","[W4] FJKR"]
+    "victors": ["[KYS] MrBazooka","puffiballgd","HurryingJackM","Sushi","Okarun","[GLAZE] ruwaq","Symm","[W4] FJKR"]
   },
   {
     "name": "metronome",
