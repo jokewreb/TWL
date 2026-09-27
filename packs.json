@@ -138,5 +138,15 @@
       "Happiest Day Unnerfed",
       "Happiest Day"
     ]
+  },
+  {
+    "name": "SON Pack",
+    "tier": "PLATINUM",
+    "points": 100,
+    "levels": [
+      "SONkupen end",
+      "SONometry Dash",
+      "SONdertale"
+    ]
   }
 ]
